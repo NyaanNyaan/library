@@ -2,6 +2,18 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: internal/internal-type-traits.hpp
+    title: internal/internal-type-traits.hpp
+  - icon: ':heavy_check_mark:'
+    path: math-fast/gcd.hpp
+    title: binary GCD
+  - icon: ':heavy_check_mark:'
+    path: math/rational.hpp
+    title: math/rational.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/stern-brocot-tree-binary-search.hpp
+    title: math/stern-brocot-tree-binary-search.hpp
+  - icon: ':heavy_check_mark:'
     path: math/stern-brocot-tree.hpp
     title: Stern-Brocot Tree
   - icon: ':heavy_check_mark:'
@@ -32,7 +44,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/stern_brocot_tree
     links:
     - https://judge.yosupo.jp/problem/stern_brocot_tree
-  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp\"\
+  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/stern_brocot_tree\"\n//\n\
     #line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
     \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
@@ -207,9 +219,94 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp\"\n//\n#line\
-    \ 2 \"math/stern-brocot-tree.hpp\"\n\n#line 6 \"math/stern-brocot-tree.hpp\"\n\
-    using namespace std;\n\n// x / y (x > 0, y > 0) \u3092\u7BA1\u7406\u3001\u30C7\
+    \ 4 \"verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp\"\n//\n#line\
+    \ 2 \"math/rational.hpp\"\n\n#line 6 \"math/rational.hpp\"\nusing namespace std;\n\
+    \n#line 2 \"internal/internal-type-traits.hpp\"\n\n#line 4 \"internal/internal-type-traits.hpp\"\
+    \nusing namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
+    \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
+    \                               is_same_v<T, __uint128_t>,\n                 \
+    \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
+    \ =\n    typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n\
+    \                           true_type, false_type>::type;\n\ntemplate <typename\
+    \ T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
+    \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
+    \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
+    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
+    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
+    \                                   \\\n  template <class, class = void>     \
+    \                          \\\n  struct has_##var : false_type {};           \
+    \                 \\\n  template <class T>                                   \
+    \        \\\n  struct has_##var<T, void_t<typename T::var>> : true_type {}; \\\
+    \n  template <class T>                                           \\\n  constexpr\
+    \ auto has_##var##_v = has_##var<T>::value;\n\n#define ENABLE_HAS_VAR(var)   \
+    \                                  \\\n  template <class, class = void>      \
+    \                          \\\n  struct has_##var : false_type {};           \
+    \                  \\\n  template <class T>                                  \
+    \          \\\n  struct has_##var<T, void_t<decltype(T::var)>> : true_type {};\
+    \ \\\n  template <class T>                                            \\\n  constexpr\
+    \ auto has_##var##_v = has_##var<T>::value;\n\n}  // namespace internal\n#line\
+    \ 2 \"math-fast/gcd.hpp\"\n\n#line 4 \"math-fast/gcd.hpp\"\nusing namespace std;\n\
+    \nnamespace BinaryGCDImpl {\nusing u64 = unsigned long long;\nusing i8 = char;\n\
+    \nu64 binary_gcd(u64 a, u64 b) {\n  if (a == 0 || b == 0) return a + b;\n  i8\
+    \ n = __builtin_ctzll(a);\n  i8 m = __builtin_ctzll(b);\n  a >>= n;\n  b >>= m;\n\
+    \  n = min(n, m);\n  while (a != b) {\n    u64 d = a - b;\n    i8 s = __builtin_ctzll(d);\n\
+    \    bool f = a > b;\n    b = f ? b : a;\n    a = (f ? d : -d) >> s;\n  }\n  return\
+    \ a << n;\n}\n\nusing u128 = __uint128_t;\n// a > 0\nint ctz128(u128 a) {\n  u64\
+    \ lo = a & u64(-1);\n  return lo ? __builtin_ctzll(lo) : 64 + __builtin_ctzll(a\
+    \ >> 64);\n}\nu128 binary_gcd128(u128 a, u128 b) {\n  if (a == 0 || b == 0) return\
+    \ a + b;\n  i8 n = ctz128(a);\n  i8 m = ctz128(b);\n  a >>= n;\n  b >>= m;\n \
+    \ n = min(n, m);\n  while (a != b) {\n    u128 d = a - b;\n    i8 s = ctz128(d);\n\
+    \    bool f = a > b;\n    b = f ? b : a;\n    a = (f ? d : -d) >> s;\n  }\n  return\
+    \ a << n;\n}\n\n}  // namespace BinaryGCDImpl\n\nlong long binary_gcd(long long\
+    \ a, long long b) {\n  return BinaryGCDImpl::binary_gcd(abs(a), abs(b));\n}\n\
+    __int128_t binary_gcd128(__int128_t a, __int128_t b) {\n  if (a < 0) a = -a;\n\
+    \  if (b < 0) b = -b;\n  return BinaryGCDImpl::binary_gcd128(a, b);\n}\n\n/**\n\
+    \ * @brief binary GCD\n */\n#line 10 \"math/rational.hpp\"\n\n// T : \u5024, U\
+    \ : \u6BD4\u8F03\u7528\ntemplate <typename T, typename U>\nstruct RationalBase\
+    \ {\n  using R = RationalBase;\n  using Key = T;\n  T x, y;\n  RationalBase()\
+    \ : x(0), y(1) {}\n  template <typename T1>\n  RationalBase(const T1& _x) : RationalBase<T,\
+    \ U>(_x, T1{1}) {}\n  template <typename T1, typename T2>\n  RationalBase(const\
+    \ pair<T1, T2>& _p)\n      : RationalBase<T, U>(_p.first, _p.second) {}\n  template\
+    \ <typename T1, typename T2>\n  RationalBase(const T1& _x, const T2& _y) : x(_x),\
+    \ y(_y) {\n    assert(y != 0);\n    if (y == -1) x = -x, y = -y;\n    if (y !=\
+    \ 1) {\n      T g;\n      if constexpr (internal::is_broadly_integral_v<T>) {\n\
+    \        if constexpr (sizeof(T) == 16) {\n          g = binary_gcd128(x, y);\n\
+    \        } else {\n          g = binary_gcd(x, y);\n        }\n      } else {\n\
+    \        g = gcd(x, y);\n      }\n      if (g != 0) x /= g, y /= g;\n      if\
+    \ (y < 0) x = -x, y = -y;\n    }\n  }\n  // y = 0 \u306E\u4EE3\u5165\u3082\u8A8D\
+    \u3081\u308B\n  static R raw(T _x, T _y) {\n    R r;\n    r.x = _x, r.y = _y;\n\
+    \    return r;\n  }\n  friend R operator+(const R& l, const R& r) {\n    if (l.y\
+    \ == r.y) return R{l.x + r.x, l.y};\n    return R{l.x * r.y + l.y * r.x, l.y *\
+    \ r.y};\n  }\n  friend R operator-(const R& l, const R& r) {\n    if (l.y == r.y)\
+    \ return R{l.x - r.x, l.y};\n    return R{l.x * r.y - l.y * r.x, l.y * r.y};\n\
+    \  }\n  friend R operator*(const R& l, const R& r) { return R{l.x * r.x, l.y *\
+    \ r.y}; }\n  friend R operator/(const R& l, const R& r) { return R{l.x * r.y,\
+    \ l.y * r.x}; }\n  R& operator+=(const R& r) { return (*this) = (*this) + r; }\n\
+    \  R& operator-=(const R& r) { return (*this) = (*this) - r; }\n  R& operator*=(const\
+    \ R& r) { return (*this) = (*this) * r; }\n  R& operator/=(const R& r) { return\
+    \ (*this) = (*this) / r; }\n  R operator-() const { return raw(-x, y); }\n  R\
+    \ inverse() const {\n    assert(x != 0);\n    R r = raw(y, x);\n    if (r.y <\
+    \ 0) r.x = -r.x, r.y = -r.y;\n    return r;\n  }\n  R pow(long long p) const {\n\
+    \    R res{1}, base{*this};\n    while (p) {\n      if (p & 1) res *= base;\n\
+    \      base *= base;\n      p >>= 1;\n    }\n    return res;\n  }\n  friend bool\
+    \ operator==(const R& l, const R& r) {\n    return l.x == r.x && l.y == r.y;\n\
+    \  };\n  friend bool operator!=(const R& l, const R& r) {\n    return l.x != r.x\
+    \ || l.y != r.y;\n  };\n  friend bool operator<(const R& l, const R& r) {\n  \
+    \  return U{l.x} * r.y < U{l.y} * r.x;\n  };\n  friend bool operator<=(const R&\
+    \ l, const R& r) { return l < r || l == r; }\n  friend bool operator>(const R&\
+    \ l, const R& r) {\n    return U{l.x} * r.y > U{l.y} * r.x;\n  };\n  friend bool\
+    \ operator>=(const R& l, const R& r) { return l > r || l == r; }\n  friend ostream&\
+    \ operator<<(ostream& os, const R& r) {\n    os << r.x;\n    if (r.x != 0 && r.y\
+    \ != 1) os << \"/\" << r.y;\n    return os;\n  }\n\n  // T \u306B\u30AD\u30E3\u30B9\
+    \u30C8\u3055\u308C\u308B\u306E\u3067 T \u304C bigint \u306E\u5834\u5408\u306F\
+    \ to_ll \u3082\u8981\u308B\n  T to_mint(T mod) const {\n    assert(mod != 0);\n\
+    \    T a = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n\
+    \      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return U((u\
+    \ % mod + mod) % mod) * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long\
+    \ long, __int128_t>;\n#line 2 \"math/stern-brocot-tree-binary-search.hpp\"\n\n\
+    #line 5 \"math/stern-brocot-tree-binary-search.hpp\"\nusing namespace std;\n\n\
+    #line 2 \"math/stern-brocot-tree.hpp\"\n\n#line 6 \"math/stern-brocot-tree.hpp\"\
+    \nusing namespace std;\n\n// x / y (x > 0, y > 0) \u3092\u7BA1\u7406\u3001\u30C7\
     \u30D5\u30A9\u30EB\u30C8\u3067 1 / 1\n// \u5165\u529B\u304C\u4E92\u3044\u306B\u7D20\
     \u3067\u306A\u3044\u5834\u5408\u306F gcd \u3092\u53D6\u3063\u3066\u683C\u7D0D\n\
     // seq : (1, 1) \u304B\u3089 (x, y) \u3078\u306E\u30D1\u30B9\u3002\u53F3\u306E\
@@ -260,37 +357,76 @@ data:
     ;\n    return os;\n  }\n  friend bool operator<(const Node &lhs, const Node &rhs)\
     \ {\n    return lhs.x * rhs.y < rhs.x * lhs.y;\n  }\n  friend bool operator==(const\
     \ Node &lhs, const Node &rhs) {\n    return lhs.x == rhs.x and lhs.y == rhs.y;\n\
-    \  }\n};\n\n/**\n *  @brief Stern-Brocot Tree\n */\n#line 6 \"verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp\"\
-    \n\nusing namespace Nyaan;\n\nusing SBT = SternBrocotTreeNode<ll>;\n\nvoid q()\
-    \ {\n  ins(cmd);\n  if (cmd == \"DECODE_PATH\") {\n    ini(n);\n    SBT f;\n \
-    \   rep(_, n) {\n      char c;\n      in(c);\n      inl(x);\n      if (c == 'R')\
-    \ f.go_right(x);\n      if (c == 'L') f.go_left(x);\n    }\n    out(f.x, f.y);\n\
-    \  } else if (cmd == \"ENCODE_PATH\") {\n    inl(x, y);\n    SBT f{x, y};\n  \
-    \  cout << f.seq.size() << \" \";\n    each(s, f.seq) {\n      cout << (s > 0\
-    \ ? 'R' : 'L') << \" \";\n      cout << abs(s) << \" \";\n    }\n    cout << \"\
-    \\n\";\n  } else if (cmd == \"LCA\") {\n    inl(x1, y1, x2, y2);\n    SBT f{x1,\
-    \ y1}, g{x2, y2};\n    SBT h = SBT::lca(f, g);\n    out(h.x, h.y);\n  } else if\
-    \ (cmd == \"ANCESTOR\") {\n    inl(k, x, y);\n    SBT f{x, y};\n\n    ll l = f.depth()\
-    \ - k;\n    if (l < 0) {\n      out(-1);\n    } else {\n      bool b = f.go_parent(l);\n\
-    \      assert(b == true);\n      out(f.x, f.y);\n    }\n  } else {\n    inl(x,\
-    \ y);\n    SBT f{x, y};\n    out(f.lower_bound(), f.upper_bound());\n  }\n}\n\n\
-    void Nyaan::solve() {\n  int t = 1;\n  in(t);\n  while (t--) q();\n}\n"
+    \  }\n};\n\n/**\n *  @brief Stern-Brocot Tree\n */\n#line 8 \"math/stern-brocot-tree-binary-search.hpp\"\
+    \n\n// \u5206\u5B50\u3068\u5206\u6BCD\u304C INF \u4EE5\u4E0B\u3067\u3042\u308B\
+    \u975E\u8CA0\u306E\u65E2\u7D04\u5206\u6570\u306E\u3046\u3061\u6B21\u306E\u3082\
+    \u306E\u3092\u8FD4\u3059\n// first : f(x) \u304C false \u3067\u3042\u308B\u6700\
+    \u5927\u306E\u65E2\u7D04\u5206\u6570 x\n// second : f(x) \u304C true \u3067\u3042\
+    \u308B\u6700\u5C0F\u306E\u65E2\u7D04\u5206\u6570 x\n// \u305F\u3060\u3057\n//\
+    \ - f(0) = true \u306E\u5834\u5408\u306F (0/1, 0/1) \u3092\u8FD4\u3059\n// - true\
+    \ \u306B\u306A\u308B\u5206\u6570\u304C\u5B58\u5728\u3057\u306A\u3044\u5834\u5408\
+    \u306F (?, 1/0) \u3092\u8FD4\u3059\n// - INF = 0 \u306E\u5834\u5408\u306F (0/1,\
+    \ 1/0) \u3092\u8FD4\u3059\ntemplate <typename I>\npair<pair<I, I>, pair<I, I>>\
+    \ binary_search_on_stern_brocot_tree(\n    function<bool(pair<I, I>)> f, const\
+    \ I &INF) {\n  // INF >= 0\n  assert(0 <= INF);\n  SternBrocotTreeNode<I> m;\n\
+    \  if (INF == 0) return {m.lower_bound(), m.upper_bound()};\n\n  // INF \u6761\
+    \u4EF6\u3092\u8D85\u3048\u308B or f(m) = return_value \u3067\u3042\u308B\n  auto\
+    \ over = [&](bool return_value) {\n    return max(m.x, m.y) > INF or f(m.get())\
+    \ == return_value;\n  };\n\n  if (f(make_pair(0, 1))) return {m.lower_bound(),\
+    \ m.lower_bound()};\n  int go_left = over(true);\n  for (; true; go_left ^= 1)\
+    \ {\n    if (go_left) {\n      // f(M) = true -> (L, M] \u306B\u7B54\u3048\u304C\
+    \u3042\u308B\n      // (f(L * b + M) = false) or (INF \u8D85\u3048) \u306B\u306A\
+    \u308B b \u306E\u6700\u5C0F\u306F\uFF1F\n      I a = 1;\n      for (; true; a\
+    \ *= 2) {\n        m.go_left(a);\n        if (over(false)) {\n          m.go_parent(a);\n\
+    \          break;\n        }\n      }\n      for (a /= 2; a != 0; a /= 2) {\n\
+    \        m.go_left(a);\n        if (over(false)) m.go_parent(a);\n      }\n  \
+    \    m.go_left(1);\n      if (max(m.get().first, m.get().second) > INF)\n    \
+    \    return {m.lower_bound(), m.upper_bound()};\n    } else {\n      // f(M) =\
+    \ false -> (M, R] \u306B\u7B54\u3048\u304C\u3042\u308B\n      // (f(M + R * b)\
+    \ = true) or (INF \u8D85\u3048) \u306B\u306A\u308B b \u306E\u6700\u5C0F\u306F\uFF1F\
+    \n      I a = 1;\n      for (; true; a *= 2) {\n        m.go_right(a);\n     \
+    \   if (over(true)) {\n          m.go_parent(a);\n          break;\n        }\n\
+    \      }\n      for (a /= 2; a != 0; a /= 2) {\n        m.go_right(a);\n     \
+    \   if (over(true)) m.go_parent(a);\n      }\n      m.go_right(1);\n      if (max(m.get().first,\
+    \ m.get().second) > INF)\n        return {m.lower_bound(), m.upper_bound()};\n\
+    \    }\n  }\n}\n#line 8 \"verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp\"\
+    \nusing namespace Nyaan;\n\nusing SBT = SternBrocotTreeNode<ll>;\n\nvoid Nyaan::solve()\
+    \ {\n  int T;\n  cin >> T;\n  while (T--) {\n    ins(cmd);\n    if (cmd == \"\
+    DECODE_PATH\") {\n      ini(n);\n      SBT f;\n      rep(_, n) {\n        char\
+    \ c;\n        in(c);\n        inl(x);\n        if (c == 'R') f.go_right(x);\n\
+    \        if (c == 'L') f.go_left(x);\n      }\n      out(f.x, f.y);\n    } else\
+    \ if (cmd == \"ENCODE_PATH\") {\n      inl(x, y);\n      SBT f{x, y};\n      cout\
+    \ << f.seq.size() << \" \";\n      each(s, f.seq) {\n        cout << (s > 0 ?\
+    \ 'R' : 'L') << \" \";\n        cout << abs(s) << \" \";\n      }\n      cout\
+    \ << \"\\n\";\n    } else if (cmd == \"LCA\") {\n      inl(x1, y1, x2, y2);\n\
+    \      SBT f{x1, y1}, g{x2, y2};\n      SBT h = SBT::lca(f, g);\n      out(h.x,\
+    \ h.y);\n    } else if (cmd == \"ANCESTOR\") {\n      inl(k, x, y);\n      SBT\
+    \ f{x, y};\n\n      ll l = f.depth() - k;\n      if (l < 0) {\n        out(-1);\n\
+    \      } else {\n        bool b = f.go_parent(l);\n        assert(b == true);\n\
+    \        out(f.x, f.y);\n      }\n    } else {\n      inl(x, y);\n      auto p\
+    \ = binary_search_on_stern_brocot_tree<ll>(\n          [&](pair<ll, ll> f) {\n\
+    \            return Rational{x, y} <= Rational{f};\n          },\n          max(x,\
+    \ y) - 1);\n      out(p.fi.fi, p.fi.se, p.se.fi, p.se.se);\n    }\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/stern_brocot_tree\"\n//\n\
-    #include \"../../template/template.hpp\"\n//\n#include \"../../math/stern-brocot-tree.hpp\"\
-    \n\nusing namespace Nyaan;\n\nusing SBT = SternBrocotTreeNode<ll>;\n\nvoid q()\
-    \ {\n  ins(cmd);\n  if (cmd == \"DECODE_PATH\") {\n    ini(n);\n    SBT f;\n \
-    \   rep(_, n) {\n      char c;\n      in(c);\n      inl(x);\n      if (c == 'R')\
-    \ f.go_right(x);\n      if (c == 'L') f.go_left(x);\n    }\n    out(f.x, f.y);\n\
-    \  } else if (cmd == \"ENCODE_PATH\") {\n    inl(x, y);\n    SBT f{x, y};\n  \
-    \  cout << f.seq.size() << \" \";\n    each(s, f.seq) {\n      cout << (s > 0\
-    \ ? 'R' : 'L') << \" \";\n      cout << abs(s) << \" \";\n    }\n    cout << \"\
-    \\n\";\n  } else if (cmd == \"LCA\") {\n    inl(x1, y1, x2, y2);\n    SBT f{x1,\
-    \ y1}, g{x2, y2};\n    SBT h = SBT::lca(f, g);\n    out(h.x, h.y);\n  } else if\
-    \ (cmd == \"ANCESTOR\") {\n    inl(k, x, y);\n    SBT f{x, y};\n\n    ll l = f.depth()\
-    \ - k;\n    if (l < 0) {\n      out(-1);\n    } else {\n      bool b = f.go_parent(l);\n\
-    \      assert(b == true);\n      out(f.x, f.y);\n    }\n  } else {\n    inl(x,\
-    \ y);\n    SBT f{x, y};\n    out(f.lower_bound(), f.upper_bound());\n  }\n}\n\n\
-    void Nyaan::solve() {\n  int t = 1;\n  in(t);\n  while (t--) q();\n}\n"
+    #include \"../../template/template.hpp\"\n//\n#include \"../../math/rational.hpp\"\
+    \n#include \"../../math/stern-brocot-tree-binary-search.hpp\"\n#include \"../../math/stern-brocot-tree.hpp\"\
+    \nusing namespace Nyaan;\n\nusing SBT = SternBrocotTreeNode<ll>;\n\nvoid Nyaan::solve()\
+    \ {\n  int T;\n  cin >> T;\n  while (T--) {\n    ins(cmd);\n    if (cmd == \"\
+    DECODE_PATH\") {\n      ini(n);\n      SBT f;\n      rep(_, n) {\n        char\
+    \ c;\n        in(c);\n        inl(x);\n        if (c == 'R') f.go_right(x);\n\
+    \        if (c == 'L') f.go_left(x);\n      }\n      out(f.x, f.y);\n    } else\
+    \ if (cmd == \"ENCODE_PATH\") {\n      inl(x, y);\n      SBT f{x, y};\n      cout\
+    \ << f.seq.size() << \" \";\n      each(s, f.seq) {\n        cout << (s > 0 ?\
+    \ 'R' : 'L') << \" \";\n        cout << abs(s) << \" \";\n      }\n      cout\
+    \ << \"\\n\";\n    } else if (cmd == \"LCA\") {\n      inl(x1, y1, x2, y2);\n\
+    \      SBT f{x1, y1}, g{x2, y2};\n      SBT h = SBT::lca(f, g);\n      out(h.x,\
+    \ h.y);\n    } else if (cmd == \"ANCESTOR\") {\n      inl(k, x, y);\n      SBT\
+    \ f{x, y};\n\n      ll l = f.depth() - k;\n      if (l < 0) {\n        out(-1);\n\
+    \      } else {\n        bool b = f.go_parent(l);\n        assert(b == true);\n\
+    \        out(f.x, f.y);\n      }\n    } else {\n      inl(x, y);\n      auto p\
+    \ = binary_search_on_stern_brocot_tree<ll>(\n          [&](pair<ll, ll> f) {\n\
+    \            return Rational{x, y} <= Rational{f};\n          },\n          max(x,\
+    \ y) - 1);\n      out(p.fi.fi, p.fi.se, p.se.fi, p.se.se);\n    }\n  }\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -298,17 +434,21 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
+  - math/rational.hpp
+  - internal/internal-type-traits.hpp
+  - math-fast/gcd.hpp
+  - math/stern-brocot-tree-binary-search.hpp
   - math/stern-brocot-tree.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp
+  path: verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
   requiredBy: []
   timestamp: '2023-12-18 23:52:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp
+documentation_of: verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp
-- /verify/verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp.html
-title: verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp.html
+title: verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
 ---

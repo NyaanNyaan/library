@@ -124,8 +124,8 @@ data:
   timestamp: '2023-08-30 22:50:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-graph/yosupo-jump-on-tree.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
+  - verify/verify-yosupo-graph/yosupo-jump-on-tree.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
 documentation_of: tree/tree-query.hpp
 layout: document

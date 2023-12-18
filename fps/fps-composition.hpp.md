@@ -203,9 +203,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1939.test.cpp
+  - verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition.test.cpp
   - verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
-  - verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
 documentation_of: fps/fps-composition.hpp
 layout: document
 redirect_from:

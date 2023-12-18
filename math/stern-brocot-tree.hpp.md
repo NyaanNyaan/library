@@ -7,6 +7,9 @@ data:
     title: math/stern-brocot-tree-binary-search.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp
     title: verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -32,8 +35,8 @@ data:
     \ lx(0), ly(1), x(1), y(1), rx(1), ry(0) {}\n\n  SternBrocotTreeNode(Int X, Int\
     \ Y) : SternBrocotTreeNode() {\n    assert(1 <= X && 1 <= Y);\n    Int g = gcd(X,\
     \ Y);\n    X /= g, Y /= g;\n    while (min(X, Y) > 0) {\n      if (X > Y) {\n\
-    \        int d = X / Y;\n        X -= d * Y;\n        go_right(d - (X == 0 ? 1\
-    \ : 0));\n      } else {\n        int d = Y / X;\n        Y -= d * X;\n      \
+    \        Int d = X / Y;\n        X -= d * Y;\n        go_right(d - (X == 0 ? 1\
+    \ : 0));\n      } else {\n        Int d = Y / X;\n        Y -= d * X;\n      \
     \  go_left(d - (Y == 0 ? 1 : 0));\n      }\n    }\n  }\n  SternBrocotTreeNode(const\
     \ pair<Int, Int> &xy)\n      : SternBrocotTreeNode(xy.first, xy.second) {}\n \
     \ SternBrocotTreeNode(const vector<Int> &_seq) : SternBrocotTreeNode() {\n   \
@@ -53,8 +56,8 @@ data:
     \ += d;\n    lx += rx * d, ly += ry * d;\n    x = rx + lx, y = ry + ly;\n  }\n\
     \  // \u89AA\u306E\u65B9\u5411\u306B d \u9032\u3080\n  // d \u9032\u3081\u305F\
     \u3089 true, \u9032\u3081\u306A\u304B\u3063\u305F\u3089 false \u3092\u8FD4\u3059\
-    \n  bool go_parent(Int d = 1) {\n    if (d <= 0) return true;\n    while (d) {\n\
-    \      if (seq.empty()) return false;\n      Int d2 = min(d, abs(seq.back()));\n\
+    \n  bool go_parent(Int d = 1) {\n    if (d <= 0) return true;\n    while (d !=\
+    \ 0) {\n      if (seq.empty()) return false;\n      Int d2 = min(d, abs(seq.back()));\n\
     \      if (seq.back() > 0) {\n        x -= rx * d2, y -= ry * d2;\n        lx\
     \ = x - rx, ly = y - ry;\n        seq.back() -= d2;\n      } else {\n        x\
     \ -= lx * d2, y -= ly * d2;\n        rx = x - lx, ry = y - ly;\n        seq.back()\
@@ -69,11 +72,11 @@ data:
     \ {\n    os << \"\\n\";\n    os << \"L : ( \" << rhs.lx << \", \" << rhs.ly <<\
     \ \" )\\n\";\n    os << \"M : ( \" << rhs.x << \", \" << rhs.y << \" )\\n\";\n\
     \    os << \"R : ( \" << rhs.rx << \", \" << rhs.ry << \" )\\n\";\n    os << \"\
-    seq : \" << rhs.seq << \"\\n\";\n    return os;\n  }\n  friend bool operator<(const\
-    \ Node &lhs, const Node &rhs) {\n    return lhs.x * rhs.y < rhs.x * lhs.y;\n \
-    \ }\n  friend bool operator==(const Node &lhs, const Node &rhs) {\n    return\
-    \ lhs.x == rhs.x and lhs.y == rhs.y;\n  }\n};\n\n/**\n *  @brief Stern-Brocot\
-    \ Tree\n */\n"
+    seq : {\";\n    for (auto &x : rhs.seq) os << x << \", \";\n    os << \"} \\n\"\
+    ;\n    return os;\n  }\n  friend bool operator<(const Node &lhs, const Node &rhs)\
+    \ {\n    return lhs.x * rhs.y < rhs.x * lhs.y;\n  }\n  friend bool operator==(const\
+    \ Node &lhs, const Node &rhs) {\n    return lhs.x == rhs.x and lhs.y == rhs.y;\n\
+    \  }\n};\n\n/**\n *  @brief Stern-Brocot Tree\n */\n"
   code: "#pragma once\n\n#include <algorithm>\n#include <cassert>\n#include <vector>\n\
     using namespace std;\n\n// x / y (x > 0, y > 0) \u3092\u7BA1\u7406\u3001\u30C7\
     \u30D5\u30A9\u30EB\u30C8\u3067 1 / 1\n// \u5165\u529B\u304C\u4E92\u3044\u306B\u7D20\
@@ -84,9 +87,9 @@ data:
     \ x, y, rx, ry;\n  vector<Int> seq;\n\n  SternBrocotTreeNode() : lx(0), ly(1),\
     \ x(1), y(1), rx(1), ry(0) {}\n\n  SternBrocotTreeNode(Int X, Int Y) : SternBrocotTreeNode()\
     \ {\n    assert(1 <= X && 1 <= Y);\n    Int g = gcd(X, Y);\n    X /= g, Y /= g;\n\
-    \    while (min(X, Y) > 0) {\n      if (X > Y) {\n        int d = X / Y;\n   \
+    \    while (min(X, Y) > 0) {\n      if (X > Y) {\n        Int d = X / Y;\n   \
     \     X -= d * Y;\n        go_right(d - (X == 0 ? 1 : 0));\n      } else {\n \
-    \       int d = Y / X;\n        Y -= d * X;\n        go_left(d - (Y == 0 ? 1 :\
+    \       Int d = Y / X;\n        Y -= d * X;\n        go_left(d - (Y == 0 ? 1 :\
     \ 0));\n      }\n    }\n  }\n  SternBrocotTreeNode(const pair<Int, Int> &xy)\n\
     \      : SternBrocotTreeNode(xy.first, xy.second) {}\n  SternBrocotTreeNode(const\
     \ vector<Int> &_seq) : SternBrocotTreeNode() {\n    for (const Int &d : _seq)\
@@ -106,11 +109,11 @@ data:
     \  lx += rx * d, ly += ry * d;\n    x = rx + lx, y = ry + ly;\n  }\n  // \u89AA\
     \u306E\u65B9\u5411\u306B d \u9032\u3080\n  // d \u9032\u3081\u305F\u3089 true,\
     \ \u9032\u3081\u306A\u304B\u3063\u305F\u3089 false \u3092\u8FD4\u3059\n  bool\
-    \ go_parent(Int d = 1) {\n    if (d <= 0) return true;\n    while (d) {\n    \
-    \  if (seq.empty()) return false;\n      Int d2 = min(d, abs(seq.back()));\n \
-    \     if (seq.back() > 0) {\n        x -= rx * d2, y -= ry * d2;\n        lx =\
-    \ x - rx, ly = y - ry;\n        seq.back() -= d2;\n      } else {\n        x -=\
-    \ lx * d2, y -= ly * d2;\n        rx = x - lx, ry = y - ly;\n        seq.back()\
+    \ go_parent(Int d = 1) {\n    if (d <= 0) return true;\n    while (d != 0) {\n\
+    \      if (seq.empty()) return false;\n      Int d2 = min(d, abs(seq.back()));\n\
+    \      if (seq.back() > 0) {\n        x -= rx * d2, y -= ry * d2;\n        lx\
+    \ = x - rx, ly = y - ry;\n        seq.back() -= d2;\n      } else {\n        x\
+    \ -= lx * d2, y -= ly * d2;\n        rx = x - lx, ry = y - ly;\n        seq.back()\
     \ += d2;\n      }\n      d -= d2;\n      if (seq.back() == 0) seq.pop_back();\n\
     \      if (d2 == Int{0}) break;\n    }\n    return true;\n  }\n  // SBT \u4E0A\
     \u306E LCA\n  static Node lca(const Node &lhs, const Node &rhs) {\n    Node n;\n\
@@ -122,22 +125,23 @@ data:
     \ {\n    os << \"\\n\";\n    os << \"L : ( \" << rhs.lx << \", \" << rhs.ly <<\
     \ \" )\\n\";\n    os << \"M : ( \" << rhs.x << \", \" << rhs.y << \" )\\n\";\n\
     \    os << \"R : ( \" << rhs.rx << \", \" << rhs.ry << \" )\\n\";\n    os << \"\
-    seq : \" << rhs.seq << \"\\n\";\n    return os;\n  }\n  friend bool operator<(const\
-    \ Node &lhs, const Node &rhs) {\n    return lhs.x * rhs.y < rhs.x * lhs.y;\n \
-    \ }\n  friend bool operator==(const Node &lhs, const Node &rhs) {\n    return\
-    \ lhs.x == rhs.x and lhs.y == rhs.y;\n  }\n};\n\n/**\n *  @brief Stern-Brocot\
-    \ Tree\n */\n"
+    seq : {\";\n    for (auto &x : rhs.seq) os << x << \", \";\n    os << \"} \\n\"\
+    ;\n    return os;\n  }\n  friend bool operator<(const Node &lhs, const Node &rhs)\
+    \ {\n    return lhs.x * rhs.y < rhs.x * lhs.y;\n  }\n  friend bool operator==(const\
+    \ Node &lhs, const Node &rhs) {\n    return lhs.x == rhs.x and lhs.y == rhs.y;\n\
+    \  }\n};\n\n/**\n *  @brief Stern-Brocot Tree\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: math/stern-brocot-tree.hpp
   requiredBy:
   - math/stern-brocot-tree-binary-search.hpp
-  timestamp: '2023-08-10 13:25:59+09:00'
+  timestamp: '2023-12-18 23:52:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-2266.test.cpp
   - verify/verify-yuki/yuki-2262.test.cpp
+  - verify/verify-yuki/yuki-2266.test.cpp
   - verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp
+  - verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
 documentation_of: math/stern-brocot-tree.hpp
 layout: document
 redirect_from:

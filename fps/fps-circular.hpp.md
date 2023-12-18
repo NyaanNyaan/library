@@ -210,8 +210,8 @@ data:
   timestamp: '2023-08-31 20:44:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-0963-circular.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
+  - verify/verify-yuki/yuki-0963-circular.test.cpp
 documentation_of: fps/fps-circular.hpp
 layout: document
 redirect_from:

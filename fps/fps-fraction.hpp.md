@@ -75,8 +75,8 @@ data:
   timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-1145-frac.test.cpp
   - verify/verify-yuki/yuki-1875.test.cpp
+  - verify/verify-yuki/yuki-1145-frac.test.cpp
 documentation_of: fps/fps-fraction.hpp
 layout: document
 redirect_from:

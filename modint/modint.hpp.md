@@ -70,8 +70,8 @@ data:
   timestamp: '2023-05-29 20:16:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
   - verify/verify-unit-test/modint.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
 documentation_of: modint/modint.hpp
 layout: document
 redirect_from:

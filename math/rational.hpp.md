@@ -31,6 +31,9 @@ data:
     path: verify/verify-unit-test/rational-number.test.cpp
     title: verify/verify-unit-test/rational-number.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-2262.test.cpp
     title: verify/verify-yuki/yuki-2262.test.cpp
   - icon: ':heavy_check_mark:'
@@ -87,48 +90,7 @@ data:
     \ {\n  using R = RationalBase;\n  using Key = T;\n  T x, y;\n  RationalBase()\
     \ : x(0), y(1) {}\n  template <typename T1>\n  RationalBase(const T1& _x) : RationalBase<T,\
     \ U>(_x, T1{1}) {}\n  template <typename T1, typename T2>\n  RationalBase(const\
-    \ T1& _x, const T2& _y) : x(_x), y(_y) {\n    assert(y != 0);\n    if (y == -1)\
-    \ x = -x, y = -y;\n    if (y != 1) {\n      T g;\n      if constexpr (internal::is_broadly_integral_v<T>)\
-    \ {\n        if constexpr (sizeof(T) == 16) {\n          g = binary_gcd128(x,\
-    \ y);\n        } else {\n          g = binary_gcd(x, y);\n        }\n      } else\
-    \ {\n        g = gcd(x, y);\n      }\n      if (g != 0) x /= g, y /= g;\n    \
-    \  if (y < 0) x = -x, y = -y;\n    }\n  }\n  // y = 0 \u306E\u4EE3\u5165\u3082\
-    \u8A8D\u3081\u308B\n  static R raw(T _x, T _y) {\n    R r;\n    r.x = _x, r.y\
-    \ = _y;\n    return r;\n  }\n  friend R operator+(const R& l, const R& r) {\n\
-    \    if (l.y == r.y) return R{l.x + r.x, l.y};\n    return R{l.x * r.y + l.y *\
-    \ r.x, l.y * r.y};\n  }\n  friend R operator-(const R& l, const R& r) {\n    if\
-    \ (l.y == r.y) return R{l.x - r.x, l.y};\n    return R{l.x * r.y - l.y * r.x,\
-    \ l.y * r.y};\n  }\n  friend R operator*(const R& l, const R& r) { return R{l.x\
-    \ * r.x, l.y * r.y}; }\n  friend R operator/(const R& l, const R& r) { return\
-    \ R{l.x * r.y, l.y * r.x}; }\n  R& operator+=(const R& r) { return (*this) = (*this)\
-    \ + r; }\n  R& operator-=(const R& r) { return (*this) = (*this) - r; }\n  R&\
-    \ operator*=(const R& r) { return (*this) = (*this) * r; }\n  R& operator/=(const\
-    \ R& r) { return (*this) = (*this) / r; }\n  R operator-() const { return raw(-x,\
-    \ y); }\n  R inverse() const {\n    assert(x != 0);\n    R r = raw(y, x);\n  \
-    \  if (r.y < 0) r.x = -r.x, r.y = -r.y;\n    return r;\n  }\n  R pow(long long\
-    \ p) const {\n    R res{1}, base{*this};\n    while (p) {\n      if (p & 1) res\
-    \ *= base;\n      base *= base;\n      p >>= 1;\n    }\n    return res;\n  }\n\
-    \  friend bool operator==(const R& l, const R& r) {\n    return l.x == r.x &&\
-    \ l.y == r.y;\n  };\n  friend bool operator!=(const R& l, const R& r) {\n    return\
-    \ l.x != r.x || l.y != r.y;\n  };\n  friend bool operator<(const R& l, const R&\
-    \ r) {\n    return U{l.x} * r.y < U{l.y} * r.x;\n  };\n  friend bool operator<=(const\
-    \ R& l, const R& r) { return l < r || l == r; }\n  friend bool operator>(const\
-    \ R& l, const R& r) {\n    return U{l.x} * r.y > U{l.y} * r.x;\n  };\n  friend\
-    \ bool operator>=(const R& l, const R& r) { return l > r || l == r; }\n  friend\
-    \ ostream& operator<<(ostream& os, const R& r) {\n    os << r.x;\n    if (r.x\
-    \ != 0 && r.y != 1) os << \"/\" << r.y;\n    return os;\n  }\n\n  // T \u306B\u30AD\
-    \u30E3\u30B9\u30C8\u3055\u308C\u308B\u306E\u3067 T \u304C bigint \u306E\u5834\u5408\
-    \u306F to_ll \u3082\u8981\u308B\n  T to_mint(T mod) const {\n    assert(mod !=\
-    \ 0);\n    T a = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t =\
-    \ a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return\
-    \ U((u % mod + mod) % mod) * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long\
-    \ long, __int128_t>;\n"
-  code: "#pragma once\n\n#include <cassert>\n#include <numeric>\n#include <vector>\n\
-    using namespace std;\n\n#include \"../internal/internal-type-traits.hpp\"\n#include\
-    \ \"../math-fast/gcd.hpp\"\n\n// T : \u5024, U : \u6BD4\u8F03\u7528\ntemplate\
-    \ <typename T, typename U>\nstruct RationalBase {\n  using R = RationalBase;\n\
-    \  using Key = T;\n  T x, y;\n  RationalBase() : x(0), y(1) {}\n  template <typename\
-    \ T1>\n  RationalBase(const T1& _x) : RationalBase<T, U>(_x, T1{1}) {}\n  template\
+    \ pair<T1, T2>& _p)\n      : RationalBase<T, U>(_p.first, _p.second) {}\n  template\
     \ <typename T1, typename T2>\n  RationalBase(const T1& _x, const T2& _y) : x(_x),\
     \ y(_y) {\n    assert(y != 0);\n    if (y == -1) x = -x, y = -y;\n    if (y !=\
     \ 1) {\n      T g;\n      if constexpr (internal::is_broadly_integral_v<T>) {\n\
@@ -166,24 +128,69 @@ data:
     \      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return U((u\
     \ % mod + mod) % mod) * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long\
     \ long, __int128_t>;\n"
+  code: "#pragma once\n\n#include <cassert>\n#include <numeric>\n#include <vector>\n\
+    using namespace std;\n\n#include \"../internal/internal-type-traits.hpp\"\n#include\
+    \ \"../math-fast/gcd.hpp\"\n\n// T : \u5024, U : \u6BD4\u8F03\u7528\ntemplate\
+    \ <typename T, typename U>\nstruct RationalBase {\n  using R = RationalBase;\n\
+    \  using Key = T;\n  T x, y;\n  RationalBase() : x(0), y(1) {}\n  template <typename\
+    \ T1>\n  RationalBase(const T1& _x) : RationalBase<T, U>(_x, T1{1}) {}\n  template\
+    \ <typename T1, typename T2>\n  RationalBase(const pair<T1, T2>& _p)\n      :\
+    \ RationalBase<T, U>(_p.first, _p.second) {}\n  template <typename T1, typename\
+    \ T2>\n  RationalBase(const T1& _x, const T2& _y) : x(_x), y(_y) {\n    assert(y\
+    \ != 0);\n    if (y == -1) x = -x, y = -y;\n    if (y != 1) {\n      T g;\n  \
+    \    if constexpr (internal::is_broadly_integral_v<T>) {\n        if constexpr\
+    \ (sizeof(T) == 16) {\n          g = binary_gcd128(x, y);\n        } else {\n\
+    \          g = binary_gcd(x, y);\n        }\n      } else {\n        g = gcd(x,\
+    \ y);\n      }\n      if (g != 0) x /= g, y /= g;\n      if (y < 0) x = -x, y\
+    \ = -y;\n    }\n  }\n  // y = 0 \u306E\u4EE3\u5165\u3082\u8A8D\u3081\u308B\n \
+    \ static R raw(T _x, T _y) {\n    R r;\n    r.x = _x, r.y = _y;\n    return r;\n\
+    \  }\n  friend R operator+(const R& l, const R& r) {\n    if (l.y == r.y) return\
+    \ R{l.x + r.x, l.y};\n    return R{l.x * r.y + l.y * r.x, l.y * r.y};\n  }\n \
+    \ friend R operator-(const R& l, const R& r) {\n    if (l.y == r.y) return R{l.x\
+    \ - r.x, l.y};\n    return R{l.x * r.y - l.y * r.x, l.y * r.y};\n  }\n  friend\
+    \ R operator*(const R& l, const R& r) { return R{l.x * r.x, l.y * r.y}; }\n  friend\
+    \ R operator/(const R& l, const R& r) { return R{l.x * r.y, l.y * r.x}; }\n  R&\
+    \ operator+=(const R& r) { return (*this) = (*this) + r; }\n  R& operator-=(const\
+    \ R& r) { return (*this) = (*this) - r; }\n  R& operator*=(const R& r) { return\
+    \ (*this) = (*this) * r; }\n  R& operator/=(const R& r) { return (*this) = (*this)\
+    \ / r; }\n  R operator-() const { return raw(-x, y); }\n  R inverse() const {\n\
+    \    assert(x != 0);\n    R r = raw(y, x);\n    if (r.y < 0) r.x = -r.x, r.y =\
+    \ -r.y;\n    return r;\n  }\n  R pow(long long p) const {\n    R res{1}, base{*this};\n\
+    \    while (p) {\n      if (p & 1) res *= base;\n      base *= base;\n      p\
+    \ >>= 1;\n    }\n    return res;\n  }\n  friend bool operator==(const R& l, const\
+    \ R& r) {\n    return l.x == r.x && l.y == r.y;\n  };\n  friend bool operator!=(const\
+    \ R& l, const R& r) {\n    return l.x != r.x || l.y != r.y;\n  };\n  friend bool\
+    \ operator<(const R& l, const R& r) {\n    return U{l.x} * r.y < U{l.y} * r.x;\n\
+    \  };\n  friend bool operator<=(const R& l, const R& r) { return l < r || l ==\
+    \ r; }\n  friend bool operator>(const R& l, const R& r) {\n    return U{l.x} *\
+    \ r.y > U{l.y} * r.x;\n  };\n  friend bool operator>=(const R& l, const R& r)\
+    \ { return l > r || l == r; }\n  friend ostream& operator<<(ostream& os, const\
+    \ R& r) {\n    os << r.x;\n    if (r.x != 0 && r.y != 1) os << \"/\" << r.y;\n\
+    \    return os;\n  }\n\n  // T \u306B\u30AD\u30E3\u30B9\u30C8\u3055\u308C\u308B\
+    \u306E\u3067 T \u304C bigint \u306E\u5834\u5408\u306F to_ll \u3082\u8981\u308B\
+    \n  T to_mint(T mod) const {\n    assert(mod != 0);\n    T a = y, b = mod, u =\
+    \ 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b,\
+    \ b);\n      swap(u -= t * v, v);\n    }\n    return U((u % mod + mod) % mod)\
+    \ * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long long, __int128_t>;\n"
   dependsOn:
   - internal/internal-type-traits.hpp
   - math-fast/gcd.hpp
   isVerificationFile: false
   path: math/rational.hpp
   requiredBy:
+  - math/bigint-rational.hpp
   - math/rational-fps.hpp
   - math/rational-binomial.hpp
-  - math/bigint-rational.hpp
   - math/bigint-all.hpp
-  timestamp: '2023-09-05 21:46:27+09:00'
+  timestamp: '2023-12-18 23:52:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-2266.test.cpp
   - verify/verify-yuki/yuki-2262.test.cpp
-  - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+  - verify/verify-yuki/yuki-2266.test.cpp
   - verify/verify-unit-test/rational-number.test.cpp
   - verify/verify-unit-test/bigrational.test.cpp
+  - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+  - verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
 documentation_of: math/rational.hpp
 layout: document
 redirect_from:

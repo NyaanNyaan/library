@@ -77,8 +77,8 @@ data:
   isVerificationFile: false
   path: math/garner.hpp
   requiredBy:
-  - math/nimber.hpp
   - math/nimber-to-field.hpp
+  - math/nimber.hpp
   timestamp: '2021-12-23 18:55:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

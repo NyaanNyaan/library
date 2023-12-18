@@ -1996,6 +1996,9 @@ data:
       path: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
       title: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
+      title: verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp
       title: verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp
     - icon: ':heavy_check_mark:'

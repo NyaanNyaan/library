@@ -84,8 +84,8 @@ data:
   isVerificationFile: false
   path: set-function/subset-convolution.hpp
   requiredBy:
-  - set-function/exp-of-set-power-series.hpp
   - set-function/polynomial-composite-set-power-series.hpp
+  - set-function/exp-of-set-power-series.hpp
   timestamp: '2023-05-27 23:17:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

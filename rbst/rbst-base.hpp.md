@@ -96,8 +96,8 @@ data:
   path: rbst/rbst-base.hpp
   requiredBy:
   - rbst/lazy-reversible-rbst.hpp
-  - orderedmap/orderedmap-base.hpp
   - orderedmap/orderedmap.hpp
+  - orderedmap/orderedmap-base.hpp
   timestamp: '2020-12-17 01:20:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

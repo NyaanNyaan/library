@@ -62,19 +62,19 @@ data:
   isVerificationFile: false
   path: math/constexpr-primitive-root.hpp
   requiredBy:
-  - ntt/rader-ntt.hpp
-  - ntt/cooley-tukey-ntt.hpp
-  - ntt/multivariate-circular-convolution.hpp
   - fps/dual-fps.hpp
+  - ntt/multivariate-circular-convolution.hpp
+  - ntt/cooley-tukey-ntt.hpp
+  - ntt/rader-ntt.hpp
   timestamp: '2023-08-31 20:44:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1783.test.cpp
   - verify/verify-yuki/yuki-1504.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
-  - verify/verify-unit-test/dual-fps.test.cpp
   - verify/verify-unit-test/primitive-root.test.cpp
+  - verify/verify-unit-test/dual-fps.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
 documentation_of: math/constexpr-primitive-root.hpp
 layout: document
 redirect_from:

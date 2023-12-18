@@ -260,8 +260,8 @@ data:
   timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/sum-of-mf.test.cpp
   - verify/verify-unit-test/mf.test.cpp
+  - verify/verify-unit-test/sum-of-mf.test.cpp
 documentation_of: multiplicative-function/enamurate-multiplicative-function.hpp
 layout: document
 redirect_from:

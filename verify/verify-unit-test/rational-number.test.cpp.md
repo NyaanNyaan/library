@@ -278,41 +278,43 @@ data:
     \ {\n  using R = RationalBase;\n  using Key = T;\n  T x, y;\n  RationalBase()\
     \ : x(0), y(1) {}\n  template <typename T1>\n  RationalBase(const T1& _x) : RationalBase<T,\
     \ U>(_x, T1{1}) {}\n  template <typename T1, typename T2>\n  RationalBase(const\
-    \ T1& _x, const T2& _y) : x(_x), y(_y) {\n    assert(y != 0);\n    if (y == -1)\
-    \ x = -x, y = -y;\n    if (y != 1) {\n      T g;\n      if constexpr (internal::is_broadly_integral_v<T>)\
-    \ {\n        if constexpr (sizeof(T) == 16) {\n          g = binary_gcd128(x,\
-    \ y);\n        } else {\n          g = binary_gcd(x, y);\n        }\n      } else\
-    \ {\n        g = gcd(x, y);\n      }\n      if (g != 0) x /= g, y /= g;\n    \
-    \  if (y < 0) x = -x, y = -y;\n    }\n  }\n  // y = 0 \u306E\u4EE3\u5165\u3082\
-    \u8A8D\u3081\u308B\n  static R raw(T _x, T _y) {\n    R r;\n    r.x = _x, r.y\
-    \ = _y;\n    return r;\n  }\n  friend R operator+(const R& l, const R& r) {\n\
-    \    if (l.y == r.y) return R{l.x + r.x, l.y};\n    return R{l.x * r.y + l.y *\
-    \ r.x, l.y * r.y};\n  }\n  friend R operator-(const R& l, const R& r) {\n    if\
-    \ (l.y == r.y) return R{l.x - r.x, l.y};\n    return R{l.x * r.y - l.y * r.x,\
-    \ l.y * r.y};\n  }\n  friend R operator*(const R& l, const R& r) { return R{l.x\
-    \ * r.x, l.y * r.y}; }\n  friend R operator/(const R& l, const R& r) { return\
-    \ R{l.x * r.y, l.y * r.x}; }\n  R& operator+=(const R& r) { return (*this) = (*this)\
-    \ + r; }\n  R& operator-=(const R& r) { return (*this) = (*this) - r; }\n  R&\
-    \ operator*=(const R& r) { return (*this) = (*this) * r; }\n  R& operator/=(const\
-    \ R& r) { return (*this) = (*this) / r; }\n  R operator-() const { return raw(-x,\
-    \ y); }\n  R inverse() const {\n    assert(x != 0);\n    R r = raw(y, x);\n  \
-    \  if (r.y < 0) r.x = -r.x, r.y = -r.y;\n    return r;\n  }\n  R pow(long long\
-    \ p) const {\n    R res{1}, base{*this};\n    while (p) {\n      if (p & 1) res\
-    \ *= base;\n      base *= base;\n      p >>= 1;\n    }\n    return res;\n  }\n\
-    \  friend bool operator==(const R& l, const R& r) {\n    return l.x == r.x &&\
-    \ l.y == r.y;\n  };\n  friend bool operator!=(const R& l, const R& r) {\n    return\
-    \ l.x != r.x || l.y != r.y;\n  };\n  friend bool operator<(const R& l, const R&\
-    \ r) {\n    return U{l.x} * r.y < U{l.y} * r.x;\n  };\n  friend bool operator<=(const\
-    \ R& l, const R& r) { return l < r || l == r; }\n  friend bool operator>(const\
-    \ R& l, const R& r) {\n    return U{l.x} * r.y > U{l.y} * r.x;\n  };\n  friend\
-    \ bool operator>=(const R& l, const R& r) { return l > r || l == r; }\n  friend\
-    \ ostream& operator<<(ostream& os, const R& r) {\n    os << r.x;\n    if (r.x\
-    \ != 0 && r.y != 1) os << \"/\" << r.y;\n    return os;\n  }\n\n  // T \u306B\u30AD\
-    \u30E3\u30B9\u30C8\u3055\u308C\u308B\u306E\u3067 T \u304C bigint \u306E\u5834\u5408\
-    \u306F to_ll \u3082\u8981\u308B\n  T to_mint(T mod) const {\n    assert(mod !=\
-    \ 0);\n    T a = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t =\
-    \ a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return\
-    \ U((u % mod + mod) % mod) * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long\
+    \ pair<T1, T2>& _p)\n      : RationalBase<T, U>(_p.first, _p.second) {}\n  template\
+    \ <typename T1, typename T2>\n  RationalBase(const T1& _x, const T2& _y) : x(_x),\
+    \ y(_y) {\n    assert(y != 0);\n    if (y == -1) x = -x, y = -y;\n    if (y !=\
+    \ 1) {\n      T g;\n      if constexpr (internal::is_broadly_integral_v<T>) {\n\
+    \        if constexpr (sizeof(T) == 16) {\n          g = binary_gcd128(x, y);\n\
+    \        } else {\n          g = binary_gcd(x, y);\n        }\n      } else {\n\
+    \        g = gcd(x, y);\n      }\n      if (g != 0) x /= g, y /= g;\n      if\
+    \ (y < 0) x = -x, y = -y;\n    }\n  }\n  // y = 0 \u306E\u4EE3\u5165\u3082\u8A8D\
+    \u3081\u308B\n  static R raw(T _x, T _y) {\n    R r;\n    r.x = _x, r.y = _y;\n\
+    \    return r;\n  }\n  friend R operator+(const R& l, const R& r) {\n    if (l.y\
+    \ == r.y) return R{l.x + r.x, l.y};\n    return R{l.x * r.y + l.y * r.x, l.y *\
+    \ r.y};\n  }\n  friend R operator-(const R& l, const R& r) {\n    if (l.y == r.y)\
+    \ return R{l.x - r.x, l.y};\n    return R{l.x * r.y - l.y * r.x, l.y * r.y};\n\
+    \  }\n  friend R operator*(const R& l, const R& r) { return R{l.x * r.x, l.y *\
+    \ r.y}; }\n  friend R operator/(const R& l, const R& r) { return R{l.x * r.y,\
+    \ l.y * r.x}; }\n  R& operator+=(const R& r) { return (*this) = (*this) + r; }\n\
+    \  R& operator-=(const R& r) { return (*this) = (*this) - r; }\n  R& operator*=(const\
+    \ R& r) { return (*this) = (*this) * r; }\n  R& operator/=(const R& r) { return\
+    \ (*this) = (*this) / r; }\n  R operator-() const { return raw(-x, y); }\n  R\
+    \ inverse() const {\n    assert(x != 0);\n    R r = raw(y, x);\n    if (r.y <\
+    \ 0) r.x = -r.x, r.y = -r.y;\n    return r;\n  }\n  R pow(long long p) const {\n\
+    \    R res{1}, base{*this};\n    while (p) {\n      if (p & 1) res *= base;\n\
+    \      base *= base;\n      p >>= 1;\n    }\n    return res;\n  }\n  friend bool\
+    \ operator==(const R& l, const R& r) {\n    return l.x == r.x && l.y == r.y;\n\
+    \  };\n  friend bool operator!=(const R& l, const R& r) {\n    return l.x != r.x\
+    \ || l.y != r.y;\n  };\n  friend bool operator<(const R& l, const R& r) {\n  \
+    \  return U{l.x} * r.y < U{l.y} * r.x;\n  };\n  friend bool operator<=(const R&\
+    \ l, const R& r) { return l < r || l == r; }\n  friend bool operator>(const R&\
+    \ l, const R& r) {\n    return U{l.x} * r.y > U{l.y} * r.x;\n  };\n  friend bool\
+    \ operator>=(const R& l, const R& r) { return l > r || l == r; }\n  friend ostream&\
+    \ operator<<(ostream& os, const R& r) {\n    os << r.x;\n    if (r.x != 0 && r.y\
+    \ != 1) os << \"/\" << r.y;\n    return os;\n  }\n\n  // T \u306B\u30AD\u30E3\u30B9\
+    \u30C8\u3055\u308C\u308B\u306E\u3067 T \u304C bigint \u306E\u5834\u5408\u306F\
+    \ to_ll \u3082\u8981\u308B\n  T to_mint(T mod) const {\n    assert(mod != 0);\n\
+    \    T a = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n\
+    \      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return U((u\
+    \ % mod + mod) % mod) * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long\
     \ long, __int128_t>;\n#line 4 \"math/rational-binomial.hpp\"\n\ntemplate <typename\
     \ R = Rational>\nstruct Binomial_rational {\n  vector<R> fc;\n  Binomial_rational(int\
     \ = 0) { fc.emplace_back(1); }\n  void extend() {\n    int n = fc.size();\n  \
@@ -327,10 +329,13 @@ data:
     \  for (auto& x : r) {\n      if (x < 0) return R{0};\n      n += x;\n    }\n\
     \    R res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
     \  }\n\n  template <typename I>\n  R operator()(const vector<I>& r) {\n    return\
-    \ multinomial(r);\n  }\n};\n#line 2 \"math/rational-fps.hpp\"\n\n#line 5 \"math/rational-fps.hpp\"\
-    \n\ntemplate <typename R = Rational>\nstruct FormalPowerSeries_rational : vector<R>\
-    \ {\n  using vector<R>::vector;\n  using fps = FormalPowerSeries_rational;\n\n\
-    \  fps &operator+=(const fps &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
+    \ multinomial(r);\n  }\n  \n  R P(int n, int r) {\n    if (n < 0 || n < r || r\
+    \ < 0) return R(0);\n    return fac(n) * finv(n - r);\n  }\n  // [x^r] 1 / (1-x)^n\n\
+    \  R H(int n, int r) {\n    if (n < 0 || r < 0) return R(0);\n    return r ==\
+    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 2 \"math/rational-fps.hpp\"\n\n#line\
+    \ 5 \"math/rational-fps.hpp\"\n\ntemplate <typename R = Rational>\nstruct FormalPowerSeries_rational\
+    \ : vector<R> {\n  using vector<R>::vector;\n  using fps = FormalPowerSeries_rational;\n\
+    \n  fps &operator+=(const fps &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
     \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
     \  }\n\n  fps &operator+=(const R &r) {\n    if (this->empty()) this->resize(1);\n\
     \    (*this)[0] += r;\n    return *this;\n  }\n\n  fps &operator-=(const fps &r)\
@@ -585,7 +590,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/rational-number.test.cpp
   requiredBy: []
-  timestamp: '2023-09-05 21:46:27+09:00'
+  timestamp: '2023-12-18 23:52:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/rational-number.test.cpp

@@ -88,41 +88,43 @@ data:
     \ {\n  using R = RationalBase;\n  using Key = T;\n  T x, y;\n  RationalBase()\
     \ : x(0), y(1) {}\n  template <typename T1>\n  RationalBase(const T1& _x) : RationalBase<T,\
     \ U>(_x, T1{1}) {}\n  template <typename T1, typename T2>\n  RationalBase(const\
-    \ T1& _x, const T2& _y) : x(_x), y(_y) {\n    assert(y != 0);\n    if (y == -1)\
-    \ x = -x, y = -y;\n    if (y != 1) {\n      T g;\n      if constexpr (internal::is_broadly_integral_v<T>)\
-    \ {\n        if constexpr (sizeof(T) == 16) {\n          g = binary_gcd128(x,\
-    \ y);\n        } else {\n          g = binary_gcd(x, y);\n        }\n      } else\
-    \ {\n        g = gcd(x, y);\n      }\n      if (g != 0) x /= g, y /= g;\n    \
-    \  if (y < 0) x = -x, y = -y;\n    }\n  }\n  // y = 0 \u306E\u4EE3\u5165\u3082\
-    \u8A8D\u3081\u308B\n  static R raw(T _x, T _y) {\n    R r;\n    r.x = _x, r.y\
-    \ = _y;\n    return r;\n  }\n  friend R operator+(const R& l, const R& r) {\n\
-    \    if (l.y == r.y) return R{l.x + r.x, l.y};\n    return R{l.x * r.y + l.y *\
-    \ r.x, l.y * r.y};\n  }\n  friend R operator-(const R& l, const R& r) {\n    if\
-    \ (l.y == r.y) return R{l.x - r.x, l.y};\n    return R{l.x * r.y - l.y * r.x,\
-    \ l.y * r.y};\n  }\n  friend R operator*(const R& l, const R& r) { return R{l.x\
-    \ * r.x, l.y * r.y}; }\n  friend R operator/(const R& l, const R& r) { return\
-    \ R{l.x * r.y, l.y * r.x}; }\n  R& operator+=(const R& r) { return (*this) = (*this)\
-    \ + r; }\n  R& operator-=(const R& r) { return (*this) = (*this) - r; }\n  R&\
-    \ operator*=(const R& r) { return (*this) = (*this) * r; }\n  R& operator/=(const\
-    \ R& r) { return (*this) = (*this) / r; }\n  R operator-() const { return raw(-x,\
-    \ y); }\n  R inverse() const {\n    assert(x != 0);\n    R r = raw(y, x);\n  \
-    \  if (r.y < 0) r.x = -r.x, r.y = -r.y;\n    return r;\n  }\n  R pow(long long\
-    \ p) const {\n    R res{1}, base{*this};\n    while (p) {\n      if (p & 1) res\
-    \ *= base;\n      base *= base;\n      p >>= 1;\n    }\n    return res;\n  }\n\
-    \  friend bool operator==(const R& l, const R& r) {\n    return l.x == r.x &&\
-    \ l.y == r.y;\n  };\n  friend bool operator!=(const R& l, const R& r) {\n    return\
-    \ l.x != r.x || l.y != r.y;\n  };\n  friend bool operator<(const R& l, const R&\
-    \ r) {\n    return U{l.x} * r.y < U{l.y} * r.x;\n  };\n  friend bool operator<=(const\
-    \ R& l, const R& r) { return l < r || l == r; }\n  friend bool operator>(const\
-    \ R& l, const R& r) {\n    return U{l.x} * r.y > U{l.y} * r.x;\n  };\n  friend\
-    \ bool operator>=(const R& l, const R& r) { return l > r || l == r; }\n  friend\
-    \ ostream& operator<<(ostream& os, const R& r) {\n    os << r.x;\n    if (r.x\
-    \ != 0 && r.y != 1) os << \"/\" << r.y;\n    return os;\n  }\n\n  // T \u306B\u30AD\
-    \u30E3\u30B9\u30C8\u3055\u308C\u308B\u306E\u3067 T \u304C bigint \u306E\u5834\u5408\
-    \u306F to_ll \u3082\u8981\u308B\n  T to_mint(T mod) const {\n    assert(mod !=\
-    \ 0);\n    T a = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t =\
-    \ a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return\
-    \ U((u % mod + mod) % mod) * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long\
+    \ pair<T1, T2>& _p)\n      : RationalBase<T, U>(_p.first, _p.second) {}\n  template\
+    \ <typename T1, typename T2>\n  RationalBase(const T1& _x, const T2& _y) : x(_x),\
+    \ y(_y) {\n    assert(y != 0);\n    if (y == -1) x = -x, y = -y;\n    if (y !=\
+    \ 1) {\n      T g;\n      if constexpr (internal::is_broadly_integral_v<T>) {\n\
+    \        if constexpr (sizeof(T) == 16) {\n          g = binary_gcd128(x, y);\n\
+    \        } else {\n          g = binary_gcd(x, y);\n        }\n      } else {\n\
+    \        g = gcd(x, y);\n      }\n      if (g != 0) x /= g, y /= g;\n      if\
+    \ (y < 0) x = -x, y = -y;\n    }\n  }\n  // y = 0 \u306E\u4EE3\u5165\u3082\u8A8D\
+    \u3081\u308B\n  static R raw(T _x, T _y) {\n    R r;\n    r.x = _x, r.y = _y;\n\
+    \    return r;\n  }\n  friend R operator+(const R& l, const R& r) {\n    if (l.y\
+    \ == r.y) return R{l.x + r.x, l.y};\n    return R{l.x * r.y + l.y * r.x, l.y *\
+    \ r.y};\n  }\n  friend R operator-(const R& l, const R& r) {\n    if (l.y == r.y)\
+    \ return R{l.x - r.x, l.y};\n    return R{l.x * r.y - l.y * r.x, l.y * r.y};\n\
+    \  }\n  friend R operator*(const R& l, const R& r) { return R{l.x * r.x, l.y *\
+    \ r.y}; }\n  friend R operator/(const R& l, const R& r) { return R{l.x * r.y,\
+    \ l.y * r.x}; }\n  R& operator+=(const R& r) { return (*this) = (*this) + r; }\n\
+    \  R& operator-=(const R& r) { return (*this) = (*this) - r; }\n  R& operator*=(const\
+    \ R& r) { return (*this) = (*this) * r; }\n  R& operator/=(const R& r) { return\
+    \ (*this) = (*this) / r; }\n  R operator-() const { return raw(-x, y); }\n  R\
+    \ inverse() const {\n    assert(x != 0);\n    R r = raw(y, x);\n    if (r.y <\
+    \ 0) r.x = -r.x, r.y = -r.y;\n    return r;\n  }\n  R pow(long long p) const {\n\
+    \    R res{1}, base{*this};\n    while (p) {\n      if (p & 1) res *= base;\n\
+    \      base *= base;\n      p >>= 1;\n    }\n    return res;\n  }\n  friend bool\
+    \ operator==(const R& l, const R& r) {\n    return l.x == r.x && l.y == r.y;\n\
+    \  };\n  friend bool operator!=(const R& l, const R& r) {\n    return l.x != r.x\
+    \ || l.y != r.y;\n  };\n  friend bool operator<(const R& l, const R& r) {\n  \
+    \  return U{l.x} * r.y < U{l.y} * r.x;\n  };\n  friend bool operator<=(const R&\
+    \ l, const R& r) { return l < r || l == r; }\n  friend bool operator>(const R&\
+    \ l, const R& r) {\n    return U{l.x} * r.y > U{l.y} * r.x;\n  };\n  friend bool\
+    \ operator>=(const R& l, const R& r) { return l > r || l == r; }\n  friend ostream&\
+    \ operator<<(ostream& os, const R& r) {\n    os << r.x;\n    if (r.x != 0 && r.y\
+    \ != 1) os << \"/\" << r.y;\n    return os;\n  }\n\n  // T \u306B\u30AD\u30E3\u30B9\
+    \u30C8\u3055\u308C\u308B\u306E\u3067 T \u304C bigint \u306E\u5834\u5408\u306F\
+    \ to_ll \u3082\u8981\u308B\n  T to_mint(T mod) const {\n    assert(mod != 0);\n\
+    \    T a = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n\
+    \      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return U((u\
+    \ % mod + mod) % mod) * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long\
     \ long, __int128_t>;\n#line 4 \"math/rational-binomial.hpp\"\n\ntemplate <typename\
     \ R = Rational>\nstruct Binomial_rational {\n  vector<R> fc;\n  Binomial_rational(int\
     \ = 0) { fc.emplace_back(1); }\n  void extend() {\n    int n = fc.size();\n  \
@@ -137,10 +139,13 @@ data:
     \  for (auto& x : r) {\n      if (x < 0) return R{0};\n      n += x;\n    }\n\
     \    R res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
     \  }\n\n  template <typename I>\n  R operator()(const vector<I>& r) {\n    return\
-    \ multinomial(r);\n  }\n};\n#line 2 \"math/rational-fps.hpp\"\n\n#line 5 \"math/rational-fps.hpp\"\
-    \n\ntemplate <typename R = Rational>\nstruct FormalPowerSeries_rational : vector<R>\
-    \ {\n  using vector<R>::vector;\n  using fps = FormalPowerSeries_rational;\n\n\
-    \  fps &operator+=(const fps &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
+    \ multinomial(r);\n  }\n  \n  R P(int n, int r) {\n    if (n < 0 || n < r || r\
+    \ < 0) return R(0);\n    return fac(n) * finv(n - r);\n  }\n  // [x^r] 1 / (1-x)^n\n\
+    \  R H(int n, int r) {\n    if (n < 0 || r < 0) return R(0);\n    return r ==\
+    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 2 \"math/rational-fps.hpp\"\n\n#line\
+    \ 5 \"math/rational-fps.hpp\"\n\ntemplate <typename R = Rational>\nstruct FormalPowerSeries_rational\
+    \ : vector<R> {\n  using vector<R>::vector;\n  using fps = FormalPowerSeries_rational;\n\
+    \n  fps &operator+=(const fps &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
     \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
     \  }\n\n  fps &operator+=(const R &r) {\n    if (this->empty()) this->resize(1);\n\
     \    (*this)[0] += r;\n    return *this;\n  }\n\n  fps &operator-=(const fps &r)\
@@ -566,42 +571,47 @@ data:
     \ cerr << a[i] << \", \";\n    cerr << \"}\" << endl;\n  }\n};\n\nusing bigint\
     \ = MultiPrecisionInteger;\n\n/**\n * @brief \u591A\u500D\u9577\u6574\u6570\n\
     \ */\n#line 8 \"math/bigint-gcd.hpp\"\n\nnamespace GCDforBigintImpl {\n\nbigint\
-    \ bigint_pow(bigint a, long long k) {\n  bigint res{1};\n  while (k) {\n    if\
-    \ (k & 1) res = res * a;\n    k >>= 1;\n    if (k) a = a * a;\n  }\n  return res;\n\
-    }\n\n// a = 2^x 5^y \u306E\u5F62\u3067\u8868\u73FE\u3059\u308B\npair<int, int>\
-    \ shrink(int a) {\n  assert(a > 0);\n  int x = __builtin_ctz(a);\n  a >>= x;\n\
-    \  int y = a == 1        ? 0\n          : a == 5      ? 1\n          : a == 25\
-    \     ? 2\n          : a == 125    ? 3\n          : a == 625    ? 4\n        \
-    \  : a == 3125   ? 5\n          : a == 15625  ? 6\n          : a == 78125  ? 7\n\
-    \          : a == 390625 ? 8\n                        : 9;\n  return {x, y};\n\
-    }\n\npair<int, int> shrink(bigint& a) {\n  assert(a.neg == false);\n  if (a.dat.empty())\
-    \ return {0, 0};\n  pair<int, int> res{0, 0};\n  while (true) {\n    int g = gcd(bigint::D,\
-    \ a.dat[0]);\n    if (g == 1) break;\n    if (g != bigint::D) a *= bigint::D /\
-    \ g;\n    a.dat.erase(begin(a.dat));\n    auto s = shrink(g);\n    res.first +=\
-    \ s.first, res.second += s.second;\n  }\n  return res;\n}\n\ntemplate <bool FAST\
-    \ = false>\nbigint gcd_d_ary(bigint a, bigint b) {\n  a.neg = b.neg = false;\n\
-    \  if constexpr (FAST) {\n    if (max<int>(a.dat.size(), b.dat.size()) <= 4) {\n\
-    \      return __int128_t(BinaryGCDImpl::binary_gcd128(a.to_i128(), b.to_i128()));\n\
-    \    }\n  }\n  if (a.dat.empty()) return b;\n  if (b.dat.empty()) return a;\n\
-    \  pair<int, int> s = shrink(a), t = shrink(b);\n  if (a < b) swap(a, b);\n  while\
-    \ (true) {\n    if (b.dat.empty()) break;\n    if constexpr (FAST) {\n      if\
-    \ ((int)a.dat.size() <= 4) break;\n    }\n    a = a - b;\n    if (!a.dat.empty())\
-    \ {\n      while (true) {\n        int g = gcd<int>(a.dat[0], bigint::D);\n  \
-    \      if (g == 1) break;\n        if (g != bigint::D) a *= bigint::D / g;\n \
-    \       a.dat.erase(begin(a.dat));\n      }\n    }\n    if (a < b) swap(a, b);\n\
-    \  }\n  assert(a >= b);\n  bigint g;\n  if constexpr (FAST) {\n    if (b.dat.empty())\
-    \ {\n      g = a;\n    } else {\n      g = __int128_t(BinaryGCDImpl::binary_gcd128(a.to_i128(),\
-    \ b.to_i128()));\n    }\n  } else {\n    g = a;\n  }\n  int e2 = min(s.first,\
-    \ t.first);\n  int e5 = min(s.second, t.second);\n  if (e2) g *= bigint_pow(bigint{2},\
-    \ e2);\n  if (e5) g *= bigint_pow(bigint{5}, e5);\n  return g;\n}\n}  // namespace\
-    \ GCDforBigintImpl\n\nMultiPrecisionInteger gcd(const MultiPrecisionInteger& a,\n\
-    \                          const MultiPrecisionInteger& b) {\n  return GCDforBigintImpl::gcd_d_ary<true>(a,\
-    \ b);\n}\n#line 5 \"math/bigint-rational.hpp\"\n\nusing BigRational = RationalBase<bigint,\
+    \ bigint_pow(bigint a, long long k) {\n  if (k == 0) return 1;\n  bigint half\
+    \ = bigint_pow(a, k / 2);\n  bigint res = half * half;\n  return k % 2 ? res *\
+    \ a : res;\n}\n\n// a = 2^x 5^y \u306E\u5F62\u3067\u8868\u73FE\u3059\u308B\npair<int,\
+    \ int> shrink(int a) {\n  assert(a > 0);\n  int x = __builtin_ctz(a);\n  a >>=\
+    \ x;\n  int y = a == 1        ? 0\n          : a == 5      ? 1\n          : a\
+    \ == 25     ? 2\n          : a == 125    ? 3\n          : a == 625    ? 4\n  \
+    \        : a == 3125   ? 5\n          : a == 15625  ? 6\n          : a == 78125\
+    \  ? 7\n          : a == 390625 ? 8\n                        : 9;\n  return {x,\
+    \ y};\n}\n\npair<int, int> shrink(bigint& a) {\n  assert(a.neg == false);\n  if\
+    \ (a.dat.empty()) return {0, 0};\n  pair<int, int> res{0, 0};\n  while (true)\
+    \ {\n    int g = gcd(bigint::D, a.dat[0]);\n    if (g == 1) break;\n    if (g\
+    \ != bigint::D) a *= bigint::D / g;\n    a.dat.erase(begin(a.dat));\n    auto\
+    \ s = shrink(g);\n    res.first += s.first, res.second += s.second;\n  }\n  return\
+    \ res;\n}\n\ntemplate <bool FAST = false>\nbigint gcd_d_ary(bigint a, bigint b)\
+    \ {\n  a.neg = b.neg = false;\n  if constexpr (FAST) {\n    if (max<int>(a.dat.size(),\
+    \ b.dat.size()) <= 4) {\n      return __int128_t(BinaryGCDImpl::binary_gcd128(a.to_i128(),\
+    \ b.to_i128()));\n    }\n  }\n  if (a.dat.empty()) return b;\n  if (b.dat.empty())\
+    \ return a;\n  pair<int, int> s = shrink(a), t = shrink(b);\n  if (a < b) swap(a,\
+    \ b);\n  while (true) {\n    if (b.dat.empty()) break;\n    if constexpr (FAST)\
+    \ {\n      if ((int)a.dat.size() <= 4) break;\n    }\n    a = a - b;\n    if (!a.dat.empty())\
+    \ {\n      while ((a.dat[0] & 1) == 0) {\n        int m = a.dat[0] ? __builtin_ctz(a.dat[0])\
+    \ : 32;\n        m = min(m, bigint::logD);\n        int mask = (1 << m) - 1, prod\
+    \ = bigint::D >> m;\n        a.dat[0] >>= m;\n        for (int i = 1; i < (int)a.dat.size();\
+    \ i++) {\n          a.dat[i - 1] += prod * (a.dat[i] & mask);\n          a.dat[i]\
+    \ >>= m;\n        }\n        if (a.dat.back() == 0) a.dat.pop_back();\n      }\n\
+    \    }\n    if (a < b) swap(a, b);\n  }\n  assert(a >= b);\n  bigint g;\n  if\
+    \ constexpr (FAST) {\n    if (b.dat.empty()) {\n      g = a;\n    } else {\n \
+    \     g = __int128_t(BinaryGCDImpl::binary_gcd128(a.to_i128(), b.to_i128()));\n\
+    \    }\n  } else {\n    g = a;\n  }\n  int e2 = min(s.first, t.first);\n  int\
+    \ e5 = min(s.second, t.second);\n  if (e2) g *= bigint_pow(bigint{2}, e2);\n \
+    \ if (e5) g *= bigint_pow(bigint{5}, e5);\n  return g;\n}\n}  // namespace GCDforBigintImpl\n\
+    \nMultiPrecisionInteger gcd(const MultiPrecisionInteger& a,\n                \
+    \          const MultiPrecisionInteger& b) {\n  return GCDforBigintImpl::gcd_d_ary<true>(a,\
+    \ b);\n}\n\nMultiPrecisionInteger lcm(const MultiPrecisionInteger& a,\n      \
+    \                    const MultiPrecisionInteger& b) {\n  return a / gcd(a, b)\
+    \ * b;\n}\n#line 5 \"math/bigint-rational.hpp\"\n\nusing BigRational = RationalBase<bigint,\
     \ bigint>;\n\ndouble to_double(const BigRational& r) {\n  pair<long double, int>\
     \ a = r.x.dfp();\n  pair<long double, int> b = r.y.dfp();\n  return a.first /\
     \ b.first * powl(10.0, a.second - b.second);\n}\n#line 9 \"math/bigint-all.hpp\"\
-    \n//\nusing mint = BigRational;\nusing vm = vector<mint>;\nusing vvm = vector<vm>;\n\
-    using fps = FormalPowerSeries_rational<mint>;\nBinomial_rational<mint> C;\n"
+    \n//\n\n/*\nusing mint = BigRational;\nusing vm = vector<mint>;\nusing vvm = vector<vm>;\n\
+    using fps = FormalPowerSeries_rational<mint>;\nBinomial_rational<mint> C;\n*/\n"
   code: '#pragma once
 
 
@@ -619,6 +629,9 @@ data:
 
     //
 
+
+    /*
+
     using mint = BigRational;
 
     using vm = vector<mint>;
@@ -628,6 +641,8 @@ data:
     using fps = FormalPowerSeries_rational<mint>;
 
     Binomial_rational<mint> C;
+
+    */
 
     '
   dependsOn:
@@ -645,7 +660,7 @@ data:
   isVerificationFile: false
   path: math/bigint-all.hpp
   requiredBy: []
-  timestamp: '2023-09-05 21:46:27+09:00'
+  timestamp: '2023-12-18 23:52:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/bigint-all.hpp
