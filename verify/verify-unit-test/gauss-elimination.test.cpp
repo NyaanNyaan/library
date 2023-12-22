@@ -3,9 +3,9 @@
 #include "../../template/template.hpp"
 //
 #include "../../matrix/matrix.hpp"
+#include "../../matrix/gauss-elimination.hpp"
 //
 namespace Normal {
-#include "../../matrix/gauss-elimination.hpp"
 #include "../../matrix/linear-equation.hpp"
 }  // namespace Normal
 namespace Fast {
@@ -41,7 +41,7 @@ void test(int n, int m, bool sparse) {
     }
     {
       auto b = a;
-      det2 = Normal::GaussElimination<mint>(b.A).second;
+      det2 = GaussElimination<mint>(b.A).second;
     }
     {
       auto b = a;

@@ -46,7 +46,7 @@ void benchmark() {
     int t3 = timer.elapsed();
 
     assert(ans1 == ans2 && ans2 == ans3);
-    out("mod =", mod, "small", t1, t2, t3);
+    trc2("mod =", mod, "small", t1, t2, t3);
     cout.flush();
   }
   {
@@ -71,7 +71,7 @@ void benchmark() {
     int t3 = timer.elapsed();
 
     assert(ans1 == ans2 && ans2 == ans3);
-    out("mod =", mod, "large", t1, t2, t3);
+    trc2("mod =", mod, "large", t1, t2, t3);
     cout.flush();
   }
 }
