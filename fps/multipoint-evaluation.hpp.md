@@ -10,6 +10,9 @@ data:
     path: fps/polynomial-interpolation.hpp
     title: fps/polynomial-interpolation.hpp
   - icon: ':heavy_check_mark:'
+    path: fps/stirling-matrix.hpp
+    title: fps/stirling-matrix.hpp
+  - icon: ':heavy_check_mark:'
     path: matrix/matrix-tree.hpp
     title: "\u884C\u5217\u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\
       \u5217)"
@@ -20,6 +23,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/multieval.test.cpp
     title: verify/verify-unit-test/multieval.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/stirling-matrix.test.cpp
+    title: verify/verify-unit-test/stirling-matrix.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
     title: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
@@ -195,10 +201,12 @@ data:
   - matrix/matrix-tree.hpp
   - matrix/polynomial-matrix-determinant.hpp
   - fps/polynomial-interpolation.hpp
+  - fps/stirling-matrix.hpp
   timestamp: '2023-08-31 20:44:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1303.test.cpp
+  - verify/verify-unit-test/stirling-matrix.test.cpp
   - verify/verify-unit-test/multieval.test.cpp
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval.test.cpp

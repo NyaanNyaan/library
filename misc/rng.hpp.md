@@ -85,6 +85,9 @@ data:
     path: verify/verify-unit-test/fast-bs.test.cpp
     title: verify/verify-unit-test/fast-bs.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/fast-inv-o1.test.cpp
+    title: verify/verify-unit-test/fast-inv-o1.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/fast-inv.test.cpp
     title: verify/verify-unit-test/fast-inv.test.cpp
   - icon: ':heavy_check_mark:'
@@ -390,6 +393,7 @@ data:
   - verify/verify-unit-test/multieval.test.cpp
   - verify/verify-unit-test/rbst-sequence.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
+  - verify/verify-unit-test/fast-inv-o1.test.cpp
   - verify/verify-unit-test/relaxed-convolution.test.cpp
   - verify/verify-unit-test/lazyseg-setval.test.cpp
   - verify/verify-unit-test/fps-sparse.test.cpp

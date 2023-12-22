@@ -124,6 +124,9 @@ data:
     path: verify/verify-unit-test/factorize.test.cpp
     title: verify/verify-unit-test/factorize.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/fast-inv-o1.test.cpp
+    title: verify/verify-unit-test/fast-inv-o1.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/garner-bigint.test.cpp
     title: verify/verify-unit-test/garner-bigint.test.cpp
   - icon: ':heavy_check_mark:'
@@ -444,6 +447,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-2266.test.cpp
     title: verify/verify-yuki/yuki-2266.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-2580.test.cpp
+    title: verify/verify-yuki/yuki-2580.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-3024.test.cpp
+    title: verify/verify-yuki/yuki-3024.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -545,6 +554,8 @@ data:
   - verify/verify-yuki/yuki-1467-weighted.test.cpp
   - verify/verify-yuki/yuki-2266.test.cpp
   - verify/verify-yuki/yuki-1786.test.cpp
+  - verify/verify-yuki/yuki-2580.test.cpp
+  - verify/verify-yuki/yuki-3024.test.cpp
   - verify/verify-unit-test/internal-type-traits.test.cpp
   - verify/verify-unit-test/bigint2.test.cpp
   - verify/verify-unit-test/osak.test.cpp
@@ -561,6 +572,7 @@ data:
   - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/rbst-sequence.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
+  - verify/verify-unit-test/fast-inv-o1.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
   - verify/verify-aoj-other/aoj-1377.test.cpp

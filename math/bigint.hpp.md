@@ -81,6 +81,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0303.test.cpp
     title: verify/verify-yuki/yuki-0303.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-2580.test.cpp
+    title: verify/verify-yuki/yuki-2580.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -687,6 +690,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0303.test.cpp
+  - verify/verify-yuki/yuki-2580.test.cpp
   - verify/verify-unit-test/bigint2.test.cpp
   - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-unit-test/bigint3.test.cpp

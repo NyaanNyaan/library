@@ -15,6 +15,12 @@ data:
     path: internal/internal-seed.hpp
     title: internal/internal-seed.hpp
   - icon: ':heavy_check_mark:'
+    path: matrix/gauss-elimination.hpp
+    title: matrix/gauss-elimination.hpp
+  - icon: ':heavy_check_mark:'
+    path: matrix/inverse-matrix.hpp
+    title: matrix/inverse-matrix.hpp
+  - icon: ':heavy_check_mark:'
     path: matrix/matrix.hpp
     title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
   - icon: ':heavy_check_mark:'
@@ -499,24 +505,50 @@ data:
     \ buf[i * 2 + 0];\n    for (int j = 0; j < len; j++) tmp[j] *= g[j];\n    tmp.intt();\n\
     \    rec(rec, i * 2 + 1, m, r, fps{begin(tmp) + (len >> 1), end(tmp)});\n  };\n\
     \  calc(calc, 1, 0, N, root);\n  return ans;\n}\n\n/**\n * @brief Multipoint Evaluation(\u9AD8\
-    \u901F\u5316\u7248)\n */\n#line 2 \"matrix/matrix.hpp\"\n\ntemplate <class T>\n\
-    struct Matrix {\n  vector<vector<T> > A;\n\n  Matrix() = default;\n  Matrix(int\
-    \ n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int n) : A(n, vector<T>(n,\
-    \ T())){};\n\n  int H() const { return A.size(); }\n\n  int W() const { return\
-    \ A[0].size(); }\n\n  int size() const { return A.size(); }\n\n  inline const\
-    \ vector<T> &operator[](int k) const { return A[k]; }\n\n  inline vector<T> &operator[](int\
-    \ k) { return A[k]; }\n\n  static Matrix I(int n) {\n    Matrix mat(n);\n    for\
-    \ (int i = 0; i < n; i++) mat[i][i] = 1;\n    return (mat);\n  }\n\n  Matrix &operator+=(const\
-    \ Matrix &B) {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n\
-    \    for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j]\
-    \ += B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B)\
-    \ {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for\
-    \ (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -=\
-    \ B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B)\
-    \ {\n    int n = H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T>\
-    \ > C(n, vector<T>(m, T{}));\n    for (int i = 0; i < n; i++)\n      for (int\
-    \ k = 0; k < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k]\
-    \ * B[k][j];\n    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long\
+    \u901F\u5316\u7248)\n */\n#line 2 \"matrix/matrix.hpp\"\n\n#line 2 \"matrix/inverse-matrix.hpp\"\
+    \n\n#line 2 \"matrix/gauss-elimination.hpp\"\n\n#line 5 \"matrix/gauss-elimination.hpp\"\
+    \nusing namespace std;\n\n// {rank, det(\u975E\u6B63\u65B9\u884C\u5217\u306E\u5834\
+    \u5408\u306F\u672A\u5B9A\u7FA9)} \u3092\u8FD4\u3059\n// \u578B\u304C double \u3084\
+    \ Rational \u3067\u3082\u52D5\u304F\u306F\u305A\uFF1F(\u672A\u691C\u8A3C)\n//\n\
+    // pivot \u5019\u88DC : [0, pivot_end)\ntemplate <typename T>\nstd::pair<int,\
+    \ T> GaussElimination(vector<vector<T>> &a, int pivot_end = -1,\n            \
+    \                       bool diagonalize = false) {\n  int H = a.size(), W = a[0].size(),\
+    \ rank = 0;\n  if (pivot_end == -1) pivot_end = W;\n  T det = 1;\n  for (int j\
+    \ = 0; j < pivot_end; j++) {\n    int idx = -1;\n    for (int i = rank; i < H;\
+    \ i++) {\n      if (a[i][j] != T(0)) {\n        idx = i;\n        break;\n   \
+    \   }\n    }\n    if (idx == -1) {\n      det = 0;\n      continue;\n    }\n \
+    \   if (rank != idx) det = -det, swap(a[rank], a[idx]);\n    det *= a[rank][j];\n\
+    \    if (diagonalize && a[rank][j] != T(1)) {\n      T coeff = T(1) / a[rank][j];\n\
+    \      for (int k = j; k < W; k++) a[rank][k] *= coeff;\n    }\n    int is = diagonalize\
+    \ ? 0 : rank + 1;\n    for (int i = is; i < H; i++) {\n      if (i == rank) continue;\n\
+    \      if (a[i][j] != T(0)) {\n        T coeff = a[i][j] / a[rank][j];\n     \
+    \   for (int k = j; k < W; k++) a[i][k] -= a[rank][k] * coeff;\n      }\n    }\n\
+    \    rank++;\n  }\n  return make_pair(rank, det);\n}\n#line 4 \"matrix/inverse-matrix.hpp\"\
+    \n\ntemplate <typename mint>\nvector<vector<mint>> inverse_matrix(const vector<vector<mint>>&\
+    \ a) {\n  int N = a.size();\n  assert(N > 0);\n  assert(N == (int)a[0].size());\n\
+    \n  vector<vector<mint>> m(N, vector<mint>(2 * N));\n  for (int i = 0; i < N;\
+    \ i++) {\n    copy(begin(a[i]), end(a[i]), begin(m[i]));\n    m[i][N + i] = 1;\n\
+    \  }\n\n  auto [rank, det] = GaussElimination(m, N, true);\n  if (rank != N) return\
+    \ {};\n\n  vector<vector<mint>> b(N);\n  for (int i = 0; i < N; i++) {\n    copy(begin(m[i])\
+    \ + N, end(m[i]), back_inserter(b[i]));\n  }\n  return b;\n}\n#line 4 \"matrix/matrix.hpp\"\
+    \n\ntemplate <class T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix()\
+    \ = default;\n  Matrix(int n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int\
+    \ n) : A(n, vector<T>(n, T())){};\n\n  int H() const { return A.size(); }\n\n\
+    \  int W() const { return A[0].size(); }\n\n  int size() const { return A.size();\
+    \ }\n\n  inline const vector<T> &operator[](int k) const { return A[k]; }\n\n\
+    \  inline vector<T> &operator[](int k) { return A[k]; }\n\n  static Matrix I(int\
+    \ n) {\n    Matrix mat(n);\n    for (int i = 0; i < n; i++) mat[i][i] = 1;\n \
+    \   return (mat);\n  }\n\n  Matrix &operator+=(const Matrix &B) {\n    int n =\
+    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
+    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] += B[i][j];\n   \
+    \ return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B) {\n    int n =\
+    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
+    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -= B[i][j];\n   \
+    \ return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B) {\n    int n =\
+    \ H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T> > C(n,\
+    \ vector<T>(m, T{}));\n    for (int i = 0; i < n; i++)\n      for (int k = 0;\
+    \ k < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k] *\
+    \ B[k][j];\n    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long\
     \ long k) {\n    Matrix B = Matrix::I(H());\n    while (k > 0) {\n      if (k\
     \ & 1) B *= *this;\n      *this *= *this;\n      k >>= 1LL;\n    }\n    A.swap(B.A);\n\
     \    return (*this);\n  }\n\n  Matrix operator+(const Matrix &B) const { return\
@@ -529,53 +561,55 @@ data:
     \ true;\n  }\n\n  bool operator!=(const Matrix &B) const {\n    assert(H() ==\
     \ B.H() && W() == B.W());\n    for (int i = 0; i < H(); i++)\n      for (int j\
     \ = 0; j < W(); j++)\n        if (A[i][j] != B[i][j]) return true;\n    return\
-    \ false;\n  }\n\n  friend ostream &operator<<(ostream &os, const Matrix &p) {\n\
-    \    int n = p.H(), m = p.W();\n    for (int i = 0; i < n; i++) {\n      os <<\
-    \ (i ? \"   \" : \"\") << \"[\";\n      for (int j = 0; j < m; j++) {\n      \
-    \  os << p[i][j] << (j + 1 == m ? \"]\\n\" : \",\");\n      }\n    }\n    return\
-    \ (os);\n  }\n\n  T determinant() const {\n    Matrix B(*this);\n    assert(H()\
-    \ == W());\n    T ret = 1;\n    for (int i = 0; i < H(); i++) {\n      int idx\
-    \ = -1;\n      for (int j = i; j < W(); j++) {\n        if (B[j][i] != 0) {\n\
-    \          idx = j;\n          break;\n        }\n      }\n      if (idx == -1)\
-    \ return 0;\n      if (i != idx) {\n        ret *= T(-1);\n        swap(B[i],\
-    \ B[idx]);\n      }\n      ret *= B[i][i];\n      T inv = T(1) / B[i][i];\n  \
-    \    for (int j = 0; j < W(); j++) {\n        B[i][j] *= inv;\n      }\n     \
-    \ for (int j = i + 1; j < H(); j++) {\n        T a = B[j][i];\n        if (a ==\
-    \ 0) continue;\n        for (int k = i; k < W(); k++) {\n          B[j][k] -=\
-    \ B[i][k] * a;\n        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n *\
-    \ @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA\n */\n#line 2 \"modulo/binomial.hpp\"\
-    \n\n#line 6 \"modulo/binomial.hpp\"\nusing namespace std;\n\n// \u30B3\u30F3\u30B9\
-    \u30C8\u30E9\u30AF\u30BF\u306E MAX \u306B \u300CC(n, r) \u3084 fac(n) \u3067\u30AF\
-    \u30A8\u30EA\u3092\u6295\u3052\u308B\u6700\u5927\u306E n \u300D\n// \u3092\u5165\
-    \u308C\u308B\u3068\u500D\u901F\u304F\u3089\u3044\u306B\u306A\u308B\n// mod \u3092\
-    \u8D85\u3048\u3066\u524D\u8A08\u7B97\u3057\u3066 0 \u5272\u308A\u3092\u8E0F\u3080\
-    \u30D0\u30B0\u306F\u5BFE\u7B56\u6E08\u307F\ntemplate <typename T>\nstruct Binomial\
-    \ {\n  vector<T> f, g, h;\n  Binomial(int MAX = 0) {\n    assert(T::get_mod()\
-    \ != 0 && \"Binomial<mint>()\");\n    f.resize(1, T{1});\n    g.resize(1, T{1});\n\
-    \    h.resize(1, T{1});\n    if (MAX > 0) extend(MAX + 1);\n  }\n\n  void extend(int\
-    \ m = -1) {\n    int n = f.size();\n    if (m == -1) m = n * 2;\n    m = min<int>(m,\
-    \ T::get_mod());\n    if (n >= m) return;\n    f.resize(m);\n    g.resize(m);\n\
-    \    h.resize(m);\n    for (int i = n; i < m; i++) f[i] = f[i - 1] * T(i);\n \
-    \   g[m - 1] = f[m - 1].inverse();\n    h[m - 1] = g[m - 1] * f[m - 2];\n    for\
-    \ (int i = m - 2; i >= n; i--) {\n      g[i] = g[i + 1] * T(i + 1);\n      h[i]\
-    \ = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int i) {\n    if (i < 0) return T(0);\n\
-    \    while (i >= (int)f.size()) extend();\n    return f[i];\n  }\n\n  T finv(int\
-    \ i) {\n    if (i < 0) return T(0);\n    while (i >= (int)g.size()) extend();\n\
-    \    return g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return -inv(-i);\n\
-    \    while (i >= (int)h.size()) extend();\n    return h[i];\n  }\n\n  T C(int\
-    \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r) { return\
-    \ C(n, r); }\n\n  template <typename I>\n  T multinomial(const vector<I>& r) {\n\
-    \    static_assert(is_integral<I>::value == true);\n    int n = 0;\n    for (auto&\
-    \ x : r) {\n      if (x < 0) return T(0);\n      n += x;\n    }\n    T res = fac(n);\n\
-    \    for (auto& x : r) res *= finv(x);\n    return res;\n  }\n\n  template <typename\
-    \ I>\n  T operator()(const vector<I>& r) {\n    return multinomial(r);\n  }\n\n\
-    \  T C_naive(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n\
-    \    T ret = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret\
-    \ *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n\
-    \ < 0 || n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\
-    \n  // [x^r] 1 / (1-x)^n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
-    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 2 \"modulo/multipoint-binomial-sum.hpp\"\
+    \ false;\n  }\n\n  Matrix inverse() const {\n    assert(H() == W());\n    Matrix\
+    \ B(H());\n    B.A = inverse_matrix(A);\n    return B;\n  }\n\n  friend ostream\
+    \ &operator<<(ostream &os, const Matrix &p) {\n    int n = p.H(), m = p.W();\n\
+    \    for (int i = 0; i < n; i++) {\n      os << (i ? \"   \" : \"\") << \"[\"\
+    ;\n      for (int j = 0; j < m; j++) {\n        os << p[i][j] << (j + 1 == m ?\
+    \ \"]\\n\" : \",\");\n      }\n    }\n    return (os);\n  }\n\n  T determinant()\
+    \ const {\n    Matrix B(*this);\n    assert(H() == W());\n    T ret = 1;\n   \
+    \ for (int i = 0; i < H(); i++) {\n      int idx = -1;\n      for (int j = i;\
+    \ j < W(); j++) {\n        if (B[j][i] != 0) {\n          idx = j;\n         \
+    \ break;\n        }\n      }\n      if (idx == -1) return 0;\n      if (i != idx)\
+    \ {\n        ret *= T(-1);\n        swap(B[i], B[idx]);\n      }\n      ret *=\
+    \ B[i][i];\n      T inv = T(1) / B[i][i];\n      for (int j = 0; j < W(); j++)\
+    \ {\n        B[i][j] *= inv;\n      }\n      for (int j = i + 1; j < H(); j++)\
+    \ {\n        T a = B[j][i];\n        if (a == 0) continue;\n        for (int k\
+    \ = i; k < W(); k++) {\n          B[j][k] -= B[i][k] * a;\n        }\n      }\n\
+    \    }\n    return ret;\n  }\n};\n\n/**\n * @brief \u884C\u5217\u30E9\u30A4\u30D6\
+    \u30E9\u30EA\n */\n#line 2 \"modulo/binomial.hpp\"\n\n#line 6 \"modulo/binomial.hpp\"\
+    \nusing namespace std;\n\n// \u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u306E\
+    \ MAX \u306B \u300CC(n, r) \u3084 fac(n) \u3067\u30AF\u30A8\u30EA\u3092\u6295\u3052\
+    \u308B\u6700\u5927\u306E n \u300D\n// \u3092\u5165\u308C\u308B\u3068\u500D\u901F\
+    \u304F\u3089\u3044\u306B\u306A\u308B\n// mod \u3092\u8D85\u3048\u3066\u524D\u8A08\
+    \u7B97\u3057\u3066 0 \u5272\u308A\u3092\u8E0F\u3080\u30D0\u30B0\u306F\u5BFE\u7B56\
+    \u6E08\u307F\ntemplate <typename T>\nstruct Binomial {\n  vector<T> f, g, h;\n\
+    \  Binomial(int MAX = 0) {\n    assert(T::get_mod() != 0 && \"Binomial<mint>()\"\
+    );\n    f.resize(1, T{1});\n    g.resize(1, T{1});\n    h.resize(1, T{1});\n \
+    \   if (MAX > 0) extend(MAX + 1);\n  }\n\n  void extend(int m = -1) {\n    int\
+    \ n = f.size();\n    if (m == -1) m = n * 2;\n    m = min<int>(m, T::get_mod());\n\
+    \    if (n >= m) return;\n    f.resize(m);\n    g.resize(m);\n    h.resize(m);\n\
+    \    for (int i = n; i < m; i++) f[i] = f[i - 1] * T(i);\n    g[m - 1] = f[m -\
+    \ 1].inverse();\n    h[m - 1] = g[m - 1] * f[m - 2];\n    for (int i = m - 2;\
+    \ i >= n; i--) {\n      g[i] = g[i + 1] * T(i + 1);\n      h[i] = g[i] * f[i -\
+    \ 1];\n    }\n  }\n\n  T fac(int i) {\n    if (i < 0) return T(0);\n    while\
+    \ (i >= (int)f.size()) extend();\n    return f[i];\n  }\n\n  T finv(int i) {\n\
+    \    if (i < 0) return T(0);\n    while (i >= (int)g.size()) extend();\n    return\
+    \ g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return -inv(-i);\n    while (i\
+    \ >= (int)h.size()) extend();\n    return h[i];\n  }\n\n  T C(int n, int r) {\n\
+    \    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r)\
+    \ * finv(r);\n  }\n\n  inline T operator()(int n, int r) { return C(n, r); }\n\
+    \n  template <typename I>\n  T multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
+    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
+    \ T(0);\n      n += x;\n    }\n    T res = fac(n);\n    for (auto& x : r) res\
+    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  T operator()(const\
+    \ vector<I>& r) {\n    return multinomial(r);\n  }\n\n  T C_naive(int n, int r)\
+    \ {\n    if (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r =\
+    \ min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n  \
+    \  return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0)\
+    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n\
+    \  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
+    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 2 \"modulo/multipoint-binomial-sum.hpp\"\
     \n\n#line 2 \"misc/mo.hpp\"\n\nstruct Mo {\n  int width;\n  vector<int> left,\
     \ right, order;\n\n  Mo(int N, int Q) : order(Q) {\n    width = max<int>(1, 1.0\
     \ * N / max<double>(1.0, sqrt(Q * 2.0 / 3.0)));\n    iota(begin(order), end(order),\
@@ -751,6 +785,8 @@ data:
   - ntt/ntt.hpp
   - fps/formal-power-series.hpp
   - matrix/matrix.hpp
+  - matrix/inverse-matrix.hpp
+  - matrix/gauss-elimination.hpp
   - modulo/binomial.hpp
   - modulo/multipoint-binomial-sum.hpp
   - misc/mo.hpp
@@ -760,7 +796,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   requiredBy: []
-  timestamp: '2023-08-31 20:44:07+09:00'
+  timestamp: '2023-12-22 19:57:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/multipoint-binomial-sum.test.cpp

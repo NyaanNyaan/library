@@ -6,32 +6,22 @@ data:
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   - icon: ':heavy_check_mark:'
-    path: fps/taylor-shift.hpp
-    title: "\u5E73\u884C\u79FB\u52D5"
-  - icon: ':heavy_check_mark:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: fps/fualhuber.hpp
-    title: fps/fualhuber.hpp
+    path: fps/stirling-matrix.hpp
+    title: fps/stirling-matrix.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-2580.test.cpp
-    title: verify/verify-yuki/yuki-2580.test.cpp
+    path: verify/verify-unit-test/stirling-matrix.test.cpp
+    title: verify/verify-unit-test/stirling-matrix.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "\u6709\u540D\u306A\u6570\u5217"
     links: []
-  bundledCode: "#line 2 \"fps/fps-famous-series.hpp\"\n\n#line 2 \"modulo/binomial.hpp\"\
+  bundledCode: "#line 2 \"fps/pascal-matrix.hpp\"\n\n#line 2 \"modulo/binomial.hpp\"\
     \n\n#include <cassert>\n#include <type_traits>\n#include <vector>\nusing namespace\
     \ std;\n\n// \u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u306E MAX \u306B \u300C\
     C(n, r) \u3084 fac(n) \u3067\u30AF\u30A8\u30EA\u3092\u6295\u3052\u308B\u6700\u5927\
@@ -132,89 +122,69 @@ data:
     \ inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate <typename\
     \ mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\
     \u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\
-    \n * @docs docs/fps/formal-power-series.md\n */\n#line 4 \"fps/taylor-shift.hpp\"\
-    \n\n// calculate F(x + a)\ntemplate <typename mint>\nFormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint>\
-    \ f, mint a,\n                                    Binomial<mint>& C) {\n  using\
-    \ fps = FormalPowerSeries<mint>;\n  int N = f.size();\n  for (int i = 0; i < N;\
-    \ i++) f[i] *= C.fac(i);\n  reverse(begin(f), end(f));\n  fps g(N, mint(1));\n\
-    \  for (int i = 1; i < N; i++) g[i] = g[i - 1] * a * C.inv(i);\n  f = (f * g).pre(N);\n\
-    \  reverse(begin(f), end(f));\n  for (int i = 0; i < N; i++) f[i] *= C.finv(i);\n\
-    \  return f;\n}\n\n/**\n * @brief \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n\
-    \ */\n#line 6 \"fps/fps-famous-series.hpp\"\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ Stirling1st(int N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  if (N <= 0) return fps{1};\n  int lg = 31 - __builtin_clz(N);\n  fps f = {0,\
-    \ 1};\n  for (int i = lg - 1; i >= 0; i--) {\n    int n = N >> i;\n    f *= TaylorShift(f,\
-    \ mint(n >> 1), C);\n    if (n & 1) f = (f << 1) + f * (n - 1);\n  }\n  return\
-    \ f;\n}\n\n// S(0, K), S(1, K), ..., S(upper, K) \u3092\u5217\u6319\ntemplate\
-    \ <typename mint>\nFormalPowerSeries<mint> Stirling1stRow(int K, int upper, Binomial<mint>\
-    \ &C) {\n  using fps = FormalPowerSeries<mint>;\n  if (upper < K) return {};\n\
-    \  fps f(upper + 1);\n  for (int i = 1; i < (int)f.size(); i++) f[i] = C.inv(i);\n\
-    \  f = f.pow(K) * C.finv(K);\n  for (int n = K; n <= upper; n++) f[n] *= C.fac(n);\n\
-    \  return f;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Stirling2nd(int\
-    \ N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
-    \ 1), g(N + 1);\n  for (int i = 0; i <= N; i++) {\n    f[i] = mint(i).pow(N) *\
-    \ C.finv(i);\n    g[i] = (i & 1) ? -C.finv(i) : C.finv(i);\n  }\n  return (f *\
-    \ g).pre(N + 1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> BernoulliEGF(int\
-    \ N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
-    \ 1);\n  for (int i = 0; i <= N; i++) f[i] = C.finv(i + 1);\n  return f.inv(N\
-    \ + 1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Partition(int\
-    \ N, Binomial<mint> &) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
-    \ 1);\n  f[0] = 1;\n  for (int k = 1; k <= N; k++) {\n    long long k1 = 1LL *\
-    \ k * (3 * k + 1) / 2;\n    long long k2 = 1LL * k * (3 * k - 1) / 2;\n    if\
-    \ (k2 > N) break;\n    if (k1 <= N) f[k1] += ((k & 1) ? -1 : 1);\n    if (k2 <=\
-    \ N) f[k2] += ((k & 1) ? -1 : 1);\n  }\n  return f.inv();\n}\n\ntemplate <typename\
-    \ mint>\nvector<mint> Montmort(int N) {\n  if (N <= 1) return {0};\n  if (N ==\
-    \ 2) return {0, 1};\n  vector<mint> f(N);\n  f[0] = 0, f[1] = 1;\n  mint coeff\
-    \ = 2, one = 1;\n  for (int i = 2; i < N; i++) {\n    f[i] = (f[i - 1] + f[i -\
-    \ 2]) * coeff;\n    coeff += one;\n  }\n  return f;\n};\n\n/**\n * @brief \u6709\
-    \u540D\u306A\u6570\u5217\n */\n"
+    \n * @docs docs/fps/formal-power-series.md\n */\n#line 5 \"fps/pascal-matrix.hpp\"\
+    \n\n// P_{i, j} = binom(i, j) \u3092\u6E80\u305F\u3059\u884C\u5217 P \u3092\u7E26\
+    \u30D9\u30AF\u30C8\u30EB\u306B\u4F5C\u7528\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ pascal_matrix(FormalPowerSeries<mint> a,\n                                 \
+    \     int rev = false) {\n  using fps = FormalPowerSeries<mint>;\n  if (a.empty())\
+    \ return {};\n\n  int N = a.size();\n  Binomial<mint> binom(N + 10);\n  if (rev\
+    \ == false) {\n    fps e(N);\n    for (int i = 0; i < N; i++) {\n      a[i] *=\
+    \ binom.finv(i);\n      e[i] = binom.finv(i);\n    }\n    fps b = (a * e).pre(N);\n\
+    \    for (int i = 0; i < N; i++) b[i] *= binom.fac(i);\n    return b;\n  } else\
+    \ {\n    fps ie(N);\n    for (int i = 0; i < N; i++) {\n      a[i] *= binom.finv(i);\n\
+    \      ie[i] = binom.finv(i) * (i % 2 ? -1 : 1);\n    }\n    fps b = (a * ie).pre(N);\n\
+    \    for (int i = 0; i < N; i++) b[i] *= binom.fac(i);\n    return b;\n  }\n}\n\
+    \n// P_{i, j} = binom(j, i) \u3092\u6E80\u305F\u3059\u884C\u5217 P \u3092\u7E26\
+    \u30D9\u30AF\u30C8\u30EB\u306B\u4F5C\u7528\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ pascal_matrix_trans(FormalPowerSeries<mint> a,\n                           \
+    \                 int rev = false) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  if (a.empty()) return {};\n\n  int N = a.size();\n  Binomial<mint> binom(N\
+    \ + 10);\n  if (rev == false) {\n    fps e(N);\n    for (int i = 0; i < N; i++)\
+    \ {\n      a[i] *= binom.fac(i);\n      e[i] = binom.finv(i);\n    }\n    fps\
+    \ b = (a.rev() * e).pre(N).rev();\n    for (int i = 0; i < N; i++) b[i] *= binom.finv(i);\n\
+    \    return b;\n  } else {\n    fps ie(N);\n    for (int i = 0; i < N; i++) {\n\
+    \      a[i] *= binom.fac(i);\n      ie[i] = binom.finv(i) * (i % 2 ? -1 : 1);\n\
+    \    }\n    fps b = (a.rev() * ie).pre(N).rev();\n    for (int i = 0; i < N; i++)\
+    \ b[i] *= binom.finv(i);\n    return b;\n  }\n}\n"
   code: "#pragma once\n\n#include \"../modulo/binomial.hpp\"\n#include \"formal-power-series.hpp\"\
-    \n#include \"taylor-shift.hpp\"\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ Stirling1st(int N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  if (N <= 0) return fps{1};\n  int lg = 31 - __builtin_clz(N);\n  fps f = {0,\
-    \ 1};\n  for (int i = lg - 1; i >= 0; i--) {\n    int n = N >> i;\n    f *= TaylorShift(f,\
-    \ mint(n >> 1), C);\n    if (n & 1) f = (f << 1) + f * (n - 1);\n  }\n  return\
-    \ f;\n}\n\n// S(0, K), S(1, K), ..., S(upper, K) \u3092\u5217\u6319\ntemplate\
-    \ <typename mint>\nFormalPowerSeries<mint> Stirling1stRow(int K, int upper, Binomial<mint>\
-    \ &C) {\n  using fps = FormalPowerSeries<mint>;\n  if (upper < K) return {};\n\
-    \  fps f(upper + 1);\n  for (int i = 1; i < (int)f.size(); i++) f[i] = C.inv(i);\n\
-    \  f = f.pow(K) * C.finv(K);\n  for (int n = K; n <= upper; n++) f[n] *= C.fac(n);\n\
-    \  return f;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Stirling2nd(int\
-    \ N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
-    \ 1), g(N + 1);\n  for (int i = 0; i <= N; i++) {\n    f[i] = mint(i).pow(N) *\
-    \ C.finv(i);\n    g[i] = (i & 1) ? -C.finv(i) : C.finv(i);\n  }\n  return (f *\
-    \ g).pre(N + 1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> BernoulliEGF(int\
-    \ N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
-    \ 1);\n  for (int i = 0; i <= N; i++) f[i] = C.finv(i + 1);\n  return f.inv(N\
-    \ + 1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Partition(int\
-    \ N, Binomial<mint> &) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
-    \ 1);\n  f[0] = 1;\n  for (int k = 1; k <= N; k++) {\n    long long k1 = 1LL *\
-    \ k * (3 * k + 1) / 2;\n    long long k2 = 1LL * k * (3 * k - 1) / 2;\n    if\
-    \ (k2 > N) break;\n    if (k1 <= N) f[k1] += ((k & 1) ? -1 : 1);\n    if (k2 <=\
-    \ N) f[k2] += ((k & 1) ? -1 : 1);\n  }\n  return f.inv();\n}\n\ntemplate <typename\
-    \ mint>\nvector<mint> Montmort(int N) {\n  if (N <= 1) return {0};\n  if (N ==\
-    \ 2) return {0, 1};\n  vector<mint> f(N);\n  f[0] = 0, f[1] = 1;\n  mint coeff\
-    \ = 2, one = 1;\n  for (int i = 2; i < N; i++) {\n    f[i] = (f[i - 1] + f[i -\
-    \ 2]) * coeff;\n    coeff += one;\n  }\n  return f;\n};\n\n/**\n * @brief \u6709\
-    \u540D\u306A\u6570\u5217\n */\n"
+    \n\n// P_{i, j} = binom(i, j) \u3092\u6E80\u305F\u3059\u884C\u5217 P \u3092\u7E26\
+    \u30D9\u30AF\u30C8\u30EB\u306B\u4F5C\u7528\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ pascal_matrix(FormalPowerSeries<mint> a,\n                                 \
+    \     int rev = false) {\n  using fps = FormalPowerSeries<mint>;\n  if (a.empty())\
+    \ return {};\n\n  int N = a.size();\n  Binomial<mint> binom(N + 10);\n  if (rev\
+    \ == false) {\n    fps e(N);\n    for (int i = 0; i < N; i++) {\n      a[i] *=\
+    \ binom.finv(i);\n      e[i] = binom.finv(i);\n    }\n    fps b = (a * e).pre(N);\n\
+    \    for (int i = 0; i < N; i++) b[i] *= binom.fac(i);\n    return b;\n  } else\
+    \ {\n    fps ie(N);\n    for (int i = 0; i < N; i++) {\n      a[i] *= binom.finv(i);\n\
+    \      ie[i] = binom.finv(i) * (i % 2 ? -1 : 1);\n    }\n    fps b = (a * ie).pre(N);\n\
+    \    for (int i = 0; i < N; i++) b[i] *= binom.fac(i);\n    return b;\n  }\n}\n\
+    \n// P_{i, j} = binom(j, i) \u3092\u6E80\u305F\u3059\u884C\u5217 P \u3092\u7E26\
+    \u30D9\u30AF\u30C8\u30EB\u306B\u4F5C\u7528\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ pascal_matrix_trans(FormalPowerSeries<mint> a,\n                           \
+    \                 int rev = false) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  if (a.empty()) return {};\n\n  int N = a.size();\n  Binomial<mint> binom(N\
+    \ + 10);\n  if (rev == false) {\n    fps e(N);\n    for (int i = 0; i < N; i++)\
+    \ {\n      a[i] *= binom.fac(i);\n      e[i] = binom.finv(i);\n    }\n    fps\
+    \ b = (a.rev() * e).pre(N).rev();\n    for (int i = 0; i < N; i++) b[i] *= binom.finv(i);\n\
+    \    return b;\n  } else {\n    fps ie(N);\n    for (int i = 0; i < N; i++) {\n\
+    \      a[i] *= binom.fac(i);\n      ie[i] = binom.finv(i) * (i % 2 ? -1 : 1);\n\
+    \    }\n    fps b = (a.rev() * ie).pre(N).rev();\n    for (int i = 0; i < N; i++)\
+    \ b[i] *= binom.finv(i);\n    return b;\n  }\n}\n"
   dependsOn:
   - modulo/binomial.hpp
   - fps/formal-power-series.hpp
-  - fps/taylor-shift.hpp
   isVerificationFile: false
-  path: fps/fps-famous-series.hpp
+  path: fps/pascal-matrix.hpp
   requiredBy:
-  - fps/fualhuber.hpp
-  timestamp: '2023-09-05 21:46:27+09:00'
+  - fps/stirling-matrix.hpp
+  timestamp: '2023-12-22 19:57:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-2580.test.cpp
-  - verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp
-  - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-documentation_of: fps/fps-famous-series.hpp
+  - verify/verify-unit-test/stirling-matrix.test.cpp
+documentation_of: fps/pascal-matrix.hpp
 layout: document
 redirect_from:
-- /library/fps/fps-famous-series.hpp
-- /library/fps/fps-famous-series.hpp.html
-title: "\u6709\u540D\u306A\u6570\u5217"
+- /library/fps/pascal-matrix.hpp
+- /library/fps/pascal-matrix.hpp.html
+title: fps/pascal-matrix.hpp
 ---

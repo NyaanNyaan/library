@@ -39,6 +39,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-2266.test.cpp
     title: verify/verify-yuki/yuki-2266.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-3024.test.cpp
+    title: verify/verify-yuki/yuki-3024.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -187,6 +190,7 @@ data:
   verifiedWith:
   - verify/verify-yuki/yuki-2262.test.cpp
   - verify/verify-yuki/yuki-2266.test.cpp
+  - verify/verify-yuki/yuki-3024.test.cpp
   - verify/verify-unit-test/rational-number.test.cpp
   - verify/verify-unit-test/bigrational.test.cpp
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp

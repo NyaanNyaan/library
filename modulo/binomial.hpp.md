@@ -19,6 +19,9 @@ data:
     path: fps/fps-utility.hpp
     title: fps/fps-utility.hpp
   - icon: ':heavy_check_mark:'
+    path: fps/fualhuber.hpp
+    title: fps/fualhuber.hpp
+  - icon: ':heavy_check_mark:'
     path: fps/lagrange-interpolation-point.hpp
     title: fps/lagrange-interpolation-point.hpp
   - icon: ':heavy_check_mark:'
@@ -30,8 +33,14 @@ data:
     title: "\u90E8\u5206\u5206\u6570\u5206\u89E3(\u5206\u6BCD\u304C1\u6B21\u5F0F\u306E\
       \u7A4D\u3067\u8868\u305B\u308B\u5834\u5408)"
   - icon: ':heavy_check_mark:'
+    path: fps/pascal-matrix.hpp
+    title: fps/pascal-matrix.hpp
+  - icon: ':heavy_check_mark:'
     path: fps/sample-point-shift.hpp
     title: fps/sample-point-shift.hpp
+  - icon: ':heavy_check_mark:'
+    path: fps/stirling-matrix.hpp
+    title: fps/stirling-matrix.hpp
   - icon: ':heavy_check_mark:'
     path: fps/sum-of-exponential-times-poly.hpp
     title: $\sum_{i}a^i f(i)$
@@ -79,6 +88,9 @@ data:
     path: verify/verify-unit-test/rational-number.test.cpp
     title: verify/verify-unit-test/rational-number.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/stirling-matrix.test.cpp
+    title: verify/verify-unit-test/stirling-matrix.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/sum-of-mf.test.cpp
     title: verify/verify-unit-test/sum-of-mf.test.cpp
   - icon: ':heavy_check_mark:'
@@ -105,6 +117,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-factorial.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-factorial.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
@@ -231,6 +249,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1939.test.cpp
     title: verify/verify-yuki/yuki-1939.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-2580.test.cpp
+    title: verify/verify-yuki/yuki-2580.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -311,11 +332,14 @@ data:
   - fps/fps-famous-series.hpp
   - fps/find-p-recursive.hpp
   - fps/partial-fraction-decomposition.hpp
+  - fps/pascal-matrix.hpp
   - fps/fps-utility.hpp
   - fps/taylor-shift.hpp
   - fps/fps-compositional-inverse.hpp
   - fps/multivariate-fps.hpp
+  - fps/stirling-matrix.hpp
   - fps/fps-composition.hpp
+  - fps/fualhuber.hpp
   - fps/sum-of-exponential-times-poly.hpp
   - fps/lagrange-interpolation-point.hpp
   - modulo/multipoint-binomial-sum.hpp
@@ -345,10 +369,12 @@ data:
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-1533.test.cpp
   - verify/verify-yuki/yuki-1145-frac.test.cpp
+  - verify/verify-yuki/yuki-2580.test.cpp
   - verify/verify-unit-test/dual-fps.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/sum-of-mf.test.cpp
+  - verify/verify-unit-test/stirling-matrix.test.cpp
   - verify/verify-unit-test/rational-number.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
@@ -377,9 +403,11 @@ data:
   - verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
   - verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
+  - verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
   - verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
+  - verify/verify-yosupo-fps/yosupo-factorial.test.cpp
   - verify/verify-yosupo-fps/yosupo-sparse-exp.test.cpp
   - verify/verify-yosupo-fps/yosupo-sparse-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp

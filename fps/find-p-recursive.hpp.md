@@ -12,6 +12,9 @@ data:
     path: matrix/gauss-elimination.hpp
     title: matrix/gauss-elimination.hpp
   - icon: ':heavy_check_mark:'
+    path: matrix/inverse-matrix.hpp
+    title: matrix/inverse-matrix.hpp
+  - icon: ':heavy_check_mark:'
     path: matrix/linear-equation.hpp
     title: matrix/linear-equation.hpp
   - icon: ':heavy_check_mark:'
@@ -28,6 +31,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/p-recursive.test.cpp
     title: verify/verify-unit-test/p-recursive.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1533.test.cpp
     title: verify/verify-yuki/yuki-1533.test.cpp
@@ -195,7 +201,15 @@ data:
     \n  auto dh = d * h;\n\n  FormalPowerSeries<mint> ret(m);\n  mint cur = T;\n \
     \ for (int i = 1; i <= k; i++) cur *= T - i;\n  for (int i = 0; i < m; i++) {\n\
     \    ret[i] = cur * dh[k + i];\n    cur *= T + i + 1;\n    cur *= h[i];\n  }\n\
-    \  return ret;\n}\n#line 2 \"matrix/matrix.hpp\"\n\ntemplate <class T>\nstruct\
+    \  return ret;\n}\n#line 2 \"matrix/matrix.hpp\"\n\n#line 2 \"matrix/inverse-matrix.hpp\"\
+    \n\n#line 4 \"matrix/inverse-matrix.hpp\"\n\ntemplate <typename mint>\nvector<vector<mint>>\
+    \ inverse_matrix(const vector<vector<mint>>& a) {\n  int N = a.size();\n  assert(N\
+    \ > 0);\n  assert(N == (int)a[0].size());\n\n  vector<vector<mint>> m(N, vector<mint>(2\
+    \ * N));\n  for (int i = 0; i < N; i++) {\n    copy(begin(a[i]), end(a[i]), begin(m[i]));\n\
+    \    m[i][N + i] = 1;\n  }\n\n  auto [rank, det] = GaussElimination(m, N, true);\n\
+    \  if (rank != N) return {};\n\n  vector<vector<mint>> b(N);\n  for (int i = 0;\
+    \ i < N; i++) {\n    copy(begin(m[i]) + N, end(m[i]), back_inserter(b[i]));\n\
+    \  }\n  return b;\n}\n#line 4 \"matrix/matrix.hpp\"\n\ntemplate <class T>\nstruct\
     \ Matrix {\n  vector<vector<T> > A;\n\n  Matrix() = default;\n  Matrix(int n,\
     \ int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int n) : A(n, vector<T>(n, T())){};\n\
     \n  int H() const { return A.size(); }\n\n  int W() const { return A[0].size();\
@@ -225,60 +239,61 @@ data:
     \ true;\n  }\n\n  bool operator!=(const Matrix &B) const {\n    assert(H() ==\
     \ B.H() && W() == B.W());\n    for (int i = 0; i < H(); i++)\n      for (int j\
     \ = 0; j < W(); j++)\n        if (A[i][j] != B[i][j]) return true;\n    return\
-    \ false;\n  }\n\n  friend ostream &operator<<(ostream &os, const Matrix &p) {\n\
-    \    int n = p.H(), m = p.W();\n    for (int i = 0; i < n; i++) {\n      os <<\
-    \ (i ? \"   \" : \"\") << \"[\";\n      for (int j = 0; j < m; j++) {\n      \
-    \  os << p[i][j] << (j + 1 == m ? \"]\\n\" : \",\");\n      }\n    }\n    return\
-    \ (os);\n  }\n\n  T determinant() const {\n    Matrix B(*this);\n    assert(H()\
-    \ == W());\n    T ret = 1;\n    for (int i = 0; i < H(); i++) {\n      int idx\
-    \ = -1;\n      for (int j = i; j < W(); j++) {\n        if (B[j][i] != 0) {\n\
-    \          idx = j;\n          break;\n        }\n      }\n      if (idx == -1)\
-    \ return 0;\n      if (i != idx) {\n        ret *= T(-1);\n        swap(B[i],\
-    \ B[idx]);\n      }\n      ret *= B[i][i];\n      T inv = T(1) / B[i][i];\n  \
-    \    for (int j = 0; j < W(); j++) {\n        B[i][j] *= inv;\n      }\n     \
-    \ for (int j = i + 1; j < H(); j++) {\n        T a = B[j][i];\n        if (a ==\
-    \ 0) continue;\n        for (int k = i; k < W(); k++) {\n          B[j][k] -=\
-    \ B[i][k] * a;\n        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n *\
-    \ @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA\n */\n#line 6 \"matrix/polynomial-matrix-prefix-prod.hpp\"\
-    \n\n// return m(k-1) * m(k-2) * ... * m(1) * m(0)\ntemplate <typename mint>\n\
-    Matrix<mint> polynomial_matrix_prod(Matrix<FormalPowerSeries<mint>> &m,\n    \
-    \                                long long k) {\n  using Mat = Matrix<mint>;\n\
-    \  using fps = FormalPowerSeries<mint>;\n\n  auto shift = [](vector<Mat> &G, mint\
-    \ x) -> vector<Mat> {\n    int d = G.size(), n = G[0].size();\n    vector<Mat>\
-    \ H(d, Mat(n));\n    for (int i = 0; i < n; i++) {\n      for (int j = 0; j <\
-    \ n; j++) {\n        fps g(d);\n        for (int l = 0; l < d; l++) g[l] = G[l][i][j];\n\
-    \        fps h = SamplePointShift(g, x);\n        for (int l = 0; l < d; l++)\
-    \ H[l][i][j] = h[l];\n      }\n    }\n    return H;\n  };\n\n  int n = m.size();\n\
-    \  int deg = 1;\n  for (auto &_ : m.A) {\n    for (auto &x : _) deg = max<int>(deg,\
-    \ (int)x.size() - 1);\n  }\n  while (deg & (deg - 1)) deg++;\n\n  vector<Mat>\
-    \ G(deg + 1);\n  long long v = 1;\n  while (deg * v * v < k) v *= 2;\n  mint iv\
-    \ = mint(v).inverse();\n\n  for (int i = 0; i < (int)G.size(); i++) {\n    mint\
-    \ x = mint(v) * i;\n    Mat mt(n);\n    for (int j = 0; j < n; j++)\n      for\
-    \ (int l = 0; l < n; l++) mt[j][l] = m[j][l].eval(x);\n    G[i] = mt;\n  }\n\n\
-    \  for (long long w = 1; w != v; w <<= 1) {\n    mint W = w;\n    auto G1 = shift(G,\
-    \ W * iv);\n    auto G2 = shift(G, (W * deg * v + v) * iv);\n    auto G3 = shift(G,\
-    \ (W * deg * v + v + W) * iv);\n    for (int i = 0; i <= w * deg; i++)\n     \
-    \ G[i] = G1[i] * G[i], G2[i] = G3[i] * G2[i];\n    copy(begin(G2), end(G2) - 1,\
-    \ back_inserter(G));\n  }\n\n  Mat res = Mat::I(n);\n  long long i = 0;\n  while\
-    \ (i + v <= k) res = G[i / v] * res, i += v;\n  while (i < k) {\n    Mat mt(n);\n\
-    \    for (int j = 0; j < n; j++)\n      for (int l = 0; l < n; l++) mt[j][l] =\
-    \ m[j][l].eval(i);\n    res = mt * res;\n    i++;\n  }\n  return res;\n}\n\n/**\n\
-    \ * @brief \u591A\u9805\u5F0F\u884C\u5217\u306Eprefix product\n */\n#line 6 \"\
-    fps/find-p-recursive.hpp\"\n\n// return polynomial coefficient s.t. sum_{j=k...0}\
-    \ f_j(i) a_{i+j} = 0\n// (In more details, read verification code.)\ntemplate\
-    \ <typename mint>\nvector<FormalPowerSeries<mint>> find_p_recursive(vector<mint>&\
-    \ a, int d) {\n  using fps = FormalPowerSeries<mint>;\n  int n = a.size();\n \
-    \ int k = (n + 2) / (d + 2) - 1;\n  if (k <= 0) return {};\n  int m = (k + 1)\
-    \ * (d + 1);\n  vector<vector<mint>> M(m - 1, vector<mint>(m));\n  for (int i\
-    \ = 0; i < m - 1; i++) {\n    for (int j = 0; j <= k; j++) {\n      mint base\
-    \ = 1;\n      for (int l = 0; l <= d; l++) {\n        M[i][(d + 1) * j + l] =\
-    \ base * a[i + j];\n        base *= i + j;\n      }\n    }\n  }\n  auto gauss\
-    \ = LinearEquation<mint>(M, vector<mint>(m - 1, 0));\n  if (gauss.size() <= 1)\
-    \ return {};\n  auto c = gauss[1];\n  while (all_of(end(c) - d - 1, end(c), [](mint\
-    \ x) { return x == mint(0); })) {\n    c.erase(end(c) - d - 1, end(c));\n  }\n\
-    \  k = c.size() / (d + 1) - 1;\n  vector<fps> res;\n  for (int i = 0, j = 0; i\
-    \ < (int)c.size(); i += d + 1, j++) {\n    fps f{1}, base{j, 1};\n    fps sm;\n\
-    \    for (int l = 0; l <= d; l++) sm += f * c[i + l], f *= base;\n    res.push_back(sm);\n\
+    \ false;\n  }\n\n  Matrix inverse() const {\n    assert(H() == W());\n    Matrix\
+    \ B(H());\n    B.A = inverse_matrix(A);\n    return B;\n  }\n\n  friend ostream\
+    \ &operator<<(ostream &os, const Matrix &p) {\n    int n = p.H(), m = p.W();\n\
+    \    for (int i = 0; i < n; i++) {\n      os << (i ? \"   \" : \"\") << \"[\"\
+    ;\n      for (int j = 0; j < m; j++) {\n        os << p[i][j] << (j + 1 == m ?\
+    \ \"]\\n\" : \",\");\n      }\n    }\n    return (os);\n  }\n\n  T determinant()\
+    \ const {\n    Matrix B(*this);\n    assert(H() == W());\n    T ret = 1;\n   \
+    \ for (int i = 0; i < H(); i++) {\n      int idx = -1;\n      for (int j = i;\
+    \ j < W(); j++) {\n        if (B[j][i] != 0) {\n          idx = j;\n         \
+    \ break;\n        }\n      }\n      if (idx == -1) return 0;\n      if (i != idx)\
+    \ {\n        ret *= T(-1);\n        swap(B[i], B[idx]);\n      }\n      ret *=\
+    \ B[i][i];\n      T inv = T(1) / B[i][i];\n      for (int j = 0; j < W(); j++)\
+    \ {\n        B[i][j] *= inv;\n      }\n      for (int j = i + 1; j < H(); j++)\
+    \ {\n        T a = B[j][i];\n        if (a == 0) continue;\n        for (int k\
+    \ = i; k < W(); k++) {\n          B[j][k] -= B[i][k] * a;\n        }\n      }\n\
+    \    }\n    return ret;\n  }\n};\n\n/**\n * @brief \u884C\u5217\u30E9\u30A4\u30D6\
+    \u30E9\u30EA\n */\n#line 6 \"matrix/polynomial-matrix-prefix-prod.hpp\"\n\n//\
+    \ return m(k-1) * m(k-2) * ... * m(1) * m(0)\ntemplate <typename mint>\nMatrix<mint>\
+    \ polynomial_matrix_prod(Matrix<FormalPowerSeries<mint>> &m,\n               \
+    \                     long long k) {\n  using Mat = Matrix<mint>;\n  using fps\
+    \ = FormalPowerSeries<mint>;\n\n  auto shift = [](vector<Mat> &G, mint x) -> vector<Mat>\
+    \ {\n    int d = G.size(), n = G[0].size();\n    vector<Mat> H(d, Mat(n));\n \
+    \   for (int i = 0; i < n; i++) {\n      for (int j = 0; j < n; j++) {\n     \
+    \   fps g(d);\n        for (int l = 0; l < d; l++) g[l] = G[l][i][j];\n      \
+    \  fps h = SamplePointShift(g, x);\n        for (int l = 0; l < d; l++) H[l][i][j]\
+    \ = h[l];\n      }\n    }\n    return H;\n  };\n\n  int n = m.size();\n  int deg\
+    \ = 1;\n  for (auto &_ : m.A) {\n    for (auto &x : _) deg = max<int>(deg, (int)x.size()\
+    \ - 1);\n  }\n  while (deg & (deg - 1)) deg++;\n\n  vector<Mat> G(deg + 1);\n\
+    \  long long v = 1;\n  while (deg * v * v < k) v *= 2;\n  mint iv = mint(v).inverse();\n\
+    \n  for (int i = 0; i < (int)G.size(); i++) {\n    mint x = mint(v) * i;\n   \
+    \ Mat mt(n);\n    for (int j = 0; j < n; j++)\n      for (int l = 0; l < n; l++)\
+    \ mt[j][l] = m[j][l].eval(x);\n    G[i] = mt;\n  }\n\n  for (long long w = 1;\
+    \ w != v; w <<= 1) {\n    mint W = w;\n    auto G1 = shift(G, W * iv);\n    auto\
+    \ G2 = shift(G, (W * deg * v + v) * iv);\n    auto G3 = shift(G, (W * deg * v\
+    \ + v + W) * iv);\n    for (int i = 0; i <= w * deg; i++)\n      G[i] = G1[i]\
+    \ * G[i], G2[i] = G3[i] * G2[i];\n    copy(begin(G2), end(G2) - 1, back_inserter(G));\n\
+    \  }\n\n  Mat res = Mat::I(n);\n  long long i = 0;\n  while (i + v <= k) res =\
+    \ G[i / v] * res, i += v;\n  while (i < k) {\n    Mat mt(n);\n    for (int j =\
+    \ 0; j < n; j++)\n      for (int l = 0; l < n; l++) mt[j][l] = m[j][l].eval(i);\n\
+    \    res = mt * res;\n    i++;\n  }\n  return res;\n}\n\n/**\n * @brief \u591A\
+    \u9805\u5F0F\u884C\u5217\u306Eprefix product\n */\n#line 6 \"fps/find-p-recursive.hpp\"\
+    \n\n// return polynomial coefficient s.t. sum_{j=k...0} f_j(i) a_{i+j} = 0\n//\
+    \ (In more details, read verification code.)\ntemplate <typename mint>\nvector<FormalPowerSeries<mint>>\
+    \ find_p_recursive(vector<mint>& a, int d) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  int n = a.size();\n  int k = (n + 2) / (d + 2) - 1;\n  if (k <= 0) return {};\n\
+    \  int m = (k + 1) * (d + 1);\n  vector<vector<mint>> M(m - 1, vector<mint>(m));\n\
+    \  for (int i = 0; i < m - 1; i++) {\n    for (int j = 0; j <= k; j++) {\n   \
+    \   mint base = 1;\n      for (int l = 0; l <= d; l++) {\n        M[i][(d + 1)\
+    \ * j + l] = base * a[i + j];\n        base *= i + j;\n      }\n    }\n  }\n \
+    \ auto gauss = LinearEquation<mint>(M, vector<mint>(m - 1, 0));\n  if (gauss.size()\
+    \ <= 1) return {};\n  auto c = gauss[1];\n  while (all_of(end(c) - d - 1, end(c),\
+    \ [](mint x) { return x == mint(0); })) {\n    c.erase(end(c) - d - 1, end(c));\n\
+    \  }\n  k = c.size() / (d + 1) - 1;\n  vector<fps> res;\n  for (int i = 0, j =\
+    \ 0; i < (int)c.size(); i += d + 1, j++) {\n    fps f{1}, base{j, 1};\n    fps\
+    \ sm;\n    for (int l = 0; l <= d; l++) sm += f * c[i + l], f *= base;\n    res.push_back(sm);\n\
     \  }\n  reverse(begin(res), end(res));\n  return res;\n}\n\ntemplate <typename\
     \ mint>\nmint kth_term_of_p_recursive(vector<mint>& a, long long k, int d) {\n\
     \  if (k < (int)a.size()) return a[k];\n  if (all_of(begin(a), end(a), [](mint\
@@ -293,12 +308,12 @@ data:
     \ a, long long k) {\n  if (k < (int)a.size()) return a[k];\n  if (all_of(begin(a),\
     \ end(a), [](mint x) { return x == mint(0); })) return 0;\n\n  int n = a.size()\
     \ - 1;\n  vector<mint> b{begin(a), end(a) - 1};\n\n  for (int d = 0;; d++) {\n\
-    \    if ((n + 2) / (d + 2) <= 1) break;\n    if (kth_term_of_p_recursive(b, n,\
-    \ d) == a.back()) {\n#ifdef NyaanLocal\n      cerr << \"d : \" << d << endl;\n\
-    \      cerr << find_p_recursive(b, d) << endl;\n#endif\n      return kth_term_of_p_recursive(a,\
-    \ k, d);\n    }\n  }\n  cerr << \"Failed.\" << endl;\n  exit(1);\n}\n\n/**\n *\
-    \ @brief P-recursive\u306E\u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/find-p-recursive.md\n\
-    \ */\n"
+    #ifdef NyaanLocal\n    cerr << \"d = \" << d << endl;\n#endif\n    if ((n + 2)\
+    \ / (d + 2) <= 1) break;\n    if (kth_term_of_p_recursive(b, n, d) == a.back())\
+    \ {\n#ifdef NyaanLocal\n      cerr << \"Found, d = \" << d << endl;\n#endif\n\
+    \      return kth_term_of_p_recursive(a, k, d);\n    }\n  }\n  cerr << \"Failed.\"\
+    \ << endl;\n  exit(1);\n}\n\n/**\n * @brief P-recursive\u306E\u9AD8\u901F\u8A08\
+    \u7B97\n * @docs docs/fps/find-p-recursive.md\n */\n"
   code: "#pragma once\n\n#include \"../matrix/linear-equation.hpp\"\n#include \"../matrix/polynomial-matrix-prefix-prod.hpp\"\
     \n#include \"formal-power-series.hpp\"\n\n// return polynomial coefficient s.t.\
     \ sum_{j=k...0} f_j(i) a_{i+j} = 0\n// (In more details, read verification code.)\n\
@@ -329,12 +344,12 @@ data:
     \ a, long long k) {\n  if (k < (int)a.size()) return a[k];\n  if (all_of(begin(a),\
     \ end(a), [](mint x) { return x == mint(0); })) return 0;\n\n  int n = a.size()\
     \ - 1;\n  vector<mint> b{begin(a), end(a) - 1};\n\n  for (int d = 0;; d++) {\n\
-    \    if ((n + 2) / (d + 2) <= 1) break;\n    if (kth_term_of_p_recursive(b, n,\
-    \ d) == a.back()) {\n#ifdef NyaanLocal\n      cerr << \"d : \" << d << endl;\n\
-    \      cerr << find_p_recursive(b, d) << endl;\n#endif\n      return kth_term_of_p_recursive(a,\
-    \ k, d);\n    }\n  }\n  cerr << \"Failed.\" << endl;\n  exit(1);\n}\n\n/**\n *\
-    \ @brief P-recursive\u306E\u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/find-p-recursive.md\n\
-    \ */\n"
+    #ifdef NyaanLocal\n    cerr << \"d = \" << d << endl;\n#endif\n    if ((n + 2)\
+    \ / (d + 2) <= 1) break;\n    if (kth_term_of_p_recursive(b, n, d) == a.back())\
+    \ {\n#ifdef NyaanLocal\n      cerr << \"Found, d = \" << d << endl;\n#endif\n\
+    \      return kth_term_of_p_recursive(a, k, d);\n    }\n  }\n  cerr << \"Failed.\"\
+    \ << endl;\n  exit(1);\n}\n\n/**\n * @brief P-recursive\u306E\u9AD8\u901F\u8A08\
+    \u7B97\n * @docs docs/fps/find-p-recursive.md\n */\n"
   dependsOn:
   - matrix/linear-equation.hpp
   - matrix/gauss-elimination.hpp
@@ -343,14 +358,16 @@ data:
   - fps/sample-point-shift.hpp
   - modulo/binomial.hpp
   - matrix/matrix.hpp
+  - matrix/inverse-matrix.hpp
   isVerificationFile: false
   path: fps/find-p-recursive.hpp
   requiredBy: []
-  timestamp: '2023-08-31 20:44:07+09:00'
+  timestamp: '2023-12-22 19:57:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1533.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
+  - verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
 documentation_of: fps/find-p-recursive.hpp
 layout: document
 redirect_from:

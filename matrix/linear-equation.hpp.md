@@ -22,6 +22,9 @@ data:
     path: verify/verify-unit-test/p-recursive.test.cpp
     title: verify/verify-unit-test/p-recursive.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
     title: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - icon: ':heavy_check_mark:'
@@ -97,6 +100,7 @@ data:
   - verify/verify-aoj-other/aoj-2171.test.cpp
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
+  - verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
 documentation_of: matrix/linear-equation.hpp
 layout: document
 redirect_from:

@@ -25,6 +25,9 @@ data:
     path: verify/verify-unit-test/bigint3.test.cpp
     title: verify/verify-unit-test/bigint3.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/fast-inv-o1.test.cpp
+    title: verify/verify-unit-test/fast-inv-o1.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/garner-bigint.test.cpp
     title: verify/verify-unit-test/garner-bigint.test.cpp
   - icon: ':heavy_check_mark:'
@@ -417,6 +420,7 @@ data:
   - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
   - verify/verify-unit-test/bigint3.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
+  - verify/verify-unit-test/fast-inv-o1.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp

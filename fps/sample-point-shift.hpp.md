@@ -26,6 +26,12 @@ data:
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-factorial.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-factorial.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
   - icon: ':heavy_check_mark:'
@@ -203,6 +209,8 @@ data:
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
+  - verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
+  - verify/verify-yosupo-fps/yosupo-factorial.test.cpp
 documentation_of: fps/sample-point-shift.hpp
 layout: document
 redirect_from:

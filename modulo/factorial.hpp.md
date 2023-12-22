@@ -14,6 +14,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-factorial.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-factorial.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0502.test.cpp
     title: verify/verify-yuki/yuki-0502.test.cpp
   _isVerificationFailed: false
@@ -180,6 +183,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0502.test.cpp
+  - verify/verify-yosupo-fps/yosupo-factorial.test.cpp
 documentation_of: modulo/factorial.hpp
 layout: document
 redirect_from:

@@ -9,6 +9,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
     title: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-3024.test.cpp
+    title: verify/verify-yuki/yuki-3024.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -37,6 +40,7 @@ data:
   timestamp: '2020-12-07 13:36:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yuki/yuki-3024.test.cpp
   - verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
   - verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
 documentation_of: set-function/enumerate-set.hpp

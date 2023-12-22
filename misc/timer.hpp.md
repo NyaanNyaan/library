@@ -31,6 +31,9 @@ data:
     path: verify/verify-unit-test/fast-bs.test.cpp
     title: verify/verify-unit-test/fast-bs.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/fast-inv-o1.test.cpp
+    title: verify/verify-unit-test/fast-inv-o1.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/fast-inv.test.cpp
     title: verify/verify-unit-test/fast-inv.test.cpp
   - icon: ':heavy_check_mark:'
@@ -101,6 +104,7 @@ data:
   - verify/verify-unit-test/bigint3.test.cpp
   - verify/verify-unit-test/composite-exp.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
+  - verify/verify-unit-test/fast-inv-o1.test.cpp
   - verify/verify-unit-test/simulated-annealing.test.cpp
 documentation_of: misc/timer.hpp
 layout: document

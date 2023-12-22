@@ -18,6 +18,9 @@ data:
     path: matrix/gauss-elimination.hpp
     title: matrix/gauss-elimination.hpp
   - icon: ':heavy_check_mark:'
+    path: matrix/inverse-matrix.hpp
+    title: matrix/inverse-matrix.hpp
+  - icon: ':heavy_check_mark:'
     path: matrix/linear-equation.hpp
     title: matrix/linear-equation.hpp
   - icon: ':heavy_check_mark:'
@@ -396,7 +399,15 @@ data:
     \n  auto dh = d * h;\n\n  FormalPowerSeries<mint> ret(m);\n  mint cur = T;\n \
     \ for (int i = 1; i <= k; i++) cur *= T - i;\n  for (int i = 0; i < m; i++) {\n\
     \    ret[i] = cur * dh[k + i];\n    cur *= T + i + 1;\n    cur *= h[i];\n  }\n\
-    \  return ret;\n}\n#line 2 \"matrix/matrix.hpp\"\n\ntemplate <class T>\nstruct\
+    \  return ret;\n}\n#line 2 \"matrix/matrix.hpp\"\n\n#line 2 \"matrix/inverse-matrix.hpp\"\
+    \n\n#line 4 \"matrix/inverse-matrix.hpp\"\n\ntemplate <typename mint>\nvector<vector<mint>>\
+    \ inverse_matrix(const vector<vector<mint>>& a) {\n  int N = a.size();\n  assert(N\
+    \ > 0);\n  assert(N == (int)a[0].size());\n\n  vector<vector<mint>> m(N, vector<mint>(2\
+    \ * N));\n  for (int i = 0; i < N; i++) {\n    copy(begin(a[i]), end(a[i]), begin(m[i]));\n\
+    \    m[i][N + i] = 1;\n  }\n\n  auto [rank, det] = GaussElimination(m, N, true);\n\
+    \  if (rank != N) return {};\n\n  vector<vector<mint>> b(N);\n  for (int i = 0;\
+    \ i < N; i++) {\n    copy(begin(m[i]) + N, end(m[i]), back_inserter(b[i]));\n\
+    \  }\n  return b;\n}\n#line 4 \"matrix/matrix.hpp\"\n\ntemplate <class T>\nstruct\
     \ Matrix {\n  vector<vector<T> > A;\n\n  Matrix() = default;\n  Matrix(int n,\
     \ int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int n) : A(n, vector<T>(n, T())){};\n\
     \n  int H() const { return A.size(); }\n\n  int W() const { return A[0].size();\
@@ -426,60 +437,61 @@ data:
     \ true;\n  }\n\n  bool operator!=(const Matrix &B) const {\n    assert(H() ==\
     \ B.H() && W() == B.W());\n    for (int i = 0; i < H(); i++)\n      for (int j\
     \ = 0; j < W(); j++)\n        if (A[i][j] != B[i][j]) return true;\n    return\
-    \ false;\n  }\n\n  friend ostream &operator<<(ostream &os, const Matrix &p) {\n\
-    \    int n = p.H(), m = p.W();\n    for (int i = 0; i < n; i++) {\n      os <<\
-    \ (i ? \"   \" : \"\") << \"[\";\n      for (int j = 0; j < m; j++) {\n      \
-    \  os << p[i][j] << (j + 1 == m ? \"]\\n\" : \",\");\n      }\n    }\n    return\
-    \ (os);\n  }\n\n  T determinant() const {\n    Matrix B(*this);\n    assert(H()\
-    \ == W());\n    T ret = 1;\n    for (int i = 0; i < H(); i++) {\n      int idx\
-    \ = -1;\n      for (int j = i; j < W(); j++) {\n        if (B[j][i] != 0) {\n\
-    \          idx = j;\n          break;\n        }\n      }\n      if (idx == -1)\
-    \ return 0;\n      if (i != idx) {\n        ret *= T(-1);\n        swap(B[i],\
-    \ B[idx]);\n      }\n      ret *= B[i][i];\n      T inv = T(1) / B[i][i];\n  \
-    \    for (int j = 0; j < W(); j++) {\n        B[i][j] *= inv;\n      }\n     \
-    \ for (int j = i + 1; j < H(); j++) {\n        T a = B[j][i];\n        if (a ==\
-    \ 0) continue;\n        for (int k = i; k < W(); k++) {\n          B[j][k] -=\
-    \ B[i][k] * a;\n        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n *\
-    \ @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA\n */\n#line 6 \"matrix/polynomial-matrix-prefix-prod.hpp\"\
-    \n\n// return m(k-1) * m(k-2) * ... * m(1) * m(0)\ntemplate <typename mint>\n\
-    Matrix<mint> polynomial_matrix_prod(Matrix<FormalPowerSeries<mint>> &m,\n    \
-    \                                long long k) {\n  using Mat = Matrix<mint>;\n\
-    \  using fps = FormalPowerSeries<mint>;\n\n  auto shift = [](vector<Mat> &G, mint\
-    \ x) -> vector<Mat> {\n    int d = G.size(), n = G[0].size();\n    vector<Mat>\
-    \ H(d, Mat(n));\n    for (int i = 0; i < n; i++) {\n      for (int j = 0; j <\
-    \ n; j++) {\n        fps g(d);\n        for (int l = 0; l < d; l++) g[l] = G[l][i][j];\n\
-    \        fps h = SamplePointShift(g, x);\n        for (int l = 0; l < d; l++)\
-    \ H[l][i][j] = h[l];\n      }\n    }\n    return H;\n  };\n\n  int n = m.size();\n\
-    \  int deg = 1;\n  for (auto &_ : m.A) {\n    for (auto &x : _) deg = max<int>(deg,\
-    \ (int)x.size() - 1);\n  }\n  while (deg & (deg - 1)) deg++;\n\n  vector<Mat>\
-    \ G(deg + 1);\n  long long v = 1;\n  while (deg * v * v < k) v *= 2;\n  mint iv\
-    \ = mint(v).inverse();\n\n  for (int i = 0; i < (int)G.size(); i++) {\n    mint\
-    \ x = mint(v) * i;\n    Mat mt(n);\n    for (int j = 0; j < n; j++)\n      for\
-    \ (int l = 0; l < n; l++) mt[j][l] = m[j][l].eval(x);\n    G[i] = mt;\n  }\n\n\
-    \  for (long long w = 1; w != v; w <<= 1) {\n    mint W = w;\n    auto G1 = shift(G,\
-    \ W * iv);\n    auto G2 = shift(G, (W * deg * v + v) * iv);\n    auto G3 = shift(G,\
-    \ (W * deg * v + v + W) * iv);\n    for (int i = 0; i <= w * deg; i++)\n     \
-    \ G[i] = G1[i] * G[i], G2[i] = G3[i] * G2[i];\n    copy(begin(G2), end(G2) - 1,\
-    \ back_inserter(G));\n  }\n\n  Mat res = Mat::I(n);\n  long long i = 0;\n  while\
-    \ (i + v <= k) res = G[i / v] * res, i += v;\n  while (i < k) {\n    Mat mt(n);\n\
-    \    for (int j = 0; j < n; j++)\n      for (int l = 0; l < n; l++) mt[j][l] =\
-    \ m[j][l].eval(i);\n    res = mt * res;\n    i++;\n  }\n  return res;\n}\n\n/**\n\
-    \ * @brief \u591A\u9805\u5F0F\u884C\u5217\u306Eprefix product\n */\n#line 6 \"\
-    fps/find-p-recursive.hpp\"\n\n// return polynomial coefficient s.t. sum_{j=k...0}\
-    \ f_j(i) a_{i+j} = 0\n// (In more details, read verification code.)\ntemplate\
-    \ <typename mint>\nvector<FormalPowerSeries<mint>> find_p_recursive(vector<mint>&\
-    \ a, int d) {\n  using fps = FormalPowerSeries<mint>;\n  int n = a.size();\n \
-    \ int k = (n + 2) / (d + 2) - 1;\n  if (k <= 0) return {};\n  int m = (k + 1)\
-    \ * (d + 1);\n  vector<vector<mint>> M(m - 1, vector<mint>(m));\n  for (int i\
-    \ = 0; i < m - 1; i++) {\n    for (int j = 0; j <= k; j++) {\n      mint base\
-    \ = 1;\n      for (int l = 0; l <= d; l++) {\n        M[i][(d + 1) * j + l] =\
-    \ base * a[i + j];\n        base *= i + j;\n      }\n    }\n  }\n  auto gauss\
-    \ = LinearEquation<mint>(M, vector<mint>(m - 1, 0));\n  if (gauss.size() <= 1)\
-    \ return {};\n  auto c = gauss[1];\n  while (all_of(end(c) - d - 1, end(c), [](mint\
-    \ x) { return x == mint(0); })) {\n    c.erase(end(c) - d - 1, end(c));\n  }\n\
-    \  k = c.size() / (d + 1) - 1;\n  vector<fps> res;\n  for (int i = 0, j = 0; i\
-    \ < (int)c.size(); i += d + 1, j++) {\n    fps f{1}, base{j, 1};\n    fps sm;\n\
-    \    for (int l = 0; l <= d; l++) sm += f * c[i + l], f *= base;\n    res.push_back(sm);\n\
+    \ false;\n  }\n\n  Matrix inverse() const {\n    assert(H() == W());\n    Matrix\
+    \ B(H());\n    B.A = inverse_matrix(A);\n    return B;\n  }\n\n  friend ostream\
+    \ &operator<<(ostream &os, const Matrix &p) {\n    int n = p.H(), m = p.W();\n\
+    \    for (int i = 0; i < n; i++) {\n      os << (i ? \"   \" : \"\") << \"[\"\
+    ;\n      for (int j = 0; j < m; j++) {\n        os << p[i][j] << (j + 1 == m ?\
+    \ \"]\\n\" : \",\");\n      }\n    }\n    return (os);\n  }\n\n  T determinant()\
+    \ const {\n    Matrix B(*this);\n    assert(H() == W());\n    T ret = 1;\n   \
+    \ for (int i = 0; i < H(); i++) {\n      int idx = -1;\n      for (int j = i;\
+    \ j < W(); j++) {\n        if (B[j][i] != 0) {\n          idx = j;\n         \
+    \ break;\n        }\n      }\n      if (idx == -1) return 0;\n      if (i != idx)\
+    \ {\n        ret *= T(-1);\n        swap(B[i], B[idx]);\n      }\n      ret *=\
+    \ B[i][i];\n      T inv = T(1) / B[i][i];\n      for (int j = 0; j < W(); j++)\
+    \ {\n        B[i][j] *= inv;\n      }\n      for (int j = i + 1; j < H(); j++)\
+    \ {\n        T a = B[j][i];\n        if (a == 0) continue;\n        for (int k\
+    \ = i; k < W(); k++) {\n          B[j][k] -= B[i][k] * a;\n        }\n      }\n\
+    \    }\n    return ret;\n  }\n};\n\n/**\n * @brief \u884C\u5217\u30E9\u30A4\u30D6\
+    \u30E9\u30EA\n */\n#line 6 \"matrix/polynomial-matrix-prefix-prod.hpp\"\n\n//\
+    \ return m(k-1) * m(k-2) * ... * m(1) * m(0)\ntemplate <typename mint>\nMatrix<mint>\
+    \ polynomial_matrix_prod(Matrix<FormalPowerSeries<mint>> &m,\n               \
+    \                     long long k) {\n  using Mat = Matrix<mint>;\n  using fps\
+    \ = FormalPowerSeries<mint>;\n\n  auto shift = [](vector<Mat> &G, mint x) -> vector<Mat>\
+    \ {\n    int d = G.size(), n = G[0].size();\n    vector<Mat> H(d, Mat(n));\n \
+    \   for (int i = 0; i < n; i++) {\n      for (int j = 0; j < n; j++) {\n     \
+    \   fps g(d);\n        for (int l = 0; l < d; l++) g[l] = G[l][i][j];\n      \
+    \  fps h = SamplePointShift(g, x);\n        for (int l = 0; l < d; l++) H[l][i][j]\
+    \ = h[l];\n      }\n    }\n    return H;\n  };\n\n  int n = m.size();\n  int deg\
+    \ = 1;\n  for (auto &_ : m.A) {\n    for (auto &x : _) deg = max<int>(deg, (int)x.size()\
+    \ - 1);\n  }\n  while (deg & (deg - 1)) deg++;\n\n  vector<Mat> G(deg + 1);\n\
+    \  long long v = 1;\n  while (deg * v * v < k) v *= 2;\n  mint iv = mint(v).inverse();\n\
+    \n  for (int i = 0; i < (int)G.size(); i++) {\n    mint x = mint(v) * i;\n   \
+    \ Mat mt(n);\n    for (int j = 0; j < n; j++)\n      for (int l = 0; l < n; l++)\
+    \ mt[j][l] = m[j][l].eval(x);\n    G[i] = mt;\n  }\n\n  for (long long w = 1;\
+    \ w != v; w <<= 1) {\n    mint W = w;\n    auto G1 = shift(G, W * iv);\n    auto\
+    \ G2 = shift(G, (W * deg * v + v) * iv);\n    auto G3 = shift(G, (W * deg * v\
+    \ + v + W) * iv);\n    for (int i = 0; i <= w * deg; i++)\n      G[i] = G1[i]\
+    \ * G[i], G2[i] = G3[i] * G2[i];\n    copy(begin(G2), end(G2) - 1, back_inserter(G));\n\
+    \  }\n\n  Mat res = Mat::I(n);\n  long long i = 0;\n  while (i + v <= k) res =\
+    \ G[i / v] * res, i += v;\n  while (i < k) {\n    Mat mt(n);\n    for (int j =\
+    \ 0; j < n; j++)\n      for (int l = 0; l < n; l++) mt[j][l] = m[j][l].eval(i);\n\
+    \    res = mt * res;\n    i++;\n  }\n  return res;\n}\n\n/**\n * @brief \u591A\
+    \u9805\u5F0F\u884C\u5217\u306Eprefix product\n */\n#line 6 \"fps/find-p-recursive.hpp\"\
+    \n\n// return polynomial coefficient s.t. sum_{j=k...0} f_j(i) a_{i+j} = 0\n//\
+    \ (In more details, read verification code.)\ntemplate <typename mint>\nvector<FormalPowerSeries<mint>>\
+    \ find_p_recursive(vector<mint>& a, int d) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  int n = a.size();\n  int k = (n + 2) / (d + 2) - 1;\n  if (k <= 0) return {};\n\
+    \  int m = (k + 1) * (d + 1);\n  vector<vector<mint>> M(m - 1, vector<mint>(m));\n\
+    \  for (int i = 0; i < m - 1; i++) {\n    for (int j = 0; j <= k; j++) {\n   \
+    \   mint base = 1;\n      for (int l = 0; l <= d; l++) {\n        M[i][(d + 1)\
+    \ * j + l] = base * a[i + j];\n        base *= i + j;\n      }\n    }\n  }\n \
+    \ auto gauss = LinearEquation<mint>(M, vector<mint>(m - 1, 0));\n  if (gauss.size()\
+    \ <= 1) return {};\n  auto c = gauss[1];\n  while (all_of(end(c) - d - 1, end(c),\
+    \ [](mint x) { return x == mint(0); })) {\n    c.erase(end(c) - d - 1, end(c));\n\
+    \  }\n  k = c.size() / (d + 1) - 1;\n  vector<fps> res;\n  for (int i = 0, j =\
+    \ 0; i < (int)c.size(); i += d + 1, j++) {\n    fps f{1}, base{j, 1};\n    fps\
+    \ sm;\n    for (int l = 0; l <= d; l++) sm += f * c[i + l], f *= base;\n    res.push_back(sm);\n\
     \  }\n  reverse(begin(res), end(res));\n  return res;\n}\n\ntemplate <typename\
     \ mint>\nmint kth_term_of_p_recursive(vector<mint>& a, long long k, int d) {\n\
     \  if (k < (int)a.size()) return a[k];\n  if (all_of(begin(a), end(a), [](mint\
@@ -494,82 +506,82 @@ data:
     \ a, long long k) {\n  if (k < (int)a.size()) return a[k];\n  if (all_of(begin(a),\
     \ end(a), [](mint x) { return x == mint(0); })) return 0;\n\n  int n = a.size()\
     \ - 1;\n  vector<mint> b{begin(a), end(a) - 1};\n\n  for (int d = 0;; d++) {\n\
-    \    if ((n + 2) / (d + 2) <= 1) break;\n    if (kth_term_of_p_recursive(b, n,\
-    \ d) == a.back()) {\n#ifdef NyaanLocal\n      cerr << \"d : \" << d << endl;\n\
-    \      cerr << find_p_recursive(b, d) << endl;\n#endif\n      return kth_term_of_p_recursive(a,\
-    \ k, d);\n    }\n  }\n  cerr << \"Failed.\" << endl;\n  exit(1);\n}\n\n/**\n *\
-    \ @brief P-recursive\u306E\u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/find-p-recursive.md\n\
-    \ */\n#line 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt.hpp\"\n\ntemplate\
-    \ <typename mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t\
-    \ _mod = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32] = {};\n \
-    \   int idx = 0;\n    u64 m = _mod - 1;\n    for (u64 i = 2; i * i <= m; ++i)\
-    \ {\n      if (m % i == 0) {\n        ds[idx++] = i;\n        while (m % i ==\
-    \ 0) m /= i;\n      }\n    }\n    if (m != 1) ds[idx++] = m;\n\n    uint32_t _pr\
-    \ = 2;\n    while (1) {\n      int flg = 1;\n      for (int i = 0; i < idx; ++i)\
-    \ {\n        u64 a = _pr, b = (_mod - 1) / ds[i], r = 1;\n        while (b) {\n\
-    \          if (b & 1) r = r * a % _mod;\n          a = a * a % _mod;\n       \
-    \   b >>= 1;\n        }\n        if (r == 1) {\n          flg = 0;\n         \
-    \ break;\n        }\n      }\n      if (flg == 1) break;\n      ++_pr;\n    }\n\
-    \    return _pr;\n  };\n\n  static constexpr uint32_t mod = mint::get_mod();\n\
-    \  static constexpr uint32_t pr = get_pr();\n  static constexpr int level = __builtin_ctzll(mod\
-    \ - 1);\n  mint dw[level], dy[level];\n\n  void setwy(int k) {\n    mint w[level],\
-    \ y[level];\n    w[k - 1] = mint(pr).pow((mod - 1) / (1 << k));\n    y[k - 1]\
-    \ = w[k - 1].inverse();\n    for (int i = k - 2; i > 0; --i)\n      w[i] = w[i\
-    \ + 1] * w[i + 1], y[i] = y[i + 1] * y[i + 1];\n    dw[1] = w[1], dy[1] = y[1],\
-    \ dw[2] = w[2], dy[2] = y[2];\n    for (int i = 3; i < k; ++i) {\n      dw[i]\
-    \ = dw[i - 1] * y[i - 2] * w[i];\n      dy[i] = dy[i - 1] * w[i - 2] * y[i];\n\
-    \    }\n  }\n\n  NTT() { setwy(level); }\n\n  void fft4(vector<mint> &a, int k)\
-    \ {\n    if ((int)a.size() <= 1) return;\n    if (k == 1) {\n      mint a1 = a[1];\n\
-    \      a[1] = a[0] - a[1];\n      a[0] = a[0] + a1;\n      return;\n    }\n  \
-    \  if (k & 1) {\n      int v = 1 << (k - 1);\n      for (int j = 0; j < v; ++j)\
-    \ {\n        mint ajv = a[j + v];\n        a[j + v] = a[j] - ajv;\n        a[j]\
-    \ += ajv;\n      }\n    }\n    int u = 1 << (2 + (k & 1));\n    int v = 1 << (k\
-    \ - 2 - (k & 1));\n    mint one = mint(1);\n    mint imag = dw[1];\n    while\
-    \ (v) {\n      // jh = 0\n      {\n        int j0 = 0;\n        int j1 = v;\n\
-    \        int j2 = j1 + v;\n        int j3 = j2 + v;\n        for (; j0 < v; ++j0,\
-    \ ++j1, ++j2, ++j3) {\n          mint t0 = a[j0], t1 = a[j1], t2 = a[j2], t3 =\
-    \ a[j3];\n          mint t0p2 = t0 + t2, t1p3 = t1 + t3;\n          mint t0m2\
-    \ = t0 - t2, t1m3 = (t1 - t3) * imag;\n          a[j0] = t0p2 + t1p3, a[j1] =\
-    \ t0p2 - t1p3;\n          a[j2] = t0m2 + t1m3, a[j3] = t0m2 - t1m3;\n        }\n\
-    \      }\n      // jh >= 1\n      mint ww = one, xx = one * dw[2], wx = one;\n\
-    \      for (int jh = 4; jh < u;) {\n        ww = xx * xx, wx = ww * xx;\n    \
-    \    int j0 = jh * v;\n        int je = j0 + v;\n        int j2 = je + v;\n  \
-    \      for (; j0 < je; ++j0, ++j2) {\n          mint t0 = a[j0], t1 = a[j0 + v]\
-    \ * xx, t2 = a[j2] * ww,\n               t3 = a[j2 + v] * wx;\n          mint\
-    \ t0p2 = t0 + t2, t1p3 = t1 + t3;\n          mint t0m2 = t0 - t2, t1m3 = (t1 -\
-    \ t3) * imag;\n          a[j0] = t0p2 + t1p3, a[j0 + v] = t0p2 - t1p3;\n     \
-    \     a[j2] = t0m2 + t1m3, a[j2 + v] = t0m2 - t1m3;\n        }\n        xx *=\
-    \ dw[__builtin_ctzll((jh += 4))];\n      }\n      u <<= 2;\n      v >>= 2;\n \
-    \   }\n  }\n\n  void ifft4(vector<mint> &a, int k) {\n    if ((int)a.size() <=\
-    \ 1) return;\n    if (k == 1) {\n      mint a1 = a[1];\n      a[1] = a[0] - a[1];\n\
-    \      a[0] = a[0] + a1;\n      return;\n    }\n    int u = 1 << (k - 2);\n  \
-    \  int v = 1;\n    mint one = mint(1);\n    mint imag = dy[1];\n    while (u)\
-    \ {\n      // jh = 0\n      {\n        int j0 = 0;\n        int j1 = v;\n    \
-    \    int j2 = v + v;\n        int j3 = j2 + v;\n        for (; j0 < v; ++j0, ++j1,\
-    \ ++j2, ++j3) {\n          mint t0 = a[j0], t1 = a[j1], t2 = a[j2], t3 = a[j3];\n\
-    \          mint t0p1 = t0 + t1, t2p3 = t2 + t3;\n          mint t0m1 = t0 - t1,\
-    \ t2m3 = (t2 - t3) * imag;\n          a[j0] = t0p1 + t2p3, a[j2] = t0p1 - t2p3;\n\
-    \          a[j1] = t0m1 + t2m3, a[j3] = t0m1 - t2m3;\n        }\n      }\n   \
-    \   // jh >= 1\n      mint ww = one, xx = one * dy[2], yy = one;\n      u <<=\
-    \ 2;\n      for (int jh = 4; jh < u;) {\n        ww = xx * xx, yy = xx * imag;\n\
-    \        int j0 = jh * v;\n        int je = j0 + v;\n        int j2 = je + v;\n\
-    \        for (; j0 < je; ++j0, ++j2) {\n          mint t0 = a[j0], t1 = a[j0 +\
-    \ v], t2 = a[j2], t3 = a[j2 + v];\n          mint t0p1 = t0 + t1, t2p3 = t2 +\
-    \ t3;\n          mint t0m1 = (t0 - t1) * xx, t2m3 = (t2 - t3) * yy;\n        \
-    \  a[j0] = t0p1 + t2p3, a[j2] = (t0p1 - t2p3) * ww;\n          a[j0 + v] = t0m1\
-    \ + t2m3, a[j2 + v] = (t0m1 - t2m3) * ww;\n        }\n        xx *= dy[__builtin_ctzll(jh\
-    \ += 4)];\n      }\n      u >>= 4;\n      v <<= 2;\n    }\n    if (k & 1) {\n\
-    \      u = 1 << (k - 1);\n      for (int j = 0; j < u; ++j) {\n        mint ajv\
-    \ = a[j] - a[j + u];\n        a[j] += a[j + u];\n        a[j + u] = ajv;\n   \
-    \   }\n    }\n  }\n\n  void ntt(vector<mint> &a) {\n    if ((int)a.size() <= 1)\
-    \ return;\n    fft4(a, __builtin_ctz(a.size()));\n  }\n\n  void intt(vector<mint>\
-    \ &a) {\n    if ((int)a.size() <= 1) return;\n    ifft4(a, __builtin_ctz(a.size()));\n\
-    \    mint iv = mint(a.size()).inverse();\n    for (auto &x : a) x *= iv;\n  }\n\
-    \n  vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {\n  \
-    \  int l = a.size() + b.size() - 1;\n    if (min<int>(a.size(), b.size()) <= 40)\
-    \ {\n      vector<mint> s(l);\n      for (int i = 0; i < (int)a.size(); ++i)\n\
-    \        for (int j = 0; j < (int)b.size(); ++j) s[i + j] += a[i] * b[j];\n  \
-    \    return s;\n    }\n    int k = 2, M = 4;\n    while (M < l) M <<= 1, ++k;\n\
+    #ifdef NyaanLocal\n    cerr << \"d = \" << d << endl;\n#endif\n    if ((n + 2)\
+    \ / (d + 2) <= 1) break;\n    if (kth_term_of_p_recursive(b, n, d) == a.back())\
+    \ {\n#ifdef NyaanLocal\n      cerr << \"Found, d = \" << d << endl;\n#endif\n\
+    \      return kth_term_of_p_recursive(a, k, d);\n    }\n  }\n  cerr << \"Failed.\"\
+    \ << endl;\n  exit(1);\n}\n\n/**\n * @brief P-recursive\u306E\u9AD8\u901F\u8A08\
+    \u7B97\n * @docs docs/fps/find-p-recursive.md\n */\n#line 2 \"fps/ntt-friendly-fps.hpp\"\
+    \n\n#line 2 \"ntt/ntt.hpp\"\n\ntemplate <typename mint>\nstruct NTT {\n  static\
+    \ constexpr uint32_t get_pr() {\n    uint32_t _mod = mint::get_mod();\n    using\
+    \ u64 = uint64_t;\n    u64 ds[32] = {};\n    int idx = 0;\n    u64 m = _mod -\
+    \ 1;\n    for (u64 i = 2; i * i <= m; ++i) {\n      if (m % i == 0) {\n      \
+    \  ds[idx++] = i;\n        while (m % i == 0) m /= i;\n      }\n    }\n    if\
+    \ (m != 1) ds[idx++] = m;\n\n    uint32_t _pr = 2;\n    while (1) {\n      int\
+    \ flg = 1;\n      for (int i = 0; i < idx; ++i) {\n        u64 a = _pr, b = (_mod\
+    \ - 1) / ds[i], r = 1;\n        while (b) {\n          if (b & 1) r = r * a %\
+    \ _mod;\n          a = a * a % _mod;\n          b >>= 1;\n        }\n        if\
+    \ (r == 1) {\n          flg = 0;\n          break;\n        }\n      }\n     \
+    \ if (flg == 1) break;\n      ++_pr;\n    }\n    return _pr;\n  };\n\n  static\
+    \ constexpr uint32_t mod = mint::get_mod();\n  static constexpr uint32_t pr =\
+    \ get_pr();\n  static constexpr int level = __builtin_ctzll(mod - 1);\n  mint\
+    \ dw[level], dy[level];\n\n  void setwy(int k) {\n    mint w[level], y[level];\n\
+    \    w[k - 1] = mint(pr).pow((mod - 1) / (1 << k));\n    y[k - 1] = w[k - 1].inverse();\n\
+    \    for (int i = k - 2; i > 0; --i)\n      w[i] = w[i + 1] * w[i + 1], y[i] =\
+    \ y[i + 1] * y[i + 1];\n    dw[1] = w[1], dy[1] = y[1], dw[2] = w[2], dy[2] =\
+    \ y[2];\n    for (int i = 3; i < k; ++i) {\n      dw[i] = dw[i - 1] * y[i - 2]\
+    \ * w[i];\n      dy[i] = dy[i - 1] * w[i - 2] * y[i];\n    }\n  }\n\n  NTT() {\
+    \ setwy(level); }\n\n  void fft4(vector<mint> &a, int k) {\n    if ((int)a.size()\
+    \ <= 1) return;\n    if (k == 1) {\n      mint a1 = a[1];\n      a[1] = a[0] -\
+    \ a[1];\n      a[0] = a[0] + a1;\n      return;\n    }\n    if (k & 1) {\n   \
+    \   int v = 1 << (k - 1);\n      for (int j = 0; j < v; ++j) {\n        mint ajv\
+    \ = a[j + v];\n        a[j + v] = a[j] - ajv;\n        a[j] += ajv;\n      }\n\
+    \    }\n    int u = 1 << (2 + (k & 1));\n    int v = 1 << (k - 2 - (k & 1));\n\
+    \    mint one = mint(1);\n    mint imag = dw[1];\n    while (v) {\n      // jh\
+    \ = 0\n      {\n        int j0 = 0;\n        int j1 = v;\n        int j2 = j1\
+    \ + v;\n        int j3 = j2 + v;\n        for (; j0 < v; ++j0, ++j1, ++j2, ++j3)\
+    \ {\n          mint t0 = a[j0], t1 = a[j1], t2 = a[j2], t3 = a[j3];\n        \
+    \  mint t0p2 = t0 + t2, t1p3 = t1 + t3;\n          mint t0m2 = t0 - t2, t1m3 =\
+    \ (t1 - t3) * imag;\n          a[j0] = t0p2 + t1p3, a[j1] = t0p2 - t1p3;\n   \
+    \       a[j2] = t0m2 + t1m3, a[j3] = t0m2 - t1m3;\n        }\n      }\n      //\
+    \ jh >= 1\n      mint ww = one, xx = one * dw[2], wx = one;\n      for (int jh\
+    \ = 4; jh < u;) {\n        ww = xx * xx, wx = ww * xx;\n        int j0 = jh *\
+    \ v;\n        int je = j0 + v;\n        int j2 = je + v;\n        for (; j0 <\
+    \ je; ++j0, ++j2) {\n          mint t0 = a[j0], t1 = a[j0 + v] * xx, t2 = a[j2]\
+    \ * ww,\n               t3 = a[j2 + v] * wx;\n          mint t0p2 = t0 + t2, t1p3\
+    \ = t1 + t3;\n          mint t0m2 = t0 - t2, t1m3 = (t1 - t3) * imag;\n      \
+    \    a[j0] = t0p2 + t1p3, a[j0 + v] = t0p2 - t1p3;\n          a[j2] = t0m2 + t1m3,\
+    \ a[j2 + v] = t0m2 - t1m3;\n        }\n        xx *= dw[__builtin_ctzll((jh +=\
+    \ 4))];\n      }\n      u <<= 2;\n      v >>= 2;\n    }\n  }\n\n  void ifft4(vector<mint>\
+    \ &a, int k) {\n    if ((int)a.size() <= 1) return;\n    if (k == 1) {\n     \
+    \ mint a1 = a[1];\n      a[1] = a[0] - a[1];\n      a[0] = a[0] + a1;\n      return;\n\
+    \    }\n    int u = 1 << (k - 2);\n    int v = 1;\n    mint one = mint(1);\n \
+    \   mint imag = dy[1];\n    while (u) {\n      // jh = 0\n      {\n        int\
+    \ j0 = 0;\n        int j1 = v;\n        int j2 = v + v;\n        int j3 = j2 +\
+    \ v;\n        for (; j0 < v; ++j0, ++j1, ++j2, ++j3) {\n          mint t0 = a[j0],\
+    \ t1 = a[j1], t2 = a[j2], t3 = a[j3];\n          mint t0p1 = t0 + t1, t2p3 = t2\
+    \ + t3;\n          mint t0m1 = t0 - t1, t2m3 = (t2 - t3) * imag;\n          a[j0]\
+    \ = t0p1 + t2p3, a[j2] = t0p1 - t2p3;\n          a[j1] = t0m1 + t2m3, a[j3] =\
+    \ t0m1 - t2m3;\n        }\n      }\n      // jh >= 1\n      mint ww = one, xx\
+    \ = one * dy[2], yy = one;\n      u <<= 2;\n      for (int jh = 4; jh < u;) {\n\
+    \        ww = xx * xx, yy = xx * imag;\n        int j0 = jh * v;\n        int\
+    \ je = j0 + v;\n        int j2 = je + v;\n        for (; j0 < je; ++j0, ++j2)\
+    \ {\n          mint t0 = a[j0], t1 = a[j0 + v], t2 = a[j2], t3 = a[j2 + v];\n\
+    \          mint t0p1 = t0 + t1, t2p3 = t2 + t3;\n          mint t0m1 = (t0 - t1)\
+    \ * xx, t2m3 = (t2 - t3) * yy;\n          a[j0] = t0p1 + t2p3, a[j2] = (t0p1 -\
+    \ t2p3) * ww;\n          a[j0 + v] = t0m1 + t2m3, a[j2 + v] = (t0m1 - t2m3) *\
+    \ ww;\n        }\n        xx *= dy[__builtin_ctzll(jh += 4)];\n      }\n     \
+    \ u >>= 4;\n      v <<= 2;\n    }\n    if (k & 1) {\n      u = 1 << (k - 1);\n\
+    \      for (int j = 0; j < u; ++j) {\n        mint ajv = a[j] - a[j + u];\n  \
+    \      a[j] += a[j + u];\n        a[j + u] = ajv;\n      }\n    }\n  }\n\n  void\
+    \ ntt(vector<mint> &a) {\n    if ((int)a.size() <= 1) return;\n    fft4(a, __builtin_ctz(a.size()));\n\
+    \  }\n\n  void intt(vector<mint> &a) {\n    if ((int)a.size() <= 1) return;\n\
+    \    ifft4(a, __builtin_ctz(a.size()));\n    mint iv = mint(a.size()).inverse();\n\
+    \    for (auto &x : a) x *= iv;\n  }\n\n  vector<mint> multiply(const vector<mint>\
+    \ &a, const vector<mint> &b) {\n    int l = a.size() + b.size() - 1;\n    if (min<int>(a.size(),\
+    \ b.size()) <= 40) {\n      vector<mint> s(l);\n      for (int i = 0; i < (int)a.size();\
+    \ ++i)\n        for (int j = 0; j < (int)b.size(); ++j) s[i + j] += a[i] * b[j];\n\
+    \      return s;\n    }\n    int k = 2, M = 4;\n    while (M < l) M <<= 1, ++k;\n\
     \    setwy(k);\n    vector<mint> s(M);\n    for (int i = 0; i < (int)a.size();\
     \ ++i) s[i] = a[i];\n    fft4(s, k);\n    if (a.size() == b.size() && a == b)\
     \ {\n      for (int i = 0; i < M; ++i) s[i] *= s[i];\n    } else {\n      vector<mint>\
@@ -783,13 +795,14 @@ data:
   - fps/sample-point-shift.hpp
   - modulo/binomial.hpp
   - matrix/matrix.hpp
+  - matrix/inverse-matrix.hpp
   - fps/ntt-friendly-fps.hpp
   - ntt/ntt.hpp
   - modint/montgomery-modint.hpp
   isVerificationFile: true
   path: verify/verify-unit-test/p-recursive.test.cpp
   requiredBy: []
-  timestamp: '2023-08-31 20:44:07+09:00'
+  timestamp: '2023-12-22 19:57:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/p-recursive.test.cpp

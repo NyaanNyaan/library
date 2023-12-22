@@ -289,6 +289,9 @@ data:
     path: verify/verify-unit-test/fast-bs.test.cpp
     title: verify/verify-unit-test/fast-bs.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/fast-inv-o1.test.cpp
+    title: verify/verify-unit-test/fast-inv-o1.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/fast-inv.test.cpp
     title: verify/verify-unit-test/fast-inv.test.cpp
   - icon: ':heavy_check_mark:'
@@ -435,6 +438,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/sparse-table.test.cpp
     title: verify/verify-unit-test/sparse-table.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/stirling-matrix.test.cpp
+    title: verify/verify-unit-test/stirling-matrix.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/strassen.test.cpp
     title: verify/verify-unit-test/strassen.test.cpp
@@ -660,6 +666,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-exp.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-factorial.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-factorial.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
     title: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
@@ -1249,6 +1261,12 @@ data:
     path: verify/verify-yuki/yuki-2333.test.cpp
     title: verify/verify-yuki/yuki-2333.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-2580.test.cpp
+    title: verify/verify-yuki/yuki-2580.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-3024.test.cpp
+    title: verify/verify-yuki/yuki-3024.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
   _isVerificationFailed: false
@@ -1674,8 +1692,10 @@ data:
   - verify/verify-yuki/yuki-0886.test.cpp
   - verify/verify-yuki/yuki-1533.test.cpp
   - verify/verify-yuki/yuki-1145-frac.test.cpp
+  - verify/verify-yuki/yuki-2580.test.cpp
   - verify/verify-yuki/yuki-1269.test.cpp
   - verify/verify-yuki/yuki-0704.test.cpp
+  - verify/verify-yuki/yuki-3024.test.cpp
   - verify/verify-yuki/yuki-1789.test.cpp
   - verify/verify-unit-test/mf.test.cpp
   - verify/verify-unit-test/sparse-table.test.cpp
@@ -1703,6 +1723,7 @@ data:
   - verify/verify-unit-test/int-div.test.cpp
   - verify/verify-unit-test/debug.test.cpp
   - verify/verify-unit-test/sum-of-mf.test.cpp
+  - verify/verify-unit-test/stirling-matrix.test.cpp
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
   - verify/verify-unit-test/bigint-gcd.test.cpp
@@ -1739,6 +1760,7 @@ data:
   - verify/verify-unit-test/multieval.test.cpp
   - verify/verify-unit-test/rbst-sequence.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
+  - verify/verify-unit-test/fast-inv-o1.test.cpp
   - verify/verify-unit-test/relaxed-convolution.test.cpp
   - verify/verify-unit-test/lazyseg-setval.test.cpp
   - verify/verify-unit-test/hashmap.test.cpp
@@ -1892,9 +1914,11 @@ data:
   - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp.test.cpp
+  - verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
   - verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
+  - verify/verify-yosupo-fps/yosupo-factorial.test.cpp
   - verify/verify-yosupo-fps/yosupo-sparse-exp.test.cpp
   - verify/verify-yosupo-fps/yosupo-sparse-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow.test.cpp

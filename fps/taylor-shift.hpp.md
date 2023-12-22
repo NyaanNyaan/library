@@ -13,6 +13,9 @@ data:
     path: fps/fps-famous-series.hpp
     title: "\u6709\u540D\u306A\u6570\u5217"
   - icon: ':heavy_check_mark:'
+    path: fps/fualhuber.hpp
+    title: fps/fualhuber.hpp
+  - icon: ':heavy_check_mark:'
     path: fps/partial-fraction-decomposition.hpp
     title: "\u90E8\u5206\u5206\u6570\u5206\u89E3(\u5206\u6BCD\u304C1\u6B21\u5F0F\u306E\
       \u7A4D\u3067\u8868\u305B\u308B\u5834\u5408)"
@@ -47,6 +50,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1875.test.cpp
     title: verify/verify-yuki/yuki-1875.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-2580.test.cpp
+    title: verify/verify-yuki/yuki-2580.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -180,6 +186,7 @@ data:
   requiredBy:
   - fps/fps-famous-series.hpp
   - fps/partial-fraction-decomposition.hpp
+  - fps/fualhuber.hpp
   - set-function/polynomial-composite-set-power-series.hpp
   timestamp: '2023-08-31 20:44:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -187,6 +194,7 @@ data:
   - verify/verify-yuki/yuki-1510.test.cpp
   - verify/verify-yuki/yuki-1504.test.cpp
   - verify/verify-yuki/yuki-1875.test.cpp
+  - verify/verify-yuki/yuki-2580.test.cpp
   - verify/verify-unit-test/dual-fps.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp

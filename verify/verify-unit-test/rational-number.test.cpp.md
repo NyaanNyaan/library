@@ -511,28 +511,29 @@ data:
     \n    {\n      fps f{1, 2, {3, 2}}, g{{1, 4}, 5};\n      fps h{{5, 4}, 7, {3,\
     \ 2}};\n      assert(f + g == h);\n      h = fps{{3, 4}, -3, {3, 2}};\n      assert(f\
     \ - g == h);\n      assert(f * g % g == fps{});\n      assert(f * g % f == fps{});\n\
-    \    }\n\n    \n    {\n      fps e{1, 1, {1, 2}, {1, 6}, {1, 24}, {1, 120}};\n\
-    \      fps f = e.pow(10);\n      trc(f);\n      rep(i, sz(e)) {\n        assert(e[i]\
-    \ * Rational{10}.pow(i) == f[i]);\n      }\n    }\n  }\n\n  // mint \u3068\u6319\
-    \u52D5\u306E\u6BD4\u8F03\n  {\n    auto comp = [&](int i, int j, int k, int l)\
-    \ {\n      rep(b, 16) {\n        int ii = (b >> 0) % 2 ? -i : +i;\n        int\
-    \ jj = (b >> 1) % 2 ? -j : +j;\n        int kk = (b >> 2) % 2 ? -k : +k;\n   \
-    \     int ll = (b >> 3) % 2 ? -l : +l;\n        Rational x{ii, jj}, y{kk, ll};\n\
-    \        mint X = mint{ii} / jj;\n        mint Y = mint{kk} / ll;\n        assert(X\
-    \ + Y == (x + y).to_mint(998244353));\n        assert(X - Y == (x - y).to_mint(998244353));\n\
-    \        assert(X * Y == (x * y).to_mint(998244353));\n        if (Y != 0) {\n\
-    \          assert(X / Y == (x / y).to_mint(998244353));\n        }\n      }\n\
-    \    };\n    rep(i, 20) rep1(j, 20) rep(k, 20) rep1(l, 20) comp(i, j, k, l);\n\
-    \    rep(t, 10000) {\n      int lower = t % 2 ? 1 : 32000;\n      ll i = rng(lower,\
-    \ 35000);\n      ll j = rng(lower, 35000);\n      ll k = rng(lower, 35000);\n\
-    \      ll l = rng(lower, 35000);\n      comp(i, j, k, l);\n    }\n  }\n\n  //\
-    \ binom, mint \u3068\u6319\u52D5\u306E\u6BD4\u8F03\n  {\n    Binomial_rational<Rational>\
-    \ C1;\n    Binomial<mint> C2;\n    reg(i, -15, 15) {\n      assert(C2.fac(i) ==\
-    \ C1.fac(i).to_mint(998244353));\n      assert(C2.finv(i) == C1.finv(i).to_mint(998244353));\n\
-    \      assert(C2.inv(i) == C1.inv(i).to_mint(998244353));\n      reg(j, -15, 15)\
-    \ assert(C2(i, j) == C1(i, j).to_mint(998244353));\n    }\n  }\n\n  cerr << \"\
-    OK\" << endl;\n  {\n    int s, t;\n    cin >> s >> t;\n    cout << s + t << \"\
-    \\n\";\n  }\n}\n"
+    \    }\n\n    {\n      fps e{1, 1, {1, 2}, {1, 6}, {1, 24}, {1, 120}};\n     \
+    \ fps f = e.pow(10);\n      trc(f);\n      rep(i, sz(e)) { assert(e[i] * Rational{10}.pow(i)\
+    \ == f[i]); }\n    }\n  }\n\n  // mint \u3068\u6319\u52D5\u306E\u6BD4\u8F03\n\
+    \  {\n    auto comp = [&](int i, int j, int k, int l) {\n      rep(b, 16) {\n\
+    \        int ii = (b >> 0) % 2 ? -i : +i;\n        int jj = (b >> 1) % 2 ? -j\
+    \ : +j;\n        int kk = (b >> 2) % 2 ? -k : +k;\n        int ll = (b >> 3) %\
+    \ 2 ? -l : +l;\n        Rational x{ii, jj}, y{kk, ll};\n        mint X = mint{ii}\
+    \ / jj;\n        mint Y = mint{kk} / ll;\n        assert(X + Y == (x + y).to_mint(998244353));\n\
+    \        assert(X - Y == (x - y).to_mint(998244353));\n        assert(X * Y ==\
+    \ (x * y).to_mint(998244353));\n        if (Y != 0) {\n          assert(X / Y\
+    \ == (x / y).to_mint(998244353));\n        }\n      }\n    };\n    rep(i, 20)\
+    \ rep1(j, 20) rep(k, 20) rep1(l, 20) comp(i, j, k, l);\n    rep(t, 10000) {\n\
+    \      int lower = t % 2 ? 1 : 32000;\n      ll i = rng(lower, 35000);\n     \
+    \ ll j = rng(lower, 35000);\n      ll k = rng(lower, 35000);\n      ll l = rng(lower,\
+    \ 35000);\n      comp(i, j, k, l);\n    }\n  }\n\n  // binom, mint \u3068\u6319\
+    \u52D5\u306E\u6BD4\u8F03\n  {\n    Binomial_rational<Rational> C1;\n    Binomial<mint>\
+    \ C2;\n    reg(i, -15, 15) {\n      assert(C2.fac(i) == C1.fac(i).to_mint(998244353));\n\
+    \      assert(C2.finv(i) == C1.finv(i).to_mint(998244353));\n      assert(C2.inv(i)\
+    \ == C1.inv(i).to_mint(998244353));\n      reg(j, -15, 15) {\n        assert(C2(i,\
+    \ j) == C1(i, j).to_mint(998244353));\n        assert(C2.P(i, j) == C1.P(i, j).to_mint(998244353));\n\
+    \        if (i + j < 20) assert(C2.H(i, j) == C1.H(i, j).to_mint(998244353));\n\
+    \      }\n    }\n  }\n\n  cerr << \"OK\" << endl;\n  {\n    int s, t;\n    cin\
+    \ >> s >> t;\n    cout << s + t << \"\\n\";\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../math/rational-binomial.hpp\"\
     \n#include \"../../math/rational-fps.hpp\"\n#include \"../../math/rational.hpp\"\
@@ -549,28 +550,29 @@ data:
     \n    {\n      fps f{1, 2, {3, 2}}, g{{1, 4}, 5};\n      fps h{{5, 4}, 7, {3,\
     \ 2}};\n      assert(f + g == h);\n      h = fps{{3, 4}, -3, {3, 2}};\n      assert(f\
     \ - g == h);\n      assert(f * g % g == fps{});\n      assert(f * g % f == fps{});\n\
-    \    }\n\n    \n    {\n      fps e{1, 1, {1, 2}, {1, 6}, {1, 24}, {1, 120}};\n\
-    \      fps f = e.pow(10);\n      trc(f);\n      rep(i, sz(e)) {\n        assert(e[i]\
-    \ * Rational{10}.pow(i) == f[i]);\n      }\n    }\n  }\n\n  // mint \u3068\u6319\
-    \u52D5\u306E\u6BD4\u8F03\n  {\n    auto comp = [&](int i, int j, int k, int l)\
-    \ {\n      rep(b, 16) {\n        int ii = (b >> 0) % 2 ? -i : +i;\n        int\
-    \ jj = (b >> 1) % 2 ? -j : +j;\n        int kk = (b >> 2) % 2 ? -k : +k;\n   \
-    \     int ll = (b >> 3) % 2 ? -l : +l;\n        Rational x{ii, jj}, y{kk, ll};\n\
-    \        mint X = mint{ii} / jj;\n        mint Y = mint{kk} / ll;\n        assert(X\
-    \ + Y == (x + y).to_mint(998244353));\n        assert(X - Y == (x - y).to_mint(998244353));\n\
-    \        assert(X * Y == (x * y).to_mint(998244353));\n        if (Y != 0) {\n\
-    \          assert(X / Y == (x / y).to_mint(998244353));\n        }\n      }\n\
-    \    };\n    rep(i, 20) rep1(j, 20) rep(k, 20) rep1(l, 20) comp(i, j, k, l);\n\
-    \    rep(t, 10000) {\n      int lower = t % 2 ? 1 : 32000;\n      ll i = rng(lower,\
-    \ 35000);\n      ll j = rng(lower, 35000);\n      ll k = rng(lower, 35000);\n\
-    \      ll l = rng(lower, 35000);\n      comp(i, j, k, l);\n    }\n  }\n\n  //\
-    \ binom, mint \u3068\u6319\u52D5\u306E\u6BD4\u8F03\n  {\n    Binomial_rational<Rational>\
-    \ C1;\n    Binomial<mint> C2;\n    reg(i, -15, 15) {\n      assert(C2.fac(i) ==\
-    \ C1.fac(i).to_mint(998244353));\n      assert(C2.finv(i) == C1.finv(i).to_mint(998244353));\n\
-    \      assert(C2.inv(i) == C1.inv(i).to_mint(998244353));\n      reg(j, -15, 15)\
-    \ assert(C2(i, j) == C1(i, j).to_mint(998244353));\n    }\n  }\n\n  cerr << \"\
-    OK\" << endl;\n  {\n    int s, t;\n    cin >> s >> t;\n    cout << s + t << \"\
-    \\n\";\n  }\n}\n"
+    \    }\n\n    {\n      fps e{1, 1, {1, 2}, {1, 6}, {1, 24}, {1, 120}};\n     \
+    \ fps f = e.pow(10);\n      trc(f);\n      rep(i, sz(e)) { assert(e[i] * Rational{10}.pow(i)\
+    \ == f[i]); }\n    }\n  }\n\n  // mint \u3068\u6319\u52D5\u306E\u6BD4\u8F03\n\
+    \  {\n    auto comp = [&](int i, int j, int k, int l) {\n      rep(b, 16) {\n\
+    \        int ii = (b >> 0) % 2 ? -i : +i;\n        int jj = (b >> 1) % 2 ? -j\
+    \ : +j;\n        int kk = (b >> 2) % 2 ? -k : +k;\n        int ll = (b >> 3) %\
+    \ 2 ? -l : +l;\n        Rational x{ii, jj}, y{kk, ll};\n        mint X = mint{ii}\
+    \ / jj;\n        mint Y = mint{kk} / ll;\n        assert(X + Y == (x + y).to_mint(998244353));\n\
+    \        assert(X - Y == (x - y).to_mint(998244353));\n        assert(X * Y ==\
+    \ (x * y).to_mint(998244353));\n        if (Y != 0) {\n          assert(X / Y\
+    \ == (x / y).to_mint(998244353));\n        }\n      }\n    };\n    rep(i, 20)\
+    \ rep1(j, 20) rep(k, 20) rep1(l, 20) comp(i, j, k, l);\n    rep(t, 10000) {\n\
+    \      int lower = t % 2 ? 1 : 32000;\n      ll i = rng(lower, 35000);\n     \
+    \ ll j = rng(lower, 35000);\n      ll k = rng(lower, 35000);\n      ll l = rng(lower,\
+    \ 35000);\n      comp(i, j, k, l);\n    }\n  }\n\n  // binom, mint \u3068\u6319\
+    \u52D5\u306E\u6BD4\u8F03\n  {\n    Binomial_rational<Rational> C1;\n    Binomial<mint>\
+    \ C2;\n    reg(i, -15, 15) {\n      assert(C2.fac(i) == C1.fac(i).to_mint(998244353));\n\
+    \      assert(C2.finv(i) == C1.finv(i).to_mint(998244353));\n      assert(C2.inv(i)\
+    \ == C1.inv(i).to_mint(998244353));\n      reg(j, -15, 15) {\n        assert(C2(i,\
+    \ j) == C1(i, j).to_mint(998244353));\n        assert(C2.P(i, j) == C1.P(i, j).to_mint(998244353));\n\
+    \        if (i + j < 20) assert(C2.H(i, j) == C1.H(i, j).to_mint(998244353));\n\
+    \      }\n    }\n  }\n\n  cerr << \"OK\" << endl;\n  {\n    int s, t;\n    cin\
+    \ >> s >> t;\n    cout << s + t << \"\\n\";\n  }\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -590,7 +592,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/rational-number.test.cpp
   requiredBy: []
-  timestamp: '2023-12-18 23:52:12+09:00'
+  timestamp: '2023-12-22 19:57:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/rational-number.test.cpp
