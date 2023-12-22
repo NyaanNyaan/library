@@ -1,7 +1,7 @@
 #pragma once
 
 template <typename C>
-vector<pair<typename C::value_type, int>> RunLengthEncoding(C& S) {
+vector<pair<typename C::value_type, int>> RunLengthEncoding(const C& S) {
   using T = typename C::value_type;
   if (S.empty()) return {};
   vector<pair<T, int>> ret;

@@ -1,5 +1,8 @@
 #pragma once
 
+#include <vector>
+using namespace std;
+
 #include "./graph-template.hpp"
 
 // bridge ... 橋 (辺 (u, v) が u < v となるように格納)
@@ -13,7 +16,9 @@ struct LowLink {
 
   LowLink(const G &_g) : g(_g), N(g.size()), ord(N, -1), low(N, -1) {
     for (int i = 0, k = 0; i < N; i++) {
-      if (ord[i] == -1) k = dfs(i, k, -1);
+      if (ord[i] == -1) {
+        k = dfs(i, k, -1);
+      }
     }
   }
 

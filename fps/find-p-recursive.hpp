@@ -69,11 +69,13 @@ mint kth_term_of_p_recursive(vector<mint>& a, long long k) {
   vector<mint> b{begin(a), end(a) - 1};
 
   for (int d = 0;; d++) {
+#ifdef NyaanLocal
+    cerr << "d = " << d << endl;
+#endif
     if ((n + 2) / (d + 2) <= 1) break;
     if (kth_term_of_p_recursive(b, n, d) == a.back()) {
 #ifdef NyaanLocal
-      cerr << "d : " << d << endl;
-      cerr << find_p_recursive(b, d) << endl;
+      cerr << "Found, d = " << d << endl;
 #endif
       return kth_term_of_p_recursive(a, k, d);
     }

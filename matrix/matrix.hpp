@@ -1,5 +1,7 @@
 #pragma once
 
+#include "inverse-matrix.hpp"
+
 template <class T>
 struct Matrix {
   vector<vector<T> > A;
@@ -84,6 +86,13 @@ struct Matrix {
       for (int j = 0; j < W(); j++)
         if (A[i][j] != B[i][j]) return true;
     return false;
+  }
+
+  Matrix inverse() const {
+    assert(H() == W());
+    Matrix B(H());
+    B.A = inverse_matrix(A);
+    return B;
   }
 
   friend ostream &operator<<(ostream &os, const Matrix &p) {

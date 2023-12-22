@@ -51,14 +51,11 @@ void Nyaan::solve() {
       assert(f * g % f == fps{});
     }
 
-    
     {
       fps e{1, 1, {1, 2}, {1, 6}, {1, 24}, {1, 120}};
       fps f = e.pow(10);
       trc(f);
-      rep(i, sz(e)) {
-        assert(e[i] * Rational{10}.pow(i) == f[i]);
-      }
+      rep(i, sz(e)) { assert(e[i] * Rational{10}.pow(i) == f[i]); }
     }
   }
 
@@ -100,7 +97,11 @@ void Nyaan::solve() {
       assert(C2.fac(i) == C1.fac(i).to_mint(998244353));
       assert(C2.finv(i) == C1.finv(i).to_mint(998244353));
       assert(C2.inv(i) == C1.inv(i).to_mint(998244353));
-      reg(j, -15, 15) assert(C2(i, j) == C1(i, j).to_mint(998244353));
+      reg(j, -15, 15) {
+        assert(C2(i, j) == C1(i, j).to_mint(998244353));
+        assert(C2.P(i, j) == C1.P(i, j).to_mint(998244353));
+        if (i + j < 20) assert(C2.H(i, j) == C1.H(i, j).to_mint(998244353));
+      }
     }
   }
 
