@@ -27,6 +27,9 @@ int sign(Real a) { return eq(a, 0) ? 0 : a > 0 ? 1 : -1; }
 Point operator*(const Point &p, const Real &d) {
   return Point(real(p) * d, imag(p) * d);
 }
+Point operator/(const Point &p, const Real &d) {
+  return Point(real(p) / d, imag(p) / d);
+}
 
 namespace std {
 bool operator<(const Point &a, const Point &b) {
