@@ -296,11 +296,23 @@ data:
   - name: geometry
     pages:
     - icon: ':warning:'
-      path: geometry/geometry.hpp
-      title: geometry/geometry.hpp
+      path: geometry/circle.hpp
+      title: geometry/circle.hpp
+    - icon: ':heavy_check_mark:'
+      path: geometry/geometry-base.hpp
+      title: geometry/geometry-base.hpp
     - icon: ':heavy_check_mark:'
       path: geometry/integer-geometry.hpp
       title: geometry/integer-geometry.hpp
+    - icon: ':heavy_check_mark:'
+      path: geometry/line.hpp
+      title: geometry/line.hpp
+    - icon: ':heavy_check_mark:'
+      path: geometry/polygon.hpp
+      title: geometry/polygon.hpp
+    - icon: ':heavy_check_mark:'
+      path: geometry/segment.hpp
+      title: geometry/segment.hpp
   - name: graph
     pages:
     - icon: ':heavy_check_mark:'
@@ -1073,6 +1085,47 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
       title: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
+  - name: verify/verify-aoj-cgl
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-cgl/aoj-cgl-1-a.test.cpp
+      title: verify/verify-aoj-cgl/aoj-cgl-1-a.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-cgl/aoj-cgl-1-b.test.cpp
+      title: verify/verify-aoj-cgl/aoj-cgl-1-b.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-cgl/aoj-cgl-1-c.test.cpp
+      title: verify/verify-aoj-cgl/aoj-cgl-1-c.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-cgl/aoj-cgl-2-a.test.cpp
+      title: verify/verify-aoj-cgl/aoj-cgl-2-a.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-cgl/aoj-cgl-2-b.test.cpp
+      title: verify/verify-aoj-cgl/aoj-cgl-2-b.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-cgl/aoj-cgl-2-c.test.cpp
+      title: verify/verify-aoj-cgl/aoj-cgl-2-c.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-cgl/aoj-cgl-2-d.test.cpp
+      title: verify/verify-aoj-cgl/aoj-cgl-2-d.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-cgl/aoj-cgl-3-a.test.cpp
+      title: verify/verify-aoj-cgl/aoj-cgl-3-a.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-cgl/aoj-cgl-3-b.test.cpp
+      title: verify/verify-aoj-cgl/aoj-cgl-3-b.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-cgl/aoj-cgl-3-c.test.cpp
+      title: verify/verify-aoj-cgl/aoj-cgl-3-c.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-cgl/aoj-cgl-4-a.test.cpp
+      title: verify/verify-aoj-cgl/aoj-cgl-4-a.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-cgl/aoj-cgl-4-b.test.cpp
+      title: verify/verify-aoj-cgl/aoj-cgl-4-b.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-cgl/aoj-cgl-4-c.test.cpp
+      title: verify/verify-aoj-cgl/aoj-cgl-4-c.test.cpp
   - name: verify/verify-aoj-dpl
     pages:
     - icon: ':heavy_check_mark:'
@@ -1260,6 +1313,9 @@ data:
       path: verify/verify-aoj-other/aoj-0304.test.cpp
       title: verify/verify-aoj-other/aoj-0304.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-other/aoj-0412.test.cpp
+      title: verify/verify-aoj-other/aoj-0412.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-1068.test.cpp
       title: verify/verify-aoj-other/aoj-1068.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1378,6 +1434,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/gauss-elimination.test.cpp
       title: verify/verify-unit-test/gauss-elimination.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/geometry.test.cpp
+      title: verify/verify-unit-test/geometry.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/hashmap.test.cpp
       title: verify/verify-unit-test/hashmap.test.cpp

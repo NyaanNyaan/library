@@ -25,6 +25,45 @@ data:
     path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
     title: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-cgl/aoj-cgl-1-a.test.cpp
+    title: verify/verify-aoj-cgl/aoj-cgl-1-a.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-cgl/aoj-cgl-1-b.test.cpp
+    title: verify/verify-aoj-cgl/aoj-cgl-1-b.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-cgl/aoj-cgl-1-c.test.cpp
+    title: verify/verify-aoj-cgl/aoj-cgl-1-c.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-cgl/aoj-cgl-2-a.test.cpp
+    title: verify/verify-aoj-cgl/aoj-cgl-2-a.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-cgl/aoj-cgl-2-b.test.cpp
+    title: verify/verify-aoj-cgl/aoj-cgl-2-b.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-cgl/aoj-cgl-2-c.test.cpp
+    title: verify/verify-aoj-cgl/aoj-cgl-2-c.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-cgl/aoj-cgl-2-d.test.cpp
+    title: verify/verify-aoj-cgl/aoj-cgl-2-d.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-cgl/aoj-cgl-3-a.test.cpp
+    title: verify/verify-aoj-cgl/aoj-cgl-3-a.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-cgl/aoj-cgl-3-b.test.cpp
+    title: verify/verify-aoj-cgl/aoj-cgl-3-b.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-cgl/aoj-cgl-3-c.test.cpp
+    title: verify/verify-aoj-cgl/aoj-cgl-3-c.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-cgl/aoj-cgl-4-a.test.cpp
+    title: verify/verify-aoj-cgl/aoj-cgl-4-a.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-cgl/aoj-cgl-4-b.test.cpp
+    title: verify/verify-aoj-cgl/aoj-cgl-4-b.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-cgl/aoj-cgl-4-c.test.cpp
+    title: verify/verify-aoj-cgl/aoj-cgl-4-c.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dpl/aoj-dpl-1-b.test.cpp
     title: verify/verify-aoj-dpl/aoj-dpl-1-b.test.cpp
   - icon: ':heavy_check_mark:'
@@ -181,6 +220,9 @@ data:
     path: verify/verify-aoj-other/aoj-0304.test.cpp
     title: verify/verify-aoj-other/aoj-0304.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-0412.test.cpp
+    title: verify/verify-aoj-other/aoj-0412.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-1068.test.cpp
     title: verify/verify-aoj-other/aoj-1068.test.cpp
   - icon: ':heavy_check_mark:'
@@ -297,6 +339,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/gauss-elimination.test.cpp
     title: verify/verify-unit-test/gauss-elimination.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/geometry.test.cpp
+    title: verify/verify-unit-test/geometry.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/hashmap.test.cpp
     title: verify/verify-unit-test/hashmap.test.cpp
@@ -1470,6 +1515,7 @@ data:
   - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
   - verify/verify-unit-test/bitset-find-prev.test.cpp
   - verify/verify-unit-test/bigint3.test.cpp
+  - verify/verify-unit-test/geometry.test.cpp
   - verify/verify-unit-test/composite-exp.test.cpp
   - verify/verify-unit-test/bigrational.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
@@ -1499,6 +1545,7 @@ data:
   - verify/verify-aoj-other/aoj-1068.test.cpp
   - verify/verify-aoj-other/aoj-2891.test.cpp
   - verify/verify-aoj-other/aoj-0304.test.cpp
+  - verify/verify-aoj-other/aoj-0412.test.cpp
   - verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
   - verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
   - verify/verify-aoj-other/aoj-3086.test.cpp
@@ -1645,6 +1692,19 @@ data:
   - verify/verify-yosupo-fps/yosupo-sparse-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-1-b.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-3-b.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-4-b.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-1-a.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-2-a.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-4-a.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-2-b.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-2-d.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-3-c.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-2-c.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-1-c.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-3-a.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-4-c.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-b.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
