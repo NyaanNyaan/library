@@ -47,6 +47,28 @@ Polygon convex_hull(vector<Point> ps) {
   return ch;
 }
 
+// 凸包の内部に点があるか？
+// OUT : 0, ON : 1, IN : 2
+int contains_convex(const Polygon &C, const Point &p) {
+  int N = C.size();
+  auto b1 = cross(C[1] - C[0], p - C[0]);
+  auto b2 = cross(C[N - 1] - C[0], p - C[0]);
+  if (b1 < -EPS or b2 > EPS) return 0;
+  int L = 1, R = N - 1;
+  while (L + 1 < R) {
+    int M = (L + R) / 2;
+    (cross(p - C[0], C[M] - C[0]) >= 0 ? R : L) = M;
+  }
+  auto v = cross(C[L] - p, C[R] - p);
+  if (equals(v, 0)) {
+    return 1;
+  } else if (v > 0) {
+    return equals(b1, 0) or equals(b2, 0) ? 1 : 2;
+  } else {
+    return 0;
+  }
+}
+
 // 凸包が与えられるので最遠点対を返す
 // 返り値：頂点番号のペア
 pair<int, int> convex_polygon_diameter(const Polygon &p) {
