@@ -71,7 +71,7 @@ void q() {
                       (inv * inv).pre(deg2);
               dBdt -= fps{1};
 
-              return mkp(Bt.pre(deg), dBdt.pre(deg));
+              return mkp(Bt.pre(deg2), dBdt.pre(deg2));
             },
             fps{0}, deg);
         return (fs * 2 - s).pre(deg);
