@@ -42,6 +42,9 @@ void test(const vector<mint>& a, int p, int d) {
     auto b = kth_term_of_p_recursive<mint>(pre, i, d);
     assert(b == a[i]);
   }
+
+  auto c = kth_term_of_p_recursive_enumerate(pre, sz(a), d);
+  rep(i, sz(a)) assert(c[i] == a[i]);
 }
 
 void verify(int N) {

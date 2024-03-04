@@ -11,6 +11,7 @@ namespace golden_section_search_impl {
 
 using i64 = long long;
 
+// [min, max] は閉区間を入力する
 template <typename T, bool get_min = true>
 pair<i64, T> golden_section_search(const function<T(i64)>& f, i64 min,
                                    i64 max) {

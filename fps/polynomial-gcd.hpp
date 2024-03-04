@@ -107,6 +107,7 @@ Mat<mint> InnerPolyGCD(const FPS<mint>& a, const FPS<mint>& b) {
   }
 }
 
+// 多項式 GCD, 非零の場合 monic なものを返す
 template <typename mint>
 FPS<mint> PolyGCD(const FPS<mint>& a, const FPS<mint>& b) {
   Arr<mint> p(a, b);

@@ -9,19 +9,14 @@ using namespace std;
 template <typename fps>
 fps newton_method(function<pair<fps, fps>(fps, int)> calc_g, fps f0, int deg) {
   assert(!f0.empty());
-  fps f{f0};
-  for (int d = f.size(); d < deg; d *= 2) {
-    // 少し多めに計算しておく
-    const int extra = d + 10;
-    auto [g, dgdf] = calc_g(f, d * 2 + extra);
-    int offset = 0;
-    while (offset < (int)dgdf.size() && dgdf[offset] == 0) offset++;
-    assert(offset <= extra);
-    dgdf = dgdf >> offset;
-    g = g >> offset;
-    f = (f - g * dgdf.inv()).pre(d * 2);
-  }
-  return f.pre(deg);
+  if (deg <= (int)f0.size()) return f0.pre(deg);
+  fps f = newton_method(calc_g, f0, (deg + 1) / 2);
+  int extra = 10, offset = 0;
+  auto [g, dgdf] = calc_g(f, deg + extra);
+  while (offset < (int)dgdf.size() && dgdf[offset] == 0) offset++;
+  assert(offset <= extra);
+  dgdf = dgdf >> offset, g = g >> offset;
+  return (f - g * dgdf.inv()).pre(deg);
 }
 // G(f) = 0 mod x^{deg} を満たす f を返す
 // f0 : 初期解, 非空な fps か mint を入れる
