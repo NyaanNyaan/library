@@ -238,17 +238,18 @@ data:
     \ phi(long long n) {\n  auto pf = PrimeFactors(n);\n  long long ret = n;\n  for\
     \ (auto p : pf) {\n    ret /= p.first;\n    ret *= (p.first - 1);\n  }\n  return\
     \ ret;\n}\n\n// Extended Euclidean algorithm\n// solve : ax + by = gcd(a, b)\n\
-    // return : pair(x, y)\npair<long long, long long> extgcd(long long a, long long\
-    \ b) {\n  if (b == 0) return make_pair(1, 0);\n  long long x, y;\n  tie(y, x)\
-    \ = extgcd(b, a % b);\n  y -= a / b * x;\n  return make_pair(x, y);\n}\n\n// Check\
-    \ if n is Square Number\n// true : return d s.t. d * d == n\n// false : return\
-    \ -1\nlong long SqrtInt(long long n) {\n  if (n == 0 || n == 1) return n;\n  long\
-    \ long d = (long long)sqrt(n) - 1;\n  while (d * d < n) ++d;\n  return (d * d\
-    \ == n) ? d : -1;\n}\n\n// return a number of n's digit\n// zero ... return value\
-    \ if n = 0 (default -> 1)\nint isDigit(long long n, int zero = 1) {\n  if (n ==\
-    \ 0) return zero;\n  int ret = 0;\n  while (n) {\n    n /= 10;\n    ret++;\n \
-    \ }\n  return ret;\n}\n#line 6 \"verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp\"\n\
-    \nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N,M);\n  out(modpow(N,M,1000000007));\n\
+    // return : pair(x, y)\n// a>=0,b>=0 \u3067\u306A\u3044\u5834\u5408 gcd(a, b)\
+    \ \u306F\u8CA0\u306B\u3082\u306A\u308A\u5F97\u308B\u306E\u3067\u6CE8\u610F\npair<long\
+    \ long, long long> extgcd(long long a, long long b) {\n  if (b == 0) return make_pair(1,\
+    \ 0);\n  long long x, y;\n  tie(y, x) = extgcd(b, a % b);\n  y -= a / b * x;\n\
+    \  return make_pair(x, y);\n}\n\n// Check if n is Square Number\n// true : return\
+    \ d s.t. d * d == n\n// false : return -1\nlong long SqrtInt(long long n) {\n\
+    \  if (n == 0 || n == 1) return n;\n  long long d = (long long)sqrt(n) - 1;\n\
+    \  while (d * d < n) ++d;\n  return (d * d == n) ? d : -1;\n}\n\n// return a number\
+    \ of n's digit\n// zero ... return value if n = 0 (default -> 1)\nint isDigit(long\
+    \ long n, int zero = 1) {\n  if (n == 0) return zero;\n  int ret = 0;\n  while\
+    \ (n) {\n    n /= 10;\n    ret++;\n  }\n  return ret;\n}\n#line 6 \"verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp\"\
+    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N,M);\n  out(modpow(N,M,1000000007));\n\
     }\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B\"\
     \n\n#include \"../../template/template.hpp\"\n#include \"../../math/elementary-function.hpp\"\
@@ -265,7 +266,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 13:25:59+09:00'
+  timestamp: '2024-03-04 16:48:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp

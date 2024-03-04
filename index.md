@@ -268,6 +268,9 @@ data:
       path: fps/polynomial-interpolation.hpp
       title: fps/polynomial-interpolation.hpp
     - icon: ':heavy_check_mark:'
+      path: fps/root-finding.hpp
+      title: fps/root-finding.hpp
+    - icon: ':heavy_check_mark:'
       path: fps/sample-point-shift.hpp
       title: fps/sample-point-shift.hpp
     - icon: ':heavy_check_mark:'
@@ -731,6 +734,9 @@ data:
   - name: multiplicative-function
     pages:
     - icon: ':heavy_check_mark:'
+      path: multiplicative-function/count-square-free.hpp
+      title: "\u7121\u5E73\u65B9\u6570\u306E\u6570\u3048\u4E0A\u3052"
+    - icon: ':heavy_check_mark:'
       path: multiplicative-function/divisor-multiple-transform.hpp
       title: "\u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB"
     - icon: ':heavy_check_mark:'
@@ -1036,6 +1042,9 @@ data:
       title: template/util.hpp
   - name: tree
     pages:
+    - icon: ':heavy_check_mark:'
+      path: tree/auxiliary-tree.hpp
+      title: Auxiliary Tree
     - icon: ':heavy_check_mark:'
       path: tree/block-cut-tree.hpp
       title: Block Cut Tree
@@ -1841,6 +1850,9 @@ data:
       path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
       title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
       title: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1976,6 +1988,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
       title: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-count-squarefrees.test.cpp
+      title: verify/verify-yosupo-math/yosupo-count-squarefrees.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
       title: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
@@ -2419,6 +2434,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-2580.test.cpp
       title: verify/verify-yuki/yuki-2580.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-2588.test.cpp
+      title: verify/verify-yuki/yuki-2588.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-2661.test.cpp
+      title: verify/verify-yuki/yuki-2661.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-3024.test.cpp
       title: verify/verify-yuki/yuki-3024.test.cpp

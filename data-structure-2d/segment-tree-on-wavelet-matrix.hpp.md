@@ -58,13 +58,13 @@ data:
     \ }\n\n  void add(S x, S y, T val) {\n    int i = lower_bound(begin(ps), end(ps),\
     \ P{x, y}) - begin(ps);\n    for (int h = lg - 1; h >= 0; --h) {\n      int i0\
     \ = bv[h].rank0(i);\n      if (bv[h].get(i))\n        i += bv[h].zeros - i0;\n\
-    \      else\n        i = i0;\n      seg[h].add(i, val);\n    }\n  }\n\n  T sum(int\
+    \      else\n        i = i0;\n      seg[h].add(i, val);\n    }\n  }\n\n  T _sum(int\
     \ l, int r, u32 upper) const {\n    T res = I();\n    for (int h = lg; h--;) {\n\
     \      int l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);\n      if ((upper >> h) &\
     \ 1) {\n        res = f(res, seg[h].query(l0, r0));\n        l += bv[h].zeros\
     \ - l0;\n        r += bv[h].zeros - r0;\n      } else {\n        l = l0, r = r0;\n\
     \      }\n    }\n    return res;\n  }\n\n  T sum(S L, S D, S R, S U) const {\n\
-    \    int l = xid(L), r = xid(R);\n    return sum(l, r, yid(U)) - sum(l, r, yid(D));\n\
+    \    int l = xid(L), r = xid(R);\n    return _sum(l, r, yid(U)) - _sum(l, r, yid(D));\n\
     \  }\n};\n"
   code: "\n#include <immintrin.h>\n//\n\nstruct bit_vector {\n  using u32 = uint32_t;\n\
     \  using i64 = int64_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 w =\
@@ -112,19 +112,19 @@ data:
     \ }\n\n  void add(S x, S y, T val) {\n    int i = lower_bound(begin(ps), end(ps),\
     \ P{x, y}) - begin(ps);\n    for (int h = lg - 1; h >= 0; --h) {\n      int i0\
     \ = bv[h].rank0(i);\n      if (bv[h].get(i))\n        i += bv[h].zeros - i0;\n\
-    \      else\n        i = i0;\n      seg[h].add(i, val);\n    }\n  }\n\n  T sum(int\
+    \      else\n        i = i0;\n      seg[h].add(i, val);\n    }\n  }\n\n  T _sum(int\
     \ l, int r, u32 upper) const {\n    T res = I();\n    for (int h = lg; h--;) {\n\
     \      int l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);\n      if ((upper >> h) &\
     \ 1) {\n        res = f(res, seg[h].query(l0, r0));\n        l += bv[h].zeros\
     \ - l0;\n        r += bv[h].zeros - r0;\n      } else {\n        l = l0, r = r0;\n\
     \      }\n    }\n    return res;\n  }\n\n  T sum(S L, S D, S R, S U) const {\n\
-    \    int l = xid(L), r = xid(R);\n    return sum(l, r, yid(U)) - sum(l, r, yid(D));\n\
+    \    int l = xid(L), r = xid(R);\n    return _sum(l, r, yid(U)) - _sum(l, r, yid(D));\n\
     \  }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: data-structure-2d/segment-tree-on-wavelet-matrix.hpp
   requiredBy: []
-  timestamp: '2022-08-22 19:46:43+09:00'
+  timestamp: '2024-03-04 16:48:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-segtree-on-wm.test.cpp

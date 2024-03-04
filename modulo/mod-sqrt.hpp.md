@@ -99,8 +99,8 @@ data:
   timestamp: '2023-05-29 20:16:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
   - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+  - verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
 documentation_of: modulo/mod-sqrt.hpp
 layout: document
 redirect_from:

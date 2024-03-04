@@ -116,12 +116,12 @@ data:
   timestamp: '2023-08-30 23:05:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-0125.test.cpp
-  - verify/verify-yuki/yuki-0896.test.cpp
-  - verify/verify-yuki/yuki-0890.test.cpp
-  - verify/verify-yuki/yuki-0886.test.cpp
   - verify/verify-unit-test/mf.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
+  - verify/verify-yuki/yuki-0896.test.cpp
+  - verify/verify-yuki/yuki-0890.test.cpp
+  - verify/verify-yuki/yuki-0125.test.cpp
+  - verify/verify-yuki/yuki-0886.test.cpp
   - verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
 documentation_of: multiplicative-function/divisor-multiple-transform.hpp

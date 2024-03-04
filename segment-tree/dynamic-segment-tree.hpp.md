@@ -138,11 +138,11 @@ data:
   timestamp: '2022-08-23 00:32:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-0789.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-range-sum-dynamic-segtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-associative-array-dynamic-segtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-set-range-composite-dynamic-segtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-dynamic-segtree.test.cpp
+  - verify/verify-yuki/yuki-0789.test.cpp
 documentation_of: segment-tree/dynamic-segment-tree.hpp
 layout: document
 redirect_from:

@@ -90,8 +90,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-exp-of-set-power-series.test.cpp
-  - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+  - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
 documentation_of: set-function/subset-convolution.hpp
 layout: document
 redirect_from:

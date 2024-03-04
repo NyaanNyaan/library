@@ -101,20 +101,20 @@ data:
     // \u8FD4\u308A\u5024\uFF1Apair(g, x)\n// s.t. g = gcd(a, b), xa = g (mod b),\
     \ 0 <= x < b/g\ntemplate <typename T>\npair<T, T> inv_gcd(T a, T p) {\n  static_assert(is_broadly_signed_v<T>);\n\
     \  a = safe_mod(a, p);\n  if (a == 0) return {p, 0};\n  T b = p, x = 1, y = 0;\n\
-    \  while (a) {\n    T q = b / a;\n    swap(a, b %= a);\n    swap(x, y -= q * x);\n\
-    \  }\n  if (y < 0) y += p / b;\n  return {b, y};\n}\n\n// \u8FD4\u308A\u5024 :\
-    \ a^{-1} mod p\n// gcd(a, p) != 1 \u304C\u5FC5\u8981\ntemplate <typename T>\n\
-    T inv(T a, T p) {\n  static_assert(is_broadly_signed_v<T>);\n  a = safe_mod(a,\
-    \ p);\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T q = b / a;\n    swap(a,\
+    \  while (a != 0) {\n    T q = b / a;\n    swap(a, b %= a);\n    swap(x, y -=\
+    \ q * x);\n  }\n  if (y < 0) y += p / b;\n  return {b, y};\n}\n\n// \u8FD4\u308A\
+    \u5024 : a^{-1} mod p\n// gcd(a, p) != 1 \u304C\u5FC5\u8981\ntemplate <typename\
+    \ T>\nT inv(T a, T p) {\n  static_assert(is_broadly_signed_v<T>);\n  a = safe_mod(a,\
+    \ p);\n  T b = p, x = 1, y = 0;\n  while (a != 0) {\n    T q = b / a;\n    swap(a,\
     \ b %= a);\n    swap(x, y -= q * x);\n  }\n  assert(b == 1);\n  return y < 0 ?\
     \ y + p : y;\n}\n\n// T : \u5E95\u306E\u578B\n// U : T*T \u304C\u30AA\u30FC\u30D0\
     \u30FC\u30D5\u30ED\u30FC\u3057\u306A\u3044 \u304B\u3064 \u6307\u6570\u306E\u578B\
     \ntemplate <typename T, typename U>\nT modpow(T a, U n, T p) {\n  a = safe_mod(a,\
-    \ p);\n  T ret = 1 % p;\n  while (n) {\n    if (n & 1) ret = U(ret) * a % p;\n\
-    \    a = U(a) * a % p;\n    n >>= 1;\n  }\n  return ret;\n}\n\n// \u8FD4\u308A\
-    \u5024 : pair(rem, mod)\n// \u89E3\u306A\u3057\u306E\u3068\u304D\u306F {0, 0}\
-    \ \u3092\u8FD4\u3059\ntemplate <typename T>\npair<T, T> crt(const vector<T>& r,\
-    \ const vector<T>& m) {\n  static_assert(is_broadly_signed_v<T>);\n  assert(r.size()\
+    \ p);\n  T ret = 1 % p;\n  while (n != 0) {\n    if (n % 2 == 1) ret = U(ret)\
+    \ * a % p;\n    a = U(a) * a % p;\n    n /= 2;\n  }\n  return ret;\n}\n\n// \u8FD4\
+    \u308A\u5024 : pair(rem, mod)\n// \u89E3\u306A\u3057\u306E\u3068\u304D\u306F {0,\
+    \ 0} \u3092\u8FD4\u3059\ntemplate <typename T>\npair<T, T> crt(const vector<T>&\
+    \ r, const vector<T>& m) {\n  static_assert(is_broadly_signed_v<T>);\n  assert(r.size()\
     \ == m.size());\n  int n = int(r.size());\n  T r0 = 0, m0 = 1;\n  for (int i =\
     \ 0; i < n; i++) {\n    assert(1 <= m[i]);\n    T r1 = safe_mod(r[i], m[i]), m1\
     \ = m[i];\n    if (m0 < m1) swap(r0, r1), swap(m0, m1);\n    if (m0 % m1 == 0)\
@@ -220,25 +220,25 @@ data:
   path: prime/miller-rabin.hpp
   requiredBy:
   - math/primitive-root-ll.hpp
-  - modulo/mod-kth-root.hpp
   - prime/fast-factorize.hpp
+  - modulo/mod-kth-root.hpp
   - ntt/multivariate-circular-convolution.hpp
-  timestamp: '2023-09-05 21:46:27+09:00'
+  timestamp: '2024-03-04 16:48:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-0103.test.cpp
-  - verify/verify-yuki/yuki-0002.test.cpp
   - verify/verify-unit-test/osak.test.cpp
-  - verify/verify-unit-test/primitive-root.test.cpp
-  - verify/verify-unit-test/primality-test.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
+  - verify/verify-unit-test/primality-test.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
+  - verify/verify-unit-test/primitive-root.test.cpp
+  - verify/verify-yuki/yuki-0002.test.cpp
+  - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
-  - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
-  - verify/verify-yosupo-math/yosupo-primality-test-u64.test.cpp
   - verify/verify-yosupo-math/yosupo-primality-test.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
+  - verify/verify-yosupo-math/yosupo-primality-test-u64.test.cpp
+  - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
 documentation_of: prime/miller-rabin.hpp
 layout: document
 redirect_from:

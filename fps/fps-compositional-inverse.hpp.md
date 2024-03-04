@@ -20,6 +20,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1939.test.cpp
     title: verify/verify-yuki/yuki-1939.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-2661.test.cpp
+    title: verify/verify-yuki/yuki-2661.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -170,12 +173,12 @@ data:
     \ + deg};\n}\n\n// f(g(x)) = x \u3092\u6E80\u305F\u3059 g(x) mod x^{deg} \u3092\
     \u8FD4\u3059\n// calc_f(g, d) \u306F f(g(x)) mod x^d \u3092\u8A08\u7B97\u3059\u308B\
     \u95A2\u6570\ntemplate <typename fps>\nfps compositional_inverse(function<fps(fps,\
-    \ int)> calc_f, int deg) {\n  fps g = calc_f(fps{0, 1}, 2);\n  assert(g[0] ==\
-    \ 0 && g[1] != 0);\n  g[1] = g[1].inverse();\n  for (int d = 2; d < deg; d *=\
-    \ 2) {\n    fps fg = calc_f(g, 2 * d + 1);\n    trc(fg);\n    fps fdg = (fg.diff()\
-    \ * g.diff().inv(2 * d)).pre(2 * d);\n    trc(fdg);\n    g = (g - (fg - fps{0,\
-    \ 1}) * fdg.inv(2 * d)).pre(2 * d);\n  }\n  return {begin(g), begin(g) + deg};\n\
-    }\n\n/*\n *  @brief \u9006\u95A2\u6570\n */\n"
+    \ int)> calc_f, int deg) {\n  if (deg <= 2) {\n    fps g = calc_f(fps{0, 1}, 2);\n\
+    \    assert(g[0] == 0 && g[1] != 0);\n    g[1] = g[1].inverse();\n    return g.pre(deg);\n\
+    \  }\n  fps g = compositional_inverse(calc_f, (deg + 1) / 2);\n  fps fg = calc_f(g,\
+    \ deg + 1);\n  fps fdg = (fg.diff() * g.diff().inv(deg)).pre(deg);\n  return (g\
+    \ - (fg - fps{0, 1}) * fdg.inv()).pre(deg);\n}\n\n/*\n *  @brief \u9006\u95A2\u6570\
+    \n */\n"
   code: "#pragma once\n\n#include <cassert>\n#include <functional>\nusing namespace\
     \ std;\n\n#include \"../modulo/binomial.hpp\"\n#include \"formal-power-series.hpp\"\
     \n#include \"fps-composition.hpp\"\n\n// f \u3092\u5165\u529B\u3068\u3057\u3066\
@@ -191,12 +194,12 @@ data:
     \u6E80\u305F\u3059 g(x) mod x^{deg} \u3092\u8FD4\u3059\n// calc_f(g, d) \u306F\
     \ f(g(x)) mod x^d \u3092\u8A08\u7B97\u3059\u308B\u95A2\u6570\ntemplate <typename\
     \ fps>\nfps compositional_inverse(function<fps(fps, int)> calc_f, int deg) {\n\
-    \  fps g = calc_f(fps{0, 1}, 2);\n  assert(g[0] == 0 && g[1] != 0);\n  g[1] =\
-    \ g[1].inverse();\n  for (int d = 2; d < deg; d *= 2) {\n    fps fg = calc_f(g,\
-    \ 2 * d + 1);\n    trc(fg);\n    fps fdg = (fg.diff() * g.diff().inv(2 * d)).pre(2\
-    \ * d);\n    trc(fdg);\n    g = (g - (fg - fps{0, 1}) * fdg.inv(2 * d)).pre(2\
-    \ * d);\n  }\n  return {begin(g), begin(g) + deg};\n}\n\n/*\n *  @brief \u9006\
-    \u95A2\u6570\n */\n"
+    \  if (deg <= 2) {\n    fps g = calc_f(fps{0, 1}, 2);\n    assert(g[0] == 0 &&\
+    \ g[1] != 0);\n    g[1] = g[1].inverse();\n    return g.pre(deg);\n  }\n  fps\
+    \ g = compositional_inverse(calc_f, (deg + 1) / 2);\n  fps fg = calc_f(g, deg\
+    \ + 1);\n  fps fdg = (fg.diff() * g.diff().inv(deg)).pre(deg);\n  return (g -\
+    \ (fg - fps{0, 1}) * fdg.inv()).pre(deg);\n}\n\n/*\n *  @brief \u9006\u95A2\u6570\
+    \n */\n"
   dependsOn:
   - modulo/binomial.hpp
   - fps/formal-power-series.hpp
@@ -204,10 +207,11 @@ data:
   isVerificationFile: false
   path: fps/fps-compositional-inverse.hpp
   requiredBy: []
-  timestamp: '2023-08-31 20:44:07+09:00'
+  timestamp: '2024-03-04 16:48:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1939.test.cpp
+  - verify/verify-yuki/yuki-2661.test.cpp
   - verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
 documentation_of: fps/fps-compositional-inverse.hpp
 layout: document

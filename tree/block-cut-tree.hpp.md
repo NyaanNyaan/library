@@ -132,8 +132,8 @@ data:
   timestamp: '2023-12-22 19:57:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-1326.test.cpp
   - verify/verify-aoj-other/aoj-3022.test.cpp
+  - verify/verify-yuki/yuki-1326.test.cpp
 documentation_of: tree/block-cut-tree.hpp
 layout: document
 redirect_from:

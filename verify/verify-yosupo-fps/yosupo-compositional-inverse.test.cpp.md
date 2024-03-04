@@ -371,12 +371,12 @@ data:
     \ + deg};\n}\n\n// f(g(x)) = x \u3092\u6E80\u305F\u3059 g(x) mod x^{deg} \u3092\
     \u8FD4\u3059\n// calc_f(g, d) \u306F f(g(x)) mod x^d \u3092\u8A08\u7B97\u3059\u308B\
     \u95A2\u6570\ntemplate <typename fps>\nfps compositional_inverse(function<fps(fps,\
-    \ int)> calc_f, int deg) {\n  fps g = calc_f(fps{0, 1}, 2);\n  assert(g[0] ==\
-    \ 0 && g[1] != 0);\n  g[1] = g[1].inverse();\n  for (int d = 2; d < deg; d *=\
-    \ 2) {\n    fps fg = calc_f(g, 2 * d + 1);\n    trc(fg);\n    fps fdg = (fg.diff()\
-    \ * g.diff().inv(2 * d)).pre(2 * d);\n    trc(fdg);\n    g = (g - (fg - fps{0,\
-    \ 1}) * fdg.inv(2 * d)).pre(2 * d);\n  }\n  return {begin(g), begin(g) + deg};\n\
-    }\n\n/*\n *  @brief \u9006\u95A2\u6570\n */\n#line 6 \"verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp\"\
+    \ int)> calc_f, int deg) {\n  if (deg <= 2) {\n    fps g = calc_f(fps{0, 1}, 2);\n\
+    \    assert(g[0] == 0 && g[1] != 0);\n    g[1] = g[1].inverse();\n    return g.pre(deg);\n\
+    \  }\n  fps g = compositional_inverse(calc_f, (deg + 1) / 2);\n  fps fg = calc_f(g,\
+    \ deg + 1);\n  fps fdg = (fg.diff() * g.diff().inv(deg)).pre(deg);\n  return (g\
+    \ - (fg - fps{0, 1}) * fdg.inv()).pre(deg);\n}\n\n/*\n *  @brief \u9006\u95A2\u6570\
+    \n */\n#line 6 \"verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp\"\
     \n//\n#line 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt.hpp\"\n\ntemplate\
     \ <typename mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t\
     \ _mod = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32] = {};\n \
@@ -574,7 +574,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
   requiredBy: []
-  timestamp: '2023-08-31 20:44:07+09:00'
+  timestamp: '2024-03-04 16:48:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp

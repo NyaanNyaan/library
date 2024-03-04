@@ -7,9 +7,15 @@ data:
       \u30E9\u30EA"
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: fps/root-finding.hpp
+    title: fps/root-finding.hpp
+  - icon: ':heavy_check_mark:'
     path: matrix/black-box-linear-algebra.hpp
     title: Black Box Linear Algebra
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
@@ -126,15 +132,17 @@ data:
   isVerificationFile: false
   path: fps/mod-pow.hpp
   requiredBy:
+  - fps/root-finding.hpp
   - matrix/black-box-linear-algebra.hpp
   timestamp: '2023-08-31 20:44:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-1112.test.cpp
-  - verify/verify-yuki/yuki-1112-sparse.test.cpp
   - verify/verify-yuki/yuki-0720.test.cpp
-  - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+  - verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - verify/verify-yuki/yuki-1112.test.cpp
+  - verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
 documentation_of: fps/mod-pow.hpp
 layout: document
 redirect_from:

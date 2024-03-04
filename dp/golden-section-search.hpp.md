@@ -19,20 +19,8 @@ data:
   bundledCode: "#line 2 \"dp/golden-section-search.hpp\"\n\n#include <cassert>\n#include\
     \ <functional>\n#include <utility>\nusing namespace std;\n\n// reference\uFF1A\
     https://twitter.com/noshi91/status/1399003086362865673\n\nnamespace golden_section_search_impl\
-    \ {\n\nusing i64 = long long;\n\ntemplate <typename T, bool get_min = true>\n\
-    pair<i64, T> golden_section_search(const function<T(i64)>& f, i64 min,\n     \
-    \                              i64 max) {\n  assert(min <= max);\n  i64 a = min\
-    \ - 1, x, b;\n  {\n    i64 s = 1, t = 2;\n    while (t < max - min + 2) swap(s\
-    \ += t, t);\n    x = a + t - s, b = a + t;\n  }\n  T fx = f(x), fy;\n  while (a\
-    \ + b != 2 * x) {\n    i64 y = a + b - x;\n    if (max < y || (fy = f(y), get_min\
-    \ ? fx < fy : fx > fy)) {\n      b = a;\n      a = y;\n    } else {\n      a =\
-    \ x;\n      x = y;\n      fx = fy;\n    }\n  }\n  return {x, fx};\n}\n\n}  //\
-    \ namespace golden_section_search_impl\n\nusing golden_section_search_impl::golden_section_search;\n\
-    \n/*\n  @brief \u9EC4\u91D1\u5206\u5272\u63A2\u7D22\n*/\n"
-  code: "#pragma once\n\n#include <cassert>\n#include <functional>\n#include <utility>\n\
-    using namespace std;\n\n// reference\uFF1Ahttps://twitter.com/noshi91/status/1399003086362865673\n\
-    \nnamespace golden_section_search_impl {\n\nusing i64 = long long;\n\ntemplate\
-    \ <typename T, bool get_min = true>\npair<i64, T> golden_section_search(const\
+    \ {\n\nusing i64 = long long;\n\n// [min, max] \u306F\u9589\u533A\u9593\u3092\u5165\
+    \u529B\u3059\u308B\ntemplate <typename T, bool get_min = true>\npair<i64, T> golden_section_search(const\
     \ function<T(i64)>& f, i64 min,\n                                   i64 max) {\n\
     \  assert(min <= max);\n  i64 a = min - 1, x, b;\n  {\n    i64 s = 1, t = 2;\n\
     \    while (t < max - min + 2) swap(s += t, t);\n    x = a + t - s, b = a + t;\n\
@@ -42,12 +30,25 @@ data:
     \  }\n  return {x, fx};\n}\n\n}  // namespace golden_section_search_impl\n\nusing\
     \ golden_section_search_impl::golden_section_search;\n\n/*\n  @brief \u9EC4\u91D1\
     \u5206\u5272\u63A2\u7D22\n*/\n"
+  code: "#pragma once\n\n#include <cassert>\n#include <functional>\n#include <utility>\n\
+    using namespace std;\n\n// reference\uFF1Ahttps://twitter.com/noshi91/status/1399003086362865673\n\
+    \nnamespace golden_section_search_impl {\n\nusing i64 = long long;\n\n// [min,\
+    \ max] \u306F\u9589\u533A\u9593\u3092\u5165\u529B\u3059\u308B\ntemplate <typename\
+    \ T, bool get_min = true>\npair<i64, T> golden_section_search(const function<T(i64)>&\
+    \ f, i64 min,\n                                   i64 max) {\n  assert(min <=\
+    \ max);\n  i64 a = min - 1, x, b;\n  {\n    i64 s = 1, t = 2;\n    while (t <\
+    \ max - min + 2) swap(s += t, t);\n    x = a + t - s, b = a + t;\n  }\n  T fx\
+    \ = f(x), fy;\n  while (a + b != 2 * x) {\n    i64 y = a + b - x;\n    if (max\
+    \ < y || (fy = f(y), get_min ? fx < fy : fx > fy)) {\n      b = a;\n      a =\
+    \ y;\n    } else {\n      a = x;\n      x = y;\n      fx = fy;\n    }\n  }\n \
+    \ return {x, fx};\n}\n\n}  // namespace golden_section_search_impl\n\nusing golden_section_search_impl::golden_section_search;\n\
+    \n/*\n  @brief \u9EC4\u91D1\u5206\u5272\u63A2\u7D22\n*/\n"
   dependsOn: []
   isVerificationFile: false
   path: dp/golden-section-search.hpp
   requiredBy:
   - dp/monge-d-edge-shortest-path.hpp
-  timestamp: '2023-05-23 20:26:46+09:00'
+  timestamp: '2024-03-04 16:48:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0952.test.cpp

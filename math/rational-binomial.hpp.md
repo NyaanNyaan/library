@@ -155,8 +155,8 @@ data:
   isVerificationFile: false
   path: math/rational-binomial.hpp
   requiredBy:
-  - math/rational-fps.hpp
   - math/bigint-all.hpp
+  - math/rational-fps.hpp
   timestamp: '2023-12-18 23:52:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

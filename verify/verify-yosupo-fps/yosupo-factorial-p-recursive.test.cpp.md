@@ -502,29 +502,39 @@ data:
     \  denom[0][0] = fs[0];\n  Matrix<mint> a0(deg);\n  for (int i = 0; i < deg; i++)\
     \ a0[i][0] = a[deg - 1 - i];\n  mint res = (polynomial_matrix_prod(m, k - deg\
     \ + 1) * a0)[0][0];\n  res /= polynomial_matrix_prod(denom, k - deg + 1)[0][0];\n\
-    \  return res;\n}\n\ntemplate <typename mint>\nmint kth_term_of_p_recursive(vector<mint>&\
-    \ a, long long k) {\n  if (k < (int)a.size()) return a[k];\n  if (all_of(begin(a),\
-    \ end(a), [](mint x) { return x == mint(0); })) return 0;\n\n  int n = a.size()\
-    \ - 1;\n  vector<mint> b{begin(a), end(a) - 1};\n\n  for (int d = 0;; d++) {\n\
-    #ifdef NyaanLocal\n    cerr << \"d = \" << d << endl;\n#endif\n    if ((n + 2)\
-    \ / (d + 2) <= 1) break;\n    if (kth_term_of_p_recursive(b, n, d) == a.back())\
-    \ {\n#ifdef NyaanLocal\n      cerr << \"Found, d = \" << d << endl;\n#endif\n\
-    \      return kth_term_of_p_recursive(a, k, d);\n    }\n  }\n  cerr << \"Failed.\"\
-    \ << endl;\n  exit(1);\n}\n\n/**\n * @brief P-recursive\u306E\u9AD8\u901F\u8A08\
-    \u7B97\n * @docs docs/fps/find-p-recursive.md\n */\n#line 6 \"verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp\"\
-    \n//\n#line 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt.hpp\"\n\ntemplate\
-    \ <typename mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t\
-    \ _mod = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32] = {};\n \
-    \   int idx = 0;\n    u64 m = _mod - 1;\n    for (u64 i = 2; i * i <= m; ++i)\
-    \ {\n      if (m % i == 0) {\n        ds[idx++] = i;\n        while (m % i ==\
-    \ 0) m /= i;\n      }\n    }\n    if (m != 1) ds[idx++] = m;\n\n    uint32_t _pr\
-    \ = 2;\n    while (1) {\n      int flg = 1;\n      for (int i = 0; i < idx; ++i)\
-    \ {\n        u64 a = _pr, b = (_mod - 1) / ds[i], r = 1;\n        while (b) {\n\
-    \          if (b & 1) r = r * a % _mod;\n          a = a * a % _mod;\n       \
-    \   b >>= 1;\n        }\n        if (r == 1) {\n          flg = 0;\n         \
-    \ break;\n        }\n      }\n      if (flg == 1) break;\n      ++_pr;\n    }\n\
-    \    return _pr;\n  };\n\n  static constexpr uint32_t mod = mint::get_mod();\n\
-    \  static constexpr uint32_t pr = get_pr();\n  static constexpr int level = __builtin_ctzll(mod\
+    \  return res;\n}\n\n// K \u9805\u5217\u6319\ntemplate <typename mint>\nvector<mint>\
+    \ kth_term_of_p_recursive_enumerate(vector<mint>& a, long long K,\n          \
+    \                                     int d) {\n  if (K < (int)a.size()) return\
+    \ {begin(a), begin(a) + K};\n  if (all_of(begin(a), end(a), [](mint x) { return\
+    \ x == mint(0); }))\n    return vector<mint>(K, 0);\n  auto fs = find_p_recursive(a,\
+    \ d);\n  if (fs.empty()) return {};\n\n  int k = fs.size() - 1, is = a.size();\n\
+    \  a.resize(K);\n  for (auto& f : fs) f.shrink();\n  reverse(begin(fs), end(fs));\n\
+    \  for (int ipk = is; ipk < K; ipk++) {\n    int i = ipk - k;\n    mint s = 0;\n\
+    \    for (int j = 0; j < k; j++) {\n      if (i + j >= 0) s += a[i + j] * fs[j].eval(i);\n\
+    \    }\n    a[ipk] = -s / fs[k].eval(i);\n  }\n  return a;\n}\n\ntemplate <typename\
+    \ mint>\nmint kth_term_of_p_recursive(vector<mint>& a, long long k) {\n  if (k\
+    \ < (int)a.size()) return a[k];\n  if (all_of(begin(a), end(a), [](mint x) { return\
+    \ x == mint(0); })) return 0;\n\n  int n = a.size() - 1;\n  vector<mint> b{begin(a),\
+    \ end(a) - 1};\n\n  for (int d = 0;; d++) {\n#ifdef NyaanLocal\n    cerr << \"\
+    d = \" << d << endl;\n#endif\n    if ((n + 2) / (d + 2) <= 1) break;\n    if (kth_term_of_p_recursive(b,\
+    \ n, d) == a.back()) {\n#ifdef NyaanLocal\n      cerr << \"Found, d = \" << d\
+    \ << endl;\n#endif\n      return kth_term_of_p_recursive(a, k, d);\n    }\n  }\n\
+    \  cerr << \"Failed.\" << endl;\n  exit(1);\n}\n\n\n\n/**\n * @brief P-recursive\u306E\
+    \u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/find-p-recursive.md\n */\n#line 6\
+    \ \"verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp\"\n//\n#line\
+    \ 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt.hpp\"\n\ntemplate <typename\
+    \ mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t _mod\
+    \ = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32] = {};\n    int\
+    \ idx = 0;\n    u64 m = _mod - 1;\n    for (u64 i = 2; i * i <= m; ++i) {\n  \
+    \    if (m % i == 0) {\n        ds[idx++] = i;\n        while (m % i == 0) m /=\
+    \ i;\n      }\n    }\n    if (m != 1) ds[idx++] = m;\n\n    uint32_t _pr = 2;\n\
+    \    while (1) {\n      int flg = 1;\n      for (int i = 0; i < idx; ++i) {\n\
+    \        u64 a = _pr, b = (_mod - 1) / ds[i], r = 1;\n        while (b) {\n  \
+    \        if (b & 1) r = r * a % _mod;\n          a = a * a % _mod;\n         \
+    \ b >>= 1;\n        }\n        if (r == 1) {\n          flg = 0;\n          break;\n\
+    \        }\n      }\n      if (flg == 1) break;\n      ++_pr;\n    }\n    return\
+    \ _pr;\n  };\n\n  static constexpr uint32_t mod = mint::get_mod();\n  static constexpr\
+    \ uint32_t pr = get_pr();\n  static constexpr int level = __builtin_ctzll(mod\
     \ - 1);\n  mint dw[level], dy[level];\n\n  void setwy(int k) {\n    mint w[level],\
     \ y[level];\n    w[k - 1] = mint(pr).pow((mod - 1) / (1 << k));\n    y[k - 1]\
     \ = w[k - 1].inverse();\n    for (int i = k - 2; i > 0; --i)\n      w[i] = w[i\
@@ -720,7 +730,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
   requiredBy: []
-  timestamp: '2023-12-22 19:57:12+09:00'
+  timestamp: '2024-03-04 16:48:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp

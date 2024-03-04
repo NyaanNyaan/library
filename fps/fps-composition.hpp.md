@@ -25,6 +25,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1939.test.cpp
     title: verify/verify-yuki/yuki-1939.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-2661.test.cpp
+    title: verify/verify-yuki/yuki-2661.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -203,8 +206,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1939.test.cpp
-  - verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
+  - verify/verify-yuki/yuki-2661.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition.test.cpp
+  - verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
   - verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
 documentation_of: fps/fps-composition.hpp
 layout: document

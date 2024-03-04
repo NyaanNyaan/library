@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: multiplicative-function/count-square-free.hpp
+    title: "\u7121\u5E73\u65B9\u6570\u306E\u6570\u3048\u4E0A\u3052"
+  - icon: ':heavy_check_mark:'
     path: multiplicative-function/divisor-multiple-transform.hpp
     title: "\u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB"
   - icon: ':heavy_check_mark:'
@@ -37,6 +40,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/sum-of-mf.test.cpp
     title: verify/verify-unit-test/sum-of-mf.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-count-squarefrees.test.cpp
+    title: verify/verify-yosupo-math/yosupo-count-squarefrees.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
     title: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
@@ -93,30 +99,32 @@ data:
   isVerificationFile: false
   path: prime/prime-enumerate.hpp
   requiredBy:
-  - multiplicative-function/prime-counting-o2d3.hpp
-  - multiplicative-function/divisor-multiple-transform.hpp
   - multiplicative-function/gcd-convolution.hpp
+  - multiplicative-function/divisor-multiple-transform.hpp
+  - multiplicative-function/count-square-free.hpp
   - multiplicative-function/enamurate-multiplicative-function.hpp
-  - multiplicative-function/sum-of-multiplicative-function.hpp
   - multiplicative-function/mf-famous-series.hpp
+  - multiplicative-function/sum-of-multiplicative-function.hpp
+  - multiplicative-function/prime-counting-o2d3.hpp
   timestamp: '2020-12-05 08:35:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-1781.test.cpp
-  - verify/verify-yuki/yuki-0125.test.cpp
-  - verify/verify-yuki/yuki-0896.test.cpp
-  - verify/verify-yuki/yuki-0890.test.cpp
-  - verify/verify-yuki/yuki-0886.test.cpp
+  - verify/verify-unit-test/garner-bigint.test.cpp
+  - verify/verify-unit-test/sum-of-mf.test.cpp
   - verify/verify-unit-test/mf.test.cpp
   - verify/verify-unit-test/primitive-root.test.cpp
-  - verify/verify-unit-test/sum-of-mf.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
-  - verify/verify-unit-test/garner-bigint.test.cpp
+  - verify/verify-yuki/yuki-0896.test.cpp
+  - verify/verify-yuki/yuki-1781.test.cpp
+  - verify/verify-yuki/yuki-0890.test.cpp
+  - verify/verify-yuki/yuki-0125.test.cpp
+  - verify/verify-yuki/yuki-0886.test.cpp
+  - verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
+  - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
+  - verify/verify-yosupo-math/yosupo-count-squarefrees.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
-  - verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
-  - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
 documentation_of: prime/prime-enumerate.hpp
 layout: document
 redirect_from:

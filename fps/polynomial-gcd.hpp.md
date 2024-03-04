@@ -5,11 +5,17 @@ data:
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: fps/root-finding.hpp
+    title: fps/root-finding.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -120,17 +126,19 @@ data:
     \ mat.a11);\n    return mat;\n  }\n\n  Mat<mint> res = Mat<mint>::I();\n  while\
     \ (1) {\n    Mat<mint> m1 = InnerHalfGCD(p);\n    p = m1 * p;\n    if (p.second.empty())\
     \ return m1 * res;\n    InnerNaiveGCD(m1, p);\n    if (p.second.empty()) return\
-    \ m1 * res;\n    res = m1 * res;\n  }\n}\n\ntemplate <typename mint>\nFPS<mint>\
-    \ PolyGCD(const FPS<mint>& a, const FPS<mint>& b) {\n  Arr<mint> p(a, b);\n  Mat<mint>\
-    \ m = InnerPolyGCD(a, b);\n  p = m * p;\n  if (!p.first.empty()) {\n    mint coeff\
-    \ = p.first.back().inverse();\n    for (auto& x : p.first) x *= coeff;\n  }\n\
-    \  return p.first;\n}\n\ntemplate <typename mint>\npair<int, FPS<mint>> PolyInv(const\
-    \ FPS<mint>& f, const FPS<mint>& g) {\n  using fps = FPS<mint>;\n  pair<fps, fps>\
-    \ p(f, g);\n  Mat<mint> m = InnerPolyGCD(f, g);\n  fps gcd_ = (m * p).first;\n\
-    \  if (gcd_.size() != 1) return {false, fps()};\n  pair<fps, fps> x(fps{mint(1)},\
-    \ g);\n  return {true, ((m * x).first % g) * gcd_[0].inverse()};\n}\n\n}  // namespace\
-    \ poly_gcd\nusing poly_gcd::PolyGCD;\nusing poly_gcd::PolyInv;\n\n/**\n * @brief\
-    \ \u591A\u9805\u5F0FGCD\n * @docs docs/fps/polynomial-gcd.md\n */\n"
+    \ m1 * res;\n    res = m1 * res;\n  }\n}\n\n// \u591A\u9805\u5F0F GCD, \u975E\u96F6\
+    \u306E\u5834\u5408 monic \u306A\u3082\u306E\u3092\u8FD4\u3059\ntemplate <typename\
+    \ mint>\nFPS<mint> PolyGCD(const FPS<mint>& a, const FPS<mint>& b) {\n  Arr<mint>\
+    \ p(a, b);\n  Mat<mint> m = InnerPolyGCD(a, b);\n  p = m * p;\n  if (!p.first.empty())\
+    \ {\n    mint coeff = p.first.back().inverse();\n    for (auto& x : p.first) x\
+    \ *= coeff;\n  }\n  return p.first;\n}\n\ntemplate <typename mint>\npair<int,\
+    \ FPS<mint>> PolyInv(const FPS<mint>& f, const FPS<mint>& g) {\n  using fps =\
+    \ FPS<mint>;\n  pair<fps, fps> p(f, g);\n  Mat<mint> m = InnerPolyGCD(f, g);\n\
+    \  fps gcd_ = (m * p).first;\n  if (gcd_.size() != 1) return {false, fps()};\n\
+    \  pair<fps, fps> x(fps{mint(1)}, g);\n  return {true, ((m * x).first % g) * gcd_[0].inverse()};\n\
+    }\n\n}  // namespace poly_gcd\nusing poly_gcd::PolyGCD;\nusing poly_gcd::PolyInv;\n\
+    \n/**\n * @brief \u591A\u9805\u5F0FGCD\n * @docs docs/fps/polynomial-gcd.md\n\
+    \ */\n"
   code: "#pragma once\n\n#include \"./formal-power-series.hpp\"\n\nnamespace poly_gcd\
     \ {\n\ntemplate <typename mint>\nusing FPS = FormalPowerSeries<mint>;\ntemplate\
     \ <typename mint>\nusing Arr = pair<FPS<mint>, FPS<mint>>;\n\ntemplate <typename\
@@ -166,25 +174,29 @@ data:
     \ mat.a11);\n    return mat;\n  }\n\n  Mat<mint> res = Mat<mint>::I();\n  while\
     \ (1) {\n    Mat<mint> m1 = InnerHalfGCD(p);\n    p = m1 * p;\n    if (p.second.empty())\
     \ return m1 * res;\n    InnerNaiveGCD(m1, p);\n    if (p.second.empty()) return\
-    \ m1 * res;\n    res = m1 * res;\n  }\n}\n\ntemplate <typename mint>\nFPS<mint>\
-    \ PolyGCD(const FPS<mint>& a, const FPS<mint>& b) {\n  Arr<mint> p(a, b);\n  Mat<mint>\
-    \ m = InnerPolyGCD(a, b);\n  p = m * p;\n  if (!p.first.empty()) {\n    mint coeff\
-    \ = p.first.back().inverse();\n    for (auto& x : p.first) x *= coeff;\n  }\n\
-    \  return p.first;\n}\n\ntemplate <typename mint>\npair<int, FPS<mint>> PolyInv(const\
-    \ FPS<mint>& f, const FPS<mint>& g) {\n  using fps = FPS<mint>;\n  pair<fps, fps>\
-    \ p(f, g);\n  Mat<mint> m = InnerPolyGCD(f, g);\n  fps gcd_ = (m * p).first;\n\
-    \  if (gcd_.size() != 1) return {false, fps()};\n  pair<fps, fps> x(fps{mint(1)},\
-    \ g);\n  return {true, ((m * x).first % g) * gcd_[0].inverse()};\n}\n\n}  // namespace\
-    \ poly_gcd\nusing poly_gcd::PolyGCD;\nusing poly_gcd::PolyInv;\n\n/**\n * @brief\
-    \ \u591A\u9805\u5F0FGCD\n * @docs docs/fps/polynomial-gcd.md\n */\n"
+    \ m1 * res;\n    res = m1 * res;\n  }\n}\n\n// \u591A\u9805\u5F0F GCD, \u975E\u96F6\
+    \u306E\u5834\u5408 monic \u306A\u3082\u306E\u3092\u8FD4\u3059\ntemplate <typename\
+    \ mint>\nFPS<mint> PolyGCD(const FPS<mint>& a, const FPS<mint>& b) {\n  Arr<mint>\
+    \ p(a, b);\n  Mat<mint> m = InnerPolyGCD(a, b);\n  p = m * p;\n  if (!p.first.empty())\
+    \ {\n    mint coeff = p.first.back().inverse();\n    for (auto& x : p.first) x\
+    \ *= coeff;\n  }\n  return p.first;\n}\n\ntemplate <typename mint>\npair<int,\
+    \ FPS<mint>> PolyInv(const FPS<mint>& f, const FPS<mint>& g) {\n  using fps =\
+    \ FPS<mint>;\n  pair<fps, fps> p(f, g);\n  Mat<mint> m = InnerPolyGCD(f, g);\n\
+    \  fps gcd_ = (m * p).first;\n  if (gcd_.size() != 1) return {false, fps()};\n\
+    \  pair<fps, fps> x(fps{mint(1)}, g);\n  return {true, ((m * x).first % g) * gcd_[0].inverse()};\n\
+    }\n\n}  // namespace poly_gcd\nusing poly_gcd::PolyGCD;\nusing poly_gcd::PolyInv;\n\
+    \n/**\n * @brief \u591A\u9805\u5F0FGCD\n * @docs docs/fps/polynomial-gcd.md\n\
+    \ */\n"
   dependsOn:
   - fps/formal-power-series.hpp
   isVerificationFile: false
   path: fps/polynomial-gcd.hpp
-  requiredBy: []
-  timestamp: '2023-08-31 20:44:07+09:00'
+  requiredBy:
+  - fps/root-finding.hpp
+  timestamp: '2024-03-04 16:48:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
 documentation_of: fps/polynomial-gcd.hpp
 layout: document

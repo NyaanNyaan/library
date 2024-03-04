@@ -8,6 +8,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/funtional-graph.hpp
     title: "Functional Graph(\u306A\u3082\u308A\u30B0\u30E9\u30D5)\u306E\u5206\u89E3"
+  - icon: ':heavy_check_mark:'
+    path: tree/auxiliary-tree.hpp
+    title: Auxiliary Tree
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
@@ -45,6 +48,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1778.test.cpp
     title: verify/verify-yuki/yuki-1778.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-2588.test.cpp
+    title: verify/verify-yuki/yuki-2588.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -166,21 +172,23 @@ data:
   path: tree/heavy-light-decomposition.hpp
   requiredBy:
   - graph/funtional-graph.hpp
+  - tree/auxiliary-tree.hpp
   timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
-  - verify/verify-yuki/yuki-1326.test.cpp
-  - verify/verify-yuki/yuki-1778.test.cpp
-  - verify/verify-yuki/yuki-1254.test.cpp
-  - verify/verify-aoj-other/aoj-2891.test.cpp
-  - verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
+  - verify/verify-aoj-other/aoj-2891.test.cpp
+  - verify/verify-yuki/yuki-1326.test.cpp
+  - verify/verify-yuki/yuki-1254.test.cpp
+  - verify/verify-yuki/yuki-2588.test.cpp
+  - verify/verify-yuki/yuki-1778.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
 documentation_of: tree/heavy-light-decomposition.hpp
 layout: document
 redirect_from:

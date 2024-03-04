@@ -70,8 +70,8 @@ data:
   timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/fast-inv.test.cpp
   - verify/verify-unit-test/fast-inv-o1.test.cpp
+  - verify/verify-unit-test/fast-inv.test.cpp
 documentation_of: math-fast/inv.hpp
 layout: document
 redirect_from:

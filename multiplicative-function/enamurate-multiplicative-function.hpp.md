@@ -24,6 +24,9 @@ data:
     title: template/util.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: multiplicative-function/count-square-free.hpp
+    title: "\u7121\u5E73\u65B9\u6570\u306E\u6570\u3048\u4E0A\u3052"
+  - icon: ':heavy_check_mark:'
     path: multiplicative-function/mf-famous-series.hpp
     title: "\u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570"
   _extendedVerifiedWith:
@@ -33,6 +36,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/sum-of-mf.test.cpp
     title: verify/verify-unit-test/sum-of-mf.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-count-squarefrees.test.cpp
+    title: verify/verify-yosupo-math/yosupo-count-squarefrees.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -256,12 +262,14 @@ data:
   isVerificationFile: false
   path: multiplicative-function/enamurate-multiplicative-function.hpp
   requiredBy:
+  - multiplicative-function/count-square-free.hpp
   - multiplicative-function/mf-famous-series.hpp
   timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/mf.test.cpp
   - verify/verify-unit-test/sum-of-mf.test.cpp
+  - verify/verify-unit-test/mf.test.cpp
+  - verify/verify-yosupo-math/yosupo-count-squarefrees.test.cpp
 documentation_of: multiplicative-function/enamurate-multiplicative-function.hpp
 layout: document
 redirect_from:

@@ -209,8 +209,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-2580.test.cpp
-  - verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
+  - verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp
 documentation_of: fps/fps-famous-series.hpp
 layout: document
 redirect_from:

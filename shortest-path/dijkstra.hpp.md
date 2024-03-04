@@ -86,8 +86,8 @@ data:
   timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
+  - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
   - verify/verify-aoj-other/aoj-2171.test.cpp
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a.test.cpp

@@ -57,16 +57,17 @@ data:
     \ phi(long long n) {\n  auto pf = PrimeFactors(n);\n  long long ret = n;\n  for\
     \ (auto p : pf) {\n    ret /= p.first;\n    ret *= (p.first - 1);\n  }\n  return\
     \ ret;\n}\n\n// Extended Euclidean algorithm\n// solve : ax + by = gcd(a, b)\n\
-    // return : pair(x, y)\npair<long long, long long> extgcd(long long a, long long\
-    \ b) {\n  if (b == 0) return make_pair(1, 0);\n  long long x, y;\n  tie(y, x)\
-    \ = extgcd(b, a % b);\n  y -= a / b * x;\n  return make_pair(x, y);\n}\n\n// Check\
-    \ if n is Square Number\n// true : return d s.t. d * d == n\n// false : return\
-    \ -1\nlong long SqrtInt(long long n) {\n  if (n == 0 || n == 1) return n;\n  long\
-    \ long d = (long long)sqrt(n) - 1;\n  while (d * d < n) ++d;\n  return (d * d\
-    \ == n) ? d : -1;\n}\n\n// return a number of n's digit\n// zero ... return value\
-    \ if n = 0 (default -> 1)\nint isDigit(long long n, int zero = 1) {\n  if (n ==\
-    \ 0) return zero;\n  int ret = 0;\n  while (n) {\n    n /= 10;\n    ret++;\n \
-    \ }\n  return ret;\n}\n"
+    // return : pair(x, y)\n// a>=0,b>=0 \u3067\u306A\u3044\u5834\u5408 gcd(a, b)\
+    \ \u306F\u8CA0\u306B\u3082\u306A\u308A\u5F97\u308B\u306E\u3067\u6CE8\u610F\npair<long\
+    \ long, long long> extgcd(long long a, long long b) {\n  if (b == 0) return make_pair(1,\
+    \ 0);\n  long long x, y;\n  tie(y, x) = extgcd(b, a % b);\n  y -= a / b * x;\n\
+    \  return make_pair(x, y);\n}\n\n// Check if n is Square Number\n// true : return\
+    \ d s.t. d * d == n\n// false : return -1\nlong long SqrtInt(long long n) {\n\
+    \  if (n == 0 || n == 1) return n;\n  long long d = (long long)sqrt(n) - 1;\n\
+    \  while (d * d < n) ++d;\n  return (d * d == n) ? d : -1;\n}\n\n// return a number\
+    \ of n's digit\n// zero ... return value if n = 0 (default -> 1)\nint isDigit(long\
+    \ long n, int zero = 1) {\n  if (n == 0) return zero;\n  int ret = 0;\n  while\
+    \ (n) {\n    n /= 10;\n    ret++;\n  }\n  return ret;\n}\n"
   code: "#pragma once\n\n// totient function \u03C6(N)=(1 ~ N , gcd(i,N) = 1)\n//\
     \ {0, 1, 1, 2, 4, 2, 6, 4, ... }\nvector<int> EulersTotientFunction(int N) {\n\
     \  vector<int> ret(N + 1, 0);\n  for (int i = 0; i <= N; i++) ret[i] = i;\n  for\
@@ -98,29 +99,30 @@ data:
     \ phi(long long n) {\n  auto pf = PrimeFactors(n);\n  long long ret = n;\n  for\
     \ (auto p : pf) {\n    ret /= p.first;\n    ret *= (p.first - 1);\n  }\n  return\
     \ ret;\n}\n\n// Extended Euclidean algorithm\n// solve : ax + by = gcd(a, b)\n\
-    // return : pair(x, y)\npair<long long, long long> extgcd(long long a, long long\
-    \ b) {\n  if (b == 0) return make_pair(1, 0);\n  long long x, y;\n  tie(y, x)\
-    \ = extgcd(b, a % b);\n  y -= a / b * x;\n  return make_pair(x, y);\n}\n\n// Check\
-    \ if n is Square Number\n// true : return d s.t. d * d == n\n// false : return\
-    \ -1\nlong long SqrtInt(long long n) {\n  if (n == 0 || n == 1) return n;\n  long\
-    \ long d = (long long)sqrt(n) - 1;\n  while (d * d < n) ++d;\n  return (d * d\
-    \ == n) ? d : -1;\n}\n\n// return a number of n's digit\n// zero ... return value\
-    \ if n = 0 (default -> 1)\nint isDigit(long long n, int zero = 1) {\n  if (n ==\
-    \ 0) return zero;\n  int ret = 0;\n  while (n) {\n    n /= 10;\n    ret++;\n \
-    \ }\n  return ret;\n}\n"
+    // return : pair(x, y)\n// a>=0,b>=0 \u3067\u306A\u3044\u5834\u5408 gcd(a, b)\
+    \ \u306F\u8CA0\u306B\u3082\u306A\u308A\u5F97\u308B\u306E\u3067\u6CE8\u610F\npair<long\
+    \ long, long long> extgcd(long long a, long long b) {\n  if (b == 0) return make_pair(1,\
+    \ 0);\n  long long x, y;\n  tie(y, x) = extgcd(b, a % b);\n  y -= a / b * x;\n\
+    \  return make_pair(x, y);\n}\n\n// Check if n is Square Number\n// true : return\
+    \ d s.t. d * d == n\n// false : return -1\nlong long SqrtInt(long long n) {\n\
+    \  if (n == 0 || n == 1) return n;\n  long long d = (long long)sqrt(n) - 1;\n\
+    \  while (d * d < n) ++d;\n  return (d * d == n) ? d : -1;\n}\n\n// return a number\
+    \ of n's digit\n// zero ... return value if n = 0 (default -> 1)\nint isDigit(long\
+    \ long n, int zero = 1) {\n  if (n == 0) return zero;\n  int ret = 0;\n  while\
+    \ (n) {\n    n /= 10;\n    ret++;\n  }\n  return ret;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: math/elementary-function.hpp
   requiredBy: []
-  timestamp: '2023-08-10 13:25:59+09:00'
+  timestamp: '2024-03-04 16:48:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/primitive-root.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
 documentation_of: math/elementary-function.hpp
 layout: document
 redirect_from:

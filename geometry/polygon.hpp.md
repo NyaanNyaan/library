@@ -174,24 +174,24 @@ data:
   isVerificationFile: false
   path: geometry/polygon.hpp
   requiredBy:
-  - geometry/segment.hpp
   - geometry/line.hpp
+  - geometry/segment.hpp
   timestamp: '2023-12-29 22:32:57+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-0412.test.cpp
-  - verify/verify-aoj-cgl/aoj-cgl-1-b.test.cpp
   - verify/verify-aoj-cgl/aoj-cgl-3-b.test.cpp
-  - verify/verify-aoj-cgl/aoj-cgl-4-b.test.cpp
-  - verify/verify-aoj-cgl/aoj-cgl-1-a.test.cpp
   - verify/verify-aoj-cgl/aoj-cgl-2-a.test.cpp
-  - verify/verify-aoj-cgl/aoj-cgl-4-a.test.cpp
-  - verify/verify-aoj-cgl/aoj-cgl-2-b.test.cpp
-  - verify/verify-aoj-cgl/aoj-cgl-2-d.test.cpp
-  - verify/verify-aoj-cgl/aoj-cgl-3-c.test.cpp
-  - verify/verify-aoj-cgl/aoj-cgl-2-c.test.cpp
   - verify/verify-aoj-cgl/aoj-cgl-3-a.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-2-c.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-1-a.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-1-b.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-4-b.test.cpp
   - verify/verify-aoj-cgl/aoj-cgl-4-c.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-4-a.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-3-c.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-2-d.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-2-b.test.cpp
 documentation_of: geometry/polygon.hpp
 layout: document
 redirect_from:

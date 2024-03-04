@@ -261,13 +261,13 @@ data:
     \ }\n\n  void add(S x, S y, T val) {\n    int i = lower_bound(begin(ps), end(ps),\
     \ P{x, y}) - begin(ps);\n    for (int h = lg - 1; h >= 0; --h) {\n      int i0\
     \ = bv[h].rank0(i);\n      if (bv[h].get(i))\n        i += bv[h].zeros - i0;\n\
-    \      else\n        i = i0;\n      seg[h].add(i, val);\n    }\n  }\n\n  T sum(int\
+    \      else\n        i = i0;\n      seg[h].add(i, val);\n    }\n  }\n\n  T _sum(int\
     \ l, int r, u32 upper) const {\n    T res = I();\n    for (int h = lg; h--;) {\n\
     \      int l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);\n      if ((upper >> h) &\
     \ 1) {\n        res = f(res, seg[h].query(l0, r0));\n        l += bv[h].zeros\
     \ - l0;\n        r += bv[h].zeros - r0;\n      } else {\n        l = l0, r = r0;\n\
     \      }\n    }\n    return res;\n  }\n\n  T sum(S L, S D, S R, S U) const {\n\
-    \    int l = xid(L), r = xid(R);\n    return sum(l, r, yid(U)) - sum(l, r, yid(D));\n\
+    \    int l = xid(L), r = xid(R);\n    return _sum(l, r, yid(U)) - _sum(l, r, yid(D));\n\
     \  }\n};\n#line 2 \"misc/fastio.hpp\"\n\n#line 8 \"misc/fastio.hpp\"\n\nusing\
     \ namespace std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\n\n#line 4 \"\
     internal/internal-type-traits.hpp\"\nusing namespace std;\n\nnamespace internal\
@@ -377,7 +377,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-segtree-on-wm.test.cpp
   requiredBy: []
-  timestamp: '2023-09-05 21:46:27+09:00'
+  timestamp: '2024-03-04 16:48:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-segtree-on-wm.test.cpp

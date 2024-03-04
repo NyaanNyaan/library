@@ -6,12 +6,18 @@ data:
     title: math/isqrt.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: multiplicative-function/count-square-free.hpp
+    title: "\u7121\u5E73\u65B9\u6570\u306E\u6570\u3048\u4E0A\u3052"
+  - icon: ':heavy_check_mark:'
     path: multiplicative-function/enumerate-sum-of-multiplicative-function.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306Eprefix sum \u306E\u5217\u6319"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/enumerate-quotient.test.cpp
     title: verify/verify-unit-test/enumerate-quotient.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-count-squarefrees.test.cpp
+    title: verify/verify-yosupo-math/yosupo-count-squarefrees.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-counting-primes-4.test.cpp
     title: verify/verify-yosupo-math/yosupo-counting-primes-4.test.cpp
@@ -75,14 +81,16 @@ data:
   isVerificationFile: false
   path: math/enumerate-quotient.hpp
   requiredBy:
+  - multiplicative-function/count-square-free.hpp
   - multiplicative-function/enumerate-sum-of-multiplicative-function.hpp
   timestamp: '2023-04-10 23:43:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/enumerate-quotient.test.cpp
   - verify/verify-yuki/yuki-2262.test.cpp
   - verify/verify-yuki/yuki-2266.test.cpp
-  - verify/verify-unit-test/enumerate-quotient.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes-4.test.cpp
+  - verify/verify-yosupo-math/yosupo-count-squarefrees.test.cpp
   - verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient-3.test.cpp
 documentation_of: math/enumerate-quotient.hpp

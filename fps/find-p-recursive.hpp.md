@@ -304,16 +304,25 @@ data:
     \  denom[0][0] = fs[0];\n  Matrix<mint> a0(deg);\n  for (int i = 0; i < deg; i++)\
     \ a0[i][0] = a[deg - 1 - i];\n  mint res = (polynomial_matrix_prod(m, k - deg\
     \ + 1) * a0)[0][0];\n  res /= polynomial_matrix_prod(denom, k - deg + 1)[0][0];\n\
-    \  return res;\n}\n\ntemplate <typename mint>\nmint kth_term_of_p_recursive(vector<mint>&\
-    \ a, long long k) {\n  if (k < (int)a.size()) return a[k];\n  if (all_of(begin(a),\
-    \ end(a), [](mint x) { return x == mint(0); })) return 0;\n\n  int n = a.size()\
-    \ - 1;\n  vector<mint> b{begin(a), end(a) - 1};\n\n  for (int d = 0;; d++) {\n\
-    #ifdef NyaanLocal\n    cerr << \"d = \" << d << endl;\n#endif\n    if ((n + 2)\
-    \ / (d + 2) <= 1) break;\n    if (kth_term_of_p_recursive(b, n, d) == a.back())\
-    \ {\n#ifdef NyaanLocal\n      cerr << \"Found, d = \" << d << endl;\n#endif\n\
-    \      return kth_term_of_p_recursive(a, k, d);\n    }\n  }\n  cerr << \"Failed.\"\
-    \ << endl;\n  exit(1);\n}\n\n/**\n * @brief P-recursive\u306E\u9AD8\u901F\u8A08\
-    \u7B97\n * @docs docs/fps/find-p-recursive.md\n */\n"
+    \  return res;\n}\n\n// K \u9805\u5217\u6319\ntemplate <typename mint>\nvector<mint>\
+    \ kth_term_of_p_recursive_enumerate(vector<mint>& a, long long K,\n          \
+    \                                     int d) {\n  if (K < (int)a.size()) return\
+    \ {begin(a), begin(a) + K};\n  if (all_of(begin(a), end(a), [](mint x) { return\
+    \ x == mint(0); }))\n    return vector<mint>(K, 0);\n  auto fs = find_p_recursive(a,\
+    \ d);\n  if (fs.empty()) return {};\n\n  int k = fs.size() - 1, is = a.size();\n\
+    \  a.resize(K);\n  for (auto& f : fs) f.shrink();\n  reverse(begin(fs), end(fs));\n\
+    \  for (int ipk = is; ipk < K; ipk++) {\n    int i = ipk - k;\n    mint s = 0;\n\
+    \    for (int j = 0; j < k; j++) {\n      if (i + j >= 0) s += a[i + j] * fs[j].eval(i);\n\
+    \    }\n    a[ipk] = -s / fs[k].eval(i);\n  }\n  return a;\n}\n\ntemplate <typename\
+    \ mint>\nmint kth_term_of_p_recursive(vector<mint>& a, long long k) {\n  if (k\
+    \ < (int)a.size()) return a[k];\n  if (all_of(begin(a), end(a), [](mint x) { return\
+    \ x == mint(0); })) return 0;\n\n  int n = a.size() - 1;\n  vector<mint> b{begin(a),\
+    \ end(a) - 1};\n\n  for (int d = 0;; d++) {\n#ifdef NyaanLocal\n    cerr << \"\
+    d = \" << d << endl;\n#endif\n    if ((n + 2) / (d + 2) <= 1) break;\n    if (kth_term_of_p_recursive(b,\
+    \ n, d) == a.back()) {\n#ifdef NyaanLocal\n      cerr << \"Found, d = \" << d\
+    \ << endl;\n#endif\n      return kth_term_of_p_recursive(a, k, d);\n    }\n  }\n\
+    \  cerr << \"Failed.\" << endl;\n  exit(1);\n}\n\n\n\n/**\n * @brief P-recursive\u306E\
+    \u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/find-p-recursive.md\n */\n"
   code: "#pragma once\n\n#include \"../matrix/linear-equation.hpp\"\n#include \"../matrix/polynomial-matrix-prefix-prod.hpp\"\
     \n#include \"formal-power-series.hpp\"\n\n// return polynomial coefficient s.t.\
     \ sum_{j=k...0} f_j(i) a_{i+j} = 0\n// (In more details, read verification code.)\n\
@@ -340,16 +349,25 @@ data:
     \  denom[0][0] = fs[0];\n  Matrix<mint> a0(deg);\n  for (int i = 0; i < deg; i++)\
     \ a0[i][0] = a[deg - 1 - i];\n  mint res = (polynomial_matrix_prod(m, k - deg\
     \ + 1) * a0)[0][0];\n  res /= polynomial_matrix_prod(denom, k - deg + 1)[0][0];\n\
-    \  return res;\n}\n\ntemplate <typename mint>\nmint kth_term_of_p_recursive(vector<mint>&\
-    \ a, long long k) {\n  if (k < (int)a.size()) return a[k];\n  if (all_of(begin(a),\
-    \ end(a), [](mint x) { return x == mint(0); })) return 0;\n\n  int n = a.size()\
-    \ - 1;\n  vector<mint> b{begin(a), end(a) - 1};\n\n  for (int d = 0;; d++) {\n\
-    #ifdef NyaanLocal\n    cerr << \"d = \" << d << endl;\n#endif\n    if ((n + 2)\
-    \ / (d + 2) <= 1) break;\n    if (kth_term_of_p_recursive(b, n, d) == a.back())\
-    \ {\n#ifdef NyaanLocal\n      cerr << \"Found, d = \" << d << endl;\n#endif\n\
-    \      return kth_term_of_p_recursive(a, k, d);\n    }\n  }\n  cerr << \"Failed.\"\
-    \ << endl;\n  exit(1);\n}\n\n/**\n * @brief P-recursive\u306E\u9AD8\u901F\u8A08\
-    \u7B97\n * @docs docs/fps/find-p-recursive.md\n */\n"
+    \  return res;\n}\n\n// K \u9805\u5217\u6319\ntemplate <typename mint>\nvector<mint>\
+    \ kth_term_of_p_recursive_enumerate(vector<mint>& a, long long K,\n          \
+    \                                     int d) {\n  if (K < (int)a.size()) return\
+    \ {begin(a), begin(a) + K};\n  if (all_of(begin(a), end(a), [](mint x) { return\
+    \ x == mint(0); }))\n    return vector<mint>(K, 0);\n  auto fs = find_p_recursive(a,\
+    \ d);\n  if (fs.empty()) return {};\n\n  int k = fs.size() - 1, is = a.size();\n\
+    \  a.resize(K);\n  for (auto& f : fs) f.shrink();\n  reverse(begin(fs), end(fs));\n\
+    \  for (int ipk = is; ipk < K; ipk++) {\n    int i = ipk - k;\n    mint s = 0;\n\
+    \    for (int j = 0; j < k; j++) {\n      if (i + j >= 0) s += a[i + j] * fs[j].eval(i);\n\
+    \    }\n    a[ipk] = -s / fs[k].eval(i);\n  }\n  return a;\n}\n\ntemplate <typename\
+    \ mint>\nmint kth_term_of_p_recursive(vector<mint>& a, long long k) {\n  if (k\
+    \ < (int)a.size()) return a[k];\n  if (all_of(begin(a), end(a), [](mint x) { return\
+    \ x == mint(0); })) return 0;\n\n  int n = a.size() - 1;\n  vector<mint> b{begin(a),\
+    \ end(a) - 1};\n\n  for (int d = 0;; d++) {\n#ifdef NyaanLocal\n    cerr << \"\
+    d = \" << d << endl;\n#endif\n    if ((n + 2) / (d + 2) <= 1) break;\n    if (kth_term_of_p_recursive(b,\
+    \ n, d) == a.back()) {\n#ifdef NyaanLocal\n      cerr << \"Found, d = \" << d\
+    \ << endl;\n#endif\n      return kth_term_of_p_recursive(a, k, d);\n    }\n  }\n\
+    \  cerr << \"Failed.\" << endl;\n  exit(1);\n}\n\n\n\n/**\n * @brief P-recursive\u306E\
+    \u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/find-p-recursive.md\n */\n"
   dependsOn:
   - matrix/linear-equation.hpp
   - matrix/gauss-elimination.hpp
@@ -362,11 +380,11 @@ data:
   isVerificationFile: false
   path: fps/find-p-recursive.hpp
   requiredBy: []
-  timestamp: '2023-12-22 19:57:12+09:00'
+  timestamp: '2024-03-04 16:48:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-1533.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
+  - verify/verify-yuki/yuki-1533.test.cpp
   - verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
 documentation_of: fps/find-p-recursive.hpp
 layout: document
