@@ -30,17 +30,16 @@ fps compositional_inverse(fps f, int deg = -1) {
 // calc_f(g, d) は f(g(x)) mod x^d を計算する関数
 template <typename fps>
 fps compositional_inverse(function<fps(fps, int)> calc_f, int deg) {
-  fps g = calc_f(fps{0, 1}, 2);
-  assert(g[0] == 0 && g[1] != 0);
-  g[1] = g[1].inverse();
-  for (int d = 2; d < deg; d *= 2) {
-    fps fg = calc_f(g, 2 * d + 1);
-    trc(fg);
-    fps fdg = (fg.diff() * g.diff().inv(2 * d)).pre(2 * d);
-    trc(fdg);
-    g = (g - (fg - fps{0, 1}) * fdg.inv(2 * d)).pre(2 * d);
+  if (deg <= 2) {
+    fps g = calc_f(fps{0, 1}, 2);
+    assert(g[0] == 0 && g[1] != 0);
+    g[1] = g[1].inverse();
+    return g.pre(deg);
   }
-  return {begin(g), begin(g) + deg};
+  fps g = compositional_inverse(calc_f, (deg + 1) / 2);
+  fps fg = calc_f(g, deg + 1);
+  fps fdg = (fg.diff() * g.diff().inv(deg)).pre(deg);
+  return (g - (fg - fps{0, 1}) * fdg.inv()).pre(deg);
 }
 
 /*

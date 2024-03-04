@@ -147,7 +147,7 @@ struct WaveletMatrix {
     }
   }
 
-  T sum(int l, int r, u32 upper) const {
+  T _sum(int l, int r, u32 upper) const {
     T res = I();
     for (int h = lg; h--;) {
       int l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);
@@ -164,6 +164,6 @@ struct WaveletMatrix {
 
   T sum(S L, S D, S R, S U) const {
     int l = xid(L), r = xid(R);
-    return sum(l, r, yid(U)) - sum(l, r, yid(D));
+    return _sum(l, r, yid(U)) - _sum(l, r, yid(D));
   }
 };

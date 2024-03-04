@@ -27,7 +27,7 @@ pair<T, T> inv_gcd(T a, T p) {
   a = safe_mod(a, p);
   if (a == 0) return {p, 0};
   T b = p, x = 1, y = 0;
-  while (a) {
+  while (a != 0) {
     T q = b / a;
     swap(a, b %= a);
     swap(x, y -= q * x);
@@ -43,7 +43,7 @@ T inv(T a, T p) {
   static_assert(is_broadly_signed_v<T>);
   a = safe_mod(a, p);
   T b = p, x = 1, y = 0;
-  while (a) {
+  while (a != 0) {
     T q = b / a;
     swap(a, b %= a);
     swap(x, y -= q * x);
@@ -58,10 +58,10 @@ template <typename T, typename U>
 T modpow(T a, U n, T p) {
   a = safe_mod(a, p);
   T ret = 1 % p;
-  while (n) {
-    if (n & 1) ret = U(ret) * a % p;
+  while (n != 0) {
+    if (n % 2 == 1) ret = U(ret) * a % p;
     a = U(a) * a % p;
-    n >>= 1;
+    n /= 2;
   }
   return ret;
 }

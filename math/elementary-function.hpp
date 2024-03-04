@@ -98,6 +98,7 @@ long long phi(long long n) {
 // Extended Euclidean algorithm
 // solve : ax + by = gcd(a, b)
 // return : pair(x, y)
+// a>=0,b>=0 でない場合 gcd(a, b) は負にもなり得るので注意
 pair<long long, long long> extgcd(long long a, long long b) {
   if (b == 0) return make_pair(1, 0);
   long long x, y;

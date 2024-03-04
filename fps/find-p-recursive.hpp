@@ -60,6 +60,31 @@ mint kth_term_of_p_recursive(vector<mint>& a, long long k, int d) {
   return res;
 }
 
+// K 項列挙
+template <typename mint>
+vector<mint> kth_term_of_p_recursive_enumerate(vector<mint>& a, long long K,
+                                               int d) {
+  if (K < (int)a.size()) return {begin(a), begin(a) + K};
+  if (all_of(begin(a), end(a), [](mint x) { return x == mint(0); }))
+    return vector<mint>(K, 0);
+  auto fs = find_p_recursive(a, d);
+  if (fs.empty()) return {};
+
+  int k = fs.size() - 1, is = a.size();
+  a.resize(K);
+  for (auto& f : fs) f.shrink();
+  reverse(begin(fs), end(fs));
+  for (int ipk = is; ipk < K; ipk++) {
+    int i = ipk - k;
+    mint s = 0;
+    for (int j = 0; j < k; j++) {
+      if (i + j >= 0) s += a[i + j] * fs[j].eval(i);
+    }
+    a[ipk] = -s / fs[k].eval(i);
+  }
+  return a;
+}
+
 template <typename mint>
 mint kth_term_of_p_recursive(vector<mint>& a, long long k) {
   if (k < (int)a.size()) return a[k];
@@ -83,6 +108,8 @@ mint kth_term_of_p_recursive(vector<mint>& a, long long k) {
   cerr << "Failed." << endl;
   exit(1);
 }
+
+
 
 /**
  * @brief P-recursiveの高速計算
