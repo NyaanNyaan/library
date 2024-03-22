@@ -453,7 +453,7 @@ data:
     \ m * sizeof(int));\n\n  Mat S(n, p, A), T(p, m, B), U(n, m, C);\n  inner_strassen(&S,\
     \ &T, &U);\n  vector<fps> u(n, fps(m));\n  for (int i = 0; i < n; i++) memcpy(u[i].data(),\
     \ C + i * m, m * sizeof(int));\n  return std::move(u);\n}\n\n#ifdef BUFFER_SIZE\n\
-    #undef BUFFER_SIZE\n#endif\n}  // namespace FastMatProd\n#line 5 \"fps/fps-composition-fast.hpp\"\
+    #undef BUFFER_SIZE\n#endif\n}  // namespace FastMatProd\n#line 5 \"fps/fps-composition-fast-old.hpp\"\
     \n\nusing mint = LazyMontgomeryModInt<998244353>;\nusing fps = FormalPowerSeries<mint>;\n\
     \n// Q(P(x))\n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
     ))) fps Composition(\n    fps P, fps Q, int deg = -1) {\n  int N = (deg == -1)\
@@ -523,16 +523,16 @@ data:
   - modulo/strassen.hpp
   - modint/simd-montgomery.hpp
   isVerificationFile: false
-  path: fps/fps-composition-fast.hpp
+  path: fps/fps-composition-fast-old.hpp
   requiredBy: []
-  timestamp: '2023-08-31 20:44:07+09:00'
+  timestamp: '2024-03-23 07:13:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-documentation_of: fps/fps-composition-fast.hpp
+documentation_of: fps/fps-composition-fast-old.hpp
 layout: document
 redirect_from:
-- /library/fps/fps-composition-fast.hpp
-- /library/fps/fps-composition-fast.hpp.html
+- /library/fps/fps-composition-fast-old.hpp
+- /library/fps/fps-composition-fast-old.hpp.html
 title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
 ---

@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: fps/fps-composition-fast.hpp
+    path: fps/fps-composition-fast-old.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
   - icon: ':heavy_check_mark:'
     path: modulo/gauss-elimination-fast.hpp
@@ -131,24 +131,24 @@ data:
   isVerificationFile: false
   path: modint/simd-montgomery.hpp
   requiredBy:
-  - fps/fps-composition-fast.hpp
+  - ntt/ntt-avx2.hpp
+  - ntt/ntt-sse42.hpp
+  - fps/fps-composition-fast-old.hpp
   - modulo/strassen.hpp
   - modulo/gauss-elimination-fast.hpp
-  - ntt/ntt-sse42.hpp
-  - ntt/ntt-avx2.hpp
   timestamp: '2021-04-26 16:30:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/gauss-elimination.test.cpp
-  - verify/verify-unit-test/strassen.test.cpp
-  - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-  - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp
-  - verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
   - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
+  - verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
+  - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
   - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp
+  - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+  - verify/verify-unit-test/strassen.test.cpp
+  - verify/verify-unit-test/gauss-elimination.test.cpp
 documentation_of: modint/simd-montgomery.hpp
 layout: document
 redirect_from:

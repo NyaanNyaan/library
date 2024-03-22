@@ -188,7 +188,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/fast-multieval.hpp
       title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: fps/fft2d.hpp
       title: fps/fft2d.hpp
     - icon: ':heavy_check_mark:'
@@ -202,12 +202,15 @@ data:
       path: fps/fps-circular.hpp
       title: "\u4E09\u89D2\u95A2\u6570"
     - icon: ':heavy_check_mark:'
-      path: fps/fps-composition-fast.hpp
+      path: fps/fps-composition-fast-old.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
     - icon: ':heavy_check_mark:'
-      path: fps/fps-composition.hpp
+      path: fps/fps-composition-old.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
         right)$ )"
+    - icon: ':heavy_check_mark:'
+      path: fps/fps-composition.hpp
+      title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N \\log^2 N)$ )"
     - icon: ':heavy_check_mark:'
       path: fps/fps-compositional-inverse.hpp
       title: "\u9006\u95A2\u6570"
@@ -235,6 +238,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/lagrange-interpolation-point.hpp
       title: fps/lagrange-interpolation-point.hpp
+    - icon: ':warning:'
+      path: fps/middle-product.hpp
+      title: fps/middle-product.hpp
     - icon: ':heavy_check_mark:'
       path: fps/mod-pow.hpp
       title: Mod-Pow ($f(x)^k \mod g(x)$)
@@ -267,6 +273,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/polynomial-interpolation.hpp
       title: fps/polynomial-interpolation.hpp
+    - icon: ':heavy_check_mark:'
+      path: fps/pow-enumerate.hpp
+      title: "pow \u5217\u6319"
     - icon: ':heavy_check_mark:'
       path: fps/root-finding.hpp
       title: fps/root-finding.hpp
@@ -1405,6 +1414,9 @@ data:
       path: verify/verify-unit-test/composite-exp.test.cpp
       title: verify/verify-unit-test/composite-exp.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/composition.test.cpp
+      title: verify/verify-unit-test/composition.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/debug.test.cpp
       title: verify/verify-unit-test/debug.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1428,6 +1440,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/fast-inv.test.cpp
       title: verify/verify-unit-test/fast-inv.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/fft2d.test.cpp
+      title: verify/verify-unit-test/fft2d.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/fps-sparse.test.cpp
       title: verify/verify-unit-test/fps-sparse.test.cpp
@@ -1784,8 +1799,14 @@ data:
       path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
       title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-composition-large.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-composition-large.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
       title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-compositional-inverse-large.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-compositional-inverse-large.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
       title: verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
@@ -2407,6 +2428,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1875.test.cpp
       title: verify/verify-yuki/yuki-1875.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1939-2.test.cpp
+      title: verify/verify-yuki/yuki-1939-2.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
       title: verify/verify-yuki/yuki-1939-sparse-pow.test.cpp

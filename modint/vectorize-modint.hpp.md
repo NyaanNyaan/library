@@ -141,8 +141,8 @@ data:
   timestamp: '2023-05-27 23:17:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
   - verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
+  - verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
 documentation_of: modint/vectorize-modint.hpp
 layout: document
 redirect_from:

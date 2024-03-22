@@ -95,15 +95,15 @@ data:
   isVerificationFile: false
   path: rbst/rbst-base.hpp
   requiredBy:
-  - rbst/lazy-reversible-rbst.hpp
   - orderedmap/orderedmap.hpp
   - orderedmap/orderedmap-base.hpp
+  - rbst/lazy-reversible-rbst.hpp
   timestamp: '2020-12-17 01:20:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/orderedmap.test.cpp
-  - verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
+  - verify/verify-unit-test/orderedmap.test.cpp
 documentation_of: rbst/rbst-base.hpp
 layout: document
 redirect_from:

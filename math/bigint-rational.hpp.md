@@ -543,8 +543,8 @@ data:
   timestamp: '2023-12-18 23:52:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/bigrational.test.cpp
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+  - verify/verify-unit-test/bigrational.test.cpp
 documentation_of: math/bigint-rational.hpp
 layout: document
 redirect_from:

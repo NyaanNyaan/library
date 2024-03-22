@@ -63,10 +63,10 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-3086.test.cpp
-  - verify/verify-yuki/yuki-0704.test.cpp
-  - verify/verify-yuki/yuki-0705.test.cpp
   - verify/verify-yuki/yuki-0952.test.cpp
+  - verify/verify-yuki/yuki-0705.test.cpp
   - verify/verify-yuki/yuki-0703.test.cpp
+  - verify/verify-yuki/yuki-0704.test.cpp
 documentation_of: dp/monge-shortest-path.hpp
 layout: document
 redirect_from:

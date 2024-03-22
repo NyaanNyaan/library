@@ -30,8 +30,8 @@ data:
   timestamp: '2020-12-05 08:35:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/primality-test.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp
+  - verify/verify-unit-test/primality-test.test.cpp
 documentation_of: prime/prime-sieve.hpp
 layout: document
 redirect_from:

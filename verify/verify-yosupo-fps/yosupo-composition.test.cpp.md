@@ -6,7 +6,7 @@ data:
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   - icon: ':heavy_check_mark:'
-    path: fps/fps-composition.hpp
+    path: fps/fps-composition-old.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
       right)$ )"
   - icon: ':heavy_check_mark:'
@@ -297,7 +297,7 @@ data:
     \ inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate <typename\
     \ mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\
     \u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\
-    \n * @docs docs/fps/formal-power-series.md\n */\n#line 2 \"fps/fps-composition.hpp\"\
+    \n * @docs docs/fps/formal-power-series.md\n */\n#line 2 \"fps/fps-composition-old.hpp\"\
     \n\n#line 2 \"modulo/binomial.hpp\"\n\n#line 6 \"modulo/binomial.hpp\"\nusing\
     \ namespace std;\n\n// \u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u306E MAX \u306B\
     \ \u300CC(n, r) \u3084 fac(n) \u3067\u30AF\u30A8\u30EA\u3092\u6295\u3052\u308B\
@@ -330,15 +330,15 @@ data:
     \  return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0)\
     \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n\
     \  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
-    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 5 \"fps/fps-composition.hpp\"\n\n//\
-    \ find Q(P(x)) mod x ^ min(deg(P), deg(Q))\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 5 \"fps/fps-composition-old.hpp\"\n\
+    \n// find Q(P(x)) mod x ^ min(deg(P), deg(Q))\ntemplate <typename mint>\nFormalPowerSeries<mint>\
     \ Composition(FormalPowerSeries<mint> P,\n                                   \
     \ FormalPowerSeries<mint> Q,\n                                    Binomial<mint>&\
     \ C, int deg = -1) {\n  using fps = FormalPowerSeries<mint>;\n  int N = (deg ==\
     \ -1) ? min(P.size(), Q.size()) : deg;\n  if (N == 0) return fps{};\n  P.shrink();\n\
     \  if (P.size() == 0) {\n    fps R(N, mint(0));\n    R[0] = Q.empty() ? mint(0)\
     \ : Q[0];\n    return R;\n  }\n  if (N == 1) return fps{Q.eval(P[0])};\n\n  P.resize(N,\
-    \ mint(0));\n  Q.resize(N, mint(0));\n  int M = max<int>(1, sqrt(N / log2(N)));\n\
+    \ mint(0));\n  Q.resize(N, mint(0));\n  int M = max<int>(2, sqrt(N / log2(N)));\n\
     \  int L = (N + M - 1) / M;\n  fps Pm = fps{begin(P), begin(P) + M};\n  fps Pr\
     \ = fps{begin(P) + M, end(P)};\n\n  int J = 31 - __builtin_clz(N - 1) + 1;\n \
     \ vector<fps> pms(J);\n  pms[0] = Pm;\n  for (int i = 1; i < J; i++) pms[i] =\
@@ -358,7 +358,7 @@ data:
     \ * idPm).pre(N - d);\n      R += ((QPm * pw_Pr).pre(N - d) * C.finv(l)) << d;\n\
     \    };\n  }\n  R.resize(N, mint(0));\n  return R;\n}\n\n/**\n * @brief \u95A2\
     \u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\right)$\
-    \ )\n * @docs docs/fps/fps-composition.md\n */\n#line 2 \"fps/ntt-friendly-fps.hpp\"\
+    \ )\n * @docs docs/fps/fps-composition-old.md\n */\n#line 2 \"fps/ntt-friendly-fps.hpp\"\
     \n\n#line 2 \"ntt/ntt.hpp\"\n\ntemplate <typename mint>\nstruct NTT {\n  static\
     \ constexpr uint32_t get_pr() {\n    uint32_t _mod = mint::get_mod();\n    using\
     \ u64 = uint64_t;\n    u64 ds[32] = {};\n    int idx = 0;\n    u64 m = _mod -\
@@ -609,7 +609,7 @@ data:
     \  }\n  wt('\\n');\n}\n"
   code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/composition_of_formal_power_series\"\
     \n\n#include \"../../template/template.hpp\"\n#include \"../../fps/formal-power-series.hpp\"\
-    \n#include \"../../fps/fps-composition.hpp\"\n#include \"../../fps/ntt-friendly-fps.hpp\"\
+    \n#include \"../../fps/fps-composition-old.hpp\"\n#include \"../../fps/ntt-friendly-fps.hpp\"\
     \n#include \"../../misc/fastio.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
     \n#include \"../../modulo/binomial.hpp\"\n\nusing namespace Nyaan; void Nyaan::solve()\
     \ {\n  using mint = LazyMontgomeryModInt<998244353>;\n  using fps = FormalPowerSeries<mint>;\n\
@@ -626,7 +626,7 @@ data:
   - template/debug.hpp
   - template/macro.hpp
   - fps/formal-power-series.hpp
-  - fps/fps-composition.hpp
+  - fps/fps-composition-old.hpp
   - modulo/binomial.hpp
   - fps/ntt-friendly-fps.hpp
   - ntt/ntt.hpp
@@ -636,7 +636,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
   requiredBy: []
-  timestamp: '2023-09-05 21:46:27+09:00'
+  timestamp: '2024-03-23 07:13:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-composition.test.cpp

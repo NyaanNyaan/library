@@ -78,8 +78,8 @@ data:
   timestamp: '2023-05-29 20:16:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-2281.test.cpp
   - verify/verify-yuki/yuki-2333.test.cpp
+  - verify/verify-yuki/yuki-2281.test.cpp
 documentation_of: segment-tree/segment-tree-max-of-interval.hpp
 layout: document
 redirect_from:

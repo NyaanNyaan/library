@@ -6,7 +6,7 @@ data:
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   - icon: ':heavy_check_mark:'
-    path: fps/fps-composition-fast.hpp
+    path: fps/fps-composition-fast-old.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
   - icon: ':heavy_check_mark:'
     path: fps/ntt-friendly-fps.hpp
@@ -659,7 +659,7 @@ data:
     \ m * sizeof(int));\n\n  Mat S(n, p, A), T(p, m, B), U(n, m, C);\n  inner_strassen(&S,\
     \ &T, &U);\n  vector<fps> u(n, fps(m));\n  for (int i = 0; i < n; i++) memcpy(u[i].data(),\
     \ C + i * m, m * sizeof(int));\n  return std::move(u);\n}\n\n#ifdef BUFFER_SIZE\n\
-    #undef BUFFER_SIZE\n#endif\n}  // namespace FastMatProd\n#line 5 \"fps/fps-composition-fast.hpp\"\
+    #undef BUFFER_SIZE\n#endif\n}  // namespace FastMatProd\n#line 5 \"fps/fps-composition-fast-old.hpp\"\
     \n\nusing mint = LazyMontgomeryModInt<998244353>;\nusing fps = FormalPowerSeries<mint>;\n\
     \n// Q(P(x))\n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
     ))) fps Composition(\n    fps P, fps Q, int deg = -1) {\n  int N = (deg == -1)\
@@ -904,7 +904,7 @@ data:
     \   if (i) wt(' ');\n    wt(R[i].get());\n  }\n  wt('\\n');\n}\n"
   code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/composition_of_formal_power_series\"\
     \n\n#include \"../../template/template.hpp\"\n#include \"../../fps/formal-power-series.hpp\"\
-    \n#include \"../../fps/fps-composition-fast.hpp\"\n#include \"../../fps/ntt-friendly-fps.hpp\"\
+    \n#include \"../../fps/fps-composition-fast-old.hpp\"\n#include \"../../fps/ntt-friendly-fps.hpp\"\
     \n#include \"../../misc/fastio.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n\
     \  using fps = FormalPowerSeries<mint>;\n  int N;\n  rd(N);\n  fps f(N), g(N);\n\
@@ -920,7 +920,7 @@ data:
   - template/debug.hpp
   - template/macro.hpp
   - fps/formal-power-series.hpp
-  - fps/fps-composition-fast.hpp
+  - fps/fps-composition-fast-old.hpp
   - modint/montgomery-modint.hpp
   - modulo/strassen.hpp
   - modint/simd-montgomery.hpp
@@ -931,7 +931,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   requiredBy: []
-  timestamp: '2023-09-05 21:46:27+09:00'
+  timestamp: '2024-03-23 07:13:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp

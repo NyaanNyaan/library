@@ -6,7 +6,7 @@ data:
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   - icon: ':heavy_check_mark:'
-    path: fps/fps-composition.hpp
+    path: fps/fps-composition-old.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
       right)$ )"
   - icon: ':heavy_check_mark:'
@@ -228,8 +228,8 @@ data:
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
     \ 4 \"verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp\"\n\
-    //\n#line 2 \"fps/fps-composition.hpp\"\n\n#line 2 \"modulo/binomial.hpp\"\n\n\
-    #line 6 \"modulo/binomial.hpp\"\nusing namespace std;\n\n// \u30B3\u30F3\u30B9\
+    //\n#line 2 \"fps/fps-composition-old.hpp\"\n\n#line 2 \"modulo/binomial.hpp\"\
+    \n\n#line 6 \"modulo/binomial.hpp\"\nusing namespace std;\n\n// \u30B3\u30F3\u30B9\
     \u30C8\u30E9\u30AF\u30BF\u306E MAX \u306B \u300CC(n, r) \u3084 fac(n) \u3067\u30AF\
     \u30A8\u30EA\u3092\u6295\u3052\u308B\u6700\u5927\u306E n \u300D\n// \u3092\u5165\
     \u308C\u308B\u3068\u500D\u901F\u304F\u3089\u3044\u306B\u306A\u308B\n// mod \u3092\
@@ -328,7 +328,7 @@ data:
     \ inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate <typename\
     \ mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\
     \u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\
-    \n * @docs docs/fps/formal-power-series.md\n */\n#line 5 \"fps/fps-composition.hpp\"\
+    \n * @docs docs/fps/formal-power-series.md\n */\n#line 5 \"fps/fps-composition-old.hpp\"\
     \n\n// find Q(P(x)) mod x ^ min(deg(P), deg(Q))\ntemplate <typename mint>\nFormalPowerSeries<mint>\
     \ Composition(FormalPowerSeries<mint> P,\n                                   \
     \ FormalPowerSeries<mint> Q,\n                                    Binomial<mint>&\
@@ -336,7 +336,7 @@ data:
     \ -1) ? min(P.size(), Q.size()) : deg;\n  if (N == 0) return fps{};\n  P.shrink();\n\
     \  if (P.size() == 0) {\n    fps R(N, mint(0));\n    R[0] = Q.empty() ? mint(0)\
     \ : Q[0];\n    return R;\n  }\n  if (N == 1) return fps{Q.eval(P[0])};\n\n  P.resize(N,\
-    \ mint(0));\n  Q.resize(N, mint(0));\n  int M = max<int>(1, sqrt(N / log2(N)));\n\
+    \ mint(0));\n  Q.resize(N, mint(0));\n  int M = max<int>(2, sqrt(N / log2(N)));\n\
     \  int L = (N + M - 1) / M;\n  fps Pm = fps{begin(P), begin(P) + M};\n  fps Pr\
     \ = fps{begin(P) + M, end(P)};\n\n  int J = 31 - __builtin_clz(N - 1) + 1;\n \
     \ vector<fps> pms(J);\n  pms[0] = Pm;\n  for (int i = 1; i < J; i++) pms[i] =\
@@ -356,7 +356,7 @@ data:
     \ * idPm).pre(N - d);\n      R += ((QPm * pw_Pr).pre(N - d) * C.finv(l)) << d;\n\
     \    };\n  }\n  R.resize(N, mint(0));\n  return R;\n}\n\n/**\n * @brief \u95A2\
     \u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\right)$\
-    \ )\n * @docs docs/fps/fps-composition.md\n */\n#line 2 \"fps/newton-method.hpp\"\
+    \ )\n * @docs docs/fps/fps-composition-old.md\n */\n#line 2 \"fps/newton-method.hpp\"\
     \n\n#line 4 \"fps/newton-method.hpp\"\nusing namespace std;\n\n// G(f) = 0 mod\
     \ x^{deg} \u3092\u6E80\u305F\u3059 f \u3092\u8FD4\u3059\n// f0 : \u521D\u671F\u89E3\
     , \u975E\u7A7A\u306A fps \u304B mint \u3092\u5165\u308C\u308B\n// g : (g(f), g'(f))\
@@ -552,7 +552,7 @@ data:
     \     return {fa, fda};\n      },\n      fps{0}, N);\n  out(g);\n}\n\nvoid Nyaan::solve()\
     \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/compositional_inverse_of_formal_power_series\"\
-    \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../fps/fps-composition.hpp\"\
+    \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../fps/fps-composition-old.hpp\"\
     \n#include \"../../fps/newton-method.hpp\"\n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\
     \n#include \"../../modint/montgomery-modint.hpp\"\n#include \"../../modulo/binomial.hpp\"\
     \n// #include \"fps/arbitrary-fps.hpp\"\n//\nusing namespace Nyaan;\nusing mint\
@@ -571,7 +571,7 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - fps/fps-composition.hpp
+  - fps/fps-composition-old.hpp
   - modulo/binomial.hpp
   - fps/formal-power-series.hpp
   - fps/newton-method.hpp
@@ -581,7 +581,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
   requiredBy: []
-  timestamp: '2024-03-04 16:48:10+09:00'
+  timestamp: '2024-03-23 07:13:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp

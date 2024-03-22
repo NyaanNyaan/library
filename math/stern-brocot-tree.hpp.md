@@ -138,10 +138,10 @@ data:
   timestamp: '2023-12-18 23:52:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-2262.test.cpp
-  - verify/verify-yuki/yuki-2266.test.cpp
-  - verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp
   - verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp
+  - verify/verify-yuki/yuki-2266.test.cpp
+  - verify/verify-yuki/yuki-2262.test.cpp
 documentation_of: math/stern-brocot-tree.hpp
 layout: document
 redirect_from:

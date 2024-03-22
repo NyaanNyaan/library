@@ -9,7 +9,7 @@ data:
     title: modint/simd-montgomery.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: fps/fps-composition-fast.hpp
+    path: fps/fps-composition-fast-old.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -681,13 +681,13 @@ data:
   isVerificationFile: false
   path: modulo/strassen.hpp
   requiredBy:
-  - fps/fps-composition-fast.hpp
+  - fps/fps-composition-fast-old.hpp
   timestamp: '2023-05-29 20:50:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/strassen.test.cpp
-  - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
+  - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+  - verify/verify-unit-test/strassen.test.cpp
 documentation_of: modulo/strassen.hpp
 layout: document
 redirect_from:

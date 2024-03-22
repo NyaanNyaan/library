@@ -63,11 +63,11 @@ data:
   timestamp: '2024-03-04 16:48:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-2661.test.cpp
-  - verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
-  - verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-newton-method-2.test.cpp
+  - verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
+  - verify/verify-yuki/yuki-2661.test.cpp
 documentation_of: fps/newton-method.hpp
 layout: document
 redirect_from:

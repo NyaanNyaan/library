@@ -62,8 +62,8 @@ data:
   timestamp: '2023-09-05 21:46:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp
   - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp
 documentation_of: dp/concave-min-plus-convolution.hpp
 layout: document
 redirect_from:

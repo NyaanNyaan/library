@@ -103,8 +103,8 @@ data:
   timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
   - verify/verify-aoj-other/aoj-1613.test.cpp
+  - verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
   - verify/verify-yuki/yuki-1789.test.cpp
 documentation_of: tree/tree-hash.hpp
 layout: document

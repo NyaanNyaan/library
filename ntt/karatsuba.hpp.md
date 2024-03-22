@@ -70,8 +70,8 @@ data:
   timestamp: '2021-12-21 23:55:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/karatsuba.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-2-64-karatsuba.test.cpp
+  - verify/verify-unit-test/karatsuba.test.cpp
 documentation_of: ntt/karatsuba.hpp
 layout: document
 redirect_from:
