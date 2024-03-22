@@ -3,7 +3,7 @@
 
 #include "../../template/template.hpp"
 #include "../../fps/formal-power-series.hpp"
-#include "../../fps/fps-composition-fast.hpp"
+#include "../../fps/fps-composition-fast-old.hpp"
 #include "../../fps/ntt-friendly-fps.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../modint/montgomery-modint.hpp"

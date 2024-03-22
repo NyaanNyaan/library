@@ -33,4 +33,4 @@ $$Q^{(i)}{(P_m)} \equiv \frac{\left(Q^{(i-1)}{(P_m)}\right)'}{P_m'} \mod x^{n-i}
 
 $N \leq 8192$とすると、感覚的には解説したアルゴリズムよりも大きさ$100$の行列積$100回$の方が高速に動作する気がする… 
 
-$\rightarrow$実装したら3倍速かった [実装](https://nyaannyaan.github.io/library/library/fps/fps-composition-fast.hpp.html)
+$\rightarrow$実装したら3倍速かった [実装](https://nyaannyaan.github.io/library/library/fps/fps-composition-fast-old.hpp.html)

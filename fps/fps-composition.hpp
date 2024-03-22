@@ -1,73 +1,74 @@
 #pragma once
 
-#include "../modulo/binomial.hpp"
-#include "./formal-power-series.hpp"
+#include <cassert>
+#include <vector>
+using namespace std;
 
-// find Q(P(x)) mod x ^ min(deg(P), deg(Q))
+#include "formal-power-series.hpp"
+
+// g(f(x)) を計算
 template <typename mint>
-FormalPowerSeries<mint> Composition(FormalPowerSeries<mint> P,
-                                    FormalPowerSeries<mint> Q,
-                                    Binomial<mint>& C, int deg = -1) {
+FormalPowerSeries<mint> composition(FormalPowerSeries<mint> f,
+                                    FormalPowerSeries<mint> g, int deg = -1) {
   using fps = FormalPowerSeries<mint>;
-  int N = (deg == -1) ? min(P.size(), Q.size()) : deg;
-  if (N == 0) return fps{};
-  P.shrink();
-  if (P.size() == 0) {
-    fps R(N, mint(0));
-    R[0] = Q.empty() ? mint(0) : Q[0];
-    return R;
-  }
-  if (N == 1) return fps{Q.eval(P[0])};
 
-  P.resize(N, mint(0));
-  Q.resize(N, mint(0));
-  int M = max<int>(1, sqrt(N / log2(N)));
-  int L = (N + M - 1) / M;
-  fps Pm = fps{begin(P), begin(P) + M};
-  fps Pr = fps{begin(P) + M, end(P)};
-
-  int J = 31 - __builtin_clz(N - 1) + 1;
-  vector<fps> pms(J);
-  pms[0] = Pm;
-  for (int i = 1; i < J; i++) pms[i] = (pms[i - 1] * pms[i - 1]).pre(N);
-
-  auto comp = [&](auto rec, int left, int j) -> fps {
-    if (j == 1) {
-      mint Q1 = left + 0 < (int)Q.size() ? Q[left + 0] : mint(0);
-      mint Q2 = left + 1 < (int)Q.size() ? Q[left + 1] : mint(0);
-      return (pms[0].pre(N) * Q2 + Q1).pre(N);
+  auto dfs = [&](auto rc, fps Q, int n, int h, int k) -> fps {
+    if (n == 0) {
+      fps T{begin(Q), begin(Q) + k};
+      T.push_back(1);
+      fps u = g * T.rev().inv().rev();
+      fps P(h * k);
+      for (int i = 0; i < (int)g.size(); i++) P[k - 1 - i] = u[i + k];
+      return P;
     }
-    if (N <= left) return fps{};
-    fps Q1 = rec(rec, left, j - 1);
-    fps Q2 = rec(rec, left + (1 << (j - 1)), j - 1);
-    return (Q1 + pms[j - 1].pre(N) * Q2).pre(N);
+    fps nQ(4 * h * k), nR(2 * h * k);
+    for (int i = 0; i < k; i++) {
+      copy(begin(Q) + i * h, begin(Q) + i * h + n + 1, begin(nQ) + i * 2 * h);
+    }
+    nQ[k * 2 * h] += 1;
+    nQ.ntt();
+    for (int i = 0; i < 4 * h * k; i += 2) swap(nQ[i], nQ[i + 1]);
+    for (int i = 0; i < 2 * h * k; i++) nR[i] = nQ[i * 2] * nQ[i * 2 + 1];
+    nR.intt();
+    nR[0] -= 1;
+    Q.assign(h * k, 0);
+    for (int i = 0; i < 2 * k; i++) {
+      for (int j = 0; j <= n / 2; j++) {
+        Q[i * h / 2 + j] = nR[i * h + j];
+      }
+    }
+    auto P = rc(rc, Q, n / 2, h / 2, k * 2);
+    fps nP(4 * h * k);
+    for (int i = 0; i < 2 * k; i++) {
+      for (int j = 0; j <= n / 2; j++) {
+        nP[i * 2 * h + j * 2 + n % 2] = P[i * h / 2 + j];
+      }
+    }
+    nP.ntt();
+    for (int i = 1; i < 4 * h * k; i *= 2) {
+      reverse(begin(nQ) + i, begin(nQ) + i * 2);
+    }
+    for (int i = 0; i < 4 * h * k; i++) nP[i] *= nQ[i];
+    nP.intt();
+    P.assign(h * k, 0);
+    for (int i = 0; i < k; i++) {
+      copy(begin(nP) + i * 2 * h, begin(nP) + i * 2 * h + n + 1,
+           begin(P) + i * h);
+    }
+    return P;
   };
 
-  fps QPm = comp(comp, 0, J);
-  fps R = QPm;
-  fps pw_Pr{mint(1)};
-  fps dPm = Pm.diff();
-  dPm.shrink();
-  // if dPm[0] == 0, dPm.inv() is undefined
-  int deg_dPm = 0;
-  while (deg_dPm != (int)dPm.size() && dPm[deg_dPm] == mint(0)) deg_dPm++;
-  fps idPm = dPm.empty() ? fps{} : (dPm >> deg_dPm).inv(N);
-
-  for (int l = 1, d = M; l <= L && d < N; l++, d += M) {
-    pw_Pr = (pw_Pr * Pr).pre(N - d);
-    if (dPm.empty()) {
-      R += (pw_Pr * Q[l]) << d;
-    } else {
-      idPm.resize(N - d);
-      QPm = ((QPm.diff() >> deg_dPm) * idPm).pre(N - d);
-      R += ((QPm * pw_Pr).pre(N - d) * C.finv(l)) << d;
-    };
-  }
-  R.resize(N, mint(0));
-  return R;
+  if (deg == -1) deg = max(f.size(), g.size());
+  f.resize(deg), g.resize(deg);
+  int n = f.size() - 1, k = 1;
+  int h = 1;
+  while (h < n + 1) h *= 2;
+  fps Q(h * k);
+  for (int i = 0; i <= n; i++) Q[i] = -f[i];
+  fps P = dfs(dfs, Q, n, h, k);
+  return P.pre(n + 1).rev();
 }
 
 /**
- * @brief 関数の合成( $\mathrm{O}\left((N \log N)^{\frac{3}{2}}\right)$ )
- * @docs docs/fps/fps-composition.md
+ * @brief 関数の合成( $\mathrm{O}(N \log^2 N)$ )
  */

@@ -1,9 +1,8 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/compositional_inverse_of_formal_power_series"
+#define PROBLEM "https://yukicoder.me/problems/no/1939"
 //
 #include "../../template/template.hpp"
 //
-#include "../../fps/fps-composition-old.hpp"
-#include "../../fps/newton-method.hpp"
+#include "../../fps/fps-compositional-inverse.hpp"
 //
 #include "../../fps/ntt-friendly-fps.hpp"
 #include "../../modint/montgomery-modint.hpp"
@@ -17,24 +16,20 @@ using vm = vector<mint>;
 using vvm = vector<vm>;
 Binomial<mint> C;
 using fps = FormalPowerSeries<mint>;
-//
 using namespace Nyaan;
 
 void q() {
-  inl(N);
-  fps f(N);
-  in(f);
-  fps fd = f.diff();
-  auto g = newton_method<fps>(
-      [&](fps a, int deg) -> pair<fps, fps> {
-        fps fa = Composition(a, f, C, deg) - fps{0, 1};
-        fps fda = Composition(a, fd, C, deg);
-        return {fa, fda};
-      },
-      fps{0}, N);
-  out(g);
-}
+  inl(N, M);
+  vl L(M);
+  in(L);
 
+  fps F(N + 2);
+  F[0] = 1;
+  each(n, L) F[n] = 1;
+  F = (fps{0, 1} * F.inv()).pre(N + 2);
+  auto f = compositional_inverse(F);
+  out(f[N + 1]);
+}
 void Nyaan::solve() {
   int t = 1;
   // in(t);
