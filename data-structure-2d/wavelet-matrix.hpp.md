@@ -147,7 +147,7 @@ title: Wavelet Matrix
 - `WaveletMatrix(n)`: 要素数nのWaveletMatrixを生成する。
 - `set(i, x)`:　i番目の要素にxを代入する。
 - `build()`:　データ構造を構築する。(これ以降`set(i, x)`を呼び出してはいけない。)
-- `accsess(k)`: k番目の要素の値を得る。
+- `access(k)`: k番目の要素の値を得る。
 - `kth_smallest(l, r, k)`:　`[l, r)`の範囲でk(0-indexed)番目に小さい値を返す。
 - `kth_largest(l, r, k)`:　`[l, r)`の範囲でk(0-indexed)番目に大きい値を返す。
 - `range_freq(l, r, upper)`: `[l, r)`の範囲でupper未満の要素の個数を返す。

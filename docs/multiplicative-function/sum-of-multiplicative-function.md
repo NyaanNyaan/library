@@ -71,7 +71,9 @@ $$\sum_{i+1\leq j\leq l} f(np_{j})=f(n)\sum_{i+1\leq j\leq l} f(p_{j})=f(n)\left
 
 以上のアルゴリズムを用いれば、$N$ 頂点の木の葉でない頂点を適切な情報をもってDFSすることで高速に $S(N)$ を求めることが出来る。
 
-DFS の計算量は葉でないノードの個数に一致して $\mathrm{O}\left(\frac{N^{\frac{3}{4}}}{\log N}\right)$ らしい。(参考文献のリンク先に書いてあるが中国語なので読めていない…) 以上より $S(N)$ を全体で $\mathrm{O}\left(\frac{N^{\frac{3}{4}}}{\log N}\right)$ で求めることができた。
+DFS の計算量は葉でないノードの個数に一致する。~~この個数は $\mathrm{O}\left(\frac{N^{\frac{3}{4}}}{\log N}\right)$ らしい。(参考文献のリンク先に書いてあるが中国語なので読めていない…)~~ 追記：葉でないノードの個数は $\mathrm{O}(N^{1 - \epsilon})$ が正しい。[参考](https://github.com/NyaanNyaan/library/issues/103)   
+ただし定数倍は極めて軽く、$N = 10^{11}$ で葉でないノードの個数はおよそ $8.8 \times 10^8$ 個で DFS が一般的な実行時間に十分収まる。  
+以上より $S(N)$ を実用上高速に求めることが出来た。
 
 関連：[yukicoder No.1322 Totient Bound](https://yukicoder.me/problems/no/1322) $\pi(N)$ の列挙と木上の DFS を使うとかなり見通しよく解くことが出来る。[提出](https://yukicoder.me/submissions/595840)
 
