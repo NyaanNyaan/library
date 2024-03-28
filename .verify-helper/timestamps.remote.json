@@ -443,6 +443,7 @@
 "verify/verify-yuki/yuki-2333.test.cpp": "2023-08-10 13:25:59 +0900",
 "verify/verify-yuki/yuki-2580.test.cpp": "2024-03-28 20:36:39 +0900",
 "verify/verify-yuki/yuki-2588.test.cpp": "2024-03-04 16:48:10 +0900",
+"verify/verify-yuki/yuki-2661.test.cpp": "2024-03-28 20:36:39 +0900",
 "verify/verify-yuki/yuki-3024.test.cpp": "2023-12-22 19:57:12 +0900",
 "verify/verify-yuki/yuki-helloworld.test.cpp": "2023-08-10 13:25:59 +0900"
 }
