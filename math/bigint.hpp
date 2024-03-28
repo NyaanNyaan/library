@@ -66,6 +66,7 @@ struct MultiPrecisionInteger {
       for (int i = is; i < ie; i++) x = x * 10 + S[i] - '0';
       dat.push_back(x);
     }
+    while(!dat.empty() and dat.back() == 0) dat.pop_back();
   }
 
   friend M operator+(const M& lhs, const M& rhs) {
