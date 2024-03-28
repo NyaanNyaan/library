@@ -147,35 +147,46 @@ data:
     \                                      int m = -1) {\n  using fps = FormalPowerSeries<mint>;\n\
     \  int n = f.size() - 1, k = 1;\n  g.resize(n + 1);\n  if (m == -1) m = n;\n \
     \ int h = 1;\n  while (h < n + 1) h *= 2;\n  fps P((n + 1) * k), Q((n + 1) * k),\
-    \ nP, nQ, buf;\n  for (int i = 0; i <= n; i++) P[i * k + 0] = g[i];\n  for (int\
-    \ i = 0; i <= n; i++) Q[i * k + 0] = -f[i];\n  while (n) {\n    nP.clear(), nQ.clear();\n\
-    \    for (int i = 0; i <= n; i++) {\n      buf.assign(2 * k, 0);\n      copy(begin(P)\
-    \ + i * k, begin(P) + (i + 1) * k, begin(buf));\n      buf.ntt();\n      copy(begin(buf),\
-    \ end(buf), back_inserter(nP));\n\n      buf.assign(2 * k, 0);\n      copy(begin(Q)\
-    \ + i * k, begin(Q) + (i + 1) * k, begin(buf));\n      if (i == 0) buf[k] += 1;\n\
-    \      buf.ntt();\n      copy(begin(buf), end(buf), back_inserter(nQ));\n    }\n\
-    \    nP.resize(2 * h * 2 * k);\n    nQ.resize(2 * h * 2 * k);\n    fps p(2 * h),\
-    \ q(2 * h);\n    for (int j = 0; j < 2 * k; j++) {\n      p.assign(2 * h, 0);\n\
-    \      q.assign(2 * h, 0);\n      for (int i = 0; i < h; i++) {\n        p[i]\
-    \ = nP[i * 2 * k + j], q[i] = nQ[i * 2 * k + j];\n      }\n      p.ntt(), q.ntt();\n\
-    \      for (int i = 0; i < 2 * h; i += 2) swap(q[i], q[i + 1]);\n      for (int\
-    \ i = 0; i < 2 * h; i++) p[i] *= q[i];\n      q.resize(h);\n      for (int i =\
-    \ 0; i < h; i++) q[i] = q[i * 2] * q[i * 2 + 1];\n      p.intt(), q.intt();\n\
-    \      for (int i = 0; i < 2 * h; i++) nP[i * 2 * k + j] = p[i];\n      for (int\
-    \ i = 0; i < h; i++) nQ[i * 2 * k + j] = q[i];\n    }\n    for (int i = 0; i <=\
-    \ n / 2; i++) {\n      copy(begin(nP) + (i * 2 + n % 2) * 2 * k,\n           begin(nP)\
-    \ + (i * 2 + n % 2 + 1) * 2 * k, begin(buf));\n      buf.intt();\n      copy(begin(buf),\
-    \ end(buf), begin(nP) + i * 2 * k);\n\n      copy(begin(nQ) + i * 2 * k, begin(nQ)\
-    \ + (i + 1) * 2 * k, begin(buf));\n      buf.intt();\n      if (i == 0) buf[0]\
-    \ -= 1;\n      copy(begin(buf), end(buf), begin(nQ) + i * 2 * k);\n    }\n   \
-    \ nP.resize((n / 2 + 1) * 2 * k);\n    nQ.resize((n / 2 + 1) * 2 * k);\n    swap(P,\
-    \ nP), swap(Q, nQ);\n    n /= 2, h /= 2, k *= 2;\n  }\n\n  fps S{begin(P), begin(P)\
-    \ + k};\n  fps T{begin(Q), begin(Q) + k};\n  return (S.rev() * (T + (fps{1} <<\
-    \ k)).rev().inv(m + 1)).pre(m + 1);\n}\n\n/*\n// \u5225\u30D0\u30FC\u30B8\u30E7\
-    \u30F3\n// [x^n] f(x)^i g(x) \u3092 i=0,1,...,m \u3067\u5217\u6319\n// n = (f\
-    \ \u306E\u6B21\u6570) - 1\nFormalPowerSeries<mint> pow_enumerate(FormalPowerSeries<mint>\
-    \ f,\n                                      FormalPowerSeries<mint> g = {1},\n\
-    \                                      int m = -1) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \ nP, nQ, buf, buf2;\n  for (int i = 0; i <= n; i++) P[i * k + 0] = g[i];\n  for\
+    \ (int i = 0; i <= n; i++) Q[i * k + 0] = -f[i];\n  Q[0] += 1;\n  while (n) {\n\
+    \    mint inv2 = mint{2}.inverse();\n    mint w = mint{fps::ntt_pr()}.pow((mint::get_mod()\
+    \ - 1) / (2 * k));\n    mint iw = w.inverse();\n\n    buf2.resize(k);\n    auto\
+    \ ntt_doubling = [&]() {\n      copy(begin(buf), end(buf), begin(buf2));\n   \
+    \   buf2.intt();\n      mint c = 1;\n      for (int i = 0; i < k; i++) buf2[i]\
+    \ *= c, c *= w;\n      buf2.ntt();\n      copy(begin(buf2), end(buf2), back_inserter(buf));\n\
+    \    };\n\n    nP.clear(), nQ.clear();\n    for (int i = 0; i <= n; i++) {\n \
+    \     buf.resize(k);\n      copy(begin(P) + i * k, begin(P) + (i + 1) * k, begin(buf));\n\
+    \      ntt_doubling();\n      copy(begin(buf), end(buf), back_inserter(nP));\n\
+    \n      buf.resize(k);\n      copy(begin(Q) + i * k, begin(Q) + (i + 1) * k, begin(buf));\n\
+    \      if (i == 0) {\n        for (int j = 0; j < k; j++) buf[j] -= 1;\n     \
+    \   ntt_doubling();\n        for (int j = 0; j < k; j++) buf[j] += 1;\n      \
+    \  for (int j = 0; j < k; j++) buf[k + j] -= 1;\n      } else {\n        ntt_doubling();\n\
+    \      }\n      copy(begin(buf), end(buf), back_inserter(nQ));\n    }\n    nP.resize(2\
+    \ * h * 2 * k);\n    nQ.resize(2 * h * 2 * k);\n    fps p(2 * h), q(2 * h);\n\n\
+    \    w = mint{fps::ntt_pr()}.pow((mint::get_mod() - 1) / (2 * h));\n    iw = w.inverse();\n\
+    \    vector<int> btr;\n    if (n % 2) {\n      btr.resize(h);\n      for (int\
+    \ i = 0, lg = __builtin_ctz(h); i < h; i++) {\n        btr[i] = (btr[i >> 1] >>\
+    \ 1) + ((i & 1) << (lg - 1));\n      }\n    }\n\n    for (int j = 0; j < 2 * k;\
+    \ j++) {\n      p.assign(2 * h, 0);\n      q.assign(2 * h, 0);\n      for (int\
+    \ i = 0; i < h; i++) {\n        p[i] = nP[i * 2 * k + j], q[i] = nQ[i * 2 * k\
+    \ + j];\n      }\n      p.ntt(), q.ntt();\n      for (int i = 0; i < 2 * h; i\
+    \ += 2) swap(q[i], q[i + 1]);\n      for (int i = 0; i < 2 * h; i++) p[i] *= q[i];\n\
+    \      for (int i = 0; i < h; i++) q[i] = q[i * 2] * q[i * 2 + 1];\n      if (n\
+    \ % 2 == 0) {\n        for (int i = 0; i < h; i++) p[i] = (p[i * 2] + p[i * 2\
+    \ + 1]) * inv2;\n      } else {\n        mint c = inv2;\n        buf.resize(h);\n\
+    \        for (int i : btr) buf[i] = (p[i * 2] - p[i * 2 + 1]) * c, c *= iw;\n\
+    \        swap(p, buf);\n      }\n      p.resize(h), q.resize(h);\n      p.intt(),\
+    \ q.intt();\n      for (int i = 0; i < h; i++) nP[i * 2 * k + j] = p[i];\n   \
+    \   for (int i = 0; i < h; i++) nQ[i * 2 * k + j] = q[i];\n    }\n    nP.resize((n\
+    \ / 2 + 1) * 2 * k);\n    nQ.resize((n / 2 + 1) * 2 * k);\n    swap(P, nP), swap(Q,\
+    \ nQ);\n    n /= 2, h /= 2, k *= 2;\n  }\n\n  fps S{begin(P), begin(P) + k};\n\
+    \  fps T{begin(Q), begin(Q) + k};\n  S.intt(), T.intt(), T[0] -= 1;\n  if (f[0]\
+    \ == 0) return S.rev().pre(m + 1);\n  return (S.rev() * (T + (fps{1} << k)).rev().inv(m\
+    \ + 1)).pre(m + 1);\n}\n\n/*\n// \u5225\u30D0\u30FC\u30B8\u30E7\u30F3\n// [x^n]\
+    \ f(x)^i g(x) \u3092 i=0,1,...,m \u3067\u5217\u6319\n// n = (f \u306E\u6B21\u6570\
+    ) - 1\nFormalPowerSeries<mint> pow_enumerate(FormalPowerSeries<mint> f,\n    \
+    \                                  FormalPowerSeries<mint> g = {1},\n        \
+    \                              int m = -1) {\n  using fps = FormalPowerSeries<mint>;\n\
     \  int n = f.size() - 1, k = 1;\n  g.resize(n + 1);\n  if (m == -1) m = n;\n \
     \ int h = 1;\n  while (h < n + 1) h *= 2;\n  fps P(h * k), Q(h * k), nP(4 * h\
     \ * k), nQ(4 * h * k), nR(2 * h * k);\n  for (int i = 0; i <= n; i++) P[i] = g[i],\
@@ -238,7 +249,7 @@ data:
   isVerificationFile: false
   path: fps/fps-compositional-inverse.hpp
   requiredBy: []
-  timestamp: '2024-03-23 07:13:55+09:00'
+  timestamp: '2024-03-28 20:36:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp

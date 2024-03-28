@@ -270,12 +270,12 @@ data:
     \ f);\n}\n\n/**\n * @brief monotone minima\n */\n#line 7 \"dp/concave-min-plus-convolution.hpp\"\
     \n\n// a \u306F\u4E0B\u306B\u51F8, b \u306F\u81EA\u7531\ntemplate <typename T>\n\
     vector<T> concave_min_plus_convolution(const vector<T>& a, const vector<T>& b)\
-    \ {\n  int n = a.size(), m = b.size();\n  auto argmin = monotone_minima(n + m\
-    \ - 1, m, [&](int i, int j, int k) {\n    if (i < k) return true;\n    if (i -\
-    \ j >= n) return false;\n    return a[i - j] + b[j] <= a[i - k] + b[k];\n  });\n\
-    \  vector<T> ans(n + m - 1);\n  for (int i = 0; i < n + m - 1; i++) {\n    int\
-    \ j = argmin[i];\n    ans[i] = a[i - j] + b[j];\n  }\n  return ans;\n}\n#line\
-    \ 8 \"verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp\"\
+    \ {\n  if (a.empty() or b.empty()) return {};\n  int n = a.size(), m = b.size();\n\
+    \  auto argmin = monotone_minima(n + m - 1, m, [&](int i, int j, int k) {\n  \
+    \  if (i < k) return true;\n    if (i - j >= n) return false;\n    return a[i\
+    \ - j] + b[j] <= a[i - k] + b[k];\n  });\n  vector<T> ans(n + m - 1);\n  for (int\
+    \ i = 0; i < n + m - 1; i++) {\n    int j = argmin[i];\n    ans[i] = a[i - j]\
+    \ + b[j];\n  }\n  return ans;\n}\n#line 8 \"verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp\"\
     \nusing namespace Nyaan;\n\nvoid test() {\n  rep(_, 10000) {\n    int N = rng(1,\
     \ 30);\n    int M = rng(1, 30);\n\n    vi a(N), b(M);\n    a[0] = -30;\n    for\
     \ (int i = 1, d = -10; i < N; i++, d += rng(1, 10)) {\n      a[i] = a[i - 1] +\
@@ -311,7 +311,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
   requiredBy: []
-  timestamp: '2023-09-05 21:46:27+09:00'
+  timestamp: '2024-03-28 20:36:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp

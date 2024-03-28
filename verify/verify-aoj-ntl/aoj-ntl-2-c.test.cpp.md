@@ -229,16 +229,17 @@ data:
     \    int l = 0;\n    if (S[0] == '-') ++l, neg = true;\n    for (int ie = S.size();\
     \ l < ie; ie -= logD) {\n      int is = max(l, ie - logD);\n      long long x\
     \ = 0;\n      for (int i = is; i < ie; i++) x = x * 10 + S[i] - '0';\n      dat.push_back(x);\n\
-    \    }\n  }\n\n  friend M operator+(const M& lhs, const M& rhs) {\n    if (lhs.neg\
-    \ == rhs.neg) return {lhs.neg, _add(lhs.dat, rhs.dat)};\n    if (_leq(lhs.dat,\
-    \ rhs.dat)) {\n      // |l| <= |r|\n      auto c = _sub(rhs.dat, lhs.dat);\n \
-    \     bool n = _is_zero(c) ? false : rhs.neg;\n      return {n, c};\n    }\n \
-    \   auto c = _sub(lhs.dat, rhs.dat);\n    bool n = _is_zero(c) ? false : lhs.neg;\n\
-    \    return {n, c};\n  }\n  friend M operator-(const M& lhs, const M& rhs) { return\
-    \ lhs + (-rhs); }\n\n  friend M operator*(const M& lhs, const M& rhs) {\n    auto\
-    \ c = _mul(lhs.dat, rhs.dat);\n    bool n = _is_zero(c) ? false : (lhs.neg ^ rhs.neg);\n\
-    \    return {n, c};\n  }\n  friend pair<M, M> divmod(const M& lhs, const M& rhs)\
-    \ {\n    auto dm = _divmod_newton(lhs.dat, rhs.dat);\n    bool dn = _is_zero(dm.first)\
+    \    }\n    while(!dat.empty() and dat.back() == 0) dat.pop_back();\n  }\n\n \
+    \ friend M operator+(const M& lhs, const M& rhs) {\n    if (lhs.neg == rhs.neg)\
+    \ return {lhs.neg, _add(lhs.dat, rhs.dat)};\n    if (_leq(lhs.dat, rhs.dat)) {\n\
+    \      // |l| <= |r|\n      auto c = _sub(rhs.dat, lhs.dat);\n      bool n = _is_zero(c)\
+    \ ? false : rhs.neg;\n      return {n, c};\n    }\n    auto c = _sub(lhs.dat,\
+    \ rhs.dat);\n    bool n = _is_zero(c) ? false : lhs.neg;\n    return {n, c};\n\
+    \  }\n  friend M operator-(const M& lhs, const M& rhs) { return lhs + (-rhs);\
+    \ }\n\n  friend M operator*(const M& lhs, const M& rhs) {\n    auto c = _mul(lhs.dat,\
+    \ rhs.dat);\n    bool n = _is_zero(c) ? false : (lhs.neg ^ rhs.neg);\n    return\
+    \ {n, c};\n  }\n  friend pair<M, M> divmod(const M& lhs, const M& rhs) {\n   \
+    \ auto dm = _divmod_newton(lhs.dat, rhs.dat);\n    bool dn = _is_zero(dm.first)\
     \ ? false : lhs.neg != rhs.neg;\n    bool mn = _is_zero(dm.second) ? false : lhs.neg;\n\
     \    return {M{dn, dm.first}, M{mn, dm.second}};\n  }\n  friend M operator/(const\
     \ M& lhs, const M& rhs) {\n    return divmod(lhs, rhs).first;\n  }\n  friend M\
@@ -422,7 +423,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
   requiredBy: []
-  timestamp: '2023-09-05 21:46:27+09:00'
+  timestamp: '2024-03-28 20:36:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
