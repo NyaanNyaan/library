@@ -8,6 +8,7 @@ using namespace std;
 // a は下に凸, b は自由
 template <typename T>
 vector<T> concave_min_plus_convolution(const vector<T>& a, const vector<T>& b) {
+  if (a.empty() or b.empty()) return {};
   int n = a.size(), m = b.size();
   auto argmin = monotone_minima(n + m - 1, m, [&](int i, int j, int k) {
     if (i < k) return true;

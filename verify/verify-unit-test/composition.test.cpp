@@ -22,10 +22,7 @@ Binomial<mint> C;
 using namespace Nyaan;
 
 void q() {
-  rep1(N, 200) {
-    fps f(N), g(N);
-    each(x, f) x = rng();
-    each(x, g) x = rng();
+  auto check = [&](int N, fps f, fps g) {
     fps h1 = Composition<mint>(f, g, C);
     fps h2 = composition(f, g);
     fps h3;
@@ -35,13 +32,28 @@ void q() {
     }
     assert(h1 == h2 and h2 == h3);
 
-    fps pe = pow_enumerate(f, g);
-    rep(i, N) {
-      assert(g[N - 1] == pe[i]);
-      g = (g * f).pre(N);
+    for (ll M : vector<int>{N - 1, (int)rng(1, 200)}) {
+      fps pe = pow_enumerate(f, g, M);
+      rep(i, M + 1) {
+        assert(g[N - 1] == pe[i]);
+        g = (g * f).pre(N);
+      }
     }
+  };
+
+  rep1(N, 200) {
+    fps f(N), g(N);
+    each(x, f) x = rng();
+    each(x, g) x = rng();
+
+    check(N, f, g);
+    f[0] = 0;
+    check(N, f, g);
+    swap(f[0], g[0]);
+    check(N, f, g);
   }
-  trc2("OK");
+
+  cerr << "OK" << endl;
 
   int a, b;
   cin >> a >> b;
