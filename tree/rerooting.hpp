@@ -13,45 +13,69 @@ struct Rerooting {
   const F1 f1;
   const F2 f2;
   vector<T> memo, dp;
-  T I;
+  T leaf;
 
-  Rerooting(const G &_g, const F1 _f1, const F2 _f2, const T &I_)
-      : g(_g), f1(_f1), f2(_f2), memo(g.size(), I_), dp(g.size(), I_), I(I_) {
+  Rerooting(const G &_g, const F1 _f1, const F2 _f2, const T &_leaf)
+      : g(_g), f1(_f1), f2(_f2), memo(g.size()), dp(g.size()), leaf(_leaf) {
     dfs(0, -1);
-    efs(0, -1, I);
+    dfs2(0, -1, T{});
   }
 
   const T &operator[](int i) const { return dp[i]; }
 
   void dfs(int cur, int par) {
+    vector<T> chds;
     for (auto &dst : g[cur]) {
       if (dst == par) continue;
       dfs(dst, cur);
-      memo[cur] = f1(memo[cur], f2(memo[dst], dst, cur));
+      chds.push_back(f2(memo[dst], dst, cur));
+    }
+    if (chds.empty()) {
+      memo[cur] = leaf;
+    } else {
+      memo[cur] = chds[0];
+      for (int i = 1; i < (int)chds.size(); i++) {
+        memo[cur] = f1(memo[cur], chds[i]);
+      }
     }
   }
 
-  void efs(int cur, int par, const T &pval) {
+  void dfs2(int cur, int par, const T &pval) {
     // get cumulative sum
     vector<T> buf;
+    if (cur != 0) buf.push_back(pval);
     for (auto dst : g[cur]) {
       if (dst == par) continue;
       buf.push_back(f2(memo[dst], dst, cur));
     }
-    vector<T> head(buf.size() + 1), tail(buf.size() + 1);
-    head[0] = tail[buf.size()] = I;
-    for (int i = 0; i < (int)buf.size(); i++) head[i + 1] = f1(head[i], buf[i]);
-    for (int i = (int)buf.size() - 1; i >= 0; i--)
-      tail[i] = f1(tail[i + 1], buf[i]);
-
-    // update
-    dp[cur] = par == -1 ? head.back() : f1(pval, head.back());
-
-    // propagate
-    int idx = 0;
+    vector<T> head(buf.size()), tail(buf.size());
+    if (!buf.empty()) {
+      head[0] = buf[0];
+      for (int i = 1; i < (int)buf.size(); i++) {
+        head[i] = f1(head[i - 1], buf[i]);
+      }
+      tail.back() = buf.back();
+      for (int i = (int)buf.size() - 2; i >= 0; i--) {
+        tail[i] = f1(tail[i + 1], buf[i]);
+      }
+    }
+    dp[cur] = head.empty() ? leaf : head.back();
+    int idx = cur == 0 ? 0 : 1;
     for (auto &dst : g[cur]) {
       if (dst == par) continue;
-      efs(dst, cur, f2(f1(pval, f1(head[idx], tail[idx + 1])), cur, dst));
+      T val;
+      bool first = idx == 0;
+      bool last = idx + 1 == (int)head.size();
+      if (first and last) {
+        val = leaf;
+      } else if (first) {
+        val = tail[idx + 1];
+      } else if (last) {
+        val = head[idx - 1];
+      } else {
+        val = f1(head[idx - 1], tail[idx + 1]);
+      }
+      dfs2(dst, cur, f2(val, cur, dst));
       idx++;
     }
   }
