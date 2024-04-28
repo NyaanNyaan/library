@@ -245,18 +245,18 @@ data:
     \ <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i; --i) {\n\
     \    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m = r - i;\n\
     \    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
-    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
-    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
-    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
-    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
-    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 7 \"\
-    verify/verify-unit-test/interval-union.test.cpp\"\n\nusing namespace Nyaan;\n\n\
-    void test(int N) {\n  vector<int> a(N + 1);\n  int t = randint(0, N / 2);\n  t\
-    \ = min<int>(t, randint(0, N / 2));\n  vector<pair<int, int>> buf;\n  while (t--)\
-    \ {\n    int l, r;\n    do {\n      l = randint(0, N);\n      r = randint(0, N\
-    \ + 1);\n    } while (l > r or abs(l - r) > 10);\n    buf.emplace_back(l, r);\n\
-    \    reg(i, l, r) a[i] = 1;\n  }\n  auto res = interval_union(buf);\n  rep(i,\
+    \  sort(begin(ret), end(ret));\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd()\
+    \ { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
+    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
+    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
+    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
+    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 7 \"verify/verify-unit-test/interval-union.test.cpp\"\
+    \n\nusing namespace Nyaan;\n\nvoid test(int N) {\n  vector<int> a(N + 1);\n  int\
+    \ t = randint(0, N / 2);\n  t = min<int>(t, randint(0, N / 2));\n  vector<pair<int,\
+    \ int>> buf;\n  while (t--) {\n    int l, r;\n    do {\n      l = randint(0, N);\n\
+    \      r = randint(0, N + 1);\n    } while (l > r or abs(l - r) > 10);\n    buf.emplace_back(l,\
+    \ r);\n    reg(i, l, r) a[i] = 1;\n  }\n  auto res = interval_union(buf);\n  rep(i,\
     \ sz(res) - 1) assert(res[i].second < res[i + 1].first);\n  each(p, res) {\n \
     \   reg(i, p.first, p.second) {\n      assert(a[i] == 1);\n      a[i] = 0;\n \
     \   }\n  }\n  assert(accumulate(all(a), 0) == 0);\n}\n\nvoid Nyaan::solve() {\n\
@@ -288,7 +288,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/interval-union.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 14:06:55+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/interval-union.test.cpp

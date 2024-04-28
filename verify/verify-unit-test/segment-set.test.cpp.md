@@ -256,33 +256,34 @@ data:
     \ randset(i64 l, i64 r, i64 n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64>\
     \ s;\n  for (i64 i = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if\
     \ (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n\
-    \  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble\
-    \ rnd() { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
-    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
-    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
-    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
-    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 8 \"verify/verify-unit-test/segment-set.test.cpp\"\
-    \n\n// \u533A\u9593\u3092\u7BA1\u7406\nusing namespace Nyaan;\n\nvoid test() {\n\
-    \  int MX = 128;\n  vi a(MX);\n\n  auto gen = [&]() -> map<int, int> {\n    map<int,\
-    \ int> res;\n    int i = 0;\n    while (true) {\n      while (i != MX and a[i]\
-    \ == 0) i++;\n      if (i == MX) break;\n      int j = i;\n      while (j != MX\
-    \ and a[j] == 1) j++;\n      res.emplace(i, j);\n      i = j;\n    }\n    return\
-    \ res;\n  };\n\n  SegmentSet<int> seg;\n  rep(__, TEN(5) * 2) {\n    int c = rng()\
-    \ & 1;\n    int l, r;\n    do {\n      l = rng() & 127;\n      r = rng() & 127;\n\
-    \    } while (l >= r);\n    if (c == 0) {\n      // insert\n      reg(i, l, r)\
-    \ a[i] = 1;\n      seg.insert(l, r);\n    } else if (c == 1) {\n      // erase\n\
-    \      reg(i, l, r) a[i] = 0;\n      seg.erase(l, r);\n    }\n    rep(i, 128)\
-    \ {\n      // find\n      bool f = seg.find(i) != seg.end();\n      assert(f ==\
-    \ a[i]);\n    }\n    auto mp = gen();\n    auto it1 = begin(seg);\n    auto it2\
-    \ = begin(mp);\n    while (it1 != end(seg)) {\n      assert(*it1 == *it2);\n \
-    \     it1++, it2++;\n    }\n\n    // lower_bound, upper_bound\n    vi rui(MX +\
-    \ 1);\n    rui[MX] = MX;\n    repr(i, MX) {\n      rui[i] = rui[i + 1];\n    \
-    \  if (a[i]) rui[i] = i;\n    }\n    rep(i, 128) {\n      auto itl = seg.lower_bound(i);\n\
-    \      int xl;\n      if (itl == end(seg)) {\n        xl = MX;\n      } else {\n\
-    \        xl = max<int>(i, itl->first);\n      }\n      assert(rui[i] == xl);\n\
-    \    }\n    assert(seg.size() == (int)seg.st.size());\n  }\n}\n\nvoid Nyaan::solve()\
-    \ {\n  test();\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \  for (auto& x : s) ret.push_back(x);\n  sort(begin(ret), end(ret));\n  return\
+    \ ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
+    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
+    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
+    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 8 \"\
+    verify/verify-unit-test/segment-set.test.cpp\"\n\n// \u533A\u9593\u3092\u7BA1\u7406\
+    \nusing namespace Nyaan;\n\nvoid test() {\n  int MX = 128;\n  vi a(MX);\n\n  auto\
+    \ gen = [&]() -> map<int, int> {\n    map<int, int> res;\n    int i = 0;\n   \
+    \ while (true) {\n      while (i != MX and a[i] == 0) i++;\n      if (i == MX)\
+    \ break;\n      int j = i;\n      while (j != MX and a[j] == 1) j++;\n      res.emplace(i,\
+    \ j);\n      i = j;\n    }\n    return res;\n  };\n\n  SegmentSet<int> seg;\n\
+    \  rep(__, TEN(5) * 2) {\n    int c = rng() & 1;\n    int l, r;\n    do {\n  \
+    \    l = rng() & 127;\n      r = rng() & 127;\n    } while (l >= r);\n    if (c\
+    \ == 0) {\n      // insert\n      reg(i, l, r) a[i] = 1;\n      seg.insert(l,\
+    \ r);\n    } else if (c == 1) {\n      // erase\n      reg(i, l, r) a[i] = 0;\n\
+    \      seg.erase(l, r);\n    }\n    rep(i, 128) {\n      // find\n      bool f\
+    \ = seg.find(i) != seg.end();\n      assert(f == a[i]);\n    }\n    auto mp =\
+    \ gen();\n    auto it1 = begin(seg);\n    auto it2 = begin(mp);\n    while (it1\
+    \ != end(seg)) {\n      assert(*it1 == *it2);\n      it1++, it2++;\n    }\n\n\
+    \    // lower_bound, upper_bound\n    vi rui(MX + 1);\n    rui[MX] = MX;\n   \
+    \ repr(i, MX) {\n      rui[i] = rui[i + 1];\n      if (a[i]) rui[i] = i;\n   \
+    \ }\n    rep(i, 128) {\n      auto itl = seg.lower_bound(i);\n      int xl;\n\
+    \      if (itl == end(seg)) {\n        xl = MX;\n      } else {\n        xl =\
+    \ max<int>(i, itl->first);\n      }\n      assert(rui[i] == xl);\n    }\n    assert(seg.size()\
+    \ == (int)seg.st.size());\n  }\n}\n\nvoid Nyaan::solve() {\n  test();\n\n  int\
+    \ a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../data-structure/segment-set.hpp\"\
     \n//\n#include \"../../misc/rng.hpp\"\n\n// \u533A\u9593\u3092\u7BA1\u7406\nusing\
@@ -319,7 +320,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/segment-set.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 14:06:55+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/segment-set.test.cpp

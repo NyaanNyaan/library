@@ -871,47 +871,48 @@ data:
     \ randset(i64 l, i64 r, i64 n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64>\
     \ s;\n  for (i64 i = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if\
     \ (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n\
-    \  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble\
-    \ rnd() { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
-    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
-    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
-    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
-    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 16 \"verify/verify-unit-test/bigrational.test.cpp\"\
-    \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  {\n    BigRational a{4,\
-    \ 3}, b{2, 3};\n    assert(a + b == 2);\n    assert(a - b == BigRational(2, 3));\n\
-    \    assert(a * b == BigRational(8, 9));\n    assert(a / b == 2);\n    assert(a.inverse()\
-    \ == BigRational(3, 4));\n    assert(a.pow(3) == BigRational(64, 27));\n\n   \
-    \ assert((a > b) == true);\n    assert((a >= b) == true);\n    assert((a < b)\
-    \ == false);\n    assert((a <= b) == false);\n  }\n\n  {\n    Binomial_rational<BigRational>\
-    \ C;\n    assert(C.fac(3) == 6);\n    assert(C.finv(3) == BigRational(1, 6));\n\
-    \    assert(C(4, 2) == 6);\n    assert(C(vi{3, 2}) == 10);\n  }\n\n  {\n    using\
-    \ fps = FormalPowerSeries_rational<BigRational>;\n    {\n      fps f{1, 2, {3,\
-    \ 2}}, g{{1, 4}, 5};\n      fps h{{5, 4}, 7, {3, 2}};\n      assert(f + g == h);\n\
-    \      h = fps{{3, 4}, -3, {3, 2}};\n      assert(f - g == h);\n      assert(f\
-    \ * g % g == fps{});\n      assert(f * g % f == fps{});\n    }\n\n    {\n    \
-    \  fps e{1, 1, {1, 2}, {1, 6}, {1, 24}, {1, 120}};\n      fps f = e.pow(TEN(10));\n\
-    \      trc(f);\n      rep(i, sz(e)) { assert(e[i] * BigRational{TEN(10)}.pow(i)\
-    \ == f[i]); }\n    }\n  }\n\n  // mint \u3068\u6319\u52D5\u306E\u6BD4\u8F03\n\
-    \  {\n    auto comp = [&](int i, int j, int k, int l) {\n      rep(b, 16) {\n\
-    \        int ii = (b >> 0) % 2 ? -i : +i;\n        int jj = (b >> 1) % 2 ? -j\
-    \ : +j;\n        int kk = (b >> 2) % 2 ? -k : +k;\n        int ll = (b >> 3) %\
-    \ 2 ? -l : +l;\n        BigRational x{ii, jj}, y{kk, ll};\n        mint X = mint{ii}\
-    \ / jj;\n        mint Y = mint{kk} / ll;\n        assert(X + Y == (x + y).to_mint(998244353).to_ll());\n\
-    \        assert(X - Y == (x - y).to_mint(998244353).to_ll());\n        assert(X\
-    \ * Y == (x * y).to_mint(998244353).to_ll());\n        if (Y != 0) {\n       \
-    \   assert(X / Y == (x / y).to_mint(998244353).to_ll());\n        }\n      }\n\
-    \    };\n    rep(i, 10) rep1(j, 10) rep(k, 10) rep1(l, 10) comp(i, j, k, l);\n\
-    \    rep(t, 1000) {\n      ll lower = t % 2 ? 1 : TEN(17);\n      ll i = rng(lower,\
-    \ TEN(18));\n      ll j = rng(lower, TEN(18));\n      ll k = rng(lower, TEN(18));\n\
-    \      ll l = rng(lower, TEN(18));\n      comp(i, j, k, l);\n    }\n  }\n\n  //\
-    \ binom, mint \u3068\u6319\u52D5\u306E\u6BD4\u8F03\n  {\n    Binomial_rational<BigRational>\
-    \ C1;\n    Binomial<mint> C2;\n    reg(i, -15, 15) {\n      assert(C2.fac(i) ==\
-    \ C1.fac(i).to_mint(998244353).to_ll());\n      assert(C2.finv(i) == C1.finv(i).to_mint(998244353).to_ll());\n\
-    \      assert(C2.inv(i) == C1.inv(i).to_mint(998244353).to_ll());\n      reg(j,\
-    \ -15, 15) assert(C2(i, j) == C1(i, j).to_mint(998244353).to_ll());\n    }\n \
-    \ }\n\n  cerr << \"OK\" << endl;\n  {\n    int s, t;\n    cin >> s >> t;\n   \
-    \ cout << s + t << \"\\n\";\n  }\n}\n"
+    \  for (auto& x : s) ret.push_back(x);\n  sort(begin(ret), end(ret));\n  return\
+    \ ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
+    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
+    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
+    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 16 \"\
+    verify/verify-unit-test/bigrational.test.cpp\"\n\nusing namespace Nyaan;\n\nvoid\
+    \ Nyaan::solve() {\n  {\n    BigRational a{4, 3}, b{2, 3};\n    assert(a + b ==\
+    \ 2);\n    assert(a - b == BigRational(2, 3));\n    assert(a * b == BigRational(8,\
+    \ 9));\n    assert(a / b == 2);\n    assert(a.inverse() == BigRational(3, 4));\n\
+    \    assert(a.pow(3) == BigRational(64, 27));\n\n    assert((a > b) == true);\n\
+    \    assert((a >= b) == true);\n    assert((a < b) == false);\n    assert((a <=\
+    \ b) == false);\n  }\n\n  {\n    Binomial_rational<BigRational> C;\n    assert(C.fac(3)\
+    \ == 6);\n    assert(C.finv(3) == BigRational(1, 6));\n    assert(C(4, 2) == 6);\n\
+    \    assert(C(vi{3, 2}) == 10);\n  }\n\n  {\n    using fps = FormalPowerSeries_rational<BigRational>;\n\
+    \    {\n      fps f{1, 2, {3, 2}}, g{{1, 4}, 5};\n      fps h{{5, 4}, 7, {3, 2}};\n\
+    \      assert(f + g == h);\n      h = fps{{3, 4}, -3, {3, 2}};\n      assert(f\
+    \ - g == h);\n      assert(f * g % g == fps{});\n      assert(f * g % f == fps{});\n\
+    \    }\n\n    {\n      fps e{1, 1, {1, 2}, {1, 6}, {1, 24}, {1, 120}};\n     \
+    \ fps f = e.pow(TEN(10));\n      trc(f);\n      rep(i, sz(e)) { assert(e[i] *\
+    \ BigRational{TEN(10)}.pow(i) == f[i]); }\n    }\n  }\n\n  // mint \u3068\u6319\
+    \u52D5\u306E\u6BD4\u8F03\n  {\n    auto comp = [&](int i, int j, int k, int l)\
+    \ {\n      rep(b, 16) {\n        int ii = (b >> 0) % 2 ? -i : +i;\n        int\
+    \ jj = (b >> 1) % 2 ? -j : +j;\n        int kk = (b >> 2) % 2 ? -k : +k;\n   \
+    \     int ll = (b >> 3) % 2 ? -l : +l;\n        BigRational x{ii, jj}, y{kk, ll};\n\
+    \        mint X = mint{ii} / jj;\n        mint Y = mint{kk} / ll;\n        assert(X\
+    \ + Y == (x + y).to_mint(998244353).to_ll());\n        assert(X - Y == (x - y).to_mint(998244353).to_ll());\n\
+    \        assert(X * Y == (x * y).to_mint(998244353).to_ll());\n        if (Y !=\
+    \ 0) {\n          assert(X / Y == (x / y).to_mint(998244353).to_ll());\n     \
+    \   }\n      }\n    };\n    rep(i, 10) rep1(j, 10) rep(k, 10) rep1(l, 10) comp(i,\
+    \ j, k, l);\n    rep(t, 1000) {\n      ll lower = t % 2 ? 1 : TEN(17);\n     \
+    \ ll i = rng(lower, TEN(18));\n      ll j = rng(lower, TEN(18));\n      ll k =\
+    \ rng(lower, TEN(18));\n      ll l = rng(lower, TEN(18));\n      comp(i, j, k,\
+    \ l);\n    }\n  }\n\n  // binom, mint \u3068\u6319\u52D5\u306E\u6BD4\u8F03\n \
+    \ {\n    Binomial_rational<BigRational> C1;\n    Binomial<mint> C2;\n    reg(i,\
+    \ -15, 15) {\n      assert(C2.fac(i) == C1.fac(i).to_mint(998244353).to_ll());\n\
+    \      assert(C2.finv(i) == C1.finv(i).to_mint(998244353).to_ll());\n      assert(C2.inv(i)\
+    \ == C1.inv(i).to_mint(998244353).to_ll());\n      reg(j, -15, 15) assert(C2(i,\
+    \ j) == C1(i, j).to_mint(998244353).to_ll());\n    }\n  }\n\n  cerr << \"OK\"\
+    \ << endl;\n  {\n    int s, t;\n    cin >> s >> t;\n    cout << s + t << \"\\\
+    n\";\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../math/rational-binomial.hpp\"\
     \n#include \"../../math/rational-fps.hpp\"\n#include \"../../math/rational.hpp\"\
@@ -976,7 +977,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/bigrational.test.cpp
   requiredBy: []
-  timestamp: '2024-03-28 20:36:39+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/bigrational.test.cpp

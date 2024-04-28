@@ -458,28 +458,29 @@ data:
     \ randset(i64 l, i64 r, i64 n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64>\
     \ s;\n  for (i64 i = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if\
     \ (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n\
-    \  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble\
-    \ rnd() { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
-    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
-    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
-    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
-    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 10 \"verify/verify-unit-test/string-search.test.cpp\"\
-    \n\nusing namespace Nyaan;\n\nvoid test() {\n  int N = rng(5, 20);\n  string S;\n\
-    \  int upper = rng(1, 10);\n  rep(i, N) S.push_back('a' + rng(0, upper - 1));\n\
-    \n  vp ps1;\n  rep(i, N) reg(j, i, N + 1) ps1.push_back({i, j});\n  vp ps2 = ps1;\n\
-    \n  // trc2(S);\n\n  StringSearch ss{S};\n  roriha rh{S};\n\n  each(p, ps1) each(q,\
-    \ ps1) {\n    string s1 = S.substr(p.fi, p.se - p.fi);\n    string s2 = S.substr(q.fi,\
-    \ q.se - q.fi);\n\n    // trc(p, q, s1, s2);\n\n    // lcp\n    {\n      int l\
-    \ = 0;\n      while (l < min(sz(s1), sz(s2)) and s1[l] == s2[l]) l++;\n      assert(ss.lcp(p.fi,\
-    \ p.se, q.fi, q.se) == l);\n      assert(ss.lcp(p, q) == l);\n      if (p.se ==\
-    \ N and q.se == N) assert(ss.lcp(p.fi, q.fi) == l);\n    }\n\n    // strcmp\n\
-    \    {\n      int c2 = s1 < s2 ? -1 : s1 == s2 ? 0 : 1;\n      int c3 = ss.strcmp(p.fi,\
-    \ p.se, q.fi, q.se);\n      int c4 = ss.strcmp(p, q);\n      int c5 = rh.strcmp(rh,\
-    \ rh, p.fi, q.fi, p.se, q.se);\n      assert(c2 == c3 and c3 == c4 and c4 == c5);\n\
-    \      if (p.se == N and q.se == N) assert(ss.strcmp(p.fi, q.fi) == c2);\n   \
-    \ }\n  }\n}\n\nvoid Nyaan::solve() {\n  rep(t, 1000) test();\n  cerr << \"OK\"\
-    \ << endl;\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \  for (auto& x : s) ret.push_back(x);\n  sort(begin(ret), end(ret));\n  return\
+    \ ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
+    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
+    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
+    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 10 \"\
+    verify/verify-unit-test/string-search.test.cpp\"\n\nusing namespace Nyaan;\n\n\
+    void test() {\n  int N = rng(5, 20);\n  string S;\n  int upper = rng(1, 10);\n\
+    \  rep(i, N) S.push_back('a' + rng(0, upper - 1));\n\n  vp ps1;\n  rep(i, N) reg(j,\
+    \ i, N + 1) ps1.push_back({i, j});\n  vp ps2 = ps1;\n\n  // trc2(S);\n\n  StringSearch\
+    \ ss{S};\n  roriha rh{S};\n\n  each(p, ps1) each(q, ps1) {\n    string s1 = S.substr(p.fi,\
+    \ p.se - p.fi);\n    string s2 = S.substr(q.fi, q.se - q.fi);\n\n    // trc(p,\
+    \ q, s1, s2);\n\n    // lcp\n    {\n      int l = 0;\n      while (l < min(sz(s1),\
+    \ sz(s2)) and s1[l] == s2[l]) l++;\n      assert(ss.lcp(p.fi, p.se, q.fi, q.se)\
+    \ == l);\n      assert(ss.lcp(p, q) == l);\n      if (p.se == N and q.se == N)\
+    \ assert(ss.lcp(p.fi, q.fi) == l);\n    }\n\n    // strcmp\n    {\n      int c2\
+    \ = s1 < s2 ? -1 : s1 == s2 ? 0 : 1;\n      int c3 = ss.strcmp(p.fi, p.se, q.fi,\
+    \ q.se);\n      int c4 = ss.strcmp(p, q);\n      int c5 = rh.strcmp(rh, rh, p.fi,\
+    \ q.fi, p.se, q.se);\n      assert(c2 == c3 and c3 == c4 and c4 == c5);\n    \
+    \  if (p.se == N and q.se == N) assert(ss.strcmp(p.fi, q.fi) == c2);\n    }\n\
+    \  }\n}\n\nvoid Nyaan::solve() {\n  rep(t, 1000) test();\n  cerr << \"OK\" <<\
+    \ endl;\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../string/string-search.hpp\"\
     \n//\n#include \"../../string/rolling-hash.hpp\"\n//\n#include \"../../misc/rng.hpp\"\
@@ -514,7 +515,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/string-search.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 14:06:55+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/string-search.test.cpp

@@ -88,12 +88,12 @@ data:
     \ N; convex[k++] = ps[i++]) {\n    while (k >= 2 && ccw(convex[k - 2], convex[k\
     \ - 1], ps[i]) <= 0) --k;\n  }\n  for (int i = N - 2, t = k + 1; i >= 0; convex[k++]\
     \ = ps[i--]) {\n    while (k >= t && ccw(convex[k - 2], convex[k - 1], ps[i])\
-    \ <= 0) --k;\n  }\n  convex.resize(k - 1);\n  return convex;\n}"
+    \ <= 0) --k;\n  }\n  convex.resize(k - 1);\n  return convex;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: geometry/integer-geometry.hpp
   requiredBy: []
-  timestamp: '2021-09-05 14:15:17+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-other/yosupo-argument-sort.test.cpp

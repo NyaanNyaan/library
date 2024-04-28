@@ -263,7 +263,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 13:25:59+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp

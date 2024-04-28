@@ -625,18 +625,19 @@ data:
     \ randset(i64 l, i64 r, i64 n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64>\
     \ s;\n  for (i64 i = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if\
     \ (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n\
-    \  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble\
-    \ rnd() { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
-    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
-    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
-    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
-    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"misc/timer.hpp\"\n\n#line\
-    \ 4 \"misc/timer.hpp\"\nusing namespace std;\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
-    \ st;\n\n  Timer() { reset(); }\n  void reset() { st = chrono::high_resolution_clock::now();\
-    \ }\n\n  long long elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
-    \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
-    \  long long operator()() { return elapsed(); }\n};\n#line 8 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\
+    \  for (auto& x : s) ret.push_back(x);\n  sort(begin(ret), end(ret));\n  return\
+    \ ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
+    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
+    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
+    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"\
+    misc/timer.hpp\"\n\n#line 4 \"misc/timer.hpp\"\nusing namespace std;\n\nstruct\
+    \ Timer {\n  chrono::high_resolution_clock::time_point st;\n\n  Timer() { reset();\
+    \ }\n  void reset() { st = chrono::high_resolution_clock::now(); }\n\n  long long\
+    \ elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n    return\
+    \ chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n  long long\
+    \ operator()() { return elapsed(); }\n};\n#line 8 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\
     \n//\n#line 2 \"segment-tree/lazy-segment-tree.hpp\"\n\n// LazySegmentTree\ntemplate\
     \ <typename T, typename E, typename F, typename G, typename H>\nstruct LazySegmentTree\
     \ {\n  int n, height;\n  F f;\n  G g;\n  H h;\n  T ti;\n  E ei;\n  vector<T> dat;\n\
@@ -668,9 +669,9 @@ data:
     };\n#line 10 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\n//\n#line\
     \ 2 \"math/affine-transformation.hpp\"\n\ntemplate <typename mint>\nstruct Affine\
     \ {\n  mint a, b;\n  constexpr Affine() : a(1), b(0) {}\n  constexpr Affine(mint\
-    \ _a, mint _b) : a(_a), b(_b) {}\n  mint operator()(mint x) { return a * x + b;\
-    \ }\n  // R(L(x))\n  friend Affine operator*(const Affine& l, const Affine& r)\
-    \ {\n    return Affine(l.a * r.a, l.b * r.a + r.b);\n  }\n  bool operator==(const\
+    \ _a, mint _b) : a(_a), b(_b) {}\n  mint operator()(mint x) const { return a *\
+    \ x + b; }\n  // R(L(x))\n  friend Affine operator*(const Affine& l, const Affine&\
+    \ r) {\n    return Affine(l.a * r.a, l.b * r.a + r.b);\n  }\n  bool operator==(const\
     \ Affine& r) const { return a == r.a && b == r.b; }\n  bool operator!=(const Affine&\
     \ r) const { return a != r.a || b != r.b; }\n  friend ostream& operator<<(ostream&\
     \ os, const Affine& r) {\n    os << \"( \" << r.a << \", \" << r.b << \" )\";\n\
@@ -952,7 +953,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/rbst-segment-tree.test.cpp
   requiredBy: []
-  timestamp: '2023-09-05 21:46:27+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/rbst-segment-tree.test.cpp

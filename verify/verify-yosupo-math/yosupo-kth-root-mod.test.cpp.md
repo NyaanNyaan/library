@@ -345,52 +345,52 @@ data:
     \ randset(i64 l, i64 r, i64 n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64>\
     \ s;\n  for (i64 i = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if\
     \ (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n\
-    \  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble\
-    \ rnd() { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
-    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
-    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
-    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
-    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"prime/miller-rabin.hpp\"\n\
-    \n#line 4 \"prime/miller-rabin.hpp\"\nusing namespace std;\n\n#line 8 \"prime/miller-rabin.hpp\"\
-    \n\nnamespace fast_factorize {\n\ntemplate <typename T, typename U>\nbool miller_rabin(const\
-    \ T& n, vector<T> ws) {\n  if (n <= 2) return n == 2;\n  if (n % 2 == 0) return\
-    \ false;\n\n  T d = n - 1;\n  while (d % 2 == 0) d /= 2;\n  U e = 1, rev = n -\
-    \ 1;\n  for (T w : ws) {\n    if (w % n == 0) continue;\n    T t = d;\n    U y\
-    \ = internal::modpow<T, U>(w, t, n);\n    while (t != n - 1 && y != e && y !=\
-    \ rev) y = y * y % n, t *= 2;\n    if (y != rev && t % 2 == 0) return false;\n\
-    \  }\n  return true;\n}\n\nbool miller_rabin_u64(unsigned long long n) {\n  return\
-    \ miller_rabin<unsigned long long, __uint128_t>(\n      n, {2, 325, 9375, 28178,\
-    \ 450775, 9780504, 1795265022});\n}\n\ntemplate <typename mint>\nbool miller_rabin(unsigned\
-    \ long long n, vector<unsigned long long> ws) {\n  if (n <= 2) return n == 2;\n\
-    \  if (n % 2 == 0) return false;\n\n  if (mint::get_mod() != n) mint::set_mod(n);\n\
-    \  unsigned long long d = n - 1;\n  while (~d & 1) d >>= 1;\n  mint e = 1, rev\
-    \ = n - 1;\n  for (unsigned long long w : ws) {\n    if (w % n == 0) continue;\n\
-    \    unsigned long long t = d;\n    mint y = mint(w).pow(t);\n    while (t !=\
-    \ n - 1 && y != e && y != rev) y *= y, t *= 2;\n    if (y != rev && t % 2 == 0)\
-    \ return false;\n  }\n  return true;\n}\n\nbool is_prime(unsigned long long n)\
-    \ {\n  using mint32 = ArbitraryLazyMontgomeryModInt<96229631>;\n  using mint64\
-    \ = ArbitraryLazyMontgomeryModInt64bit<622196072>;\n\n  if (n <= 2) return n ==\
-    \ 2;\n  if (n % 2 == 0) return false;\n  if (n < (1uLL << 30)) {\n    return miller_rabin<mint32>(n,\
-    \ {2, 7, 61});\n  } else if (n < (1uLL << 62)) {\n    return miller_rabin<mint64>(\n\
-    \        n, {2, 325, 9375, 28178, 450775, 9780504, 1795265022});\n  } else {\n\
-    \    return miller_rabin_u64(n);\n  }\n}\n\n}  // namespace fast_factorize\n\n\
-    using fast_factorize::is_prime;\n\n/**\n * @brief Miller-Rabin primality test\n\
-    \ */\n#line 12 \"prime/fast-factorize.hpp\"\n\nnamespace fast_factorize {\nusing\
-    \ u64 = uint64_t;\n\ntemplate <typename mint, typename T>\nT pollard_rho(T n)\
-    \ {\n  if (~n & 1) return 2;\n  if (is_prime(n)) return n;\n  if (mint::get_mod()\
-    \ != n) mint::set_mod(n);\n  mint R, one = 1;\n  auto f = [&](mint x) { return\
-    \ x * x + R; };\n  auto rnd_ = [&]() { return rng() % (n - 2) + 2; };\n  while\
-    \ (1) {\n    mint x, y, ys, q = one;\n    R = rnd_(), y = rnd_();\n    T g = 1;\n\
-    \    constexpr int m = 128;\n    for (int r = 1; g == 1; r <<= 1) {\n      x =\
-    \ y;\n      for (int i = 0; i < r; ++i) y = f(y);\n      for (int k = 0; g ==\
-    \ 1 && k < r; k += m) {\n        ys = y;\n        for (int i = 0; i < m && i <\
-    \ r - k; ++i) q *= x - (y = f(y));\n        g = gcd(q.get(), n);\n      }\n  \
-    \  }\n    if (g == n) do\n        g = gcd((x - (ys = f(ys))).get(), n);\n    \
-    \  while (g == 1);\n    if (g != n) return g;\n  }\n  exit(1);\n}\n\nusing i64\
-    \ = long long;\n\nvector<i64> inner_factorize(u64 n) {\n  using mint32 = ArbitraryLazyMontgomeryModInt<452288976>;\n\
-    \  using mint64 = ArbitraryLazyMontgomeryModInt64bit<401243123>;\n\n  if (n <=\
-    \ 1) return {};\n  u64 p;\n  if (n <= (1LL << 30)) {\n    p = pollard_rho<mint32,\
+    \  for (auto& x : s) ret.push_back(x);\n  sort(begin(ret), end(ret));\n  return\
+    \ ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
+    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
+    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
+    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"\
+    prime/miller-rabin.hpp\"\n\n#line 4 \"prime/miller-rabin.hpp\"\nusing namespace\
+    \ std;\n\n#line 8 \"prime/miller-rabin.hpp\"\n\nnamespace fast_factorize {\n\n\
+    template <typename T, typename U>\nbool miller_rabin(const T& n, vector<T> ws)\
+    \ {\n  if (n <= 2) return n == 2;\n  if (n % 2 == 0) return false;\n\n  T d =\
+    \ n - 1;\n  while (d % 2 == 0) d /= 2;\n  U e = 1, rev = n - 1;\n  for (T w :\
+    \ ws) {\n    if (w % n == 0) continue;\n    T t = d;\n    U y = internal::modpow<T,\
+    \ U>(w, t, n);\n    while (t != n - 1 && y != e && y != rev) y = y * y % n, t\
+    \ *= 2;\n    if (y != rev && t % 2 == 0) return false;\n  }\n  return true;\n\
+    }\n\nbool miller_rabin_u64(unsigned long long n) {\n  return miller_rabin<unsigned\
+    \ long long, __uint128_t>(\n      n, {2, 325, 9375, 28178, 450775, 9780504, 1795265022});\n\
+    }\n\ntemplate <typename mint>\nbool miller_rabin(unsigned long long n, vector<unsigned\
+    \ long long> ws) {\n  if (n <= 2) return n == 2;\n  if (n % 2 == 0) return false;\n\
+    \n  if (mint::get_mod() != n) mint::set_mod(n);\n  unsigned long long d = n -\
+    \ 1;\n  while (~d & 1) d >>= 1;\n  mint e = 1, rev = n - 1;\n  for (unsigned long\
+    \ long w : ws) {\n    if (w % n == 0) continue;\n    unsigned long long t = d;\n\
+    \    mint y = mint(w).pow(t);\n    while (t != n - 1 && y != e && y != rev) y\
+    \ *= y, t *= 2;\n    if (y != rev && t % 2 == 0) return false;\n  }\n  return\
+    \ true;\n}\n\nbool is_prime(unsigned long long n) {\n  using mint32 = ArbitraryLazyMontgomeryModInt<96229631>;\n\
+    \  using mint64 = ArbitraryLazyMontgomeryModInt64bit<622196072>;\n\n  if (n <=\
+    \ 2) return n == 2;\n  if (n % 2 == 0) return false;\n  if (n < (1uLL << 30))\
+    \ {\n    return miller_rabin<mint32>(n, {2, 7, 61});\n  } else if (n < (1uLL <<\
+    \ 62)) {\n    return miller_rabin<mint64>(\n        n, {2, 325, 9375, 28178, 450775,\
+    \ 9780504, 1795265022});\n  } else {\n    return miller_rabin_u64(n);\n  }\n}\n\
+    \n}  // namespace fast_factorize\n\nusing fast_factorize::is_prime;\n\n/**\n *\
+    \ @brief Miller-Rabin primality test\n */\n#line 12 \"prime/fast-factorize.hpp\"\
+    \n\nnamespace fast_factorize {\nusing u64 = uint64_t;\n\ntemplate <typename mint,\
+    \ typename T>\nT pollard_rho(T n) {\n  if (~n & 1) return 2;\n  if (is_prime(n))\
+    \ return n;\n  if (mint::get_mod() != n) mint::set_mod(n);\n  mint R, one = 1;\n\
+    \  auto f = [&](mint x) { return x * x + R; };\n  auto rnd_ = [&]() { return rng()\
+    \ % (n - 2) + 2; };\n  while (1) {\n    mint x, y, ys, q = one;\n    R = rnd_(),\
+    \ y = rnd_();\n    T g = 1;\n    constexpr int m = 128;\n    for (int r = 1; g\
+    \ == 1; r <<= 1) {\n      x = y;\n      for (int i = 0; i < r; ++i) y = f(y);\n\
+    \      for (int k = 0; g == 1 && k < r; k += m) {\n        ys = y;\n        for\
+    \ (int i = 0; i < m && i < r - k; ++i) q *= x - (y = f(y));\n        g = gcd(q.get(),\
+    \ n);\n      }\n    }\n    if (g == n) do\n        g = gcd((x - (ys = f(ys))).get(),\
+    \ n);\n      while (g == 1);\n    if (g != n) return g;\n  }\n  exit(1);\n}\n\n\
+    using i64 = long long;\n\nvector<i64> inner_factorize(u64 n) {\n  using mint32\
+    \ = ArbitraryLazyMontgomeryModInt<452288976>;\n  using mint64 = ArbitraryLazyMontgomeryModInt64bit<401243123>;\n\
+    \n  if (n <= 1) return {};\n  u64 p;\n  if (n <= (1LL << 30)) {\n    p = pollard_rho<mint32,\
     \ uint32_t>(n);\n  } else if (n <= (1LL << 62)) {\n    p = pollard_rho<mint64,\
     \ uint64_t>(n);\n  } else {\n    exit(1);\n  }\n  if (p == n) return {i64(p)};\n\
     \  auto l = inner_factorize(p);\n  auto r = inner_factorize(n / p);\n  copy(begin(r),\
@@ -478,7 +478,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   requiredBy: []
-  timestamp: '2024-03-04 16:48:10+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp

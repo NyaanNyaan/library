@@ -305,26 +305,27 @@ data:
     \ <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i; --i) {\n\
     \    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m = r - i;\n\
     \    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
-    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
-    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
-    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
-    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
-    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"\
-    modint/arbitrary-modint.hpp\"\n\n#line 2 \"modint/barrett-reduction.hpp\"\n\n\
-    #line 4 \"modint/barrett-reduction.hpp\"\nusing namespace std;\n\nstruct Barrett\
-    \ {\n  using u32 = unsigned int;\n  using i64 = long long;\n  using u64 = unsigned\
-    \ long long;\n  u32 m;\n  u64 im;\n  Barrett() : m(), im() {}\n  Barrett(int n)\
-    \ : m(n), im(u64(-1) / m + 1) {}\n  constexpr inline i64 quo(u64 n) {\n    u64\
-    \ x = u64((__uint128_t(n) * im) >> 64);\n    u32 r = n - x * m;\n    return m\
-    \ <= r ? x - 1 : x;\n  }\n  constexpr inline i64 rem(u64 n) {\n    u64 x = u64((__uint128_t(n)\
-    \ * im) >> 64);\n    u32 r = n - x * m;\n    return m <= r ? r + m : r;\n  }\n\
-    \  constexpr inline pair<i64, int> quorem(u64 n) {\n    u64 x = u64((__uint128_t(n)\
-    \ * im) >> 64);\n    u32 r = n - x * m;\n    if (m <= r) return {x - 1, r + m};\n\
-    \    return {x, r};\n  }\n  constexpr inline i64 pow(u64 n, i64 p) {\n    u32\
-    \ a = rem(n), r = m == 1 ? 0 : 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r)\
-    \ * a);\n      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n\
-    };\n#line 4 \"modint/arbitrary-modint.hpp\"\n\ntemplate <int id>\nstruct ArbitraryModIntBase\
+    \  sort(begin(ret), end(ret));\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd()\
+    \ { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
+    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
+    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
+    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
+    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"modint/arbitrary-modint.hpp\"\
+    \n\n#line 2 \"modint/barrett-reduction.hpp\"\n\n#line 4 \"modint/barrett-reduction.hpp\"\
+    \nusing namespace std;\n\nstruct Barrett {\n  using u32 = unsigned int;\n  using\
+    \ i64 = long long;\n  using u64 = unsigned long long;\n  u32 m;\n  u64 im;\n \
+    \ Barrett() : m(), im() {}\n  Barrett(int n) : m(n), im(u64(-1) / m + 1) {}\n\
+    \  constexpr inline i64 quo(u64 n) {\n    u64 x = u64((__uint128_t(n) * im) >>\
+    \ 64);\n    u32 r = n - x * m;\n    return m <= r ? x - 1 : x;\n  }\n  constexpr\
+    \ inline i64 rem(u64 n) {\n    u64 x = u64((__uint128_t(n) * im) >> 64);\n   \
+    \ u32 r = n - x * m;\n    return m <= r ? r + m : r;\n  }\n  constexpr inline\
+    \ pair<i64, int> quorem(u64 n) {\n    u64 x = u64((__uint128_t(n) * im) >> 64);\n\
+    \    u32 r = n - x * m;\n    if (m <= r) return {x - 1, r + m};\n    return {x,\
+    \ r};\n  }\n  constexpr inline i64 pow(u64 n, i64 p) {\n    u32 a = rem(n), r\
+    \ = m == 1 ? 0 : 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r) * a);\n\
+    \      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n};\n#line\
+    \ 4 \"modint/arbitrary-modint.hpp\"\n\ntemplate <int id>\nstruct ArbitraryModIntBase\
     \ {\n  int x;\n\n  ArbitraryModIntBase() : x(0) {}\n\n  ArbitraryModIntBase(int64_t\
     \ y) {\n    int z = y % get_mod();\n    if (z < 0) z += get_mod();\n    x = z;\n\
     \  }\n\n  ArbitraryModIntBase &operator+=(const ArbitraryModIntBase &p) {\n  \
@@ -491,7 +492,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/arbitrary-modint.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 14:06:55+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/arbitrary-modint.test.cpp

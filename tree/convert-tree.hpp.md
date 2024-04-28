@@ -4,8 +4,20 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: tree/dynamic-diameter.hpp
+    title: tree/dynamic-diameter.hpp
+  - icon: ':heavy_check_mark:'
+    path: tree/static-top-tree-vertex-based.hpp
+    title: Static Top Tree
+  - icon: ':warning:'
+    path: tree/static-top-tree.hpp
+    title: tree/static-top-tree.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/dynamic-diameter.test.cpp
+    title: verify/verify-unit-test/dynamic-diameter.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
@@ -87,12 +99,16 @@ data:
   - graph/graph-template.hpp
   isVerificationFile: false
   path: tree/convert-tree.hpp
-  requiredBy: []
+  requiredBy:
+  - tree/dynamic-diameter.hpp
+  - tree/static-top-tree-vertex-based.hpp
+  - tree/static-top-tree.hpp
   timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-1789.test.cpp
+  - verify/verify-unit-test/dynamic-diameter.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
+  - verify/verify-yuki/yuki-1789.test.cpp
 documentation_of: tree/convert-tree.hpp
 layout: document
 redirect_from:

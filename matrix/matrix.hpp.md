@@ -185,22 +185,22 @@ data:
   path: matrix/matrix.hpp
   requiredBy:
   - fps/find-p-recursive.hpp
-  - matrix/matrix-tree.hpp
   - matrix/polynomial-matrix-prefix-prod.hpp
   - matrix/polynomial-matrix-determinant.hpp
+  - matrix/matrix-tree.hpp
   timestamp: '2023-12-22 19:57:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
+  - verify/verify-unit-test/p-recursive.test.cpp
+  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - verify/verify-unit-test/debug.test.cpp
+  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-unit-test/gauss-elimination.test.cpp
+  - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-1533.test.cpp
-  - verify/verify-unit-test/debug.test.cpp
-  - verify/verify-unit-test/bigint-gcd.test.cpp
-  - verify/verify-unit-test/p-recursive.test.cpp
-  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
-  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
-  - verify/verify-unit-test/gauss-elimination.test.cpp
 documentation_of: matrix/matrix.hpp
 layout: document
 redirect_from:

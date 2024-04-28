@@ -249,26 +249,27 @@ data:
     \ <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i; --i) {\n\
     \    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m = r - i;\n\
     \    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
-    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
-    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
-    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
-    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
-    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 4 \"\
-    rbst/treap.hpp\"\n\ntemplate <typename Node>\nstruct TreapBase {\n  using Ptr\
-    \ = Node *;\n  template <typename... Args>\n  inline Ptr my_new(Args... args)\
-    \ {\n    return new Node(args...);\n  }\n  Ptr make_tree() { return nullptr; }\n\
-    \n  // for avoiding memory leak, activate below\n  /*\n  using Ptr = shared_ptr<Node>;\n\
-    \  template <typename... Args>\n  inline Ptr my_new(Args... args) {\n    return\
-    \ make_shared<Node>(args...);\n  }\n  Ptr make_tree() {return Ptr();}\n  */\n\n\
-    \  int size(Ptr t) const { return count(t); }\n\n  Ptr merge(Ptr l, Ptr r) {\n\
-    \    if (!l || !r) return l ? l : r;\n    if (l->pr >= r->pr) {\n      push(l);\n\
-    \      l->r = merge(l->r, r);\n      return update(l);\n    } else {\n      push(r);\n\
-    \      r->l = merge(l, r->l);\n      return update(r);\n    }\n  }\n\n  pair<Ptr,\
-    \ Ptr> split(Ptr t, int k) {\n    if (!t) return {nullptr, nullptr};\n    push(t);\n\
-    \    if (k <= count(t->l)) {\n      auto s = split(t->l, k);\n      t->l = s.second;\n\
-    \      return {s.first, update(t)};\n    } else {\n      auto s = split(t->r,\
-    \ k - count(t->l) - 1);\n      t->r = s.first;\n      return {update(t), s.second};\n\
+    \  sort(begin(ret), end(ret));\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd()\
+    \ { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
+    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
+    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
+    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
+    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 4 \"rbst/treap.hpp\"\n\ntemplate\
+    \ <typename Node>\nstruct TreapBase {\n  using Ptr = Node *;\n  template <typename...\
+    \ Args>\n  inline Ptr my_new(Args... args) {\n    return new Node(args...);\n\
+    \  }\n  Ptr make_tree() { return nullptr; }\n\n  // for avoiding memory leak,\
+    \ activate below\n  /*\n  using Ptr = shared_ptr<Node>;\n  template <typename...\
+    \ Args>\n  inline Ptr my_new(Args... args) {\n    return make_shared<Node>(args...);\n\
+    \  }\n  Ptr make_tree() {return Ptr();}\n  */\n\n  int size(Ptr t) const { return\
+    \ count(t); }\n\n  Ptr merge(Ptr l, Ptr r) {\n    if (!l || !r) return l ? l :\
+    \ r;\n    if (l->pr >= r->pr) {\n      push(l);\n      l->r = merge(l->r, r);\n\
+    \      return update(l);\n    } else {\n      push(r);\n      r->l = merge(l,\
+    \ r->l);\n      return update(r);\n    }\n  }\n\n  pair<Ptr, Ptr> split(Ptr t,\
+    \ int k) {\n    if (!t) return {nullptr, nullptr};\n    push(t);\n    if (k <=\
+    \ count(t->l)) {\n      auto s = split(t->l, k);\n      t->l = s.second;\n   \
+    \   return {s.first, update(t)};\n    } else {\n      auto s = split(t->r, k -\
+    \ count(t->l) - 1);\n      t->r = s.first;\n      return {update(t), s.second};\n\
     \    }\n  }\n\n  Ptr build(const vector<decltype(Node::key)> &v) {\n    int n\
     \ = v.size();\n    vector<Ptr> ps;\n    ps.reserve(n);\n    for (int i = 0; i\
     \ < n; i++) ps.push_back(my_new(v[i]));\n    vector<int> p(n, -1), st;\n    for\
@@ -357,14 +358,14 @@ data:
     \ vvm = vector<vm>;\n#line 2 \"math/affine-transformation.hpp\"\n\ntemplate <typename\
     \ mint>\nstruct Affine {\n  mint a, b;\n  constexpr Affine() : a(1), b(0) {}\n\
     \  constexpr Affine(mint _a, mint _b) : a(_a), b(_b) {}\n  mint operator()(mint\
-    \ x) { return a * x + b; }\n  // R(L(x))\n  friend Affine operator*(const Affine&\
-    \ l, const Affine& r) {\n    return Affine(l.a * r.a, l.b * r.a + r.b);\n  }\n\
-    \  bool operator==(const Affine& r) const { return a == r.a && b == r.b; }\n \
-    \ bool operator!=(const Affine& r) const { return a != r.a || b != r.b; }\n  friend\
-    \ ostream& operator<<(ostream& os, const Affine& r) {\n    os << \"( \" << r.a\
-    \ << \", \" << r.b << \" )\";\n    return os;\n  }\n};\n\n/**\n * @brief \u30A2\
-    \u30D5\u30A3\u30F3\u5909\u63DB\n */\n#line 2 \"misc/fastio.hpp\"\n\n#line 8 \"\
-    misc/fastio.hpp\"\n\nusing namespace std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\
+    \ x) const { return a * x + b; }\n  // R(L(x))\n  friend Affine operator*(const\
+    \ Affine& l, const Affine& r) {\n    return Affine(l.a * r.a, l.b * r.a + r.b);\n\
+    \  }\n  bool operator==(const Affine& r) const { return a == r.a && b == r.b;\
+    \ }\n  bool operator!=(const Affine& r) const { return a != r.a || b != r.b; }\n\
+    \  friend ostream& operator<<(ostream& os, const Affine& r) {\n    os << \"( \"\
+    \ << r.a << \", \" << r.b << \" )\";\n    return os;\n  }\n};\n\n/**\n * @brief\
+    \ \u30A2\u30D5\u30A3\u30F3\u5909\u63DB\n */\n#line 2 \"misc/fastio.hpp\"\n\n#line\
+    \ 8 \"misc/fastio.hpp\"\n\nusing namespace std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\
     \n\n#line 4 \"internal/internal-type-traits.hpp\"\nusing namespace std;\n\nnamespace\
     \ internal {\ntemplate <typename T>\nusing is_broadly_integral =\n    typename\
     \ conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n            \
@@ -487,7 +488,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
   requiredBy: []
-  timestamp: '2023-09-05 21:46:27+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp

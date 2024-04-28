@@ -531,8 +531,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
-  - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-unit-test/bigrational.test.cpp
+  - verify/verify-unit-test/bigint-gcd.test.cpp
 documentation_of: math/bigint-gcd.hpp
 layout: document
 redirect_from:

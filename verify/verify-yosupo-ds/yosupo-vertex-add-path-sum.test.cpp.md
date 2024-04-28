@@ -295,35 +295,34 @@ data:
     \ 1);\n    return res;\n  }\n\n  // (u, v]\n  vector<pair<int, int>> descend(int\
     \ u, int v) const {\n    if (u == v) return {};\n    if (nxt[u] == nxt[v]) return\
     \ {{down[u] + 1, down[v]}};\n    auto res = descend(u, par[nxt[v]]);\n    res.emplace_back(down[nxt[v]],\
-    \ down[v]);\n    return res;\n  }\n\n public:\n  G& g;\n  int id;\n  vector<int>\
-    \ size, depth, down, up, nxt, par;\n  HeavyLightDecomposition(G& _g, int root\
-    \ = 0)\n      : g(_g),\n        id(0),\n        size(g.size(), 0),\n        depth(g.size(),\
-    \ 0),\n        down(g.size(), -1),\n        up(g.size(), -1),\n        nxt(g.size(),\
-    \ root),\n        par(g.size(), root) {\n    dfs_sz(root);\n    dfs_hld(root);\n\
-    \  }\n\n  void build(int root) {\n    dfs_sz(root);\n    dfs_hld(root);\n  }\n\
-    \n  pair<int, int> idx(int i) const { return make_pair(down[i], up[i]); }\n\n\
-    \  template <typename F>\n  void path_query(int u, int v, bool vertex, const F&\
-    \ f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) {\n   \
-    \   int s = a + 1, t = b;\n      s > t ? f(t, s) : f(s, t);\n    }\n    if (vertex)\
-    \ f(down[l], down[l] + 1);\n    for (auto&& [a, b] : descend(l, v)) {\n      int\
-    \ s = a, t = b + 1;\n      s > t ? f(t, s) : f(s, t);\n    }\n  }\n\n  template\
-    \ <typename F>\n  void path_noncommutative_query(int u, int v, bool vertex, const\
-    \ F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) f(a\
-    \ + 1, b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] :\
-    \ descend(l, v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
-    \ u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n\
-    \  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a]\
-    \ < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] <\
-    \ depth[b] ? a : b;\n  }\n\n  int dist(int a, int b) { return depth[a] + depth[b]\
-    \ - depth[lca(a, b)] * 2; }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
-    \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n#line\
-    \ 6 \"verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp\"\n\nusing namespace\
-    \ Nyaan; void Nyaan::solve() {\n  ini(N, Q);\n  vl a(N);\n  in(a);\n  auto g =\
-    \ graph(N, N - 1, false, false);\n\n  HeavyLightDecomposition<vvi> hld(g);\n \
-    \ auto f = [](ll a, ll b) { return a + b; };\n  SegmentTree<ll, decltype(f)> seg(N,\
-    \ f, 0);\n  rep(i, N) { seg.set(hld.idx(i).first, a[i]); }\n  seg.build();\n\n\
-    \  ll ans = 0;\n  auto que = [&](int u, int v) { ans += seg.query(u, v); };\n\n\
-    \  rep(_, Q) {\n    ini(cmd, u, v);\n    if (cmd) {\n      ans = 0;\n      hld.path_query(u,\
+    \ down[v]);\n    return res;\n  }\n\n public:\n  G& g;\n  int root, id;\n  vector<int>\
+    \ size, depth, down, up, nxt, par;\n  HeavyLightDecomposition(G& _g, int _root\
+    \ = 0)\n      : g(_g),\n        root(_root),\n        id(0),\n        size(g.size(),\
+    \ 0),\n        depth(g.size(), 0),\n        down(g.size(), -1),\n        up(g.size(),\
+    \ -1),\n        nxt(g.size(), root),\n        par(g.size(), root) {\n    dfs_sz(root);\n\
+    \    dfs_hld(root);\n  }\n\n  pair<int, int> idx(int i) const { return make_pair(down[i],\
+    \ up[i]); }\n\n  template <typename F>\n  void path_query(int u, int v, bool vertex,\
+    \ const F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l))\
+    \ {\n      int s = a + 1, t = b;\n      s > t ? f(t, s) : f(s, t);\n    }\n  \
+    \  if (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] : descend(l, v))\
+    \ {\n      int s = a, t = b + 1;\n      s > t ? f(t, s) : f(s, t);\n    }\n  }\n\
+    \n  template <typename F>\n  void path_noncommutative_query(int u, int v, bool\
+    \ vertex, const F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u,\
+    \ l)) f(a + 1, b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&&\
+    \ [a, b] : descend(l, v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void\
+    \ subtree_query(int u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex),\
+    \ up[u]);\n  }\n\n  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n\
+    \      if (down[a] < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n   \
+    \ return depth[a] < depth[b] ? a : b;\n  }\n\n  int dist(int a, int b) { return\
+    \ depth[a] + depth[b] - depth[lca(a, b)] * 2; }\n};\n\n/**\n * @brief Heavy Light\
+    \ Decomposition(\u91CD\u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n\
+    \ */\n#line 6 \"verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp\"\n\
+    \nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, Q);\n  vl a(N);\n  in(a);\n\
+    \  auto g = graph(N, N - 1, false, false);\n\n  HeavyLightDecomposition<vvi> hld(g);\n\
+    \  auto f = [](ll a, ll b) { return a + b; };\n  SegmentTree<ll, decltype(f)>\
+    \ seg(N, f, 0);\n  rep(i, N) { seg.set(hld.idx(i).first, a[i]); }\n  seg.build();\n\
+    \n  ll ans = 0;\n  auto que = [&](int u, int v) { ans += seg.query(u, v); };\n\
+    \n  rep(_, Q) {\n    ini(cmd, u, v);\n    if (cmd) {\n      ans = 0;\n      hld.path_query(u,\
     \ v,true, que);\n      out(ans);\n    } else {\n      seg.add(hld.idx(u).first,\
     \ v);\n    }\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\n\
@@ -350,7 +349,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 13:25:59+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp

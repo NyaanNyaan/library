@@ -159,11 +159,11 @@ data:
   isVerificationFile: false
   path: geometry/segment.hpp
   requiredBy: []
-  timestamp: '2023-12-29 22:32:57+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-cgl/aoj-cgl-2-d.test.cpp
   - verify/verify-aoj-cgl/aoj-cgl-2-b.test.cpp
+  - verify/verify-aoj-cgl/aoj-cgl-2-d.test.cpp
 documentation_of: geometry/segment.hpp
 layout: document
 redirect_from:

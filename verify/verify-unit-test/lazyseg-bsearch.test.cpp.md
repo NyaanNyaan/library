@@ -237,54 +237,55 @@ data:
     \ randset(i64 l, i64 r, i64 n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64>\
     \ s;\n  for (i64 i = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if\
     \ (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n\
-    \  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble\
-    \ rnd() { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
-    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
-    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
-    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
-    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"segment-tree/lazy-segment-tree-utility.hpp\"\
-    \n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),\n\
-    \          T (*ti)(), E (*ei)()>\nstruct LazySegmentTreeBase {\n  int n, log,\
-    \ s;\n  vector<T> val;\n  vector<E> laz;\n\n  explicit LazySegmentTreeBase() {}\n\
-    \  explicit LazySegmentTreeBase(const vector<T>& vc) { init(vc); }\n\n  void init(const\
-    \ vector<T>& vc) {\n    n = 1, log = 0, s = vc.size();\n    while (n < s) n <<=\
-    \ 1, log++;\n    val.resize(2 * n, ti());\n    laz.resize(n, ei());\n    for (int\
-    \ i = 0; i < s; ++i) val[i + n] = vc[i];\n    for (int i = n - 1; i; --i) _update(i);\n\
-    \  }\n\n  void update(int l, int r, const E& x) {\n    if (l == r) return;\n \
-    \   l += n, r += n;\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i)\
-    \ << i) != l) _push(l >> i);\n      if (((r >> i) << i) != r) _push((r - 1) >>\
-    \ i);\n    }\n    {\n      int l2 = l, r2 = r;\n      while (l < r) {\n      \
-    \  if (l & 1) _apply(l++, x);\n        if (r & 1) _apply(--r, x);\n        l >>=\
-    \ 1;\n        r >>= 1;\n      }\n      l = l2;\n      r = r2;\n    }\n    for\
-    \ (int i = 1; i <= log; i++) {\n      if (((l >> i) << i) != l) _update(l >> i);\n\
-    \      if (((r >> i) << i) != r) _update((r - 1) >> i);\n    }\n  }\n\n  T query(int\
-    \ l, int r) {\n    if (l == r) return ti();\n    l += n, r += n;\n    T L = ti(),\
-    \ R = ti();\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) !=\
-    \ l) _push(l >> i);\n      if (((r >> i) << i) != r) _push((r - 1) >> i);\n  \
-    \  }\n    while (l < r) {\n      if (l & 1) L = f(L, val[l++]);\n      if (r &\
-    \ 1) R = f(val[--r], R);\n      l >>= 1;\n      r >>= 1;\n    }\n    return f(L,\
-    \ R);\n  }\n\n  void set_val(int k, const T& x) {\n    k += n;\n    for (int i\
-    \ = log; i >= 1; i--) {\n      if (((k >> i) << i) != k || (((k + 1) >> i) <<\
-    \ i) != (k + 1))\n        _push(k >> i);\n    }\n    val[k] = x;\n    for (int\
-    \ i = 1; i <= log; i++) {\n      if (((k >> i) << i) != k || (((k + 1) >> i) <<\
-    \ i) != (k + 1))\n        _update(k >> i);\n    }\n  }\n\n  void update_val(int\
-    \ k, const E& x) {\n    k += n;\n    for (int i = log; i >= 1; i--) {\n      if\
-    \ (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n        _push(k\
-    \ >> i);\n    }\n    val[k] = g(val[k], x);\n    for (int i = 1; i <= log; i++)\
+    \  for (auto& x : s) ret.push_back(x);\n  sort(begin(ret), end(ret));\n  return\
+    \ ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
+    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
+    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
+    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"\
+    segment-tree/lazy-segment-tree-utility.hpp\"\n\ntemplate <typename T, typename\
+    \ E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),\n          T (*ti)(), E (*ei)()>\n\
+    struct LazySegmentTreeBase {\n  int n, log, s;\n  vector<T> val;\n  vector<E>\
+    \ laz;\n\n  explicit LazySegmentTreeBase() {}\n  explicit LazySegmentTreeBase(const\
+    \ vector<T>& vc) { init(vc); }\n\n  void init(const vector<T>& vc) {\n    n =\
+    \ 1, log = 0, s = vc.size();\n    while (n < s) n <<= 1, log++;\n    val.resize(2\
+    \ * n, ti());\n    laz.resize(n, ei());\n    for (int i = 0; i < s; ++i) val[i\
+    \ + n] = vc[i];\n    for (int i = n - 1; i; --i) _update(i);\n  }\n\n  void update(int\
+    \ l, int r, const E& x) {\n    if (l == r) return;\n    l += n, r += n;\n    for\
+    \ (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) != l) _push(l >> i);\n\
+    \      if (((r >> i) << i) != r) _push((r - 1) >> i);\n    }\n    {\n      int\
+    \ l2 = l, r2 = r;\n      while (l < r) {\n        if (l & 1) _apply(l++, x);\n\
+    \        if (r & 1) _apply(--r, x);\n        l >>= 1;\n        r >>= 1;\n    \
+    \  }\n      l = l2;\n      r = r2;\n    }\n    for (int i = 1; i <= log; i++)\
+    \ {\n      if (((l >> i) << i) != l) _update(l >> i);\n      if (((r >> i) <<\
+    \ i) != r) _update((r - 1) >> i);\n    }\n  }\n\n  T query(int l, int r) {\n \
+    \   if (l == r) return ti();\n    l += n, r += n;\n    T L = ti(), R = ti();\n\
+    \    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) != l) _push(l\
+    \ >> i);\n      if (((r >> i) << i) != r) _push((r - 1) >> i);\n    }\n    while\
+    \ (l < r) {\n      if (l & 1) L = f(L, val[l++]);\n      if (r & 1) R = f(val[--r],\
+    \ R);\n      l >>= 1;\n      r >>= 1;\n    }\n    return f(L, R);\n  }\n\n  void\
+    \ set_val(int k, const T& x) {\n    k += n;\n    for (int i = log; i >= 1; i--)\
     \ {\n      if (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n   \
-    \     _update(k >> i);\n    }\n  }\n\n  T get_val(int k) {\n    k += n;\n    for\
-    \ (int i = log; i >= 1; i--) {\n      if (((k >> i) << i) != k || (((k + 1) >>\
-    \ i) << i) != (k + 1))\n        _push(k >> i);\n    }\n    return val[k];\n  }\n\
-    \n  template <class G>\n  int max_right(int l, G check) {\n    assert(0 <= l &&\
-    \ l <= s);\n    assert(check(ei()));\n    if (l == n) return n;\n    l += n;\n\
-    \    for (int i = log; i >= 1; i--) _push(l >> i);\n    T sm = ti();\n    do {\n\
-    \      while (l % 2 == 0) l >>= 1;\n      if (!check(f(sm, val[l]))) {\n     \
-    \   while (l < n) {\n          _push(l);\n          l = (2 * l);\n          if\
-    \ (check(f(sm, val[l]))) {\n            sm = f(sm, val[l]);\n            l++;\n\
-    \          }\n        }\n        return l - n;\n      }\n      sm = f(sm, val[l]);\n\
-    \      l++;\n    } while ((l & -l) != l);\n    return s;\n  }\n\n  template <class\
-    \ G>\n  int min_left(int r, G check) {\n    assert(0 <= r && r <= s);\n    assert(check(ei()));\n\
+    \     _push(k >> i);\n    }\n    val[k] = x;\n    for (int i = 1; i <= log; i++)\
+    \ {\n      if (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n   \
+    \     _update(k >> i);\n    }\n  }\n\n  void update_val(int k, const E& x) {\n\
+    \    k += n;\n    for (int i = log; i >= 1; i--) {\n      if (((k >> i) << i)\
+    \ != k || (((k + 1) >> i) << i) != (k + 1))\n        _push(k >> i);\n    }\n \
+    \   val[k] = g(val[k], x);\n    for (int i = 1; i <= log; i++) {\n      if (((k\
+    \ >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n        _update(k >>\
+    \ i);\n    }\n  }\n\n  T get_val(int k) {\n    k += n;\n    for (int i = log;\
+    \ i >= 1; i--) {\n      if (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k\
+    \ + 1))\n        _push(k >> i);\n    }\n    return val[k];\n  }\n\n  template\
+    \ <class G>\n  int max_right(int l, G check) {\n    assert(0 <= l && l <= s);\n\
+    \    assert(check(ei()));\n    if (l == n) return n;\n    l += n;\n    for (int\
+    \ i = log; i >= 1; i--) _push(l >> i);\n    T sm = ti();\n    do {\n      while\
+    \ (l % 2 == 0) l >>= 1;\n      if (!check(f(sm, val[l]))) {\n        while (l\
+    \ < n) {\n          _push(l);\n          l = (2 * l);\n          if (check(f(sm,\
+    \ val[l]))) {\n            sm = f(sm, val[l]);\n            l++;\n          }\n\
+    \        }\n        return l - n;\n      }\n      sm = f(sm, val[l]);\n      l++;\n\
+    \    } while ((l & -l) != l);\n    return s;\n  }\n\n  template <class G>\n  int\
+    \ min_left(int r, G check) {\n    assert(0 <= r && r <= s);\n    assert(check(ei()));\n\
     \    if (r == 0) return 0;\n    r += n;\n    for (int i = log; i >= 1; i--) _push((r\
     \ - 1) >> i);\n    T sm = ti();\n    do {\n      r--;\n      while (r > 1 && (r\
     \ % 2)) r >>= 1;\n      if (!check(f(val[r], sm))) {\n        while (r < n) {\n\
@@ -474,7 +475,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/lazyseg-bsearch.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 14:06:55+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/lazyseg-bsearch.test.cpp

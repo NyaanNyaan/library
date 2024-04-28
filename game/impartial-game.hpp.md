@@ -123,8 +123,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0002.test.cpp
-  - verify/verify-yuki/yuki-0361.test.cpp
   - verify/verify-yuki/yuki-0102.test.cpp
+  - verify/verify-yuki/yuki-0361.test.cpp
 documentation_of: game/impartial-game.hpp
 layout: document
 redirect_from:

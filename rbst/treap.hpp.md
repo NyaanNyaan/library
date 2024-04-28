@@ -41,27 +41,27 @@ data:
     \ l, i64 r, i64 n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n\
     \  for (i64 i = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m)\
     \ != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto&\
-    \ x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() {\
-    \ return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double l,\
-    \ double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
-    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
-    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
-    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 4 \"rbst/treap.hpp\"\n\ntemplate\
-    \ <typename Node>\nstruct TreapBase {\n  using Ptr = Node *;\n  template <typename...\
-    \ Args>\n  inline Ptr my_new(Args... args) {\n    return new Node(args...);\n\
-    \  }\n  Ptr make_tree() { return nullptr; }\n\n  // for avoiding memory leak,\
-    \ activate below\n  /*\n  using Ptr = shared_ptr<Node>;\n  template <typename...\
-    \ Args>\n  inline Ptr my_new(Args... args) {\n    return make_shared<Node>(args...);\n\
-    \  }\n  Ptr make_tree() {return Ptr();}\n  */\n\n  int size(Ptr t) const { return\
-    \ count(t); }\n\n  Ptr merge(Ptr l, Ptr r) {\n    if (!l || !r) return l ? l :\
-    \ r;\n    if (l->pr >= r->pr) {\n      push(l);\n      l->r = merge(l->r, r);\n\
-    \      return update(l);\n    } else {\n      push(r);\n      r->l = merge(l,\
-    \ r->l);\n      return update(r);\n    }\n  }\n\n  pair<Ptr, Ptr> split(Ptr t,\
-    \ int k) {\n    if (!t) return {nullptr, nullptr};\n    push(t);\n    if (k <=\
-    \ count(t->l)) {\n      auto s = split(t->l, k);\n      t->l = s.second;\n   \
-    \   return {s.first, update(t)};\n    } else {\n      auto s = split(t->r, k -\
-    \ count(t->l) - 1);\n      t->r = s.first;\n      return {update(t), s.second};\n\
+    \ x : s) ret.push_back(x);\n  sort(begin(ret), end(ret));\n  return ret;\n}\n\n\
+    // [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20; }\n//\
+    \ [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l + rnd()\
+    \ * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int\
+    \ n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n\
+    }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 4 \"\
+    rbst/treap.hpp\"\n\ntemplate <typename Node>\nstruct TreapBase {\n  using Ptr\
+    \ = Node *;\n  template <typename... Args>\n  inline Ptr my_new(Args... args)\
+    \ {\n    return new Node(args...);\n  }\n  Ptr make_tree() { return nullptr; }\n\
+    \n  // for avoiding memory leak, activate below\n  /*\n  using Ptr = shared_ptr<Node>;\n\
+    \  template <typename... Args>\n  inline Ptr my_new(Args... args) {\n    return\
+    \ make_shared<Node>(args...);\n  }\n  Ptr make_tree() {return Ptr();}\n  */\n\n\
+    \  int size(Ptr t) const { return count(t); }\n\n  Ptr merge(Ptr l, Ptr r) {\n\
+    \    if (!l || !r) return l ? l : r;\n    if (l->pr >= r->pr) {\n      push(l);\n\
+    \      l->r = merge(l->r, r);\n      return update(l);\n    } else {\n      push(r);\n\
+    \      r->l = merge(l, r->l);\n      return update(r);\n    }\n  }\n\n  pair<Ptr,\
+    \ Ptr> split(Ptr t, int k) {\n    if (!t) return {nullptr, nullptr};\n    push(t);\n\
+    \    if (k <= count(t->l)) {\n      auto s = split(t->l, k);\n      t->l = s.second;\n\
+    \      return {s.first, update(t)};\n    } else {\n      auto s = split(t->r,\
+    \ k - count(t->l) - 1);\n      t->r = s.first;\n      return {update(t), s.second};\n\
     \    }\n  }\n\n  Ptr build(const vector<decltype(Node::key)> &v) {\n    int n\
     \ = v.size();\n    vector<Ptr> ps;\n    ps.reserve(n);\n    for (int i = 0; i\
     \ < n; i++) ps.push_back(my_new(v[i]));\n    vector<int> p(n, -1), st;\n    for\
@@ -176,7 +176,7 @@ data:
   isVerificationFile: false
   path: rbst/treap.hpp
   requiredBy: []
-  timestamp: '2023-08-10 14:06:55+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp

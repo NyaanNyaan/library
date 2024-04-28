@@ -555,19 +555,20 @@ data:
     \ randset(i64 l, i64 r, i64 n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64>\
     \ s;\n  for (i64 i = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if\
     \ (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n\
-    \  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble\
-    \ rnd() { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
-    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
-    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
-    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
-    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 16 \"verify/verify-unit-test/multieval.test.cpp\"\
-    \n\nvoid test(int n, int s) {\n  // cerr<<n<<\" \"<<s<<endl;\n  fps f(s);\n  vm\
-    \ xs(n);\n  each(x, f) x = rng();\n  each(x, xs) x = rng();\n  auto ys1 = FastMultiEval(f,\
-    \ xs);\n  auto ys2 = MultipointEvaluation(f, xs);\n  vm ys3(n);\n  rep(i, n) ys3[i]\
-    \ = f.eval(xs[i]);\n  assert(ys1 == ys2);\n  assert(ys2 == ys3);\n}\n\nusing namespace\
-    \ Nyaan;\nvoid Nyaan::solve() {\n  rep(i, 66) rep(j, 66) rep(k, 5) test(i, j);\n\
-    \n  int a, b;\n  cin >> a >> b;\n  cout << (a + b) << endl;\n}\n"
+    \  for (auto& x : s) ret.push_back(x);\n  sort(begin(ret), end(ret));\n  return\
+    \ ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
+    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
+    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
+    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 16 \"\
+    verify/verify-unit-test/multieval.test.cpp\"\n\nvoid test(int n, int s) {\n  //\
+    \ cerr<<n<<\" \"<<s<<endl;\n  fps f(s);\n  vm xs(n);\n  each(x, f) x = rng();\n\
+    \  each(x, xs) x = rng();\n  auto ys1 = FastMultiEval(f, xs);\n  auto ys2 = MultipointEvaluation(f,\
+    \ xs);\n  vm ys3(n);\n  rep(i, n) ys3[i] = f.eval(xs[i]);\n  assert(ys1 == ys2);\n\
+    \  assert(ys2 == ys3);\n}\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n \
+    \ rep(i, 66) rep(j, 66) rep(k, 5) test(i, j);\n\n  int a, b;\n  cin >> a >> b;\n\
+    \  cout << (a + b) << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\
     \n#include \"../../modint/montgomery-modint.hpp\"\n//\n#include \"../../fps/fast-multieval.hpp\"\
@@ -598,7 +599,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/multieval.test.cpp
   requiredBy: []
-  timestamp: '2023-08-31 20:44:07+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/multieval.test.cpp

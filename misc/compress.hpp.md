@@ -46,9 +46,9 @@ data:
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
-  - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
 documentation_of: misc/compress.hpp
 layout: document
 redirect_from:

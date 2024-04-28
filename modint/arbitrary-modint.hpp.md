@@ -134,9 +134,9 @@ data:
   - verify/verify-yosupo-math/yosupo-binomial-coefficient-prime-mod.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
+  - verify/verify-unit-test/barrett-reduction.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/arbitrary-modint.test.cpp
-  - verify/verify-unit-test/barrett-reduction.test.cpp
 documentation_of: modint/arbitrary-modint.hpp
 layout: document
 redirect_from:

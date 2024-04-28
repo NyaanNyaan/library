@@ -128,8 +128,8 @@ data:
   timestamp: '2020-12-17 02:52:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
   - verify/verify-unit-test/orderedmap.test.cpp
+  - verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
 documentation_of: orderedmap/orderedmap-base.hpp
 layout: document
 redirect_from:

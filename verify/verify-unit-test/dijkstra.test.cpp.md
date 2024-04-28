@@ -252,40 +252,41 @@ data:
     \ randset(i64 l, i64 r, i64 n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64>\
     \ s;\n  for (i64 i = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if\
     \ (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n\
-    \  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble\
-    \ rnd() { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
-    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
-    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
-    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
-    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"shortest-path/dijkstra-fast.hpp\"\
-    \n\n#line 2 \"data-structure/radix-heap.hpp\"\n\ntemplate <typename Key, typename\
-    \ Val>\nstruct RadixHeap {\n  using uint = typename make_unsigned<Key>::type;\n\
-    \  static constexpr int bit = sizeof(Key) * 8;\n  array<vector<pair<uint, Val>\
-    \ >, bit + 1> vs;\n  array<uint, bit + 1> ms;\n\n  int s;\n  uint last;\n\n  RadixHeap()\
-    \ : s(0), last(0) { fill(begin(ms), end(ms), uint(-1)); }\n\n  bool empty() const\
-    \ { return s == 0; }\n\n  int size() const { return s; }\n\n  __attribute__((target(\"\
-    lzcnt\"))) inline uint64_t getbit(uint a) const {\n    return 64 - _lzcnt_u64(a);\n\
-    \  }\n\n  void push(const uint &key, const Val &val) {\n    s++;\n    uint64_t\
-    \ b = getbit(key ^ last);\n    vs[b].emplace_back(key, val);\n    ms[b] = min(key,\
-    \ ms[b]);\n  }\n\n  pair<uint, Val> pop() {\n    if (ms[0] == uint(-1)) {\n  \
-    \    int idx = 1;\n      while (ms[idx] == uint(-1)) idx++;\n      last = ms[idx];\n\
-    \      for (auto &p : vs[idx]) {\n        uint64_t b = getbit(p.first ^ last);\n\
-    \        vs[b].emplace_back(p);\n        ms[b] = min(p.first, ms[b]);\n      }\n\
-    \      vs[idx].clear();\n      ms[idx] = uint(-1);\n    }\n    --s;\n    auto\
-    \ res = vs[0].back();\n    vs[0].pop_back();\n    if (vs[0].empty()) ms[0] = uint(-1);\n\
-    \    return res;\n  }\n};\n\n/**\n * @brief Radix Heap\n * @docs docs/data-structure/radix-heap.md\n\
-    \ */\n#line 2 \"graph/static-graph.hpp\"\n\nnamespace StaticGraphImpl {\n\ntemplate\
-    \ <typename T, bool Cond = is_void<T>::value>\nstruct E;\ntemplate <typename T>\n\
-    struct E<T, false> {\n  int to;\n  T cost;\n  E() {}\n  E(const int& v, const\
-    \ T& c) : to(v), cost(c) {}\n  operator int() const { return to; }\n};\ntemplate\
-    \ <typename T>\nstruct E<T, true> {\n  int to;\n  E() {}\n  E(const int& v) :\
-    \ to(v) {}\n  operator int() const { return to; }\n};\n\ntemplate <typename T\
-    \ = void>\nstruct StaticGraph {\n private:\n  template <typename It>\n  struct\
-    \ Es {\n    It b, e;\n    It begin() const { return b; }\n    It end() const {\
-    \ return e; }\n    int size() const { return int(e - b); }\n    auto&& operator[](int\
-    \ i) const { return b[i]; }\n  };\n  \n  int N, M, ec;\n  vector<int> head;\n\
-    \  vector<pair<int, E<T>>> buf;\n  vector<E<T>> es;\n\n  void build() {\n    partial_sum(begin(head),\
+    \  for (auto& x : s) ret.push_back(x);\n  sort(begin(ret), end(ret));\n  return\
+    \ ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
+    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
+    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
+    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"\
+    shortest-path/dijkstra-fast.hpp\"\n\n#line 2 \"data-structure/radix-heap.hpp\"\
+    \n\ntemplate <typename Key, typename Val>\nstruct RadixHeap {\n  using uint =\
+    \ typename make_unsigned<Key>::type;\n  static constexpr int bit = sizeof(Key)\
+    \ * 8;\n  array<vector<pair<uint, Val> >, bit + 1> vs;\n  array<uint, bit + 1>\
+    \ ms;\n\n  int s;\n  uint last;\n\n  RadixHeap() : s(0), last(0) { fill(begin(ms),\
+    \ end(ms), uint(-1)); }\n\n  bool empty() const { return s == 0; }\n\n  int size()\
+    \ const { return s; }\n\n  __attribute__((target(\"lzcnt\"))) inline uint64_t\
+    \ getbit(uint a) const {\n    return 64 - _lzcnt_u64(a);\n  }\n\n  void push(const\
+    \ uint &key, const Val &val) {\n    s++;\n    uint64_t b = getbit(key ^ last);\n\
+    \    vs[b].emplace_back(key, val);\n    ms[b] = min(key, ms[b]);\n  }\n\n  pair<uint,\
+    \ Val> pop() {\n    if (ms[0] == uint(-1)) {\n      int idx = 1;\n      while\
+    \ (ms[idx] == uint(-1)) idx++;\n      last = ms[idx];\n      for (auto &p : vs[idx])\
+    \ {\n        uint64_t b = getbit(p.first ^ last);\n        vs[b].emplace_back(p);\n\
+    \        ms[b] = min(p.first, ms[b]);\n      }\n      vs[idx].clear();\n     \
+    \ ms[idx] = uint(-1);\n    }\n    --s;\n    auto res = vs[0].back();\n    vs[0].pop_back();\n\
+    \    if (vs[0].empty()) ms[0] = uint(-1);\n    return res;\n  }\n};\n\n/**\n *\
+    \ @brief Radix Heap\n * @docs docs/data-structure/radix-heap.md\n */\n#line 2\
+    \ \"graph/static-graph.hpp\"\n\nnamespace StaticGraphImpl {\n\ntemplate <typename\
+    \ T, bool Cond = is_void<T>::value>\nstruct E;\ntemplate <typename T>\nstruct\
+    \ E<T, false> {\n  int to;\n  T cost;\n  E() {}\n  E(const int& v, const T& c)\
+    \ : to(v), cost(c) {}\n  operator int() const { return to; }\n};\ntemplate <typename\
+    \ T>\nstruct E<T, true> {\n  int to;\n  E() {}\n  E(const int& v) : to(v) {}\n\
+    \  operator int() const { return to; }\n};\n\ntemplate <typename T = void>\nstruct\
+    \ StaticGraph {\n private:\n  template <typename It>\n  struct Es {\n    It b,\
+    \ e;\n    It begin() const { return b; }\n    It end() const { return e; }\n \
+    \   int size() const { return int(e - b); }\n    auto&& operator[](int i) const\
+    \ { return b[i]; }\n  };\n  \n  int N, M, ec;\n  vector<int> head;\n  vector<pair<int,\
+    \ E<T>>> buf;\n  vector<E<T>> es;\n\n  void build() {\n    partial_sum(begin(head),\
     \ end(head), begin(head));\n    es.resize(M);\n    for (auto&& [u, e] : buf) es[--head[u]]\
     \ = e;\n  }\n\n public:\n  StaticGraph(int _n, int _m) : N(_n), M(_m), ec(0),\
     \ head(N + 1, 0) {\n    buf.reserve(M);\n  }\n\n  template <typename... Args>\n\
@@ -427,7 +428,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/dijkstra.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 14:06:55+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/dijkstra.test.cpp

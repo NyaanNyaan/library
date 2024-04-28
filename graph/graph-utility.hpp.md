@@ -13,6 +13,9 @@ data:
     path: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/dynamic-diameter.test.cpp
+    title: verify/verify-unit-test/dynamic-diameter.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
     title: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
   - icon: ':heavy_check_mark:'
@@ -131,12 +134,13 @@ data:
   timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/dynamic-diameter.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
-  - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
-  - verify/verify-yosupo-graph/yosupo-diameter.test.cpp
-  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
   - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp
+  - verify/verify-yosupo-graph/yosupo-diameter.test.cpp
+  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
+  - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
 documentation_of: graph/graph-utility.hpp
 layout: document
 redirect_from:

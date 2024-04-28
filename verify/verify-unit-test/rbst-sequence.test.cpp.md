@@ -587,53 +587,54 @@ data:
     \ randset(i64 l, i64 r, i64 n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64>\
     \ s;\n  for (i64 i = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if\
     \ (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n\
-    \  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble\
-    \ rnd() { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
-    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
-    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
-    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
-    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 8 \"verify/verify-unit-test/rbst-sequence.test.cpp\"\
-    \n\nusing namespace Nyaan;\n\n// min add\nnamespace SequenceTestImpl {\n\nusing\
-    \ T = ll;\nusing E = ll;\nT f(T a, T b) { return min(a, b); }\nE g(T a, E b) {\
-    \ return a + b; }\nE h(T a, E b) { return a + b; }\nT ti() { return infLL; }\n\
-    E ei() { return 0; }\n\nusing Seq = Sequence<T, E, f, g, h, ti, ei>;\n\nvoid test()\
-    \ {\n  Seq s;\n  vl v;\n\n  // constructor\n  if (rng(0, 2)) {\n    int n = rng(0,\
-    \ 10);\n    if (rng(0, 1)) {\n      s = Seq{n};\n      v = vl(n, ti());\n    }\
-    \ else {\n      rep(_, n) v.push_back(rng(0, TEN(9)));\n      s = Seq{v};\n  \
-    \  }\n\n    auto v2 = s.get_vector();\n    auto v3 = s.make_array();\n    if (v\
-    \ != v2) {\n      trc2(v);\n      trc2(v2);\n    }\n    assert(v == v2);\n   \
-    \ rep(i, sz(v)) assert(v3[i].fi == i);\n\n    if (s.fold_all() == ti()) v.clear(),\
-    \ s.clear();\n  }\n\n  rep(t, 1000) {\n    // if (t % 100 == 0) cerr << sz(v)\
-    \ << \" \";\n    // if (t == 999) cerr << \"\\n\";\n    int cmd = rng(0, 10);\n\
-    \    if (cmd == 0) {\n      // insert\n      int i = rng(0, sz(v));\n      ll\
-    \ x = rng(0, TEN(9));\n      s.insert(i, x);\n      v.insert(begin(v) + i, x);\n\
-    \    } else if (cmd == 1) {\n      // push_back\n      ll x = rng(0, TEN(9));\n\
-    \      s.push_back(x);\n      v.push_back(x);\n    } else if (cmd == 2) {\n  \
-    \    // erase\n      if (sz(v) != 0) {\n        int i = rng(0, sz(v) - 1);\n \
-    \       s.erase(i);\n        v.erase(begin(v) + i);\n      }\n    } else if (cmd\
-    \ == 3) {\n      // pop_back\n      if (sz(v) != 0) {\n        s.pop_back();\n\
-    \        v.pop_back();\n      }\n    } else if (cmd == 4) {\n      // apply\n\
-    \      int l = rng(0, sz(v));\n      int r = rng(0, sz(v));\n      if (l > r)\
-    \ swap(l, r);\n      ll x = rng(0, TEN(9));\n\n      s.apply(l, r, x);\n     \
-    \ reg(i, l, r) v[i] += x;\n    } else if (cmd == 5) {\n      // fold\n      int\
-    \ l = rng(0, sz(v));\n      int r = rng(0, sz(v));\n      if (l > r) swap(l, r);\n\
-    \n      ll f1 = s.fold(l, r);\n      ll f2 = ti();\n      reg(i, l, r) f2 = f(f2,\
-    \ v[i]);\n      /*\n      if (f1 != f2) {\n        auto w = s.get_vector();\n\
-    \        trc2(v);\n        trc2(w);\n        trc2(l, r, f1, f2);\n      }\n  \
-    \    */\n      assert(f1 == f2);\n    } else if (cmd == 6) {\n      // append\n\
-    \      int n = rng(0, 15);\n      vector<ll> w(n);\n      each(x, w) x = rng(1,\
-    \ TEN(9));\n      copy(all(w), back_inserter(v));\n      s.append(w);\n    } else\
-    \ if (cmd == 7) {\n      // erase(range)\n      if (sz(v)) {\n        int l =\
-    \ rng(0, sz(v));\n        int r = rng(0, sz(v));\n        if (l > r) swap(l, r);\n\
-    \        if (r - l > 8) r = l + 8;\n        s.erase(l, r);\n        v.erase(begin(v)\
-    \ + l, begin(v) + r);\n      }\n    }\n\n    auto v2 = s.get_vector();\n    auto\
-    \ v3 = s.make_array();\n\n    /*\n    if (v != v2) {\n      trc2(cmd);\n     \
-    \ trc2(sz(v), v);\n      trc2(sz(v2), v2);\n    }\n    */\n    assert(v == v2);\n\
-    \    rep(i, sz(v3)) assert(v3[i].fi == i);\n  }\n}\n\n}  // namespace SequenceTestImpl\n\
-    \nvoid q() {\n  rep(_, 1000) SequenceTestImpl::test();\n  cerr << \"OK\" << endl;\n\
-    \n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n\nvoid Nyaan::solve()\
-    \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
+    \  for (auto& x : s) ret.push_back(x);\n  sort(begin(ret), end(ret));\n  return\
+    \ ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
+    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
+    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
+    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 8 \"\
+    verify/verify-unit-test/rbst-sequence.test.cpp\"\n\nusing namespace Nyaan;\n\n\
+    // min add\nnamespace SequenceTestImpl {\n\nusing T = ll;\nusing E = ll;\nT f(T\
+    \ a, T b) { return min(a, b); }\nE g(T a, E b) { return a + b; }\nE h(T a, E b)\
+    \ { return a + b; }\nT ti() { return infLL; }\nE ei() { return 0; }\n\nusing Seq\
+    \ = Sequence<T, E, f, g, h, ti, ei>;\n\nvoid test() {\n  Seq s;\n  vl v;\n\n \
+    \ // constructor\n  if (rng(0, 2)) {\n    int n = rng(0, 10);\n    if (rng(0,\
+    \ 1)) {\n      s = Seq{n};\n      v = vl(n, ti());\n    } else {\n      rep(_,\
+    \ n) v.push_back(rng(0, TEN(9)));\n      s = Seq{v};\n    }\n\n    auto v2 = s.get_vector();\n\
+    \    auto v3 = s.make_array();\n    if (v != v2) {\n      trc2(v);\n      trc2(v2);\n\
+    \    }\n    assert(v == v2);\n    rep(i, sz(v)) assert(v3[i].fi == i);\n\n   \
+    \ if (s.fold_all() == ti()) v.clear(), s.clear();\n  }\n\n  rep(t, 1000) {\n \
+    \   // if (t % 100 == 0) cerr << sz(v) << \" \";\n    // if (t == 999) cerr <<\
+    \ \"\\n\";\n    int cmd = rng(0, 10);\n    if (cmd == 0) {\n      // insert\n\
+    \      int i = rng(0, sz(v));\n      ll x = rng(0, TEN(9));\n      s.insert(i,\
+    \ x);\n      v.insert(begin(v) + i, x);\n    } else if (cmd == 1) {\n      //\
+    \ push_back\n      ll x = rng(0, TEN(9));\n      s.push_back(x);\n      v.push_back(x);\n\
+    \    } else if (cmd == 2) {\n      // erase\n      if (sz(v) != 0) {\n       \
+    \ int i = rng(0, sz(v) - 1);\n        s.erase(i);\n        v.erase(begin(v) +\
+    \ i);\n      }\n    } else if (cmd == 3) {\n      // pop_back\n      if (sz(v)\
+    \ != 0) {\n        s.pop_back();\n        v.pop_back();\n      }\n    } else if\
+    \ (cmd == 4) {\n      // apply\n      int l = rng(0, sz(v));\n      int r = rng(0,\
+    \ sz(v));\n      if (l > r) swap(l, r);\n      ll x = rng(0, TEN(9));\n\n    \
+    \  s.apply(l, r, x);\n      reg(i, l, r) v[i] += x;\n    } else if (cmd == 5)\
+    \ {\n      // fold\n      int l = rng(0, sz(v));\n      int r = rng(0, sz(v));\n\
+    \      if (l > r) swap(l, r);\n\n      ll f1 = s.fold(l, r);\n      ll f2 = ti();\n\
+    \      reg(i, l, r) f2 = f(f2, v[i]);\n      /*\n      if (f1 != f2) {\n     \
+    \   auto w = s.get_vector();\n        trc2(v);\n        trc2(w);\n        trc2(l,\
+    \ r, f1, f2);\n      }\n      */\n      assert(f1 == f2);\n    } else if (cmd\
+    \ == 6) {\n      // append\n      int n = rng(0, 15);\n      vector<ll> w(n);\n\
+    \      each(x, w) x = rng(1, TEN(9));\n      copy(all(w), back_inserter(v));\n\
+    \      s.append(w);\n    } else if (cmd == 7) {\n      // erase(range)\n     \
+    \ if (sz(v)) {\n        int l = rng(0, sz(v));\n        int r = rng(0, sz(v));\n\
+    \        if (l > r) swap(l, r);\n        if (r - l > 8) r = l + 8;\n        s.erase(l,\
+    \ r);\n        v.erase(begin(v) + l, begin(v) + r);\n      }\n    }\n\n    auto\
+    \ v2 = s.get_vector();\n    auto v3 = s.make_array();\n\n    /*\n    if (v !=\
+    \ v2) {\n      trc2(cmd);\n      trc2(sz(v), v);\n      trc2(sz(v2), v2);\n  \
+    \  }\n    */\n    assert(v == v2);\n    rep(i, sz(v3)) assert(v3[i].fi == i);\n\
+    \  }\n}\n\n}  // namespace SequenceTestImpl\n\nvoid q() {\n  rep(_, 1000) SequenceTestImpl::test();\n\
+    \  cerr << \"OK\" << endl;\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b <<\
+    \ endl;\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--)\
+    \ q();\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../segment-tree/rbst-sequence.hpp\"\
     \n//\n#include \"../../misc/rng.hpp\"\n\nusing namespace Nyaan;\n\n// min add\n\
@@ -692,7 +693,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/rbst-sequence.test.cpp
   requiredBy: []
-  timestamp: '2023-09-05 21:46:27+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/rbst-sequence.test.cpp

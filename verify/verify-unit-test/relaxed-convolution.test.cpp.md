@@ -249,57 +249,57 @@ data:
     \ randset(i64 l, i64 r, i64 n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64>\
     \ s;\n  for (i64 i = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if\
     \ (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n\
-    \  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble\
-    \ rnd() { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
-    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
-    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
-    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
-    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 6 \"verify/verify-unit-test/relaxed-convolution.test.cpp\"\
-    \n//\n#line 2 \"ntt/relaxed-convolution.hpp\"\n\n#line 5 \"ntt/relaxed-convolution.hpp\"\
-    \nusing namespace std;\n\n// x^0, x^1, ..., x^N \u3092\u30AA\u30F3\u30E9\u30A4\
-    \u30F3\u3067\u8A08\u7B97\u3059\u308B\n// x^{n-1} \u307E\u3067\u3092\u78BA\u5B9A\
-    \u3055\u305B\u305F\u6642\u70B9\u3067, c[n] \u306B\u306F a_0 b_n \u3068\n// a_n\
-    \ b_0 \u4EE5\u5916\u306E\u5BC4\u4E0E\u306E\u548C\u304C\u5165\u3063\u3066\u3044\
-    \u308B\u306E\u3067, \u305D\u308C\u3092\u5229\u7528\u3059\u308B\u3053\u3068\u3082\
-    \u3067\u304D\u308B\ntemplate <typename fps>\nstruct RelaxedConvolution {\n  using\
-    \ mint = typename fps::value_type;\n  int N, q;\n  vector<mint> a, b, c;\n  fps\
-    \ f, g;\n  vector<fps> as, bs;\n\n  RelaxedConvolution(int _n) : N(_n), q(0) {\n\
-    \    a.resize(N + 1), b.resize(N + 1), c.resize(N + 1);\n  }\n\n  // a[q] = x,\
-    \ b[q] = y \u3067\u3042\u308B\u3068\u304D c[q] \u3092 get\n  mint get(mint x,\
-    \ mint y) {\n    assert(q <= N);\n    a[q] = x, b[q] = y;\n    c[q] += a[q] *\
-    \ b[0] + (q ? b[q] * a[0] : 0);\n\n    auto precalc = [&](int lg) {\n      if\
-    \ ((int)as.size() <= lg) as.resize(lg + 1), bs.resize(lg + 1);\n      if (!as[lg].empty())\
-    \ return;\n      int d = 1 << lg;\n      fps s{begin(a), begin(a) + d * 2};\n\
-    \      fps t{begin(b), begin(b) + d * 2};\n      s.ntt(), t.ntt();\n      as[lg]\
-    \ = s, bs[lg] = t;\n    };\n\n    q++;\n    if (q > N) return c[q - 1];\n    for\
-    \ (int d = 1, lg = 0; d <= q; d *= 2, lg++) {\n      if (q % (2 * d) != d) continue;\n\
-    \      if (q == d) {\n        f.assign(2 * d, mint{});\n        g.assign(2 * d,\
-    \ mint{});\n        for (int i = 0; i < d; i++) f[i] = a[i];\n        for (int\
-    \ i = 0; i < d; i++) g[i] = b[i];\n        f.ntt(), g.ntt();\n        for (int\
-    \ i = 0; i < d * 2; i++) f[i] *= g[i];\n        f.intt();\n        for (int i\
-    \ = q; i < min(q + d, N + 1); i++) c[i] += f[d + i - q];\n      } else {\n   \
-    \     precalc(lg);\n        f.assign(2 * d, mint{});\n        g.assign(2 * d,\
-    \ mint{});\n        for (int i = 0; i < d; i++) f[i] = a[q - d + i];\n       \
-    \ for (int i = 0; i < d; i++) g[i] = b[q - d + i];\n        f.ntt(), g.ntt();\n\
-    \        fps& s = as[lg];\n        fps& t = bs[lg];\n        for (int i = 0; i\
-    \ < d * 2; i++) f[i] = f[i] * t[i] + g[i] * s[i];\n        f.intt();\n       \
-    \ for (int i = q; i < min(q + d, N + 1); i++) c[i] += f[d + i - q];\n      }\n\
-    \    }\n    return c[q - 1];\n  }\n};\n\n/**\n * @brief Relaxed Convolution\n\
-    \ */\n#line 8 \"verify/verify-unit-test/relaxed-convolution.test.cpp\"\n//\n#line\
-    \ 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt.hpp\"\n\ntemplate <typename\
-    \ mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t _mod\
-    \ = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32] = {};\n    int\
-    \ idx = 0;\n    u64 m = _mod - 1;\n    for (u64 i = 2; i * i <= m; ++i) {\n  \
-    \    if (m % i == 0) {\n        ds[idx++] = i;\n        while (m % i == 0) m /=\
-    \ i;\n      }\n    }\n    if (m != 1) ds[idx++] = m;\n\n    uint32_t _pr = 2;\n\
-    \    while (1) {\n      int flg = 1;\n      for (int i = 0; i < idx; ++i) {\n\
-    \        u64 a = _pr, b = (_mod - 1) / ds[i], r = 1;\n        while (b) {\n  \
-    \        if (b & 1) r = r * a % _mod;\n          a = a * a % _mod;\n         \
-    \ b >>= 1;\n        }\n        if (r == 1) {\n          flg = 0;\n          break;\n\
-    \        }\n      }\n      if (flg == 1) break;\n      ++_pr;\n    }\n    return\
-    \ _pr;\n  };\n\n  static constexpr uint32_t mod = mint::get_mod();\n  static constexpr\
-    \ uint32_t pr = get_pr();\n  static constexpr int level = __builtin_ctzll(mod\
+    \  for (auto& x : s) ret.push_back(x);\n  sort(begin(ret), end(ret));\n  return\
+    \ ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
+    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
+    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
+    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 6 \"\
+    verify/verify-unit-test/relaxed-convolution.test.cpp\"\n//\n#line 2 \"ntt/relaxed-convolution.hpp\"\
+    \n\n#line 5 \"ntt/relaxed-convolution.hpp\"\nusing namespace std;\n\n// x^0, x^1,\
+    \ ..., x^N \u3092\u30AA\u30F3\u30E9\u30A4\u30F3\u3067\u8A08\u7B97\u3059\u308B\n\
+    // x^{n-1} \u307E\u3067\u3092\u78BA\u5B9A\u3055\u305B\u305F\u6642\u70B9\u3067\
+    , c[n] \u306B\u306F a_0 b_n \u3068\n// a_n b_0 \u4EE5\u5916\u306E\u5BC4\u4E0E\u306E\
+    \u548C\u304C\u5165\u3063\u3066\u3044\u308B\u306E\u3067, \u305D\u308C\u3092\u5229\
+    \u7528\u3059\u308B\u3053\u3068\u3082\u3067\u304D\u308B\ntemplate <typename fps>\n\
+    struct RelaxedConvolution {\n  using mint = typename fps::value_type;\n  int N,\
+    \ q;\n  vector<mint> a, b, c;\n  fps f, g;\n  vector<fps> as, bs;\n\n  RelaxedConvolution(int\
+    \ _n) : N(_n), q(0) {\n    a.resize(N + 1), b.resize(N + 1), c.resize(N + 1);\n\
+    \  }\n\n  // a[q] = x, b[q] = y \u3067\u3042\u308B\u3068\u304D c[q] \u3092 get\n\
+    \  mint get(mint x, mint y) {\n    assert(q <= N);\n    a[q] = x, b[q] = y;\n\
+    \    c[q] += a[q] * b[0] + (q ? b[q] * a[0] : 0);\n\n    auto precalc = [&](int\
+    \ lg) {\n      if ((int)as.size() <= lg) as.resize(lg + 1), bs.resize(lg + 1);\n\
+    \      if (!as[lg].empty()) return;\n      int d = 1 << lg;\n      fps s{begin(a),\
+    \ begin(a) + d * 2};\n      fps t{begin(b), begin(b) + d * 2};\n      s.ntt(),\
+    \ t.ntt();\n      as[lg] = s, bs[lg] = t;\n    };\n\n    q++;\n    if (q > N)\
+    \ return c[q - 1];\n    for (int d = 1, lg = 0; d <= q; d *= 2, lg++) {\n    \
+    \  if (q % (2 * d) != d) continue;\n      if (q == d) {\n        f.assign(2 *\
+    \ d, mint{});\n        g.assign(2 * d, mint{});\n        for (int i = 0; i < d;\
+    \ i++) f[i] = a[i];\n        for (int i = 0; i < d; i++) g[i] = b[i];\n      \
+    \  f.ntt(), g.ntt();\n        for (int i = 0; i < d * 2; i++) f[i] *= g[i];\n\
+    \        f.intt();\n        for (int i = q; i < min(q + d, N + 1); i++) c[i] +=\
+    \ f[d + i - q];\n      } else {\n        precalc(lg);\n        f.assign(2 * d,\
+    \ mint{});\n        g.assign(2 * d, mint{});\n        for (int i = 0; i < d; i++)\
+    \ f[i] = a[q - d + i];\n        for (int i = 0; i < d; i++) g[i] = b[q - d + i];\n\
+    \        f.ntt(), g.ntt();\n        fps& s = as[lg];\n        fps& t = bs[lg];\n\
+    \        for (int i = 0; i < d * 2; i++) f[i] = f[i] * t[i] + g[i] * s[i];\n \
+    \       f.intt();\n        for (int i = q; i < min(q + d, N + 1); i++) c[i] +=\
+    \ f[d + i - q];\n      }\n    }\n    return c[q - 1];\n  }\n};\n\n/**\n * @brief\
+    \ Relaxed Convolution\n */\n#line 8 \"verify/verify-unit-test/relaxed-convolution.test.cpp\"\
+    \n//\n#line 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt.hpp\"\n\ntemplate\
+    \ <typename mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t\
+    \ _mod = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32] = {};\n \
+    \   int idx = 0;\n    u64 m = _mod - 1;\n    for (u64 i = 2; i * i <= m; ++i)\
+    \ {\n      if (m % i == 0) {\n        ds[idx++] = i;\n        while (m % i ==\
+    \ 0) m /= i;\n      }\n    }\n    if (m != 1) ds[idx++] = m;\n\n    uint32_t _pr\
+    \ = 2;\n    while (1) {\n      int flg = 1;\n      for (int i = 0; i < idx; ++i)\
+    \ {\n        u64 a = _pr, b = (_mod - 1) / ds[i], r = 1;\n        while (b) {\n\
+    \          if (b & 1) r = r * a % _mod;\n          a = a * a % _mod;\n       \
+    \   b >>= 1;\n        }\n        if (r == 1) {\n          flg = 0;\n         \
+    \ break;\n        }\n      }\n      if (flg == 1) break;\n      ++_pr;\n    }\n\
+    \    return _pr;\n  };\n\n  static constexpr uint32_t mod = mint::get_mod();\n\
+    \  static constexpr uint32_t pr = get_pr();\n  static constexpr int level = __builtin_ctzll(mod\
     \ - 1);\n  mint dw[level], dy[level];\n\n  void setwy(int k) {\n    mint w[level],\
     \ y[level];\n    w[k - 1] = mint(pr).pow((mod - 1) / (1 << k));\n    y[k - 1]\
     \ = w[k - 1].inverse();\n    for (int i = k - 2; i > 0; --i)\n      w[i] = w[i\
@@ -569,7 +569,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/relaxed-convolution.test.cpp
   requiredBy: []
-  timestamp: '2023-08-31 20:44:07+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/relaxed-convolution.test.cpp

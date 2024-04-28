@@ -25,6 +25,9 @@ data:
     path: verify/verify-aoj-other/aoj-2995.test.cpp
     title: verify/verify-aoj-other/aoj-2995.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/parallel-union-find.test.cpp
+    title: verify/verify-unit-test/parallel-union-find.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
   - icon: ':heavy_check_mark:'
@@ -77,20 +80,21 @@ data:
   path: data-structure/union-find.hpp
   requiredBy:
   - graph/funtional-graph.hpp
-  - graph/kruskal.hpp
   - graph/minimum-cost-arborescence.hpp
+  - graph/kruskal.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-aoj-other/aoj-2891.test.cpp
+  - verify/verify-aoj-other/aoj-2995.test.cpp
+  - verify/verify-unit-test/parallel-union-find.test.cpp
+  - verify/verify-unit-test/tree-path.test.cpp
+  - verify/verify-yuki/yuki-1303.test.cpp
+  - verify/verify-yuki/yuki-1254.test.cpp
+  - verify/verify-yuki/yuki-1170-divide-interval.test.cpp
+  - verify/verify-yuki/yuki-2588.test.cpp
   - verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
   - verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
-  - verify/verify-yuki/yuki-2588.test.cpp
-  - verify/verify-yuki/yuki-1254.test.cpp
-  - verify/verify-yuki/yuki-1303.test.cpp
-  - verify/verify-yuki/yuki-1170-divide-interval.test.cpp
-  - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
 documentation_of: data-structure/union-find.hpp
 layout: document

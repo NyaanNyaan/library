@@ -98,8 +98,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-sum-of-totient-3.test.cpp
-  - verify/verify-yuki/yuki-2266.test.cpp
   - verify/verify-yuki/yuki-2262.test.cpp
+  - verify/verify-yuki/yuki-2266.test.cpp
 documentation_of: multiplicative-function/enumerate-sum-of-multiplicative-function.hpp
 layout: document
 redirect_from:

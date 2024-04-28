@@ -483,25 +483,26 @@ data:
     \ <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i; --i) {\n\
     \    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m = r - i;\n\
     \    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
-    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
-    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
-    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
-    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
-    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 12 \"\
-    verify/verify-unit-test/fps.test.cpp\"\n\nusing namespace Nyaan;\n\nvoid test_div(int\
-    \ n, int m) {\n  trc(\"test div\");\n  assert(n > 0 and m > 0);\n  fps f(n), g(m);\n\
-    \  each(x, f) x = rng();\n  each(x, g) x = rng();\n  do {\n    f.back() = rng();\n\
-    \    g.back() = rng();\n  } while (f.back() == 0 or g.back() == 0);\n\n  auto\
-    \ q = f / g;\n  auto r = f % g;\n  assert(g * q + r == f);\n  assert(r.size()\
-    \ < g.size());\n}\n\nvoid test_pow(int n, int deg) {\n  trc(\"test pow\", n, deg);\n\
-    \  assert(n > 0 && deg > 0);\n  fps f(n);\n  each(x, f) x = rng();\n  int r =\
-    \ randint(0, 100);\n  fps g = f.pow(r, deg);\n  fps h(deg), base(f);\n  h[0] =\
-    \ 1;\n  for (int e = r; e; e >>= 1) {\n    if (e & 1) h = (base * h).pre(deg);\n\
-    \    base = (base * base).pre(deg);\n  }\n  if (g != h) {\n    trc(f, r, deg);\n\
-    \    trc(g);\n    trc(h);\n  }\n  assert(g == h);\n}\n\nvoid test_exp(int n, int\
-    \ deg) {\n  trc(\"test exp\", n, deg);\n  assert(n > 0 and deg > 0);\n  fps f(n);\n\
-    \  each(x, f) x = rng();\n  f[0] = 1;\n\n  fps g = f.log(deg);\n  fps h = g.exp(deg);\n\
+    \  sort(begin(ret), end(ret));\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd()\
+    \ { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
+    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
+    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
+    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
+    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 12 \"verify/verify-unit-test/fps.test.cpp\"\
+    \n\nusing namespace Nyaan;\n\nvoid test_div(int n, int m) {\n  trc(\"test div\"\
+    );\n  assert(n > 0 and m > 0);\n  fps f(n), g(m);\n  each(x, f) x = rng();\n \
+    \ each(x, g) x = rng();\n  do {\n    f.back() = rng();\n    g.back() = rng();\n\
+    \  } while (f.back() == 0 or g.back() == 0);\n\n  auto q = f / g;\n  auto r =\
+    \ f % g;\n  assert(g * q + r == f);\n  assert(r.size() < g.size());\n}\n\nvoid\
+    \ test_pow(int n, int deg) {\n  trc(\"test pow\", n, deg);\n  assert(n > 0 &&\
+    \ deg > 0);\n  fps f(n);\n  each(x, f) x = rng();\n  int r = randint(0, 100);\n\
+    \  fps g = f.pow(r, deg);\n  fps h(deg), base(f);\n  h[0] = 1;\n  for (int e =\
+    \ r; e; e >>= 1) {\n    if (e & 1) h = (base * h).pre(deg);\n    base = (base\
+    \ * base).pre(deg);\n  }\n  if (g != h) {\n    trc(f, r, deg);\n    trc(g);\n\
+    \    trc(h);\n  }\n  assert(g == h);\n}\n\nvoid test_exp(int n, int deg) {\n \
+    \ trc(\"test exp\", n, deg);\n  assert(n > 0 and deg > 0);\n  fps f(n);\n  each(x,\
+    \ f) x = rng();\n  f[0] = 1;\n\n  fps g = f.log(deg);\n  fps h = g.exp(deg);\n\
     \  f.resize(deg);\n  assert(f == h);\n}\n\nvoid test_inv(int n, int deg) {\n \
     \ trc(\"test inv\");\n  assert(n > 0 and deg > 0);\n  fps f(n);\n  each(x, f)\
     \ x = rng();\n  while (f[0] == 0) f[0] = rng();\n\n  fps g = f.inv(deg);\n  fps\
@@ -548,7 +549,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/fps.test.cpp
   requiredBy: []
-  timestamp: '2023-08-31 20:44:07+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/fps.test.cpp

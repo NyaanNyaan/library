@@ -36,13 +36,13 @@ data:
   isVerificationFile: false
   path: marathon/log_table.hpp
   requiredBy:
-  - marathon/sa-manager.hpp
   - marathon/simulated-annealing.hpp
+  - marathon/sa-manager.hpp
   timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/simulated-annealing.test.cpp
   - verify/verify-unit-test/sa-manager.test.cpp
+  - verify/verify-unit-test/simulated-annealing.test.cpp
 documentation_of: marathon/log_table.hpp
 layout: document
 redirect_from:

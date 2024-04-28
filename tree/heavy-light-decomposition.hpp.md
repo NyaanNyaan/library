@@ -11,6 +11,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/auxiliary-tree.hpp
     title: Auxiliary Tree
+  - icon: ':heavy_check_mark:'
+    path: tree/dynamic-diameter.hpp
+    title: tree/dynamic-diameter.hpp
+  - icon: ':heavy_check_mark:'
+    path: tree/static-top-tree-vertex-based.hpp
+    title: Static Top Tree
+  - icon: ':warning:'
+    path: tree/static-top-tree.hpp
+    title: tree/static-top-tree.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
@@ -27,6 +36,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2891.test.cpp
     title: verify/verify-aoj-other/aoj-2891.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/dynamic-diameter.test.cpp
+    title: verify/verify-unit-test/dynamic-diameter.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
@@ -105,28 +117,28 @@ data:
     \  }\n\n  // (u, v]\n  vector<pair<int, int>> descend(int u, int v) const {\n\
     \    if (u == v) return {};\n    if (nxt[u] == nxt[v]) return {{down[u] + 1, down[v]}};\n\
     \    auto res = descend(u, par[nxt[v]]);\n    res.emplace_back(down[nxt[v]], down[v]);\n\
-    \    return res;\n  }\n\n public:\n  G& g;\n  int id;\n  vector<int> size, depth,\
-    \ down, up, nxt, par;\n  HeavyLightDecomposition(G& _g, int root = 0)\n      :\
-    \ g(_g),\n        id(0),\n        size(g.size(), 0),\n        depth(g.size(),\
-    \ 0),\n        down(g.size(), -1),\n        up(g.size(), -1),\n        nxt(g.size(),\
-    \ root),\n        par(g.size(), root) {\n    dfs_sz(root);\n    dfs_hld(root);\n\
-    \  }\n\n  void build(int root) {\n    dfs_sz(root);\n    dfs_hld(root);\n  }\n\
-    \n  pair<int, int> idx(int i) const { return make_pair(down[i], up[i]); }\n\n\
-    \  template <typename F>\n  void path_query(int u, int v, bool vertex, const F&\
-    \ f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) {\n   \
-    \   int s = a + 1, t = b;\n      s > t ? f(t, s) : f(s, t);\n    }\n    if (vertex)\
-    \ f(down[l], down[l] + 1);\n    for (auto&& [a, b] : descend(l, v)) {\n      int\
-    \ s = a, t = b + 1;\n      s > t ? f(t, s) : f(s, t);\n    }\n  }\n\n  template\
-    \ <typename F>\n  void path_noncommutative_query(int u, int v, bool vertex, const\
-    \ F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) f(a\
-    \ + 1, b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] :\
-    \ descend(l, v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
-    \ u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n\
-    \  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a]\
-    \ < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] <\
-    \ depth[b] ? a : b;\n  }\n\n  int dist(int a, int b) { return depth[a] + depth[b]\
-    \ - depth[lca(a, b)] * 2; }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
-    \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n"
+    \    return res;\n  }\n\n public:\n  G& g;\n  int root, id;\n  vector<int> size,\
+    \ depth, down, up, nxt, par;\n  HeavyLightDecomposition(G& _g, int _root = 0)\n\
+    \      : g(_g),\n        root(_root),\n        id(0),\n        size(g.size(),\
+    \ 0),\n        depth(g.size(), 0),\n        down(g.size(), -1),\n        up(g.size(),\
+    \ -1),\n        nxt(g.size(), root),\n        par(g.size(), root) {\n    dfs_sz(root);\n\
+    \    dfs_hld(root);\n  }\n\n  pair<int, int> idx(int i) const { return make_pair(down[i],\
+    \ up[i]); }\n\n  template <typename F>\n  void path_query(int u, int v, bool vertex,\
+    \ const F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l))\
+    \ {\n      int s = a + 1, t = b;\n      s > t ? f(t, s) : f(s, t);\n    }\n  \
+    \  if (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] : descend(l, v))\
+    \ {\n      int s = a, t = b + 1;\n      s > t ? f(t, s) : f(s, t);\n    }\n  }\n\
+    \n  template <typename F>\n  void path_noncommutative_query(int u, int v, bool\
+    \ vertex, const F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u,\
+    \ l)) f(a + 1, b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&&\
+    \ [a, b] : descend(l, v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void\
+    \ subtree_query(int u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex),\
+    \ up[u]);\n  }\n\n  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n\
+    \      if (down[a] < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n   \
+    \ return depth[a] < depth[b] ? a : b;\n  }\n\n  int dist(int a, int b) { return\
+    \ depth[a] + depth[b] - depth[lca(a, b)] * 2; }\n};\n\n/**\n * @brief Heavy Light\
+    \ Decomposition(\u91CD\u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n\
+    \ */\n"
   code: "#pragma once\n\n#include \"../graph/graph-template.hpp\"\n\ntemplate <typename\
     \ G>\nstruct HeavyLightDecomposition {\n private:\n  void dfs_sz(int cur) {\n\
     \    size[cur] = 1;\n    for (auto& dst : g[cur]) {\n      if (dst == par[cur])\
@@ -144,51 +156,55 @@ data:
     \ 1);\n    return res;\n  }\n\n  // (u, v]\n  vector<pair<int, int>> descend(int\
     \ u, int v) const {\n    if (u == v) return {};\n    if (nxt[u] == nxt[v]) return\
     \ {{down[u] + 1, down[v]}};\n    auto res = descend(u, par[nxt[v]]);\n    res.emplace_back(down[nxt[v]],\
-    \ down[v]);\n    return res;\n  }\n\n public:\n  G& g;\n  int id;\n  vector<int>\
-    \ size, depth, down, up, nxt, par;\n  HeavyLightDecomposition(G& _g, int root\
-    \ = 0)\n      : g(_g),\n        id(0),\n        size(g.size(), 0),\n        depth(g.size(),\
-    \ 0),\n        down(g.size(), -1),\n        up(g.size(), -1),\n        nxt(g.size(),\
-    \ root),\n        par(g.size(), root) {\n    dfs_sz(root);\n    dfs_hld(root);\n\
-    \  }\n\n  void build(int root) {\n    dfs_sz(root);\n    dfs_hld(root);\n  }\n\
-    \n  pair<int, int> idx(int i) const { return make_pair(down[i], up[i]); }\n\n\
-    \  template <typename F>\n  void path_query(int u, int v, bool vertex, const F&\
-    \ f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) {\n   \
-    \   int s = a + 1, t = b;\n      s > t ? f(t, s) : f(s, t);\n    }\n    if (vertex)\
-    \ f(down[l], down[l] + 1);\n    for (auto&& [a, b] : descend(l, v)) {\n      int\
-    \ s = a, t = b + 1;\n      s > t ? f(t, s) : f(s, t);\n    }\n  }\n\n  template\
-    \ <typename F>\n  void path_noncommutative_query(int u, int v, bool vertex, const\
-    \ F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) f(a\
-    \ + 1, b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] :\
-    \ descend(l, v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
-    \ u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n\
-    \  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a]\
-    \ < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] <\
-    \ depth[b] ? a : b;\n  }\n\n  int dist(int a, int b) { return depth[a] + depth[b]\
-    \ - depth[lca(a, b)] * 2; }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
-    \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n"
+    \ down[v]);\n    return res;\n  }\n\n public:\n  G& g;\n  int root, id;\n  vector<int>\
+    \ size, depth, down, up, nxt, par;\n  HeavyLightDecomposition(G& _g, int _root\
+    \ = 0)\n      : g(_g),\n        root(_root),\n        id(0),\n        size(g.size(),\
+    \ 0),\n        depth(g.size(), 0),\n        down(g.size(), -1),\n        up(g.size(),\
+    \ -1),\n        nxt(g.size(), root),\n        par(g.size(), root) {\n    dfs_sz(root);\n\
+    \    dfs_hld(root);\n  }\n\n  pair<int, int> idx(int i) const { return make_pair(down[i],\
+    \ up[i]); }\n\n  template <typename F>\n  void path_query(int u, int v, bool vertex,\
+    \ const F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l))\
+    \ {\n      int s = a + 1, t = b;\n      s > t ? f(t, s) : f(s, t);\n    }\n  \
+    \  if (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] : descend(l, v))\
+    \ {\n      int s = a, t = b + 1;\n      s > t ? f(t, s) : f(s, t);\n    }\n  }\n\
+    \n  template <typename F>\n  void path_noncommutative_query(int u, int v, bool\
+    \ vertex, const F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u,\
+    \ l)) f(a + 1, b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&&\
+    \ [a, b] : descend(l, v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void\
+    \ subtree_query(int u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex),\
+    \ up[u]);\n  }\n\n  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n\
+    \      if (down[a] < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n   \
+    \ return depth[a] < depth[b] ? a : b;\n  }\n\n  int dist(int a, int b) { return\
+    \ depth[a] + depth[b] - depth[lca(a, b)] * 2; }\n};\n\n/**\n * @brief Heavy Light\
+    \ Decomposition(\u91CD\u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n\
+    \ */\n"
   dependsOn:
   - graph/graph-template.hpp
   isVerificationFile: false
   path: tree/heavy-light-decomposition.hpp
   requiredBy:
-  - tree/auxiliary-tree.hpp
   - graph/funtional-graph.hpp
-  timestamp: '2021-11-23 10:22:25+09:00'
+  - tree/auxiliary-tree.hpp
+  - tree/dynamic-diameter.hpp
+  - tree/static-top-tree-vertex-based.hpp
+  - tree/static-top-tree.hpp
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-2891.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
-  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-  - verify/verify-yuki/yuki-1778.test.cpp
-  - verify/verify-yuki/yuki-2588.test.cpp
+  - verify/verify-unit-test/dynamic-diameter.test.cpp
   - verify/verify-yuki/yuki-1254.test.cpp
   - verify/verify-yuki/yuki-1326.test.cpp
+  - verify/verify-yuki/yuki-2588.test.cpp
+  - verify/verify-yuki/yuki-1778.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
+  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
 documentation_of: tree/heavy-light-decomposition.hpp
 layout: document
 redirect_from:

@@ -84,14 +84,14 @@ data:
   isVerificationFile: false
   path: set-function/subset-convolution.hpp
   requiredBy:
-  - set-function/exp-of-set-power-series.hpp
   - set-function/polynomial-composite-set-power-series.hpp
+  - set-function/exp-of-set-power-series.hpp
   timestamp: '2023-05-27 23:17:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-graph/yosupo-exp-of-set-power-series.test.cpp
   - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
+  - verify/verify-yosupo-graph/yosupo-exp-of-set-power-series.test.cpp
 documentation_of: set-function/subset-convolution.hpp
 layout: document
 redirect_from:

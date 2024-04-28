@@ -3,8 +3,14 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: data-structure/parallel-union-find.hpp
+    title: data-structure/parallel-union-find.hpp
+  - icon: ':heavy_check_mark:'
     path: string/rolling-hash-2d.hpp
     title: "\u4E8C\u6B21\u5143Rolling Hash"
+  - icon: ':heavy_check_mark:'
+    path: string/rolling-hash-on-segment-tree.hpp
+    title: string/rolling-hash-on-segment-tree.hpp
   - icon: ':heavy_check_mark:'
     path: string/rolling-hash.hpp
     title: Rolling Hash
@@ -21,6 +27,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/inner-hash.test.cpp
     title: verify/verify-unit-test/inner-hash.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/parallel-union-find.test.cpp
+    title: verify/verify-unit-test/parallel-union-find.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/string-search.test.cpp
     title: verify/verify-unit-test/string-search.test.cpp
@@ -144,20 +153,23 @@ data:
   isVerificationFile: false
   path: internal/internal-hash.hpp
   requiredBy:
-  - string/rolling-hash.hpp
+  - data-structure/parallel-union-find.hpp
   - string/rolling-hash-2d.hpp
+  - string/rolling-hash-on-segment-tree.hpp
+  - string/rolling-hash.hpp
   - tree/tree-hash.hpp
   timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
   - verify/verify-aoj-other/aoj-1613.test.cpp
-  - verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
-  - verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
-  - verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
-  - verify/verify-yuki/yuki-1789.test.cpp
+  - verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
+  - verify/verify-unit-test/parallel-union-find.test.cpp
   - verify/verify-unit-test/string-search.test.cpp
   - verify/verify-unit-test/inner-hash.test.cpp
+  - verify/verify-yuki/yuki-1789.test.cpp
+  - verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
+  - verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
+  - verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
 documentation_of: internal/internal-hash.hpp
 layout: document
 redirect_from:

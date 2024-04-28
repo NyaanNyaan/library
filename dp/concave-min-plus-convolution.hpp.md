@@ -45,6 +45,13 @@ data:
     \ m, [&](int i, int j, int k) {\n    if (i < k) return true;\n    if (i - j >=\
     \ n) return false;\n    return a[i - j] + b[j] <= a[i - k] + b[k];\n  });\n  vector<T>\
     \ ans(n + m - 1);\n  for (int i = 0; i < n + m - 1; i++) {\n    int j = argmin[i];\n\
+    \    ans[i] = a[i - j] + b[j];\n  }\n  return ans;\n}\n\n// a \u306F\u4E0A\u306B\
+    \u51F8, b \u306F\u81EA\u7531\ntemplate <typename T>\nvector<T> concave_max_plus_convolution(const\
+    \ vector<T>& a, const vector<T>& b) {\n  if (a.empty() or b.empty()) return {};\n\
+    \  int n = a.size(), m = b.size();\n  auto argmin = monotone_minima(n + m - 1,\
+    \ m, [&](int i, int j, int k) {\n    if (i < k) return true;\n    if (i - j >=\
+    \ n) return false;\n    return a[i - j] + b[j] >= a[i - k] + b[k];\n  });\n  vector<T>\
+    \ ans(n + m - 1);\n  for (int i = 0; i < n + m - 1; i++) {\n    int j = argmin[i];\n\
     \    ans[i] = a[i - j] + b[j];\n  }\n  return ans;\n}\n"
   code: "#pragma once\n\n#include <vector>\nusing namespace std;\n\n#include \"monotone-minima.hpp\"\
     \n\n// a \u306F\u4E0B\u306B\u51F8, b \u306F\u81EA\u7531\ntemplate <typename T>\n\
@@ -54,17 +61,24 @@ data:
     \  if (i < k) return true;\n    if (i - j >= n) return false;\n    return a[i\
     \ - j] + b[j] <= a[i - k] + b[k];\n  });\n  vector<T> ans(n + m - 1);\n  for (int\
     \ i = 0; i < n + m - 1; i++) {\n    int j = argmin[i];\n    ans[i] = a[i - j]\
-    \ + b[j];\n  }\n  return ans;\n}\n"
+    \ + b[j];\n  }\n  return ans;\n}\n\n// a \u306F\u4E0A\u306B\u51F8, b \u306F\u81EA\
+    \u7531\ntemplate <typename T>\nvector<T> concave_max_plus_convolution(const vector<T>&\
+    \ a, const vector<T>& b) {\n  if (a.empty() or b.empty()) return {};\n  int n\
+    \ = a.size(), m = b.size();\n  auto argmin = monotone_minima(n + m - 1, m, [&](int\
+    \ i, int j, int k) {\n    if (i < k) return true;\n    if (i - j >= n) return\
+    \ false;\n    return a[i - j] + b[j] >= a[i - k] + b[k];\n  });\n  vector<T> ans(n\
+    \ + m - 1);\n  for (int i = 0; i < n + m - 1; i++) {\n    int j = argmin[i];\n\
+    \    ans[i] = a[i - j] + b[j];\n  }\n  return ans;\n}\n"
   dependsOn:
   - dp/monotone-minima.hpp
   isVerificationFile: false
   path: dp/concave-min-plus-convolution.hpp
   requiredBy: []
-  timestamp: '2024-03-28 20:36:39+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
   - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp
+  - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
 documentation_of: dp/concave-min-plus-convolution.hpp
 layout: document
 redirect_from:

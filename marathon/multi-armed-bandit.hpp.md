@@ -38,30 +38,31 @@ data:
     \ randset(i64 l, i64 r, i64 n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64>\
     \ s;\n  for (i64 i = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if\
     \ (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n\
-    \  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble\
-    \ rnd() { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
-    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
-    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
-    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
-    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 9 \"marathon/multi-armed-bandit.hpp\"\
-    \n\n// N \u629E, \u5831\u916C\u6700\u5927\u5316\nstruct MultiArmedBandit {\n \
-    \ MultiArmedBandit(int n)\n      : N(n), last(-1), iter(0), thres(N * 5), num(N),\
-    \ v(N), e(N), t(1) {}\n\n  int N, last;\n  long long iter, thres;\n  vector<long\
-    \ long> num;\n  vector<double> v, e;\n  double t;\n\n  int play() {\n    assert(last\
-    \ == -1);\n    iter++;\n    if (iter <= thres) return last = iter % N;\n\n   \
-    \ double s = accumulate(begin(e), end(e), 0.0);\n    double x = rnd() * s;\n \
-    \   for (int i = 0; i < N; i++) {\n      if ((x -= e[i]) <= 0) return last = i;\n\
-    \    }\n    return last = N - 1;\n  }\n\n  // \u91CD\u307F\u4ED8\u3051\u7528\u306E\
-    \u95A2\u6570\n  double f(double x) { return exp(x / t); }\n\n  void reward(double\
-    \ y) {\n    assert(last != -1);\n    v[last] += y;\n    num[last] += 1;\n    e[last]\
-    \ = f(v[last] / num[last]);\n    last = -1;\n\n    static double u = 1.0;\n  \
-    \  static double du = 0.01;\n    // iter % thres == 0 \u306B\u306A\u3063\u305F\
-    \u3089 t \u3092\u518D\u6C7A\u5B9A\n    if (iter % thres == 0) {\n      u = max(0.7,\
-    \ u - du);\n      double average = accumulate(begin(v), end(v), 0.0) / thres;\n\
-    \      t = average < 0.0 ? 1.0 : pow(average, u);\n      for (int i = 0; i < N;\
-    \ i++) e[i] = f(v[i] / num[i]);\n    }\n  }\n  int best() { return max_element(begin(e),\
-    \ end(e)) - begin(e); }\n};\n"
+    \  for (auto& x : s) ret.push_back(x);\n  sort(begin(ret), end(ret));\n  return\
+    \ ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
+    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
+    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
+    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 9 \"\
+    marathon/multi-armed-bandit.hpp\"\n\n// N \u629E, \u5831\u916C\u6700\u5927\u5316\
+    \nstruct MultiArmedBandit {\n  MultiArmedBandit(int n)\n      : N(n), last(-1),\
+    \ iter(0), thres(N * 5), num(N), v(N), e(N), t(1) {}\n\n  int N, last;\n  long\
+    \ long iter, thres;\n  vector<long long> num;\n  vector<double> v, e;\n  double\
+    \ t;\n\n  int play() {\n    assert(last == -1);\n    iter++;\n    if (iter <=\
+    \ thres) return last = iter % N;\n\n    double s = accumulate(begin(e), end(e),\
+    \ 0.0);\n    double x = rnd() * s;\n    for (int i = 0; i < N; i++) {\n      if\
+    \ ((x -= e[i]) <= 0) return last = i;\n    }\n    return last = N - 1;\n  }\n\n\
+    \  // \u91CD\u307F\u4ED8\u3051\u7528\u306E\u95A2\u6570\n  double f(double x) {\
+    \ return exp(x / t); }\n\n  void reward(double y) {\n    assert(last != -1);\n\
+    \    v[last] += y;\n    num[last] += 1;\n    e[last] = f(v[last] / num[last]);\n\
+    \    last = -1;\n\n    static double u = 1.0;\n    static double du = 0.01;\n\
+    \    // iter % thres == 0 \u306B\u306A\u3063\u305F\u3089 t \u3092\u518D\u6C7A\u5B9A\
+    \n    if (iter % thres == 0) {\n      u = max(0.7, u - du);\n      double average\
+    \ = accumulate(begin(v), end(v), 0.0) / thres;\n      t = average < 0.0 ? 1.0\
+    \ : pow(average, u);\n      for (int i = 0; i < N; i++) e[i] = f(v[i] / num[i]);\n\
+    \    }\n  }\n  int best() { return max_element(begin(e), end(e)) - begin(e); }\n\
+    };\n"
   code: "#include <algorithm>\n#include <cassert>\n#include <cmath>\n#include <numeric>\n\
     #include <vector>\nusing namespace std;\n\n#include \"../misc/rng.hpp\"\n\n//\
     \ N \u629E, \u5831\u916C\u6700\u5927\u5316\nstruct MultiArmedBandit {\n  MultiArmedBandit(int\
@@ -87,7 +88,7 @@ data:
   isVerificationFile: false
   path: marathon/multi-armed-bandit.hpp
   requiredBy: []
-  timestamp: '2023-09-02 22:21:41+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: marathon/multi-armed-bandit.hpp

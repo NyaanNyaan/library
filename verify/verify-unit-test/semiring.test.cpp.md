@@ -311,22 +311,23 @@ data:
     \ <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i; --i) {\n\
     \    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m = r - i;\n\
     \    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
-    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
-    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
-    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
-    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
-    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 10 \"\
-    verify/verify-unit-test/semiring.test.cpp\"\n\nll f(ll a, ll b) { return min(a,\
-    \ b); }\nll g(ll a, ll b) { return a + b; }\nll i0() { return -1; }\nll i1() {\
-    \ return 0; }\nusing rig = semiring<ll, f, g, i0, i1>;\n\nvoid test() {\n  constexpr\
-    \ int n = 100;\n  vvl d(n, vl(n, infLL));\n  rep(i, n) d[i][i] = 0;\n\n  int ratio\
-    \ = (n / 3) * pow(2, randint(0, 5));\n  rep(i, n) rep(j, i) {\n    if (randint(0,\
-    \ ratio) == 0) d[i][j] = d[j][i] = randint(0, 100);\n  }\n\n  Mat<rig, n> m;\n\
-    \  rep(i, n) rep(j, n) m[i][j] = d[i][j] == infLL ? i0() : d[i][j];\n  m ^= n\
-    \ - 1;\n\n  warshall_floyd(d);\n  rep(i, n) rep(j, n) assert(m[i][j] == (d[i][j]\
-    \ == infLL ? i0() : d[i][j]));\n}\n\nvoid Nyaan::solve() {\n  rep(i, 50) test();\n\
-    \n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \  sort(begin(ret), end(ret));\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd()\
+    \ { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
+    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
+    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
+    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
+    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 10 \"verify/verify-unit-test/semiring.test.cpp\"\
+    \n\nll f(ll a, ll b) { return min(a, b); }\nll g(ll a, ll b) { return a + b; }\n\
+    ll i0() { return -1; }\nll i1() { return 0; }\nusing rig = semiring<ll, f, g,\
+    \ i0, i1>;\n\nvoid test() {\n  constexpr int n = 100;\n  vvl d(n, vl(n, infLL));\n\
+    \  rep(i, n) d[i][i] = 0;\n\n  int ratio = (n / 3) * pow(2, randint(0, 5));\n\
+    \  rep(i, n) rep(j, i) {\n    if (randint(0, ratio) == 0) d[i][j] = d[j][i] =\
+    \ randint(0, 100);\n  }\n\n  Mat<rig, n> m;\n  rep(i, n) rep(j, n) m[i][j] = d[i][j]\
+    \ == infLL ? i0() : d[i][j];\n  m ^= n - 1;\n\n  warshall_floyd(d);\n  rep(i,\
+    \ n) rep(j, n) assert(m[i][j] == (d[i][j] == infLL ? i0() : d[i][j]));\n}\n\n\
+    void Nyaan::solve() {\n  rep(i, 50) test();\n\n  int a, b;\n  cin >> a >> b;\n\
+    \  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../math/semiring.hpp\"\n#include\
     \ \"../../shortest-path/warshall-floyd.hpp\"\nusing namespace Nyaan;\n\n#include\
@@ -355,7 +356,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/semiring.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 14:06:55+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/semiring.test.cpp

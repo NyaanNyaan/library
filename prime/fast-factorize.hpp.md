@@ -144,42 +144,42 @@ data:
     \ randset(i64 l, i64 r, i64 n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64>\
     \ s;\n  for (i64 i = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if\
     \ (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n\
-    \  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble\
-    \ rnd() { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
-    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
-    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
-    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
-    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"modint/arbitrary-montgomery-modint.hpp\"\
-    \n\n#include <iostream>\nusing namespace std;\n\ntemplate <typename Int, typename\
-    \ UInt, typename Long, typename ULong, int id>\nstruct ArbitraryLazyMontgomeryModIntBase\
-    \ {\n  using mint = ArbitraryLazyMontgomeryModIntBase;\n\n  inline static UInt\
-    \ mod;\n  inline static UInt r;\n  inline static UInt n2;\n  static constexpr\
-    \ int bit_length = sizeof(UInt) * 8;\n\n  static UInt get_r() {\n    UInt ret\
-    \ = mod;\n    while (mod * ret != 1) ret *= UInt(2) - mod * ret;\n    return ret;\n\
-    \  }\n  static void set_mod(UInt m) {\n    assert(m < (UInt(1u) << (bit_length\
-    \ - 2)));\n    assert((m & 1) == 1);\n    mod = m, n2 = -ULong(m) % m, r = get_r();\n\
-    \  }\n  UInt a;\n\n  ArbitraryLazyMontgomeryModIntBase() : a(0) {}\n  ArbitraryLazyMontgomeryModIntBase(const\
-    \ Long &b)\n      : a(reduce(ULong(b % mod + mod) * n2)){};\n\n  static UInt reduce(const\
-    \ ULong &b) {\n    return (b + ULong(UInt(b) * UInt(-r)) * mod) >> bit_length;\n\
-    \  }\n\n  mint &operator+=(const mint &b) {\n    if (Int(a += b.a - 2 * mod) <\
-    \ 0) a += 2 * mod;\n    return *this;\n  }\n  mint &operator-=(const mint &b)\
-    \ {\n    if (Int(a -= b.a) < 0) a += 2 * mod;\n    return *this;\n  }\n  mint\
-    \ &operator*=(const mint &b) {\n    a = reduce(ULong(a) * b.a);\n    return *this;\n\
-    \  }\n  mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return\
-    \ *this;\n  }\n\n  mint operator+(const mint &b) const { return mint(*this) +=\
-    \ b; }\n  mint operator-(const mint &b) const { return mint(*this) -= b; }\n \
-    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  mint operator/(const\
-    \ mint &b) const { return mint(*this) /= b; }\n\n  bool operator==(const mint\
-    \ &b) const {\n    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod\
-    \ : b.a);\n  }\n  bool operator!=(const mint &b) const {\n    return (a >= mod\
-    \ ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);\n  }\n  mint operator-() const\
-    \ { return mint(0) - mint(*this); }\n  mint operator+() const { return mint(*this);\
-    \ }\n\n  mint pow(ULong n) const {\n    mint ret(1), mul(*this);\n    while (n\
-    \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul, n >>= 1;\n    }\n  \
-    \  return ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const mint &b)\
-    \ {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream &is,\
-    \ mint &b) {\n    Long t;\n    is >> t;\n    b = ArbitraryLazyMontgomeryModIntBase(t);\n\
+    \  for (auto& x : s) ret.push_back(x);\n  sort(begin(ret), end(ret));\n  return\
+    \ ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
+    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
+    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
+    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"\
+    modint/arbitrary-montgomery-modint.hpp\"\n\n#include <iostream>\nusing namespace\
+    \ std;\n\ntemplate <typename Int, typename UInt, typename Long, typename ULong,\
+    \ int id>\nstruct ArbitraryLazyMontgomeryModIntBase {\n  using mint = ArbitraryLazyMontgomeryModIntBase;\n\
+    \n  inline static UInt mod;\n  inline static UInt r;\n  inline static UInt n2;\n\
+    \  static constexpr int bit_length = sizeof(UInt) * 8;\n\n  static UInt get_r()\
+    \ {\n    UInt ret = mod;\n    while (mod * ret != 1) ret *= UInt(2) - mod * ret;\n\
+    \    return ret;\n  }\n  static void set_mod(UInt m) {\n    assert(m < (UInt(1u)\
+    \ << (bit_length - 2)));\n    assert((m & 1) == 1);\n    mod = m, n2 = -ULong(m)\
+    \ % m, r = get_r();\n  }\n  UInt a;\n\n  ArbitraryLazyMontgomeryModIntBase() :\
+    \ a(0) {}\n  ArbitraryLazyMontgomeryModIntBase(const Long &b)\n      : a(reduce(ULong(b\
+    \ % mod + mod) * n2)){};\n\n  static UInt reduce(const ULong &b) {\n    return\
+    \ (b + ULong(UInt(b) * UInt(-r)) * mod) >> bit_length;\n  }\n\n  mint &operator+=(const\
+    \ mint &b) {\n    if (Int(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
+    \  }\n  mint &operator-=(const mint &b) {\n    if (Int(a -= b.a) < 0) a += 2 *\
+    \ mod;\n    return *this;\n  }\n  mint &operator*=(const mint &b) {\n    a = reduce(ULong(a)\
+    \ * b.a);\n    return *this;\n  }\n  mint &operator/=(const mint &b) {\n    *this\
+    \ *= b.inverse();\n    return *this;\n  }\n\n  mint operator+(const mint &b) const\
+    \ { return mint(*this) += b; }\n  mint operator-(const mint &b) const { return\
+    \ mint(*this) -= b; }\n  mint operator*(const mint &b) const { return mint(*this)\
+    \ *= b; }\n  mint operator/(const mint &b) const { return mint(*this) /= b; }\n\
+    \n  bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
+    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  bool operator!=(const mint &b) const\
+    \ {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);\n\
+    \  }\n  mint operator-() const { return mint(0) - mint(*this); }\n  mint operator+()\
+    \ const { return mint(*this); }\n\n  mint pow(ULong n) const {\n    mint ret(1),\
+    \ mul(*this);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *=\
+    \ mul, n >>= 1;\n    }\n    return ret;\n  }\n\n  friend ostream &operator<<(ostream\
+    \ &os, const mint &b) {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream\
+    \ &is, mint &b) {\n    Long t;\n    is >> t;\n    b = ArbitraryLazyMontgomeryModIntBase(t);\n\
     \    return (is);\n  }\n\n  mint inverse() const {\n    Int x = get(), y = get_mod(),\
     \ u = 1, v = 0;\n    while (y > 0) {\n      Int t = x / y;\n      swap(x -= t\
     \ * y, y);\n      swap(u -= t * v, v);\n    }\n    return mint{u};\n  }\n\n  UInt\
@@ -295,19 +295,19 @@ data:
   - math/primitive-root-ll.hpp
   - ntt/multivariate-circular-convolution.hpp
   - modulo/mod-kth-root.hpp
-  timestamp: '2024-03-04 16:48:10+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-factorization.test.cpp
-  - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
+  - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
-  - verify/verify-yuki/yuki-0103.test.cpp
-  - verify/verify-yuki/yuki-0002.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/primitive-root.test.cpp
-  - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/osak.test.cpp
+  - verify/verify-unit-test/garner-bigint.test.cpp
+  - verify/verify-yuki/yuki-0002.test.cpp
+  - verify/verify-yuki/yuki-0103.test.cpp
 documentation_of: prime/fast-factorize.hpp
 layout: document
 redirect_from:

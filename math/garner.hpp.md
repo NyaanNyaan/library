@@ -83,11 +83,11 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
-  - verify/verify-yuki/yuki-1775.test.cpp
-  - verify/verify-unit-test/karatsuba.test.cpp
   - verify/verify-unit-test/nimber.test.cpp
-  - verify/verify-unit-test/nimber-to-field.test.cpp
   - verify/verify-unit-test/garner.test.cpp
+  - verify/verify-unit-test/nimber-to-field.test.cpp
+  - verify/verify-unit-test/karatsuba.test.cpp
+  - verify/verify-yuki/yuki-1775.test.cpp
 documentation_of: math/garner.hpp
 layout: document
 redirect_from:

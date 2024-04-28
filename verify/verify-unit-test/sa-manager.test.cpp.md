@@ -243,25 +243,26 @@ data:
     \ randset(i64 l, i64 r, i64 n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64>\
     \ s;\n  for (i64 i = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if\
     \ (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n\
-    \  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble\
-    \ rnd() { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
-    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
-    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
-    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
-    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"misc/timer.hpp\"\n\n#line\
-    \ 4 \"misc/timer.hpp\"\nusing namespace std;\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
-    \ st;\n\n  Timer() { reset(); }\n  void reset() { st = chrono::high_resolution_clock::now();\
-    \ }\n\n  long long elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
-    \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
-    \  long long operator()() { return elapsed(); }\n};\n#line 2 \"marathon/log_table.hpp\"\
-    \n\nstruct log_table {\n  static constexpr int M = 65536;\n  static constexpr\
-    \ int mask = M - 1;\n  double l[M];\n  log_table() : l() {\n    unsigned long\
-    \ long x = 88172645463325252ULL;\n    double log_u64max = log(2) * 64;\n    for\
-    \ (int i = 0; i < M; i++) {\n      x = x ^ (x << 7);\n      x = x ^ (x >> 9);\n\
-    \      l[i] = log(double(x)) - log_u64max;\n    }\n  }\n  double operator()(int\
-    \ i) const { return l[i & mask]; }\n};\n#line 11 \"marathon/sa-manager.hpp\"\n\
-    \ntemplate <typename state_t, typename score_t>\nstruct SA_manager {\n private:\n\
+    \  for (auto& x : s) ret.push_back(x);\n  sort(begin(ret), end(ret));\n  return\
+    \ ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
+    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
+    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
+    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"\
+    misc/timer.hpp\"\n\n#line 4 \"misc/timer.hpp\"\nusing namespace std;\n\nstruct\
+    \ Timer {\n  chrono::high_resolution_clock::time_point st;\n\n  Timer() { reset();\
+    \ }\n  void reset() { st = chrono::high_resolution_clock::now(); }\n\n  long long\
+    \ elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n    return\
+    \ chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n  long long\
+    \ operator()() { return elapsed(); }\n};\n#line 2 \"marathon/log_table.hpp\"\n\
+    \nstruct log_table {\n  static constexpr int M = 65536;\n  static constexpr int\
+    \ mask = M - 1;\n  double l[M];\n  log_table() : l() {\n    unsigned long long\
+    \ x = 88172645463325252ULL;\n    double log_u64max = log(2) * 64;\n    for (int\
+    \ i = 0; i < M; i++) {\n      x = x ^ (x << 7);\n      x = x ^ (x >> 9);\n   \
+    \   l[i] = log(double(x)) - log_u64max;\n    }\n  }\n  double operator()(int i)\
+    \ const { return l[i & mask]; }\n};\n#line 11 \"marathon/sa-manager.hpp\"\n\n\
+    template <typename state_t, typename score_t>\nstruct SA_manager {\n private:\n\
     \  log_table rand_log;\n  Timer timer;\n  double start_time, end_time, inv_time,\
     \ cur_time;\n  double start_temp, diff_temp, cur_temp;\n  int state_max, state_size;\n\
     \n  // \u6642\u9593\u3092\u30BB\u30C3\u30C8\u3059\u308B\u95A2\u6570\n  void set_time()\
@@ -481,7 +482,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/sa-manager.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 14:06:55+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/sa-manager.test.cpp

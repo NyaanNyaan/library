@@ -151,8 +151,8 @@ data:
   timestamp: '2024-03-23 07:13:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-fps/yosupo-composition-large.test.cpp
   - verify/verify-unit-test/composition.test.cpp
+  - verify/verify-yosupo-fps/yosupo-composition-large.test.cpp
 documentation_of: fps/fps-composition.hpp
 layout: document
 redirect_from:

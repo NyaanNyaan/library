@@ -74,8 +74,8 @@ data:
   timestamp: '2023-09-02 22:21:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
   - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp
+  - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
   - verify/verify-yuki/yuki-0952.test.cpp
 documentation_of: dp/monotone-minima.hpp
 layout: document

@@ -338,32 +338,33 @@ data:
     \ <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i; --i) {\n\
     \    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m = r - i;\n\
     \    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
-    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
-    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
-    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
-    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
-    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 7 \"\
-    verify/verify-unit-test/nimber.test.cpp\"\n\n// \u53E4\u3044\u5B9F\u88C5\nnamespace\
-    \ nimber {\nusing u64 = uint64_t;\n\nu64 calc(u64, u64, int p, int pre);\n\nstruct\
-    \ Precalc {\n  u64 dp[256][256];\n  Precalc() {\n    for (int i = 0; i < 256;\
-    \ i++)\n      for (int j = 0; j <= i; j++) {\n        dp[i][j] = dp[j][i] = calc(i,\
-    \ j, 8, true);\n      }\n  }\n\n} precalc;\n\nu64 calc(u64 a, u64 b, int p = 64,\
-    \ int pre = false) {\n  if (min(a, b) <= 1) return a * b;\n  while (max(a, b)\
-    \ < 1ull << (p >> 1)) p >>= 1;\n  if (!pre && p <= 8) return precalc.dp[a][b];\n\
-    \  p >>= 1;\n  u64 a1 = a >> p, a2 = a & ((1ull << p) - 1);\n  u64 b1 = b >> p,\
-    \ b2 = b & ((1ull << p) - 1);\n  u64 c = calc(a1, b1, p, pre);\n  u64 d = calc(a2,\
-    \ b2, p, pre);\n  u64 e = calc(a1 ^ a2, b1 ^ b2, p, pre);\n  return calc(c, 1ull\
-    \ << (p - 1), p, pre) ^ d ^ ((d ^ e) << p);\n}\n\nu64 nim_product(u64 a, u64 b)\
-    \ { return calc(a, b); }\n\n}  // namespace nimber\nusing nimber::nim_product;\n\
-    \nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  using namespace NimberImpl;\n\
-    \n  rep(i, 256) rep(j, 256) {\n    auto x1 = nim_product(i, j);\n    auto x2 =\
-    \ c8.dp[i][j];\n    auto x3 = c16.prod(i, j);\n    auto x4 = product32(i, j);\n\
-    \    auto x5 = product64(i, j);\n    assert(x1 == x2);\n    assert(x1 == x3);\n\
-    \    assert(x1 == x4);\n    assert(x1 == x5);\n  }\n  cerr << \"256 OK\" << endl;\n\
-    \n  rep(t, TEN(6)) {\n    u16 i = rng();\n    u16 j = rng();\n    auto x1 = nim_product(i,\
-    \ j);\n    auto x3 = c16.prod(i, j);\n    auto x4 = product32(i, j);\n    auto\
-    \ x5 = product64(i, j);\n    assert(x1 == x3);\n    assert(x1 == x4);\n    assert(x1\
+    \  sort(begin(ret), end(ret));\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd()\
+    \ { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
+    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
+    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
+    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
+    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 7 \"verify/verify-unit-test/nimber.test.cpp\"\
+    \n\n// \u53E4\u3044\u5B9F\u88C5\nnamespace nimber {\nusing u64 = uint64_t;\n\n\
+    u64 calc(u64, u64, int p, int pre);\n\nstruct Precalc {\n  u64 dp[256][256];\n\
+    \  Precalc() {\n    for (int i = 0; i < 256; i++)\n      for (int j = 0; j <=\
+    \ i; j++) {\n        dp[i][j] = dp[j][i] = calc(i, j, 8, true);\n      }\n  }\n\
+    \n} precalc;\n\nu64 calc(u64 a, u64 b, int p = 64, int pre = false) {\n  if (min(a,\
+    \ b) <= 1) return a * b;\n  while (max(a, b) < 1ull << (p >> 1)) p >>= 1;\n  if\
+    \ (!pre && p <= 8) return precalc.dp[a][b];\n  p >>= 1;\n  u64 a1 = a >> p, a2\
+    \ = a & ((1ull << p) - 1);\n  u64 b1 = b >> p, b2 = b & ((1ull << p) - 1);\n \
+    \ u64 c = calc(a1, b1, p, pre);\n  u64 d = calc(a2, b2, p, pre);\n  u64 e = calc(a1\
+    \ ^ a2, b1 ^ b2, p, pre);\n  return calc(c, 1ull << (p - 1), p, pre) ^ d ^ ((d\
+    \ ^ e) << p);\n}\n\nu64 nim_product(u64 a, u64 b) { return calc(a, b); }\n\n}\
+    \  // namespace nimber\nusing nimber::nim_product;\n\nusing namespace Nyaan;\n\
+    \nvoid Nyaan::solve() {\n  using namespace NimberImpl;\n\n  rep(i, 256) rep(j,\
+    \ 256) {\n    auto x1 = nim_product(i, j);\n    auto x2 = c8.dp[i][j];\n    auto\
+    \ x3 = c16.prod(i, j);\n    auto x4 = product32(i, j);\n    auto x5 = product64(i,\
+    \ j);\n    assert(x1 == x2);\n    assert(x1 == x3);\n    assert(x1 == x4);\n \
+    \   assert(x1 == x5);\n  }\n  cerr << \"256 OK\" << endl;\n\n  rep(t, TEN(6))\
+    \ {\n    u16 i = rng();\n    u16 j = rng();\n    auto x1 = nim_product(i, j);\n\
+    \    auto x3 = c16.prod(i, j);\n    auto x4 = product32(i, j);\n    auto x5 =\
+    \ product64(i, j);\n    assert(x1 == x3);\n    assert(x1 == x4);\n    assert(x1\
     \ == x5);\n  }\n  cerr << \"65536 OK\" << endl;\n\n  rep(t, TEN(6)) {\n    u32\
     \ i = rng();\n    u32 j = rng();\n    auto x1 = nim_product(i, j);\n    auto x4\
     \ = product32(i, j);\n    auto x5 = product64(i, j);\n    assert(x1 == x4);\n\
@@ -414,7 +415,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/nimber.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 14:06:55+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/nimber.test.cpp

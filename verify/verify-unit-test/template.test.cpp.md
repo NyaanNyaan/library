@@ -273,42 +273,42 @@ data:
     \ <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i; --i) {\n\
     \    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m = r - i;\n\
     \    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
-    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
-    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
-    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
-    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
-    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 8 \"\
-    verify/verify-unit-test/template.test.cpp\"\n//\nusing namespace Nyaan;\n\n//\
-    \ bitop.hpp\n\nvoid verify_bitop() {\n  // popcnt\n  assert(popcnt(7) == 3);\n\
-    \  assert(popcnt(0) == 0);\n  assert(popcnt(1LL << 40) == 1);\n  rep(loop, 100)\
-    \ {\n    u64 x = rng();\n    int pc = popcnt(x);\n    rep(i, 64) if ((x >> i)\
-    \ & 1) pc--;\n    assert(pc == 0 && \"popcnt\");\n  }\n\n  // lsb\n  assert(lsb(0)\
-    \ == 64);\n  assert(lsb(1) == 0);\n  assert(lsb(1LL << 40) == 40);\n  assert(lsb(100)\
-    \ == 2);\n\n  // ctz\n  assert(ctz(0) == 64);\n  assert(ctz(1) == 0);\n  assert(ctz(1LL\
-    \ << 40) == 40);\n  assert(ctz(100) == 2);\n\n  rep(loop, 100) {\n    u64 x =\
-    \ rng();\n    int n = lsb(x);\n    assert(ctz(x) == n);\n    while (n--) {\n \
-    \     assert((x & 1) == 0 && \"lsb\");\n      x >>= 1;\n    }\n    assert((x &\
-    \ 1) == 1 && \"lsb\");\n  }\n\n  // msb\n  assert(msb(0) == -1);\n  assert(msb(1)\
-    \ == 0);\n  assert(msb(1LL << 40) == 40);\n  assert(msb(100) == 6);\n\n  rep(loop,\
-    \ 100) {\n    u64 x = rng();\n    int m = msb(x);\n    if (m != -1) {\n      assert(((x\
-    \ >> m) & 1) == 1 && \"msb\");\n    }\n    for (int i = m + 1; i < 64; i++) {\n\
-    \      assert(((x >> i) & 1) == 0 && \"msb\");\n    }\n  }\n\n  // gbit, sbit\n\
-    \  // sbit\u306F\u73FE\u5728\u30D0\u30B0\u308A\u4E2D\n  assert(gbit(5, 0) == 1);\n\
-    \  assert(gbit(5, 1) == 0);\n  assert(gbit(5, 2) == 1);\n  assert(gbit(1LL <<\
-    \ 40, 40) == 1);\n\n  rep(loop, 100) {\n    u64 x = rng();\n    for (int i = 0;\
-    \ i < 64; i++) {\n      u64 g = gbit(x, i);\n      assert(((x >> i) & 1) == g\
-    \ && \"gbit\");\n      sbit(x, i, 1);\n      assert(((x >> i) & 1) == 1u && \"\
-    sbit\");\n      sbit(x, i, 0);\n      assert(((x >> i) & 1) == 0u && \"sbit\"\
-    );\n      sbit(x, i, g);\n      assert(((x >> i) & 1) == g && \"sbit\");\n   \
-    \ }\n  }\n\n  // PW,MSK\n  rep(i, 63) {\n    assert(1LL << i == PW(i));\n    assert(1LL\
-    \ << i == MSK(i) + 1);\n  }\n}\n\nvoid verify_util() {\n  // P, mkp\n  {\n   \
-    \ pl x(3, 2);\n    pl y(2, 3);\n    assert(x + y == pl(5, 5));\n    assert(x -\
-    \ y == pl(1, -1));\n    assert(x * y == pl(6, 6));\n    x += y;\n    assert(x\
-    \ == pl(5, 5));\n    x -= y;\n    assert(x == pl(3, 2));\n    x *= y;\n    assert(x\
-    \ == pl(6, 6));\n    x *= -3;\n    assert(x == pl(-18, -18));\n\n    // mkp\n\
-    \    auto p0 = mkp(1, 1);\n    static_assert(is_same<decltype(p0), pair<int, int>>::value);\n\
-    \    auto p1 = mkp(1LL, double(2.0));\n    static_assert(is_same<decltype(p1),\
+    \  sort(begin(ret), end(ret));\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd()\
+    \ { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
+    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
+    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
+    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
+    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 8 \"verify/verify-unit-test/template.test.cpp\"\
+    \n//\nusing namespace Nyaan;\n\n// bitop.hpp\n\nvoid verify_bitop() {\n  // popcnt\n\
+    \  assert(popcnt(7) == 3);\n  assert(popcnt(0) == 0);\n  assert(popcnt(1LL <<\
+    \ 40) == 1);\n  rep(loop, 100) {\n    u64 x = rng();\n    int pc = popcnt(x);\n\
+    \    rep(i, 64) if ((x >> i) & 1) pc--;\n    assert(pc == 0 && \"popcnt\");\n\
+    \  }\n\n  // lsb\n  assert(lsb(0) == 64);\n  assert(lsb(1) == 0);\n  assert(lsb(1LL\
+    \ << 40) == 40);\n  assert(lsb(100) == 2);\n\n  // ctz\n  assert(ctz(0) == 64);\n\
+    \  assert(ctz(1) == 0);\n  assert(ctz(1LL << 40) == 40);\n  assert(ctz(100) ==\
+    \ 2);\n\n  rep(loop, 100) {\n    u64 x = rng();\n    int n = lsb(x);\n    assert(ctz(x)\
+    \ == n);\n    while (n--) {\n      assert((x & 1) == 0 && \"lsb\");\n      x >>=\
+    \ 1;\n    }\n    assert((x & 1) == 1 && \"lsb\");\n  }\n\n  // msb\n  assert(msb(0)\
+    \ == -1);\n  assert(msb(1) == 0);\n  assert(msb(1LL << 40) == 40);\n  assert(msb(100)\
+    \ == 6);\n\n  rep(loop, 100) {\n    u64 x = rng();\n    int m = msb(x);\n    if\
+    \ (m != -1) {\n      assert(((x >> m) & 1) == 1 && \"msb\");\n    }\n    for (int\
+    \ i = m + 1; i < 64; i++) {\n      assert(((x >> i) & 1) == 0 && \"msb\");\n \
+    \   }\n  }\n\n  // gbit, sbit\n  // sbit\u306F\u73FE\u5728\u30D0\u30B0\u308A\u4E2D\
+    \n  assert(gbit(5, 0) == 1);\n  assert(gbit(5, 1) == 0);\n  assert(gbit(5, 2)\
+    \ == 1);\n  assert(gbit(1LL << 40, 40) == 1);\n\n  rep(loop, 100) {\n    u64 x\
+    \ = rng();\n    for (int i = 0; i < 64; i++) {\n      u64 g = gbit(x, i);\n  \
+    \    assert(((x >> i) & 1) == g && \"gbit\");\n      sbit(x, i, 1);\n      assert(((x\
+    \ >> i) & 1) == 1u && \"sbit\");\n      sbit(x, i, 0);\n      assert(((x >> i)\
+    \ & 1) == 0u && \"sbit\");\n      sbit(x, i, g);\n      assert(((x >> i) & 1)\
+    \ == g && \"sbit\");\n    }\n  }\n\n  // PW,MSK\n  rep(i, 63) {\n    assert(1LL\
+    \ << i == PW(i));\n    assert(1LL << i == MSK(i) + 1);\n  }\n}\n\nvoid verify_util()\
+    \ {\n  // P, mkp\n  {\n    pl x(3, 2);\n    pl y(2, 3);\n    assert(x + y == pl(5,\
+    \ 5));\n    assert(x - y == pl(1, -1));\n    assert(x * y == pl(6, 6));\n    x\
+    \ += y;\n    assert(x == pl(5, 5));\n    x -= y;\n    assert(x == pl(3, 2));\n\
+    \    x *= y;\n    assert(x == pl(6, 6));\n    x *= -3;\n    assert(x == pl(-18,\
+    \ -18));\n\n    // mkp\n    auto p0 = mkp(1, 1);\n    static_assert(is_same<decltype(p0),\
+    \ pair<int, int>>::value);\n    auto p1 = mkp(1LL, double(2.0));\n    static_assert(is_same<decltype(p1),\
     \ pair<long long, double>>::value);\n    assert(p0.first == 1 && p0.second ==\
     \ 1);\n    assert(p1.first == 1LL && p1.second == 2.0);\n  }\n\n  // P, modint\n\
     \  {\n    using mint = LazyMontgomeryModInt<998244353>;\n    using pm = P<mint,\
@@ -483,7 +483,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/template.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 14:41:57+09:00'
+  timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/template.test.cpp
