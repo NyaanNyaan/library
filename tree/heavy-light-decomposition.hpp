@@ -56,10 +56,11 @@ struct HeavyLightDecomposition {
 
  public:
   G& g;
-  int id;
+  int root, id;
   vector<int> size, depth, down, up, nxt, par;
-  HeavyLightDecomposition(G& _g, int root = 0)
+  HeavyLightDecomposition(G& _g, int _root = 0)
       : g(_g),
+        root(_root),
         id(0),
         size(g.size(), 0),
         depth(g.size(), 0),
@@ -67,11 +68,6 @@ struct HeavyLightDecomposition {
         up(g.size(), -1),
         nxt(g.size(), root),
         par(g.size(), root) {
-    dfs_sz(root);
-    dfs_hld(root);
-  }
-
-  void build(int root) {
     dfs_sz(root);
     dfs_hld(root);
   }

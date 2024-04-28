@@ -35,6 +35,7 @@ vector<i64> randset(i64 l, i64 r, i64 n) {
   }
   vector<i64> ret;
   for (auto& x : s) ret.push_back(x);
+  sort(begin(ret), end(ret));
   return ret;
 }
 
