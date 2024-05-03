@@ -56,7 +56,8 @@ WeightedGraph<T> wgraph(int N, int M = -1, bool is_directed = false,
 
 // Input of Edges
 template <typename T>
-Edges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {
+Edges<T> esgraph([[maybe_unused]] int N, int M, int is_weighted = true,
+                 bool is_1origin = true) {
   Edges<T> es;
   for (int _ = 0; _ < M; _++) {
     int x, y;

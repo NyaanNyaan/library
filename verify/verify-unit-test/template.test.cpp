@@ -2,6 +2,7 @@
 //
 #include "../../template/template.hpp"
 //
+#include "../../matrix/matrix-fast.hpp"
 #include "../../modint/montgomery-modint.hpp"
 //
 #include "../../misc/rng.hpp"
@@ -63,7 +64,6 @@ void verify_bitop() {
   }
 
   // gbit, sbit
-  // sbitは現在バグり中
   assert(gbit(5, 0) == 1);
   assert(gbit(5, 1) == 0);
   assert(gbit(5, 2) == 1);
@@ -78,6 +78,10 @@ void verify_bitop() {
       assert(((x >> i) & 1) == 1u && "sbit");
       sbit(x, i, 0);
       assert(((x >> i) & 1) == 0u && "sbit");
+      sbit(x, i, g);
+      assert(((x >> i) & 1) == g && "sbit");
+      sbit(x, i, 1);
+      assert(((x >> i) & 1) == 1u && "sbit");
       sbit(x, i, g);
       assert(((x >> i) & 1) == g && "sbit");
     }
@@ -306,6 +310,24 @@ void verify_util() {
   // Power
   {
     using mint = LazyMontgomeryModInt<998244353>;
+
+    {
+      assert(Power(3, 5) == 243);
+      assert(Power(10LL, 18) == TEN(18));
+      assert(Power(mint{2}, 30) == mint{2}.pow(30));
+    }
+
+    {
+      using Mat = Matrix<mint, 2, 2>;
+      Mat m;
+      m[0][0] = 2, m[1][1] = 1;
+      Mat m2 = Power(m, 10, Mat::I());
+      assert(m2[0][0] == 1024);
+      assert(m2[0][1] == 0);
+      assert(m2[1][0] == 0);
+      assert(m2[1][1] == 1);
+    }
+
     for (ll x = 1; x <= 100; x++) {
       i128 y = 1;
       for (ll e = 0; e <= 64; e++) {
@@ -320,11 +342,41 @@ void verify_util() {
       }
     }
   }
+
+  // Rev
+  {
+    vector a{1, 2, 3};
+    vector a2{3, 2, 1};
+    assert(Rev(a) == a2);
+
+    string b = "abc";
+    string b2 = "cba"s;
+    assert(Rev(b) == b2);
+
+    vector c{vector{1}, vector{1, 2}};
+    vector c2{vector{1, 2}, vector{1}};
+    assert(Rev(c) == c2);
+  }
+
+  // Transpose, Rotate
+  {
+    vector b{"abc"s, "def"s};
+
+    vector b2{"ad"s, "be"s, "cf"s};
+    vector b3{"cf"s, "be"s, "ad"s};
+    vector b4{"da"s, "eb"s, "fc"s};
+
+    assert(b2 == Transpose(b));
+    assert(b3 == Rotate(b));
+    assert(b4 == Rotate(b, 0));
+  }
 }
 
 void Nyaan::solve() {
   verify_bitop();
   verify_util();
+
+  cerr << "OK" << endl;
 
   int a, b;
   cin >> a >> b;

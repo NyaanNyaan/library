@@ -1,6 +1,6 @@
 namespace Nyaan {
 __attribute__((target("popcnt"))) inline int popcnt(const u64 &a) {
-  return _mm_popcnt_u64(a);
+  return __builtin_popcountll(a);
 }
 inline int lsb(const u64 &a) { return a ? __builtin_ctzll(a) : 64; }
 inline int ctz(const u64 &a) { return a ? __builtin_ctzll(a) : 64; }
