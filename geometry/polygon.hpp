@@ -31,9 +31,10 @@ Real area(const Polygon &p) {
 // boundary : 周上の点も列挙する場合 true
 template <bool boundary = false>
 Polygon convex_hull(vector<Point> ps) {
-  int n = (int)ps.size(), k = 0;
+  sort(begin(ps), end(ps));
+  ps.erase(unique(begin(ps), end(ps)), end(ps));
+  int n = ps.size(), k = 0;
   if (n <= 2) return ps;
-  sort(ps.begin(), ps.end());
   vector<Point> ch(2 * n);
   // 反時計周り
   Real th = boundary ? -EPS : +EPS;

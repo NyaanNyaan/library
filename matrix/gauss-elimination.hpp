@@ -11,6 +11,7 @@ using namespace std;
 template <typename T>
 std::pair<int, T> GaussElimination(vector<vector<T>> &a, int pivot_end = -1,
                                    bool diagonalize = false) {
+  if (a.empty()) return {0, 1};
   int H = a.size(), W = a[0].size(), rank = 0;
   if (pivot_end == -1) pivot_end = W;
   T det = 1;

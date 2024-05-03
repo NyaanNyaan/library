@@ -89,9 +89,10 @@ Points UpperHull(const Points &ps) {
   return convex;
 }
 
-Points ConvexHull(const Points &ps) {
-  int N = (int)ps.size();
-  for (int i = 0; i < N - 1; i++) assert(ps[i].x <= ps[i + 1].x);
+Points ConvexHull(Points ps) {
+  sort(begin(ps), end(ps));
+  ps.erase(unique(begin(ps), end(ps)), end(ps));
+  int N = ps.size();
   if (N <= 2) return ps;
   Points convex(2 * N);
   int k = 0;

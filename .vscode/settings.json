@@ -82,14 +82,27 @@
     "cfloat": "cpp",
     "barrier": "cpp",
     "latch": "cpp",
-    "semaphore": "cpp"
+    "semaphore": "cpp",
+    "stack": "cpp",
+    "any": "cpp",
+    "variant": "cpp",
+    "expected": "cpp",
+    "spanstream": "cpp",
+    "stop_token": "cpp",
+    "syncstream": "cpp",
+    "source_location": "cpp",
+    "bit": "cpp",
+    "compare": "cpp",
+    "concepts": "cpp",
+    "coroutine": "cpp",
+    "numbers": "cpp"
   },
   "C_Cpp.suggestSnippets": false,
   "[cpp]": {
     "editor.tabSize": 2
   },
   "[python]": {
-    "editor.tabSize": 2,
+    "editor.tabSize": 4,
     "editor.formatOnSave": false,
     "editor.formatOnPaste": false,
     "editor.formatOnType": false,
