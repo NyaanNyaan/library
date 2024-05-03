@@ -147,11 +147,11 @@ void wt() {}
 template <typename Head, typename... Tail>
 void wt(const Head& head, const Tail&... tail) {
   single_write(head);
-  wt(forward<const Tail>(tail)...);
+  wt(std::forward<const Tail>(tail)...);
 }
 template <typename... Args>
 void wtn(const Args&... x) {
-  wt(forward<const Args>(x)...);
+  wt(std::forward<const Args>(x)...);
   wt('\n');
 }
 

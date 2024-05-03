@@ -41,15 +41,15 @@ struct MultivariateFormalPowerSeries {
   template <typename Head, typename... Tail>
   long long _id(int i, Head&& head, Tail&&... tail) {
     assert(i < (int)base.size() && (int)head < base[i]);
-    return head + _id(i + 1, forward<Tail>(tail)...) * base[i];
+    return head + _id(i + 1, std::forward<Tail>(tail)...) * base[i];
   }
   template <typename... Args>
   long long id(Args&&... args) {
-    return _id(0, forward<Args>(args)...);
+    return _id(0, std::forward<Args>(args)...);
   }
   template <typename... Args>
   mint& operator()(Args&&... args) {
-    return f[id(forward<Args>(args)...)];
+    return f[id(std::forward<Args>(args)...)];
   }
 
   mfps& operator+=(const mfps& rhs) {

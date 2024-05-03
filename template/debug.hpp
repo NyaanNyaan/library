@@ -101,7 +101,7 @@ void trace(Head&& head, Tail&&... tail) {
   cerr << " ";
   dump(head);
   if (sizeof...(tail) != 0) cerr << ",";
-  trace(forward<Tail>(tail)...);
+  trace(std::forward<Tail>(tail)...);
 }
 
 }  // namespace DebugImpl

@@ -159,7 +159,7 @@ T mkrev(const T &v) {
 }
 
 template <typename T>
-bool nxp(vector<T> &v) {
+bool nxp(T &v) {
   return next_permutation(begin(v), end(v));
 }
 
@@ -192,8 +192,46 @@ T Power(T a, long long n, const T &I, const function<void(T &)> &f) {
 }
 // T : 整数型のときはオーバーフローに注意する
 template <typename T>
-T Power(T a, long long n, const T &I) {
+T Power(T a, long long n, const T &I = T{1}) {
   return Power(a, n, I, function<void(T &)>{[](T &) -> void {}});
+}
+
+template <typename T>
+T Rev(const T &v) {
+  T res = v;
+  reverse(begin(res), end(res));
+  return res;
+}
+
+template <typename T>
+vector<T> Transpose(const vector<T> &v) {
+  using U = typename T::value_type;
+  if(v.empty()) return {};
+  int H = v.size(), W = v[0].size();
+  vector res(W, T(H, U{}));
+  for (int i = 0; i < H; i++) {
+    for (int j = 0; j < W; j++) {
+      res[j][i] = v[i][j];
+    }
+  }
+  return res;
+}
+
+template <typename T>
+vector<T> Rotate(const vector<T> &v, int clockwise = true) {
+  using U = typename T::value_type;
+  int H = v.size(), W = v[0].size();
+  vector res(W, T(H, U{}));
+  for (int i = 0; i < H; i++) {
+    for (int j = 0; j < W; j++) {
+      if (clockwise) {
+        res[W - 1 - j][i] = v[i][j];
+      } else {
+        res[j][H - 1 - i] = v[i][j];
+      }
+    }
+  }
+  return res;
 }
 
 }  // namespace Nyaan
