@@ -167,19 +167,19 @@ using StaticTopTreeVertexBasedImpl::StaticTopTreeVertexBased;
   // template
   using Path = ;
   using Point = ;
-  auto vertex = [&](int) -> Path {
+  auto vertex = [&](int i) -> Path {
 
   };
   auto compress = [&](const Path& p, const Path& c) -> Path {
 
   };
-  auto rake = [&](const Point& l, const Point& r) -> Point {
+  auto rake = [&](const Point& a, const Point& b) -> Point {
 
   };
-  auto add_edge = [&](const Path& d) -> Point {
+  auto add_edge = [&](const Path& a) -> Point {
 
   };
-  auto add_vertex = [&](const Point& d, int) -> Path {
+  auto add_vertex = [&](const Point& a, int i) -> Path {
 
   };
   HeavyLightDecomposition hld{g};

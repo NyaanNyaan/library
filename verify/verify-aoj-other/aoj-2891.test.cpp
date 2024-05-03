@@ -2,7 +2,7 @@
 //
 #include "../../template/template.hpp"
 //
-#include "../../graph/funtional-graph.hpp"
+#include "../../graph/namori.hpp"
 
 using namespace Nyaan;
 
