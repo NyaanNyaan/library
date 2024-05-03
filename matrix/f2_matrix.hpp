@@ -100,6 +100,13 @@ struct F2_Matrix {
     return b;
   }
 
+  int determinant() const {
+    assert(H == W);
+    F2_Matrix<H_MAX, W_MAX> c{*this};
+    int r = c.sweep();
+    return r == H ? 1 : 0;
+  }
+
   bool operator<(const Mat &rhs) const {
     if (H != rhs.H) return H < rhs.H;
     if (W != rhs.W) return W < rhs.W;
