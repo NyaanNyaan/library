@@ -9,8 +9,8 @@ data:
     path: graph/cycle-detection.hpp
     title: "\u9589\u8DEF\u306E\u691C\u51FA"
   - icon: ':heavy_check_mark:'
-    path: graph/funtional-graph.hpp
-    title: "Functional Graph(\u306A\u3082\u308A\u30B0\u30E9\u30D5)\u306E\u5206\u89E3"
+    path: graph/functional-graph.hpp
+    title: graph/functional-graph.hpp
   - icon: ':heavy_check_mark:'
     path: graph/graph-utility.hpp
     title: "\u30B0\u30E9\u30D5\u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3"
@@ -23,6 +23,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/minimum-cost-arborescence.hpp
     title: graph/minimum-cost-arborescence.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/namori.hpp
+    title: "Functional Graph(\u306A\u3082\u308A\u30B0\u30E9\u30D5)\u306E\u5206\u89E3"
   - icon: ':heavy_check_mark:'
     path: graph/strongly-connected-components.hpp
     title: graph/strongly-connected-components.hpp
@@ -158,6 +161,9 @@ data:
     path: verify/verify-aoj-other/aoj-2171.test.cpp
     title: verify/verify-aoj-other/aoj-2171.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2891-2.test.cpp
+    title: verify/verify-aoj-other/aoj-2891-2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2891.test.cpp
     title: verify/verify-aoj-other/aoj-2891.test.cpp
   - icon: ':heavy_check_mark:'
@@ -239,6 +245,9 @@ data:
     path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
     title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
   - icon: ':heavy_check_mark:'
@@ -259,6 +268,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1254-2.test.cpp
+    title: verify/verify-yuki/yuki-1254-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1254.test.cpp
     title: verify/verify-yuki/yuki-1254.test.cpp
@@ -351,13 +363,14 @@ data:
   isVerificationFile: false
   path: graph/graph-template.hpp
   requiredBy:
-  - graph/funtional-graph.hpp
+  - graph/namori.hpp
   - graph/lowlink.hpp
   - graph/minimum-cost-arborescence.hpp
   - graph/kruskal.hpp
   - graph/biconnected-components.hpp
   - graph/graph-utility.hpp
   - graph/cycle-detection.hpp
+  - graph/functional-graph.hpp
   - graph/strongly-connected-components.hpp
   - graph/two-edge-connected-components.hpp
   - graph/topological-sort.hpp
@@ -393,6 +406,7 @@ data:
   - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-aoj-other/aoj-3506.test.cpp
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+  - verify/verify-aoj-other/aoj-2891-2.test.cpp
   - verify/verify-aoj-other/aoj-2171.test.cpp
   - verify/verify-unit-test/semiring.test.cpp
   - verify/verify-unit-test/rerooting.test.cpp
@@ -404,6 +418,7 @@ data:
   - verify/verify-yuki/yuki-1326.test.cpp
   - verify/verify-yuki/yuki-1789.test.cpp
   - verify/verify-yuki/yuki-0103.test.cpp
+  - verify/verify-yuki/yuki-1254-2.test.cpp
   - verify/verify-yuki/yuki-2588.test.cpp
   - verify/verify-yuki/yuki-1778.test.cpp
   - verify/verify-yuki/yuki-1320.test.cpp
@@ -425,6 +440,7 @@ data:
   - verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
   - verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
+  - verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root.test.cpp
   - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
   - verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
   - verify/verify-yosupo-graph/yosupo-chromatic-number.test.cpp

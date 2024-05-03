@@ -6,6 +6,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
     title: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-other/yosupo-static-convex-hull-2.test.cpp
+    title: verify/verify-yosupo-other/yosupo-static-convex-hull-2.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -43,10 +46,10 @@ data:
     \ assert(ps[i].x <= ps[i + 1].x);\n  if (N <= 2) return ps;\n  Points convex(N);\n\
     \  int k = 0;\n  for (int i = 0; i < N; convex[k++] = ps[i++]) {\n    while (k\
     \ >= 2 && ccw(convex[k - 2], convex[k - 1], ps[i]) >= 0) --k;\n  }\n  convex.resize(k);\n\
-    \  return convex;\n}\n\nPoints ConvexHull(const Points &ps) {\n  int N = (int)ps.size();\n\
-    \  for (int i = 0; i < N - 1; i++) assert(ps[i].x <= ps[i + 1].x);\n  if (N <=\
-    \ 2) return ps;\n  Points convex(2 * N);\n  int k = 0;\n  for (int i = 0; i <\
-    \ N; convex[k++] = ps[i++]) {\n    while (k >= 2 && ccw(convex[k - 2], convex[k\
+    \  return convex;\n}\n\nPoints ConvexHull(Points ps) {\n  sort(begin(ps), end(ps));\n\
+    \  ps.erase(unique(begin(ps), end(ps)), end(ps));\n  int N = ps.size();\n  if\
+    \ (N <= 2) return ps;\n  Points convex(2 * N);\n  int k = 0;\n  for (int i = 0;\
+    \ i < N; convex[k++] = ps[i++]) {\n    while (k >= 2 && ccw(convex[k - 2], convex[k\
     \ - 1], ps[i]) <= 0) --k;\n  }\n  for (int i = N - 2, t = k + 1; i >= 0; convex[k++]\
     \ = ps[i--]) {\n    while (k >= t && ccw(convex[k - 2], convex[k - 1], ps[i])\
     \ <= 0) --k;\n  }\n  convex.resize(k - 1);\n  return convex;\n}\n"
@@ -82,10 +85,10 @@ data:
     \ assert(ps[i].x <= ps[i + 1].x);\n  if (N <= 2) return ps;\n  Points convex(N);\n\
     \  int k = 0;\n  for (int i = 0; i < N; convex[k++] = ps[i++]) {\n    while (k\
     \ >= 2 && ccw(convex[k - 2], convex[k - 1], ps[i]) >= 0) --k;\n  }\n  convex.resize(k);\n\
-    \  return convex;\n}\n\nPoints ConvexHull(const Points &ps) {\n  int N = (int)ps.size();\n\
-    \  for (int i = 0; i < N - 1; i++) assert(ps[i].x <= ps[i + 1].x);\n  if (N <=\
-    \ 2) return ps;\n  Points convex(2 * N);\n  int k = 0;\n  for (int i = 0; i <\
-    \ N; convex[k++] = ps[i++]) {\n    while (k >= 2 && ccw(convex[k - 2], convex[k\
+    \  return convex;\n}\n\nPoints ConvexHull(Points ps) {\n  sort(begin(ps), end(ps));\n\
+    \  ps.erase(unique(begin(ps), end(ps)), end(ps));\n  int N = ps.size();\n  if\
+    \ (N <= 2) return ps;\n  Points convex(2 * N);\n  int k = 0;\n  for (int i = 0;\
+    \ i < N; convex[k++] = ps[i++]) {\n    while (k >= 2 && ccw(convex[k - 2], convex[k\
     \ - 1], ps[i]) <= 0) --k;\n  }\n  for (int i = N - 2, t = k + 1; i >= 0; convex[k++]\
     \ = ps[i--]) {\n    while (k >= t && ccw(convex[k - 2], convex[k - 1], ps[i])\
     \ <= 0) --k;\n  }\n  convex.resize(k - 1);\n  return convex;\n}\n"
@@ -93,10 +96,11 @@ data:
   isVerificationFile: false
   path: geometry/integer-geometry.hpp
   requiredBy: []
-  timestamp: '2024-04-28 09:13:11+09:00'
+  timestamp: '2024-05-03 21:06:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
+  - verify/verify-yosupo-other/yosupo-static-convex-hull-2.test.cpp
 documentation_of: geometry/integer-geometry.hpp
 layout: document
 redirect_from:

@@ -6,6 +6,9 @@ data:
     path: data-structure/slope-trick-weighted.hpp
     title: Weighted Slope Trick
   - icon: ':heavy_check_mark:'
+    path: graph/functional-graph.hpp
+    title: graph/functional-graph.hpp
+  - icon: ':heavy_check_mark:'
     path: hashmap/hashmap-unerasable.hpp
     title: hashmap/hashmap-unerasable.hpp
   - icon: ':heavy_check_mark:'
@@ -96,6 +99,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
     title: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2891-2.test.cpp
+    title: verify/verify-aoj-other/aoj-2891-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
     title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
@@ -436,6 +442,9 @@ data:
     path: verify/verify-yuki/yuki-0303.test.cpp
     title: verify/verify-yuki/yuki-0303.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1254-2.test.cpp
+    title: verify/verify-yuki/yuki-1254-2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1467-weighted.test.cpp
     title: verify/verify-yuki/yuki-1467-weighted.test.cpp
   - icon: ':heavy_check_mark:'
@@ -514,6 +523,7 @@ data:
   - data-structure/slope-trick-weighted.hpp
   - segment-tree/rbst-sequence.hpp
   - segment-tree/rbst-segment-tree.hpp
+  - graph/functional-graph.hpp
   - misc/all.hpp
   - misc/fastio.hpp
   - math/bigint-all.hpp
@@ -540,6 +550,7 @@ data:
   - verify/verify-aoj-other/aoj-1377.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+  - verify/verify-aoj-other/aoj-2891-2.test.cpp
   - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
   - verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
   - verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
@@ -617,6 +628,7 @@ data:
   - verify/verify-yuki/yuki-2266.test.cpp
   - verify/verify-yuki/yuki-0303.test.cpp
   - verify/verify-yuki/yuki-0103.test.cpp
+  - verify/verify-yuki/yuki-1254-2.test.cpp
   - verify/verify-yuki/yuki-1786.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
   - verify/verify-yosupo-graph/yosupo-exp-of-set-power-series.test.cpp

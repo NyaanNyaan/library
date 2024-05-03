@@ -22,6 +22,9 @@ data:
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1789.test.cpp
     title: verify/verify-yuki/yuki-1789.test.cpp
   _isVerificationFailed: false
@@ -109,6 +112,7 @@ data:
   - verify/verify-unit-test/dynamic-diameter.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-yuki/yuki-1789.test.cpp
+  - verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root.test.cpp
 documentation_of: tree/convert-tree.hpp
 layout: document
 redirect_from:

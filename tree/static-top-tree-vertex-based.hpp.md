@@ -19,6 +19,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dynamic-diameter.test.cpp
     title: verify/verify-unit-test/dynamic-diameter.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -168,11 +171,11 @@ data:
     \    if (tt.R[k] != -1) dfs(tt.R[k]);\n    _update(k);\n  }\n};\n\n}  // namespace\
     \ StaticTopTreeVertexBasedImpl\n\nusing StaticTopTreeVertexBasedImpl::DPonStaticTopTreeVertexBased;\n\
     using StaticTopTreeVertexBasedImpl::StaticTopTreeVertexBased;\n\n/*\n\n  // template\n\
-    \  using Path = ;\n  using Point = ;\n  auto vertex = [&](int) -> Path {\n\n \
-    \ };\n  auto compress = [&](const Path& p, const Path& c) -> Path {\n\n  };\n\
-    \  auto rake = [&](const Point& l, const Point& r) -> Point {\n\n  };\n  auto\
-    \ add_edge = [&](const Path& d) -> Point {\n\n  };\n  auto add_vertex = [&](const\
-    \ Point& d, int) -> Path {\n\n  };\n  HeavyLightDecomposition hld{g};\n  DPonStaticTopTreeVertexBased<vector<vector<int>>,\
+    \  using Path = ;\n  using Point = ;\n  auto vertex = [&](int i) -> Path {\n\n\
+    \  };\n  auto compress = [&](const Path& p, const Path& c) -> Path {\n\n  };\n\
+    \  auto rake = [&](const Point& a, const Point& b) -> Point {\n\n  };\n  auto\
+    \ add_edge = [&](const Path& a) -> Point {\n\n  };\n  auto add_vertex = [&](const\
+    \ Point& a, int i) -> Path {\n\n  };\n  HeavyLightDecomposition hld{g};\n  DPonStaticTopTreeVertexBased<vector<vector<int>>,\
     \ Path, Point,\n  decltype(vertex), decltype(compress), decltype(rake), decltype(add_edge),\n\
     \                    decltype(add_vertex)>\n      dp(hld, vertex, compress, rake,\
     \ add_edge, add_vertex);\n*/\n\n/**\n * @brief Static Top Tree\n */\n"
@@ -235,11 +238,11 @@ data:
     \    if (tt.R[k] != -1) dfs(tt.R[k]);\n    _update(k);\n  }\n};\n\n}  // namespace\
     \ StaticTopTreeVertexBasedImpl\n\nusing StaticTopTreeVertexBasedImpl::DPonStaticTopTreeVertexBased;\n\
     using StaticTopTreeVertexBasedImpl::StaticTopTreeVertexBased;\n\n/*\n\n  // template\n\
-    \  using Path = ;\n  using Point = ;\n  auto vertex = [&](int) -> Path {\n\n \
-    \ };\n  auto compress = [&](const Path& p, const Path& c) -> Path {\n\n  };\n\
-    \  auto rake = [&](const Point& l, const Point& r) -> Point {\n\n  };\n  auto\
-    \ add_edge = [&](const Path& d) -> Point {\n\n  };\n  auto add_vertex = [&](const\
-    \ Point& d, int) -> Path {\n\n  };\n  HeavyLightDecomposition hld{g};\n  DPonStaticTopTreeVertexBased<vector<vector<int>>,\
+    \  using Path = ;\n  using Point = ;\n  auto vertex = [&](int i) -> Path {\n\n\
+    \  };\n  auto compress = [&](const Path& p, const Path& c) -> Path {\n\n  };\n\
+    \  auto rake = [&](const Point& a, const Point& b) -> Point {\n\n  };\n  auto\
+    \ add_edge = [&](const Path& a) -> Point {\n\n  };\n  auto add_vertex = [&](const\
+    \ Point& a, int i) -> Path {\n\n  };\n  HeavyLightDecomposition hld{g};\n  DPonStaticTopTreeVertexBased<vector<vector<int>>,\
     \ Path, Point,\n  decltype(vertex), decltype(compress), decltype(rake), decltype(add_edge),\n\
     \                    decltype(add_vertex)>\n      dp(hld, vertex, compress, rake,\
     \ add_edge, add_vertex);\n*/\n\n/**\n * @brief Static Top Tree\n */\n"
@@ -251,10 +254,11 @@ data:
   path: tree/static-top-tree-vertex-based.hpp
   requiredBy:
   - tree/dynamic-diameter.hpp
-  timestamp: '2024-04-28 09:13:11+09:00'
+  timestamp: '2024-05-03 21:06:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/dynamic-diameter.test.cpp
+  - verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root.test.cpp
 documentation_of: tree/static-top-tree-vertex-based.hpp
 layout: document
 redirect_from:

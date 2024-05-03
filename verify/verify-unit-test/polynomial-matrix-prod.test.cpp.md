@@ -502,43 +502,43 @@ data:
     \ Rational \u3067\u3082\u52D5\u304F\u306F\u305A\uFF1F(\u672A\u691C\u8A3C)\n//\n\
     // pivot \u5019\u88DC : [0, pivot_end)\ntemplate <typename T>\nstd::pair<int,\
     \ T> GaussElimination(vector<vector<T>> &a, int pivot_end = -1,\n            \
-    \                       bool diagonalize = false) {\n  int H = a.size(), W = a[0].size(),\
-    \ rank = 0;\n  if (pivot_end == -1) pivot_end = W;\n  T det = 1;\n  for (int j\
-    \ = 0; j < pivot_end; j++) {\n    int idx = -1;\n    for (int i = rank; i < H;\
-    \ i++) {\n      if (a[i][j] != T(0)) {\n        idx = i;\n        break;\n   \
-    \   }\n    }\n    if (idx == -1) {\n      det = 0;\n      continue;\n    }\n \
-    \   if (rank != idx) det = -det, swap(a[rank], a[idx]);\n    det *= a[rank][j];\n\
-    \    if (diagonalize && a[rank][j] != T(1)) {\n      T coeff = T(1) / a[rank][j];\n\
-    \      for (int k = j; k < W; k++) a[rank][k] *= coeff;\n    }\n    int is = diagonalize\
-    \ ? 0 : rank + 1;\n    for (int i = is; i < H; i++) {\n      if (i == rank) continue;\n\
-    \      if (a[i][j] != T(0)) {\n        T coeff = a[i][j] / a[rank][j];\n     \
-    \   for (int k = j; k < W; k++) a[i][k] -= a[rank][k] * coeff;\n      }\n    }\n\
-    \    rank++;\n  }\n  return make_pair(rank, det);\n}\n#line 4 \"matrix/inverse-matrix.hpp\"\
-    \n\ntemplate <typename mint>\nvector<vector<mint>> inverse_matrix(const vector<vector<mint>>&\
-    \ a) {\n  int N = a.size();\n  assert(N > 0);\n  assert(N == (int)a[0].size());\n\
-    \n  vector<vector<mint>> m(N, vector<mint>(2 * N));\n  for (int i = 0; i < N;\
-    \ i++) {\n    copy(begin(a[i]), end(a[i]), begin(m[i]));\n    m[i][N + i] = 1;\n\
-    \  }\n\n  auto [rank, det] = GaussElimination(m, N, true);\n  if (rank != N) return\
-    \ {};\n\n  vector<vector<mint>> b(N);\n  for (int i = 0; i < N; i++) {\n    copy(begin(m[i])\
-    \ + N, end(m[i]), back_inserter(b[i]));\n  }\n  return b;\n}\n#line 4 \"matrix/matrix.hpp\"\
-    \n\ntemplate <class T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix()\
-    \ = default;\n  Matrix(int n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int\
-    \ n) : A(n, vector<T>(n, T())){};\n\n  int H() const { return A.size(); }\n\n\
-    \  int W() const { return A[0].size(); }\n\n  int size() const { return A.size();\
-    \ }\n\n  inline const vector<T> &operator[](int k) const { return A[k]; }\n\n\
-    \  inline vector<T> &operator[](int k) { return A[k]; }\n\n  static Matrix I(int\
-    \ n) {\n    Matrix mat(n);\n    for (int i = 0; i < n; i++) mat[i][i] = 1;\n \
-    \   return (mat);\n  }\n\n  Matrix &operator+=(const Matrix &B) {\n    int n =\
-    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
-    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] += B[i][j];\n   \
-    \ return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B) {\n    int n =\
-    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
-    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -= B[i][j];\n   \
-    \ return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B) {\n    int n =\
-    \ H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T> > C(n,\
-    \ vector<T>(m, T{}));\n    for (int i = 0; i < n; i++)\n      for (int k = 0;\
-    \ k < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k] *\
-    \ B[k][j];\n    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long\
+    \                       bool diagonalize = false) {\n  if (a.empty()) return {0,\
+    \ 1};\n  int H = a.size(), W = a[0].size(), rank = 0;\n  if (pivot_end == -1)\
+    \ pivot_end = W;\n  T det = 1;\n  for (int j = 0; j < pivot_end; j++) {\n    int\
+    \ idx = -1;\n    for (int i = rank; i < H; i++) {\n      if (a[i][j] != T(0))\
+    \ {\n        idx = i;\n        break;\n      }\n    }\n    if (idx == -1) {\n\
+    \      det = 0;\n      continue;\n    }\n    if (rank != idx) det = -det, swap(a[rank],\
+    \ a[idx]);\n    det *= a[rank][j];\n    if (diagonalize && a[rank][j] != T(1))\
+    \ {\n      T coeff = T(1) / a[rank][j];\n      for (int k = j; k < W; k++) a[rank][k]\
+    \ *= coeff;\n    }\n    int is = diagonalize ? 0 : rank + 1;\n    for (int i =\
+    \ is; i < H; i++) {\n      if (i == rank) continue;\n      if (a[i][j] != T(0))\
+    \ {\n        T coeff = a[i][j] / a[rank][j];\n        for (int k = j; k < W; k++)\
+    \ a[i][k] -= a[rank][k] * coeff;\n      }\n    }\n    rank++;\n  }\n  return make_pair(rank,\
+    \ det);\n}\n#line 4 \"matrix/inverse-matrix.hpp\"\n\ntemplate <typename mint>\n\
+    vector<vector<mint>> inverse_matrix(const vector<vector<mint>>& a) {\n  int N\
+    \ = a.size();\n  assert(N > 0);\n  assert(N == (int)a[0].size());\n\n  vector<vector<mint>>\
+    \ m(N, vector<mint>(2 * N));\n  for (int i = 0; i < N; i++) {\n    copy(begin(a[i]),\
+    \ end(a[i]), begin(m[i]));\n    m[i][N + i] = 1;\n  }\n\n  auto [rank, det] =\
+    \ GaussElimination(m, N, true);\n  if (rank != N) return {};\n\n  vector<vector<mint>>\
+    \ b(N);\n  for (int i = 0; i < N; i++) {\n    copy(begin(m[i]) + N, end(m[i]),\
+    \ back_inserter(b[i]));\n  }\n  return b;\n}\n#line 4 \"matrix/matrix.hpp\"\n\n\
+    template <class T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix() = default;\n\
+    \  Matrix(int n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int n) : A(n, vector<T>(n,\
+    \ T())){};\n\n  int H() const { return A.size(); }\n\n  int W() const { return\
+    \ A[0].size(); }\n\n  int size() const { return A.size(); }\n\n  inline const\
+    \ vector<T> &operator[](int k) const { return A[k]; }\n\n  inline vector<T> &operator[](int\
+    \ k) { return A[k]; }\n\n  static Matrix I(int n) {\n    Matrix mat(n);\n    for\
+    \ (int i = 0; i < n; i++) mat[i][i] = 1;\n    return (mat);\n  }\n\n  Matrix &operator+=(const\
+    \ Matrix &B) {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n\
+    \    for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j]\
+    \ += B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B)\
+    \ {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for\
+    \ (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -=\
+    \ B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B)\
+    \ {\n    int n = H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T>\
+    \ > C(n, vector<T>(m, T{}));\n    for (int i = 0; i < n; i++)\n      for (int\
+    \ k = 0; k < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k]\
+    \ * B[k][j];\n    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long\
     \ long k) {\n    Matrix B = Matrix::I(H());\n    while (k > 0) {\n      if (k\
     \ & 1) B *= *this;\n      *this *= *this;\n      k >>= 1LL;\n    }\n    A.swap(B.A);\n\
     \    return (*this);\n  }\n\n  Matrix operator+(const Matrix &B) const { return\
@@ -705,7 +705,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   requiredBy: []
-  timestamp: '2024-04-28 09:13:11+09:00'
+  timestamp: '2024-05-03 21:06:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/polynomial-matrix-prod.test.cpp

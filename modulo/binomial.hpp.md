@@ -196,6 +196,15 @@ data:
     path: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
     title: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-pow-of-matrix-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-pow-of-matrix-2.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-pow-of-matrix.test.cpp
+    title: verify/verify-yosupo-math/yosupo-pow-of-matrix.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-rank-of-matrix.test.cpp
+    title: verify/verify-yosupo-math/yosupo-rank-of-matrix.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
     title: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
   - icon: ':heavy_check_mark:'
@@ -378,10 +387,13 @@ data:
   timestamp: '2023-05-22 22:29:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yosupo-math/yosupo-rank-of-matrix.test.cpp
   - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+  - verify/verify-yosupo-math/yosupo-pow-of-matrix-2.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient-3.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient-prime-mod.test.cpp
+  - verify/verify-yosupo-math/yosupo-pow-of-matrix.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp

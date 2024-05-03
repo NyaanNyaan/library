@@ -120,6 +120,9 @@ data:
       path: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
       title: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
     - icon: ':heavy_check_mark:'
+      path: data-structure-2d/rectangle-add-rectangle-sum.hpp
+      title: data-structure-2d/rectangle-add-rectangle-sum.hpp
+    - icon: ':heavy_check_mark:'
       path: data-structure-2d/rectangle-sum.hpp
       title: "\u77E9\u5F62\u548C(\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728)"
     - icon: ':heavy_check_mark:'
@@ -346,8 +349,8 @@ data:
       path: graph/dimension-expanded-graph.hpp
       title: "\u6B21\u5143\u62E1\u5F35\u30B0\u30E9\u30D5"
     - icon: ':heavy_check_mark:'
-      path: graph/funtional-graph.hpp
-      title: "Functional Graph(\u306A\u3082\u308A\u30B0\u30E9\u30D5)\u306E\u5206\u89E3"
+      path: graph/functional-graph.hpp
+      title: graph/functional-graph.hpp
     - icon: ':heavy_check_mark:'
       path: graph/graph-template.hpp
       title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -366,6 +369,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/minimum-cost-arborescence.hpp
       title: graph/minimum-cost-arborescence.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/namori.hpp
+      title: "Functional Graph(\u306A\u3082\u308A\u30B0\u30E9\u30D5)\u306E\u5206\u89E3"
     - icon: ':heavy_check_mark:'
       path: graph/offline-dynamic-connectivity.hpp
       title: graph/offline-dynamic-connectivity.hpp
@@ -810,6 +816,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: ntt/multidimensional-ntt.hpp
       title: "\u591A\u6B21\u5143FFT"
+    - icon: ':heavy_check_mark:'
+      path: ntt/multiplicative-convolution-mod-p.hpp
+      title: ntt/multiplicative-convolution-mod-p.hpp
     - icon: ':heavy_check_mark:'
       path: ntt/multivariate-circular-convolution.hpp
       title: "\u591A\u5909\u6570\u5DE1\u56DE\u7573\u307F\u8FBC\u307F"
@@ -1379,6 +1388,9 @@ data:
       path: verify/verify-aoj-other/aoj-2171.test.cpp
       title: verify/verify-aoj-other/aoj-2171.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-other/aoj-2891-2.test.cpp
+      title: verify/verify-aoj-other/aoj-2891-2.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-2891.test.cpp
       title: verify/verify-aoj-other/aoj-2891.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1791,6 +1803,9 @@ data:
       path: verify/verify-yosupo-ds/yosupo-range-reverse-range-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-reverse-range-sum.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-range-set-range-composite.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-range-set-range-composite.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1808,6 +1823,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
       title: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-static-rectangle-add-rectangle-sum.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-static-rectangle-add-rectangle-sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
       title: verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
@@ -1999,6 +2017,15 @@ data:
       path: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
       title: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root-2.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root-2.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
       title: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2145,6 +2172,12 @@ data:
       path: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
       title: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-pow-of-matrix-2.test.cpp
+      title: verify/verify-yosupo-math/yosupo-pow-of-matrix-2.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-pow-of-matrix.test.cpp
+      title: verify/verify-yosupo-math/yosupo-pow-of-matrix.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-primality-test-u64.test.cpp
       title: verify/verify-yosupo-math/yosupo-primality-test-u64.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2159,6 +2192,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
       title: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-rank-of-matrix.test.cpp
+      title: verify/verify-yosupo-math/yosupo-rank-of-matrix.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-rational-approximation.test.cpp
+      title: verify/verify-yosupo-math/yosupo-rational-approximation.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
       title: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
@@ -2231,6 +2270,9 @@ data:
       path: verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ntt/yosupo-convolution-on-z-pz.test.cpp
+      title: verify/verify-yosupo-ntt/yosupo-convolution-on-z-pz.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-15bit.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-15bit.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2274,6 +2316,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
       title: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-other/yosupo-static-convex-hull-2.test.cpp
+      title: verify/verify-yosupo-other/yosupo-static-convex-hull-2.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-other/yosupo-static-convex-hull.test.cpp
+      title: verify/verify-yosupo-other/yosupo-static-convex-hull.test.cpp
   - name: verify/verify-yosupo-string
     pages:
     - icon: ':heavy_check_mark:'
@@ -2410,6 +2458,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1220.test.cpp
       title: verify/verify-yuki/yuki-1220.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1254-2.test.cpp
+      title: verify/verify-yuki/yuki-1254-2.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1254.test.cpp
       title: verify/verify-yuki/yuki-1254.test.cpp

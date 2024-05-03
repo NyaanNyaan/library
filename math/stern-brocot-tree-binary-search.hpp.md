@@ -7,6 +7,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-rational-approximation.test.cpp
+    title: verify/verify-yosupo-math/yosupo-rational-approximation.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
     title: verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
   - icon: ':heavy_check_mark:'
@@ -147,6 +150,7 @@ data:
   timestamp: '2023-12-18 23:52:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yosupo-math/yosupo-rational-approximation.test.cpp
   - verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
   - verify/verify-yuki/yuki-2262.test.cpp
   - verify/verify-yuki/yuki-2266.test.cpp

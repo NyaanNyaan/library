@@ -7,6 +7,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-pow-of-matrix-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-pow-of-matrix-2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0303.test.cpp
     title: verify/verify-yuki/yuki-0303.test.cpp
   _isVerificationFailed: false
@@ -104,6 +107,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
+  - verify/verify-yosupo-math/yosupo-pow-of-matrix-2.test.cpp
   - verify/verify-yuki/yuki-0303.test.cpp
 documentation_of: matrix/matrix-fast.hpp
 layout: document

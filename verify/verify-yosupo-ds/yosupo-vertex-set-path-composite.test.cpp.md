@@ -325,50 +325,50 @@ data:
     \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
     \ */\n#line 2 \"math/affine-transformation.hpp\"\n\ntemplate <typename mint>\n\
     struct Affine {\n  mint a, b;\n  constexpr Affine() : a(1), b(0) {}\n  constexpr\
-    \ Affine(mint _a, mint _b) : a(_a), b(_b) {}\n  mint operator()(mint x) const\
-    \ { return a * x + b; }\n  // R(L(x))\n  friend Affine operator*(const Affine&\
-    \ l, const Affine& r) {\n    return Affine(l.a * r.a, l.b * r.a + r.b);\n  }\n\
-    \  bool operator==(const Affine& r) const { return a == r.a && b == r.b; }\n \
-    \ bool operator!=(const Affine& r) const { return a != r.a || b != r.b; }\n  friend\
-    \ ostream& operator<<(ostream& os, const Affine& r) {\n    os << \"( \" << r.a\
-    \ << \", \" << r.b << \" )\";\n    return os;\n  }\n};\n\n/**\n * @brief \u30A2\
-    \u30D5\u30A3\u30F3\u5909\u63DB\n */\n#line 2 \"segment-tree/segment-tree.hpp\"\
-    \n\ntemplate <typename T, typename F>\nstruct SegmentTree {\n  int N;\n  int size;\n\
-    \  vector<T> seg;\n  const F f;\n  const T I;\n\n  SegmentTree(F _f, const T &I_)\
-    \ : N(0), size(0), f(_f), I(I_) {}\n\n  SegmentTree(int _N, F _f, const T &I_)\
-    \ : f(_f), I(I_) { init(_N); }\n\n  SegmentTree(const vector<T> &v, F _f, T I_)\
-    \ : f(_f), I(I_) {\n    init(v.size());\n    for (int i = 0; i < (int)v.size();\
-    \ i++) {\n      seg[i + size] = v[i];\n    }\n    build();\n  }\n\n  void init(int\
-    \ _N) {\n    N = _N;\n    size = 1;\n    while (size < N) size <<= 1;\n    seg.assign(2\
-    \ * size, I);\n  }\n\n  void set(int k, T x) { seg[k + size] = x; }\n\n  void\
-    \ build() {\n    for (int k = size - 1; k > 0; k--) {\n      seg[k] = f(seg[2\
-    \ * k], seg[2 * k + 1]);\n    }\n  }\n\n  void update(int k, T x) {\n    k +=\
-    \ size;\n    seg[k] = x;\n    while (k >>= 1) {\n      seg[k] = f(seg[2 * k],\
-    \ seg[2 * k + 1]);\n    }\n  }\n\n  void add(int k, T x) {\n    k += size;\n \
-    \   seg[k] += x;\n    while (k >>= 1) {\n      seg[k] = f(seg[2 * k], seg[2 *\
-    \ k + 1]);\n    }\n  }\n\n  // query to [a, b)\n  T query(int a, int b) {\n  \
-    \  T L = I, R = I;\n    for (a += size, b += size; a < b; a >>= 1, b >>= 1) {\n\
-    \      if (a & 1) L = f(L, seg[a++]);\n      if (b & 1) R = f(seg[--b], R);\n\
-    \    }\n    return f(L, R);\n  }\n\n  T &operator[](const int &k) { return seg[k\
-    \ + size]; }\n\n  // check(a[l] * ...  * a[r-1]) \u304C true \u3068\u306A\u308B\
-    \u6700\u5927\u306E r\n  // (\u53F3\u7AEF\u307E\u3067\u3059\u3079\u3066 true \u306A\
-    \u3089 N \u3092\u8FD4\u3059)\n  template <class C>\n  int max_right(int l, C check)\
-    \ {\n    assert(0 <= l && l <= N);\n    assert(check(I) == true);\n    if (l ==\
-    \ N) return N;\n    l += size;\n    T sm = I;\n    do {\n      while (l % 2 ==\
-    \ 0) l >>= 1;\n      if (!check(f(sm, seg[l]))) {\n        while (l < size) {\n\
-    \          l = (2 * l);\n          if (check(f(sm, seg[l]))) {\n            sm\
-    \ = f(sm, seg[l]);\n            l++;\n          }\n        }\n        return l\
-    \ - size;\n      }\n      sm = f(sm, seg[l]);\n      l++;\n    } while ((l & -l)\
-    \ != l);\n    return N;\n  }\n\n  // check(a[l] * ... * a[r-1]) \u304C true \u3068\
-    \u306A\u308B\u6700\u5C0F\u306E l\n  // (\u5DE6\u7AEF\u307E\u3067 true \u306A\u3089\
-    \ 0 \u3092\u8FD4\u3059)\n  template <typename C>\n  int min_left(int r, C check)\
-    \ {\n    assert(0 <= r && r <= N);\n    assert(check(I) == true);\n    if (r ==\
-    \ 0) return 0;\n    r += size;\n    T sm = I;\n    do {\n      r--;\n      while\
-    \ (r > 1 && (r % 2)) r >>= 1;\n      if (!check(f(seg[r], sm))) {\n        while\
-    \ (r < size) {\n          r = (2 * r + 1);\n          if (check(f(seg[r], sm)))\
-    \ {\n            sm = f(seg[r], sm);\n            r--;\n          }\n        }\n\
-    \        return r + 1 - size;\n      }\n      sm = f(seg[r], sm);\n    } while\
-    \ ((r & -r) != r);\n    return 0;\n  }\n};\n#line 2 \"tree/heavy-light-decomposition.hpp\"\
+    \ Affine(mint _a, mint _b) : a(_a), b(_b) {}\n  // R(L(x))\n  friend Affine operator*(const\
+    \ Affine& l, const Affine& r) {\n    return Affine(l.a * r.a, l.b * r.a + r.b);\n\
+    \  }\n  mint operator()(mint x) const { return a * x + b; }\n  Affine operator()(const\
+    \ Affine& r) const { return r * (*this); }\n  bool operator==(const Affine& r)\
+    \ const { return a == r.a && b == r.b; }\n  bool operator!=(const Affine& r) const\
+    \ { return a != r.a || b != r.b; }\n  friend ostream& operator<<(ostream& os,\
+    \ const Affine& r) {\n    os << \"( \" << r.a << \", \" << r.b << \" )\";\n  \
+    \  return os;\n  }\n};\n\n/**\n * @brief \u30A2\u30D5\u30A3\u30F3\u5909\u63DB\n\
+    \ */\n#line 2 \"segment-tree/segment-tree.hpp\"\n\ntemplate <typename T, typename\
+    \ F>\nstruct SegmentTree {\n  int N;\n  int size;\n  vector<T> seg;\n  const F\
+    \ f;\n  const T I;\n\n  SegmentTree(F _f, const T &I_) : N(0), size(0), f(_f),\
+    \ I(I_) {}\n\n  SegmentTree(int _N, F _f, const T &I_) : f(_f), I(I_) { init(_N);\
+    \ }\n\n  SegmentTree(const vector<T> &v, F _f, T I_) : f(_f), I(I_) {\n    init(v.size());\n\
+    \    for (int i = 0; i < (int)v.size(); i++) {\n      seg[i + size] = v[i];\n\
+    \    }\n    build();\n  }\n\n  void init(int _N) {\n    N = _N;\n    size = 1;\n\
+    \    while (size < N) size <<= 1;\n    seg.assign(2 * size, I);\n  }\n\n  void\
+    \ set(int k, T x) { seg[k + size] = x; }\n\n  void build() {\n    for (int k =\
+    \ size - 1; k > 0; k--) {\n      seg[k] = f(seg[2 * k], seg[2 * k + 1]);\n   \
+    \ }\n  }\n\n  void update(int k, T x) {\n    k += size;\n    seg[k] = x;\n   \
+    \ while (k >>= 1) {\n      seg[k] = f(seg[2 * k], seg[2 * k + 1]);\n    }\n  }\n\
+    \n  void add(int k, T x) {\n    k += size;\n    seg[k] += x;\n    while (k >>=\
+    \ 1) {\n      seg[k] = f(seg[2 * k], seg[2 * k + 1]);\n    }\n  }\n\n  // query\
+    \ to [a, b)\n  T query(int a, int b) {\n    T L = I, R = I;\n    for (a += size,\
+    \ b += size; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) L = f(L, seg[a++]);\n\
+    \      if (b & 1) R = f(seg[--b], R);\n    }\n    return f(L, R);\n  }\n\n  T\
+    \ &operator[](const int &k) { return seg[k + size]; }\n\n  // check(a[l] * ...\
+    \  * a[r-1]) \u304C true \u3068\u306A\u308B\u6700\u5927\u306E r\n  // (\u53F3\u7AEF\
+    \u307E\u3067\u3059\u3079\u3066 true \u306A\u3089 N \u3092\u8FD4\u3059)\n  template\
+    \ <class C>\n  int max_right(int l, C check) {\n    assert(0 <= l && l <= N);\n\
+    \    assert(check(I) == true);\n    if (l == N) return N;\n    l += size;\n  \
+    \  T sm = I;\n    do {\n      while (l % 2 == 0) l >>= 1;\n      if (!check(f(sm,\
+    \ seg[l]))) {\n        while (l < size) {\n          l = (2 * l);\n          if\
+    \ (check(f(sm, seg[l]))) {\n            sm = f(sm, seg[l]);\n            l++;\n\
+    \          }\n        }\n        return l - size;\n      }\n      sm = f(sm, seg[l]);\n\
+    \      l++;\n    } while ((l & -l) != l);\n    return N;\n  }\n\n  // check(a[l]\
+    \ * ... * a[r-1]) \u304C true \u3068\u306A\u308B\u6700\u5C0F\u306E l\n  // (\u5DE6\
+    \u7AEF\u307E\u3067 true \u306A\u3089 0 \u3092\u8FD4\u3059)\n  template <typename\
+    \ C>\n  int min_left(int r, C check) {\n    assert(0 <= r && r <= N);\n    assert(check(I)\
+    \ == true);\n    if (r == 0) return 0;\n    r += size;\n    T sm = I;\n    do\
+    \ {\n      r--;\n      while (r > 1 && (r % 2)) r >>= 1;\n      if (!check(f(seg[r],\
+    \ sm))) {\n        while (r < size) {\n          r = (2 * r + 1);\n          if\
+    \ (check(f(seg[r], sm))) {\n            sm = f(seg[r], sm);\n            r--;\n\
+    \          }\n        }\n        return r + 1 - size;\n      }\n      sm = f(seg[r],\
+    \ sm);\n    } while ((r & -r) != r);\n    return 0;\n  }\n};\n#line 2 \"tree/heavy-light-decomposition.hpp\"\
     \n\n#line 4 \"tree/heavy-light-decomposition.hpp\"\n\ntemplate <typename G>\n\
     struct HeavyLightDecomposition {\n private:\n  void dfs_sz(int cur) {\n    size[cur]\
     \ = 1;\n    for (auto& dst : g[cur]) {\n      if (dst == par[cur]) {\n       \
@@ -456,7 +456,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   requiredBy: []
-  timestamp: '2024-04-28 09:13:11+09:00'
+  timestamp: '2024-05-03 21:06:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp

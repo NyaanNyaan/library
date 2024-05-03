@@ -10,6 +10,9 @@ data:
     path: ntt/cooley-tukey-ntt.hpp
     title: Cooley-Tukey FFT Algorithm
   - icon: ':heavy_check_mark:'
+    path: ntt/multiplicative-convolution-mod-p.hpp
+    title: ntt/multiplicative-convolution-mod-p.hpp
+  - icon: ':heavy_check_mark:'
     path: ntt/multivariate-circular-convolution.hpp
     title: "\u591A\u5909\u6570\u5DE1\u56DE\u7573\u307F\u8FBC\u307F"
   - icon: ':heavy_check_mark:'
@@ -25,6 +28,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-convolution-on-z-pz.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-on-z-pz.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
@@ -63,6 +69,7 @@ data:
   path: math/constexpr-primitive-root.hpp
   requiredBy:
   - fps/dual-fps.hpp
+  - ntt/multiplicative-convolution-mod-p.hpp
   - ntt/rader-ntt.hpp
   - ntt/multivariate-circular-convolution.hpp
   - ntt/cooley-tukey-ntt.hpp
@@ -71,6 +78,7 @@ data:
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-on-z-pz.test.cpp
   - verify/verify-unit-test/dual-fps.test.cpp
   - verify/verify-unit-test/primitive-root.test.cpp
   - verify/verify-yuki/yuki-1504.test.cpp

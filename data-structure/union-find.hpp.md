@@ -3,14 +3,17 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: graph/funtional-graph.hpp
-    title: "Functional Graph(\u306A\u3082\u308A\u30B0\u30E9\u30D5)\u306E\u5206\u89E3"
+    path: graph/functional-graph.hpp
+    title: graph/functional-graph.hpp
   - icon: ':heavy_check_mark:'
     path: graph/kruskal.hpp
     title: graph/kruskal.hpp
   - icon: ':heavy_check_mark:'
     path: graph/minimum-cost-arborescence.hpp
     title: graph/minimum-cost-arborescence.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/namori.hpp
+    title: "Functional Graph(\u306A\u3082\u308A\u30B0\u30E9\u30D5)\u306E\u5206\u89E3"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
@@ -18,6 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2891-2.test.cpp
+    title: verify/verify-aoj-other/aoj-2891-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2891.test.cpp
     title: verify/verify-aoj-other/aoj-2891.test.cpp
@@ -36,6 +42,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1170-divide-interval.test.cpp
     title: verify/verify-yuki/yuki-1170-divide-interval.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1254-2.test.cpp
+    title: verify/verify-yuki/yuki-1254-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1254.test.cpp
     title: verify/verify-yuki/yuki-1254.test.cpp
@@ -79,19 +88,22 @@ data:
   isVerificationFile: false
   path: data-structure/union-find.hpp
   requiredBy:
-  - graph/funtional-graph.hpp
+  - graph/namori.hpp
   - graph/minimum-cost-arborescence.hpp
   - graph/kruskal.hpp
+  - graph/functional-graph.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-2891.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
+  - verify/verify-aoj-other/aoj-2891-2.test.cpp
   - verify/verify-unit-test/parallel-union-find.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-1254.test.cpp
   - verify/verify-yuki/yuki-1170-divide-interval.test.cpp
+  - verify/verify-yuki/yuki-1254-2.test.cpp
   - verify/verify-yuki/yuki-2588.test.cpp
   - verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
   - verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp

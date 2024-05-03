@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: data-structure-2d/rectangle-add-rectangle-sum.hpp
+    title: data-structure-2d/rectangle-add-rectangle-sum.hpp
+  - icon: ':heavy_check_mark:'
     path: data-structure/range-sum-range-add-bit.hpp
     title: data-structure/range-sum-range-add-bit.hpp
   - icon: ':heavy_check_mark:'
@@ -30,6 +33,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
     title: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-static-rectangle-add-rectangle-sum.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-static-rectangle-add-rectangle-sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
@@ -93,6 +99,7 @@ data:
   isVerificationFile: false
   path: data-structure/binary-indexed-tree.hpp
   requiredBy:
+  - data-structure-2d/rectangle-add-rectangle-sum.hpp
   - data-structure/range-sum-range-add-bit.hpp
   - dp/inversion-counting.hpp
   timestamp: '2021-12-20 22:10:59+09:00'
@@ -105,6 +112,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-static-rectangle-add-rectangle-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp

@@ -226,34 +226,35 @@ data:
     \ Rational \u3067\u3082\u52D5\u304F\u306F\u305A\uFF1F(\u672A\u691C\u8A3C)\n//\n\
     // pivot \u5019\u88DC : [0, pivot_end)\ntemplate <typename T>\nstd::pair<int,\
     \ T> GaussElimination(vector<vector<T>> &a, int pivot_end = -1,\n            \
-    \                       bool diagonalize = false) {\n  int H = a.size(), W = a[0].size(),\
-    \ rank = 0;\n  if (pivot_end == -1) pivot_end = W;\n  T det = 1;\n  for (int j\
-    \ = 0; j < pivot_end; j++) {\n    int idx = -1;\n    for (int i = rank; i < H;\
-    \ i++) {\n      if (a[i][j] != T(0)) {\n        idx = i;\n        break;\n   \
-    \   }\n    }\n    if (idx == -1) {\n      det = 0;\n      continue;\n    }\n \
-    \   if (rank != idx) det = -det, swap(a[rank], a[idx]);\n    det *= a[rank][j];\n\
-    \    if (diagonalize && a[rank][j] != T(1)) {\n      T coeff = T(1) / a[rank][j];\n\
-    \      for (int k = j; k < W; k++) a[rank][k] *= coeff;\n    }\n    int is = diagonalize\
-    \ ? 0 : rank + 1;\n    for (int i = is; i < H; i++) {\n      if (i == rank) continue;\n\
-    \      if (a[i][j] != T(0)) {\n        T coeff = a[i][j] / a[rank][j];\n     \
-    \   for (int k = j; k < W; k++) a[i][k] -= a[rank][k] * coeff;\n      }\n    }\n\
-    \    rank++;\n  }\n  return make_pair(rank, det);\n}\n#line 2 \"matrix/linear-equation.hpp\"\
-    \n\n#line 4 \"matrix/linear-equation.hpp\"\n\n// \u89E3\u304C\u5B58\u5728\u3059\
-    \u308B\u5834\u5408\u306F, \u89E3\u304C v + C_1 w_1 + ... + C_k w_k \u3068\u8868\
-    \u305B\u308B\u3068\u3057\u3066\n// (v, w_1, ..., w_k) \u3092\u8FD4\u3059\n// \u89E3\
-    \u304C\u5B58\u5728\u3057\u306A\u3044\u5834\u5408\u306F\u7A7A\u306E\u30D9\u30AF\
-    \u30C8\u30EB\u3092\u8FD4\u3059\n//\n// double \u3084 Rational \u3067\u3082\u52D5\
-    \u304F\u306F\u305A\uFF1F(\u672A\u691C\u8A3C)\ntemplate <typename T>\nvector<vector<T>>\
-    \ LinearEquation(vector<vector<T>> a, vector<T> b) {\n  int H = a.size(), W =\
-    \ a[0].size();\n  for (int i = 0; i < H; i++) a[i].push_back(b[i]);\n  auto p\
-    \ = GaussElimination(a, W, true);\n  int rank = p.first;\n  for (int i = rank;\
-    \ i < H; ++i) {\n    if (a[i][W] != 0) return vector<vector<T>>{};\n  }\n  vector<vector<T>>\
-    \ res(1, vector<T>(W));\n  vector<int> pivot(W, -1);\n  for (int i = 0, j = 0;\
-    \ i < rank; ++i) {\n    while (a[i][j] == 0) ++j;\n    res[0][j] = a[i][W], pivot[j]\
-    \ = i;\n  }\n  for (int j = 0; j < W; ++j) {\n    if (pivot[j] == -1) {\n    \
-    \  vector<T> x(W);\n      x[j] = 1;\n      for (int k = 0; k < j; ++k) {\n   \
-    \     if (pivot[k] != -1) x[k] = -a[pivot[k]][j];\n      }\n      res.push_back(x);\n\
-    \    }\n  }\n  return res;\n}\n#line 7 \"verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp\"\
+    \                       bool diagonalize = false) {\n  if (a.empty()) return {0,\
+    \ 1};\n  int H = a.size(), W = a[0].size(), rank = 0;\n  if (pivot_end == -1)\
+    \ pivot_end = W;\n  T det = 1;\n  for (int j = 0; j < pivot_end; j++) {\n    int\
+    \ idx = -1;\n    for (int i = rank; i < H; i++) {\n      if (a[i][j] != T(0))\
+    \ {\n        idx = i;\n        break;\n      }\n    }\n    if (idx == -1) {\n\
+    \      det = 0;\n      continue;\n    }\n    if (rank != idx) det = -det, swap(a[rank],\
+    \ a[idx]);\n    det *= a[rank][j];\n    if (diagonalize && a[rank][j] != T(1))\
+    \ {\n      T coeff = T(1) / a[rank][j];\n      for (int k = j; k < W; k++) a[rank][k]\
+    \ *= coeff;\n    }\n    int is = diagonalize ? 0 : rank + 1;\n    for (int i =\
+    \ is; i < H; i++) {\n      if (i == rank) continue;\n      if (a[i][j] != T(0))\
+    \ {\n        T coeff = a[i][j] / a[rank][j];\n        for (int k = j; k < W; k++)\
+    \ a[i][k] -= a[rank][k] * coeff;\n      }\n    }\n    rank++;\n  }\n  return make_pair(rank,\
+    \ det);\n}\n#line 2 \"matrix/linear-equation.hpp\"\n\n#line 4 \"matrix/linear-equation.hpp\"\
+    \n\n// \u89E3\u304C\u5B58\u5728\u3059\u308B\u5834\u5408\u306F, \u89E3\u304C v\
+    \ + C_1 w_1 + ... + C_k w_k \u3068\u8868\u305B\u308B\u3068\u3057\u3066\n// (v,\
+    \ w_1, ..., w_k) \u3092\u8FD4\u3059\n// \u89E3\u304C\u5B58\u5728\u3057\u306A\u3044\
+    \u5834\u5408\u306F\u7A7A\u306E\u30D9\u30AF\u30C8\u30EB\u3092\u8FD4\u3059\n//\n\
+    // double \u3084 Rational \u3067\u3082\u52D5\u304F\u306F\u305A\uFF1F(\u672A\u691C\
+    \u8A3C)\ntemplate <typename T>\nvector<vector<T>> LinearEquation(vector<vector<T>>\
+    \ a, vector<T> b) {\n  int H = a.size(), W = a[0].size();\n  for (int i = 0; i\
+    \ < H; i++) a[i].push_back(b[i]);\n  auto p = GaussElimination(a, W, true);\n\
+    \  int rank = p.first;\n  for (int i = rank; i < H; ++i) {\n    if (a[i][W] !=\
+    \ 0) return vector<vector<T>>{};\n  }\n  vector<vector<T>> res(1, vector<T>(W));\n\
+    \  vector<int> pivot(W, -1);\n  for (int i = 0, j = 0; i < rank; ++i) {\n    while\
+    \ (a[i][j] == 0) ++j;\n    res[0][j] = a[i][W], pivot[j] = i;\n  }\n  for (int\
+    \ j = 0; j < W; ++j) {\n    if (pivot[j] == -1) {\n      vector<T> x(W);\n   \
+    \   x[j] = 1;\n      for (int k = 0; k < j; ++k) {\n        if (pivot[k] != -1)\
+    \ x[k] = -a[pivot[k]][j];\n      }\n      res.push_back(x);\n    }\n  }\n  return\
+    \ res;\n}\n#line 7 \"verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp\"\
     \n//\n#line 2 \"misc/fastio.hpp\"\n\n#line 8 \"misc/fastio.hpp\"\n\nusing namespace\
     \ std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\n\n#line 4 \"internal/internal-type-traits.hpp\"\
     \nusing namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
@@ -396,7 +397,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   requiredBy: []
-  timestamp: '2023-09-05 21:46:27+09:00'
+  timestamp: '2024-05-03 21:06:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp

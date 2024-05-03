@@ -280,6 +280,9 @@ data:
     path: verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-convolution-on-z-pz.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-on-z-pz.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -574,6 +577,7 @@ data:
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-on-z-pz.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
   - verify/verify-unit-test/dual-fps.test.cpp

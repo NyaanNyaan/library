@@ -669,14 +669,15 @@ data:
     };\n#line 10 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\n//\n#line\
     \ 2 \"math/affine-transformation.hpp\"\n\ntemplate <typename mint>\nstruct Affine\
     \ {\n  mint a, b;\n  constexpr Affine() : a(1), b(0) {}\n  constexpr Affine(mint\
-    \ _a, mint _b) : a(_a), b(_b) {}\n  mint operator()(mint x) const { return a *\
-    \ x + b; }\n  // R(L(x))\n  friend Affine operator*(const Affine& l, const Affine&\
-    \ r) {\n    return Affine(l.a * r.a, l.b * r.a + r.b);\n  }\n  bool operator==(const\
-    \ Affine& r) const { return a == r.a && b == r.b; }\n  bool operator!=(const Affine&\
-    \ r) const { return a != r.a || b != r.b; }\n  friend ostream& operator<<(ostream&\
-    \ os, const Affine& r) {\n    os << \"( \" << r.a << \", \" << r.b << \" )\";\n\
-    \    return os;\n  }\n};\n\n/**\n * @brief \u30A2\u30D5\u30A3\u30F3\u5909\u63DB\
-    \n */\n#line 2 \"modint/montgomery-modint.hpp\"\n\ntemplate <uint32_t mod>\nstruct\
+    \ _a, mint _b) : a(_a), b(_b) {}\n  // R(L(x))\n  friend Affine operator*(const\
+    \ Affine& l, const Affine& r) {\n    return Affine(l.a * r.a, l.b * r.a + r.b);\n\
+    \  }\n  mint operator()(mint x) const { return a * x + b; }\n  Affine operator()(const\
+    \ Affine& r) const { return r * (*this); }\n  bool operator==(const Affine& r)\
+    \ const { return a == r.a && b == r.b; }\n  bool operator!=(const Affine& r) const\
+    \ { return a != r.a || b != r.b; }\n  friend ostream& operator<<(ostream& os,\
+    \ const Affine& r) {\n    os << \"( \" << r.a << \", \" << r.b << \" )\";\n  \
+    \  return os;\n  }\n};\n\n/**\n * @brief \u30A2\u30D5\u30A3\u30F3\u5909\u63DB\n\
+    \ */\n#line 2 \"modint/montgomery-modint.hpp\"\n\ntemplate <uint32_t mod>\nstruct\
     \ LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32 =\
     \ int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
     \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
@@ -953,7 +954,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/rbst-segment-tree.test.cpp
   requiredBy: []
-  timestamp: '2024-04-28 09:13:11+09:00'
+  timestamp: '2024-05-03 21:06:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/rbst-segment-tree.test.cpp

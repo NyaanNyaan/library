@@ -6,7 +6,7 @@ data:
     title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: graph/funtional-graph.hpp
+    path: graph/namori.hpp
     title: "Functional Graph(\u306A\u3082\u308A\u30B0\u30E9\u30D5)\u306E\u5206\u89E3"
   - icon: ':heavy_check_mark:'
     path: tree/auxiliary-tree.hpp
@@ -51,6 +51,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
     title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1254.test.cpp
     title: verify/verify-yuki/yuki-1254.test.cpp
@@ -183,7 +186,7 @@ data:
   isVerificationFile: false
   path: tree/heavy-light-decomposition.hpp
   requiredBy:
-  - graph/funtional-graph.hpp
+  - graph/namori.hpp
   - tree/auxiliary-tree.hpp
   - tree/dynamic-diameter.hpp
   - tree/static-top-tree-vertex-based.hpp
@@ -200,6 +203,7 @@ data:
   - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
+  - verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp

@@ -60,6 +60,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/geometry.test.cpp
     title: verify/verify-unit-test/geometry.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-other/yosupo-static-convex-hull.test.cpp
+    title: verify/verify-yosupo-other/yosupo-static-convex-hull.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -153,6 +156,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-0412.test.cpp
+  - verify/verify-yosupo-other/yosupo-static-convex-hull.test.cpp
   - verify/verify-unit-test/geometry.test.cpp
   - verify/verify-aoj-cgl/aoj-cgl-3-c.test.cpp
   - verify/verify-aoj-cgl/aoj-cgl-2-a.test.cpp

@@ -266,36 +266,37 @@ data:
     \ { return mod; }\n};\n#line 6 \"verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp\"\
     \n\nusing mint = LazyMontgomeryModInt<998244353>;\n#line 2 \"math/affine-transformation.hpp\"\
     \n\ntemplate <typename mint>\nstruct Affine {\n  mint a, b;\n  constexpr Affine()\
-    \ : a(1), b(0) {}\n  constexpr Affine(mint _a, mint _b) : a(_a), b(_b) {}\n  mint\
-    \ operator()(mint x) const { return a * x + b; }\n  // R(L(x))\n  friend Affine\
-    \ operator*(const Affine& l, const Affine& r) {\n    return Affine(l.a * r.a,\
-    \ l.b * r.a + r.b);\n  }\n  bool operator==(const Affine& r) const { return a\
-    \ == r.a && b == r.b; }\n  bool operator!=(const Affine& r) const { return a !=\
-    \ r.a || b != r.b; }\n  friend ostream& operator<<(ostream& os, const Affine&\
-    \ r) {\n    os << \"( \" << r.a << \", \" << r.b << \" )\";\n    return os;\n\
-    \  }\n};\n\n/**\n * @brief \u30A2\u30D5\u30A3\u30F3\u5909\u63DB\n */\n#line 9\
-    \ \"verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp\"\nconstexpr int\
-    \ B = 300;\n\nusing namespace Nyaan;\n\nusing affine = Affine<mint>;\nint N, Q;\n\
-    V<affine> a;\nusing namespace Nyaan; void Nyaan::solve() {\n  in(N, Q);\n  a.resize(N);\n\
-    \  rep(i, N) in(a[i].a, a[i].b);\n\n  struct block {\n    // S \u4F5C\u7528\u7D20\
-    \u306E\u578B T \u8981\u7D20\u306E\u578B\n    using S = affine;\n    using T =\
-    \ affine;\n\n    int i;\n\n    block() {}\n\n    // i ... \u4F55\u500B\u76EE\u306E\
-    \u30D6\u30ED\u30C3\u30AF\u304B\n    // i * B + j ... (j\u3092\u30D6\u30ED\u30C3\
-    \u30AF\u5185\u306Eidx\u3068\u3057\u3066)\u5168\u4F53\u3067\u306Eidx\n    int idx(int\
-    \ j) const { return i * B + j; }\n\n    affine fold;\n\n    // \u5909\u6570\u3068\
-    \u30D6\u30ED\u30C3\u30AF\u306E\u521D\u671F\u5316\u3092\u5FD8\u308C\u306A\u3044\
-    \uFF01\n    void init(int _) {\n      i = _;\n      build();\n    }\n\n    void\
-    \ build() {\n      fold = {1, 0};\n      rep(j, B) if (idx(j) < N) fold = fold\
-    \ * a[idx(j)];\n    }\n\n    void update_all(S) { exit(1); }\n\n    void update_part(int\
-    \ l, int r, S x) {\n      for (int j = l; j < r; j++) a[idx(j)] = x;\n      build();\n\
-    \    }\n\n    T query_all() { return fold; }\n\n    T query_part(int l, int r)\
-    \ {\n      affine ret = affine();\n      for (int i = l; i < r; i++) ret = ret\
-    \ * a[idx(i)];\n      return ret;\n    }\n  };\n\n  auto merge = [](const affine\
-    \ &a,const affine &b) { return a * b; };\n  SquareRootDecomposition<decltype(merge),\
-    \ block, B> sqd(N, merge, affine());\n\n  rep(_, Q) {\n    ini(cmd);\n    if (cmd\
-    \ == 0) {\n      ini(p, c, d);\n      sqd.update(p, p + 1, {c, d});\n    } else\
-    \ {\n      ini(l, r, x);\n      affine sm = sqd.query(l, r);\n      out(sm.a *\
-    \ x + sm.b);\n    }\n  }\n}\n"
+    \ : a(1), b(0) {}\n  constexpr Affine(mint _a, mint _b) : a(_a), b(_b) {}\n  //\
+    \ R(L(x))\n  friend Affine operator*(const Affine& l, const Affine& r) {\n   \
+    \ return Affine(l.a * r.a, l.b * r.a + r.b);\n  }\n  mint operator()(mint x) const\
+    \ { return a * x + b; }\n  Affine operator()(const Affine& r) const { return r\
+    \ * (*this); }\n  bool operator==(const Affine& r) const { return a == r.a &&\
+    \ b == r.b; }\n  bool operator!=(const Affine& r) const { return a != r.a || b\
+    \ != r.b; }\n  friend ostream& operator<<(ostream& os, const Affine& r) {\n  \
+    \  os << \"( \" << r.a << \", \" << r.b << \" )\";\n    return os;\n  }\n};\n\n\
+    /**\n * @brief \u30A2\u30D5\u30A3\u30F3\u5909\u63DB\n */\n#line 9 \"verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp\"\
+    \nconstexpr int B = 300;\n\nusing namespace Nyaan;\n\nusing affine = Affine<mint>;\n\
+    int N, Q;\nV<affine> a;\nusing namespace Nyaan; void Nyaan::solve() {\n  in(N,\
+    \ Q);\n  a.resize(N);\n  rep(i, N) in(a[i].a, a[i].b);\n\n  struct block {\n \
+    \   // S \u4F5C\u7528\u7D20\u306E\u578B T \u8981\u7D20\u306E\u578B\n    using\
+    \ S = affine;\n    using T = affine;\n\n    int i;\n\n    block() {}\n\n    //\
+    \ i ... \u4F55\u500B\u76EE\u306E\u30D6\u30ED\u30C3\u30AF\u304B\n    // i * B +\
+    \ j ... (j\u3092\u30D6\u30ED\u30C3\u30AF\u5185\u306Eidx\u3068\u3057\u3066)\u5168\
+    \u4F53\u3067\u306Eidx\n    int idx(int j) const { return i * B + j; }\n\n    affine\
+    \ fold;\n\n    // \u5909\u6570\u3068\u30D6\u30ED\u30C3\u30AF\u306E\u521D\u671F\
+    \u5316\u3092\u5FD8\u308C\u306A\u3044\uFF01\n    void init(int _) {\n      i =\
+    \ _;\n      build();\n    }\n\n    void build() {\n      fold = {1, 0};\n    \
+    \  rep(j, B) if (idx(j) < N) fold = fold * a[idx(j)];\n    }\n\n    void update_all(S)\
+    \ { exit(1); }\n\n    void update_part(int l, int r, S x) {\n      for (int j\
+    \ = l; j < r; j++) a[idx(j)] = x;\n      build();\n    }\n\n    T query_all()\
+    \ { return fold; }\n\n    T query_part(int l, int r) {\n      affine ret = affine();\n\
+    \      for (int i = l; i < r; i++) ret = ret * a[idx(i)];\n      return ret;\n\
+    \    }\n  };\n\n  auto merge = [](const affine &a,const affine &b) { return a\
+    \ * b; };\n  SquareRootDecomposition<decltype(merge), block, B> sqd(N, merge,\
+    \ affine());\n\n  rep(_, Q) {\n    ini(cmd);\n    if (cmd == 0) {\n      ini(p,\
+    \ c, d);\n      sqd.update(p, p + 1, {c, d});\n    } else {\n      ini(l, r, x);\n\
+    \      affine sm = sqd.query(l, r);\n      out(sm.a * x + sm.b);\n    }\n  }\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
     \n\n#include \"../../template/template.hpp\"\n#include \"../../data-structure/square-root-decomposition.hpp\"\
     \n#include \"../../modint/montgomery-modint.hpp\"\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\
@@ -334,7 +335,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
   requiredBy: []
-  timestamp: '2024-04-28 09:13:11+09:00'
+  timestamp: '2024-05-03 21:06:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp

@@ -293,6 +293,9 @@ data:
     path: verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-convolution-on-z-pz.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-on-z-pz.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -573,6 +576,7 @@ data:
   - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-on-z-pz.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
   - verify/verify-unit-test/dual-fps.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
