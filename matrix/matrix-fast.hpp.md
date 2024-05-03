@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/template.test.cpp
+    title: verify/verify-unit-test/template.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
   - icon: ':heavy_check_mark:'
@@ -108,6 +111,7 @@ data:
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
   - verify/verify-yosupo-math/yosupo-pow-of-matrix-2.test.cpp
+  - verify/verify-unit-test/template.test.cpp
   - verify/verify-yuki/yuki-0303.test.cpp
 documentation_of: matrix/matrix-fast.hpp
 layout: document

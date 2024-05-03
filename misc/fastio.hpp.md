@@ -339,11 +339,11 @@ data:
     \ + out_right, pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
     \ + out_right, buf + i, buffer_size - i);\n  out_right += buffer_size - i;\n}\n\
     void wt() {}\ntemplate <typename Head, typename... Tail>\nvoid wt(const Head&\
-    \ head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const Tail>(tail)...);\n\
-    }\ntemplate <typename... Args>\nvoid wtn(const Args&... x) {\n  wt(forward<const\
-    \ Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush);\
-    \ }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\n\
-    using fastio::wt;\nusing fastio::wtn;\n"
+    \ head, const Tail&... tail) {\n  single_write(head);\n  wt(std::forward<const\
+    \ Tail>(tail)...);\n}\ntemplate <typename... Args>\nvoid wtn(const Args&... x)\
+    \ {\n  wt(std::forward<const Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n\
+    \  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
+    using fastio::skip_space;\nusing fastio::wt;\nusing fastio::wtn;\n"
   code: "#pragma once\n\n#include <cstdio>\n#include <cstring>\n#include <string>\n\
     #include <type_traits>\n#include <utility>\n\nusing namespace std;\n\n#include\
     \ \"../internal/internal-type-traits.hpp\"\n\nnamespace fastio {\nstatic constexpr\
@@ -390,18 +390,18 @@ data:
     \ + out_right, pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
     \ + out_right, buf + i, buffer_size - i);\n  out_right += buffer_size - i;\n}\n\
     void wt() {}\ntemplate <typename Head, typename... Tail>\nvoid wt(const Head&\
-    \ head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const Tail>(tail)...);\n\
-    }\ntemplate <typename... Args>\nvoid wtn(const Args&... x) {\n  wt(forward<const\
-    \ Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush);\
-    \ }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\n\
-    using fastio::wt;\nusing fastio::wtn;\n"
+    \ head, const Tail&... tail) {\n  single_write(head);\n  wt(std::forward<const\
+    \ Tail>(tail)...);\n}\ntemplate <typename... Args>\nvoid wtn(const Args&... x)\
+    \ {\n  wt(std::forward<const Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n\
+    \  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
+    using fastio::skip_space;\nusing fastio::wt;\nusing fastio::wtn;\n"
   dependsOn:
   - internal/internal-type-traits.hpp
   isVerificationFile: false
   path: misc/fastio.hpp
   requiredBy:
   - misc/all.hpp
-  timestamp: '2023-09-05 21:46:27+09:00'
+  timestamp: '2024-05-03 23:21:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp

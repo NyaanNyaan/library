@@ -101,12 +101,13 @@ data:
     \ + out_right, pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
     \ + out_right, buf + i, buffer_size - i);\n  out_right += buffer_size - i;\n}\n\
     void wt() {}\ntemplate <typename Head, typename... Tail>\nvoid wt(const Head&\
-    \ head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const Tail>(tail)...);\n\
-    }\ntemplate <typename... Args>\nvoid wtn(const Args&... x) {\n  wt(forward<const\
-    \ Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush);\
-    \ }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\n\
-    using fastio::wt;\nusing fastio::wtn;\n#line 20 \"verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp\"\
-    \n//\n#line 2 \"math-fast/subset-convolution.hpp\"\n\n#line 5 \"math-fast/subset-convolution.hpp\"\
+    \ head, const Tail&... tail) {\n  single_write(head);\n  wt(std::forward<const\
+    \ Tail>(tail)...);\n}\ntemplate <typename... Args>\nvoid wtn(const Args&... x)\
+    \ {\n  wt(std::forward<const Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n\
+    \  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
+    using fastio::skip_space;\nusing fastio::wt;\nusing fastio::wtn;\n#line 20 \"\
+    verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp\"\n//\n#line\
+    \ 2 \"math-fast/subset-convolution.hpp\"\n\n#line 5 \"math-fast/subset-convolution.hpp\"\
     \nusing namespace std;\n\n#line 2 \"modint/vectorize-modint.hpp\"\n\n#pragma GCC\
     \ optimize(\"O3,unroll-loops\")\n#pragma GCC target(\"avx2\")\n\n#line 8 \"modint/vectorize-modint.hpp\"\
     \nusing namespace std;\n\nusing m256 = __m256i;\nstruct alignas(32) mmint {\n\
@@ -282,7 +283,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
   requiredBy: []
-  timestamp: '2023-09-05 21:46:27+09:00'
+  timestamp: '2024-05-03 23:21:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp

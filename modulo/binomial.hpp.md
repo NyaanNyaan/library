@@ -29,6 +29,9 @@ data:
     title: "\u591A\u5909\u6570\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   - icon: ':heavy_check_mark:'
+    path: fps/online-fps.hpp
+    title: fps/online-fps.hpp
+  - icon: ':heavy_check_mark:'
     path: fps/partial-fraction-decomposition.hpp
     title: "\u90E8\u5206\u5206\u6570\u5206\u89E3(\u5206\u6BCD\u304C1\u6B21\u5F0F\u306E\
       \u7A4D\u3067\u8868\u305B\u308B\u5834\u5408)"
@@ -127,6 +130,9 @@ data:
     path: verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-exp-ofps.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-exp-ofps.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -138,6 +144,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
@@ -378,6 +387,7 @@ data:
   - fps/fps-utility.hpp
   - fps/taylor-shift.hpp
   - fps/stirling-matrix.hpp
+  - fps/online-fps.hpp
   - fps/fps-compositional-inverse.hpp
   - fps/sum-of-exponential-times-poly.hpp
   - fps/multivariate-fps.hpp
@@ -431,6 +441,8 @@ data:
   - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
+  - verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp-ofps.test.cpp
   - verify/verify-yosupo-fps/yosupo-sparse-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp

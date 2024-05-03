@@ -195,6 +195,9 @@ data:
       title: "\u5468\u6CE2\u6570\u9818\u57DF\u3067\u306E\u5024\u3092\u4FDD\u6301\u3059\
         \u308BFPS"
     - icon: ':heavy_check_mark:'
+      path: fps/fast-interpolate.hpp
+      title: fps/fast-interpolate.hpp
+    - icon: ':heavy_check_mark:'
       path: fps/fast-multieval.hpp
       title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
     - icon: ':heavy_check_mark:'
@@ -269,6 +272,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/ntt-friendly-fps.hpp
       title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
+    - icon: ':heavy_check_mark:'
+      path: fps/online-fps.hpp
+      title: fps/online-fps.hpp
     - icon: ':heavy_check_mark:'
       path: fps/partial-fraction-decomposition.hpp
       title: "\u90E8\u5206\u5206\u6570\u5206\u89E3(\u5206\u6BCD\u304C1\u6B21\u5F0F\
@@ -661,9 +667,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
-    - icon: ':warning:'
-      path: misc/fixpoint.hpp
-      title: misc/fixpoint.hpp
     - icon: ':heavy_check_mark:'
       path: misc/int_div.hpp
       title: misc/int_div.hpp
@@ -1883,6 +1886,9 @@ data:
       path: verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
       title: verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-exp-ofps.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-exp-ofps.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
       title: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1907,6 +1913,9 @@ data:
       path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
       title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
       title: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1927,6 +1936,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
       title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-polynomial-interpolation-fast.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-polynomial-interpolation-fast.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
       title: verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
@@ -2109,6 +2121,9 @@ data:
       path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+      title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2150,6 +2165,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-longest-increasing-sequence.test.cpp
       title: verify/verify-yosupo-math/yosupo-longest-increasing-sequence.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-matrix-product-mod-2.test.cpp
+      title: verify/verify-yosupo-math/yosupo-matrix-product-mod-2.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
       title: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp

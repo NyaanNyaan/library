@@ -4,6 +4,12 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-matrix-product-mod-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-matrix-product-mod-2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
     title: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
   _isVerificationFailed: false
@@ -43,13 +49,15 @@ data:
     \  c[i][j] = A[i][j];\n      }\n    }\n    int r = c.sweep();\n    assert(r ==\
     \ N);\n    Mat b(H, W);\n    for (int i = 0; i < N; i++) {\n      for (int j =\
     \ 0; j < N; j++) {\n        b[i][j] = c[i][j + N];\n      }\n    }\n    return\
-    \ b;\n  }\n\n  bool operator<(const Mat &rhs) const {\n    if (H != rhs.H) return\
-    \ H < rhs.H;\n    if (W != rhs.W) return W < rhs.W;\n    return A < rhs.A;\n \
-    \ }\n  bool operator==(const Mat &rhs) const {\n    return H == rhs.H and W ==\
-    \ rhs.W and A == rhs.A;\n  }\n\n  friend ostream &operator<<(ostream &os, const\
-    \ Mat &b) {\n    for (int i = 0; i < b.H; i++) {\n      os << \"[ \";\n      for\
-    \ (int j = 0; j < b.W; j++) {\n        os << b[i][j] << \", \";\n      }\n   \
-    \   os << \"],\\n\";\n    }\n    return os;\n  }\n};\n"
+    \ b;\n  }\n\n  int determinant() const {\n    assert(H == W);\n    F2_Matrix<H_MAX,\
+    \ W_MAX> c{*this};\n    int r = c.sweep();\n    return r == H ? 1 : 0;\n  }\n\n\
+    \  bool operator<(const Mat &rhs) const {\n    if (H != rhs.H) return H < rhs.H;\n\
+    \    if (W != rhs.W) return W < rhs.W;\n    return A < rhs.A;\n  }\n  bool operator==(const\
+    \ Mat &rhs) const {\n    return H == rhs.H and W == rhs.W and A == rhs.A;\n  }\n\
+    \n  friend ostream &operator<<(ostream &os, const Mat &b) {\n    for (int i =\
+    \ 0; i < b.H; i++) {\n      os << \"[ \";\n      for (int j = 0; j < b.W; j++)\
+    \ {\n        os << b[i][j] << \", \";\n      }\n      os << \"],\\n\";\n    }\n\
+    \    return os;\n  }\n};\n"
   code: "#pragma once\n\n#include <array>\n#include <bitset>\nusing namespace std;\n\
     \nnamespace std {\ntemplate <size_t N>\nbool operator<(const bitset<N> &a, const\
     \ bitset<N> &b) {\n  int f = (a ^ b)._Find_first();\n  return f == N ? false :\
@@ -82,20 +90,24 @@ data:
     \  c[i][j] = A[i][j];\n      }\n    }\n    int r = c.sweep();\n    assert(r ==\
     \ N);\n    Mat b(H, W);\n    for (int i = 0; i < N; i++) {\n      for (int j =\
     \ 0; j < N; j++) {\n        b[i][j] = c[i][j + N];\n      }\n    }\n    return\
-    \ b;\n  }\n\n  bool operator<(const Mat &rhs) const {\n    if (H != rhs.H) return\
-    \ H < rhs.H;\n    if (W != rhs.W) return W < rhs.W;\n    return A < rhs.A;\n \
-    \ }\n  bool operator==(const Mat &rhs) const {\n    return H == rhs.H and W ==\
-    \ rhs.W and A == rhs.A;\n  }\n\n  friend ostream &operator<<(ostream &os, const\
-    \ Mat &b) {\n    for (int i = 0; i < b.H; i++) {\n      os << \"[ \";\n      for\
-    \ (int j = 0; j < b.W; j++) {\n        os << b[i][j] << \", \";\n      }\n   \
-    \   os << \"],\\n\";\n    }\n    return os;\n  }\n};\n"
+    \ b;\n  }\n\n  int determinant() const {\n    assert(H == W);\n    F2_Matrix<H_MAX,\
+    \ W_MAX> c{*this};\n    int r = c.sweep();\n    return r == H ? 1 : 0;\n  }\n\n\
+    \  bool operator<(const Mat &rhs) const {\n    if (H != rhs.H) return H < rhs.H;\n\
+    \    if (W != rhs.W) return W < rhs.W;\n    return A < rhs.A;\n  }\n  bool operator==(const\
+    \ Mat &rhs) const {\n    return H == rhs.H and W == rhs.W and A == rhs.A;\n  }\n\
+    \n  friend ostream &operator<<(ostream &os, const Mat &b) {\n    for (int i =\
+    \ 0; i < b.H; i++) {\n      os << \"[ \";\n      for (int j = 0; j < b.W; j++)\
+    \ {\n        os << b[i][j] << \", \";\n      }\n      os << \"],\\n\";\n    }\n\
+    \    return os;\n  }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: matrix/f2_matrix.hpp
   requiredBy: []
-  timestamp: '2023-08-11 05:05:49+09:00'
+  timestamp: '2024-05-04 00:10:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yosupo-math/yosupo-matrix-product-mod-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
   - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
 documentation_of: matrix/f2_matrix.hpp
 layout: document

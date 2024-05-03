@@ -101,12 +101,13 @@ data:
     \ + out_right, pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
     \ + out_right, buf + i, buffer_size - i);\n  out_right += buffer_size - i;\n}\n\
     void wt() {}\ntemplate <typename Head, typename... Tail>\nvoid wt(const Head&\
-    \ head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const Tail>(tail)...);\n\
-    }\ntemplate <typename... Args>\nvoid wtn(const Args&... x) {\n  wt(forward<const\
-    \ Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush);\
-    \ }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\n\
-    using fastio::wt;\nusing fastio::wtn;\n#line 20 \"verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp\"\
-    \n//\n#line 2 \"modint/montgomery-modint.hpp\"\n\ntemplate <uint32_t mod>\nstruct\
+    \ head, const Tail&... tail) {\n  single_write(head);\n  wt(std::forward<const\
+    \ Tail>(tail)...);\n}\ntemplate <typename... Args>\nvoid wtn(const Args&... x)\
+    \ {\n  wt(std::forward<const Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n\
+    \  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
+    using fastio::skip_space;\nusing fastio::wt;\nusing fastio::wtn;\n#line 20 \"\
+    verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp\"\n\
+    //\n#line 2 \"modint/montgomery-modint.hpp\"\n\ntemplate <uint32_t mod>\nstruct\
     \ LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32 =\
     \ int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
     \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
@@ -351,7 +352,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
   requiredBy: []
-  timestamp: '2023-09-05 21:46:27+09:00'
+  timestamp: '2024-05-03 23:21:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp

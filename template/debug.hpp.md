@@ -733,6 +733,9 @@ data:
     path: verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-exp-ofps.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-exp-ofps.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -757,6 +760,9 @@ data:
     path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -777,6 +783,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-polynomial-interpolation-fast.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-polynomial-interpolation-fast.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
     title: verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
@@ -955,6 +964,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   - icon: ':heavy_check_mark:'
@@ -996,6 +1008,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-longest-increasing-sequence.test.cpp
     title: verify/verify-yosupo-math/yosupo-longest-increasing-sequence.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-matrix-product-mod-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-matrix-product-mod-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
     title: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
@@ -1450,7 +1465,7 @@ data:
     \ {\n    dump(t.first[i]);\n    cerr << (i == t.second - 1 ? \"\" : \", \");\n\
     \  }\n  cerr << \" ]\";\n}\n\nvoid trace() { cerr << endl; }\ntemplate <typename\
     \ Head, typename... Tail>\nvoid trace(Head&& head, Tail&&... tail) {\n  cerr <<\
-    \ \" \";\n  dump(head);\n  if (sizeof...(tail) != 0) cerr << \",\";\n  trace(forward<Tail>(tail)...);\n\
+    \ \" \";\n  dump(head);\n  if (sizeof...(tail) != 0) cerr << \",\";\n  trace(std::forward<Tail>(tail)...);\n\
     }\n\n}  // namespace DebugImpl\n\n#ifdef NyaanDebug\n#define trc(...)        \
     \                    \\\n  do {                                      \\\n    cerr\
     \ << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
@@ -1491,7 +1506,7 @@ data:
     \ {\n    dump(t.first[i]);\n    cerr << (i == t.second - 1 ? \"\" : \", \");\n\
     \  }\n  cerr << \" ]\";\n}\n\nvoid trace() { cerr << endl; }\ntemplate <typename\
     \ Head, typename... Tail>\nvoid trace(Head&& head, Tail&&... tail) {\n  cerr <<\
-    \ \" \";\n  dump(head);\n  if (sizeof...(tail) != 0) cerr << \",\";\n  trace(forward<Tail>(tail)...);\n\
+    \ \" \";\n  dump(head);\n  if (sizeof...(tail) != 0) cerr << \",\";\n  trace(std::forward<Tail>(tail)...);\n\
     }\n\n}  // namespace DebugImpl\n\n#ifdef NyaanDebug\n#define trc(...)        \
     \                    \\\n  do {                                      \\\n    cerr\
     \ << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
@@ -1511,7 +1526,7 @@ data:
   - set-function/xor-convolution.hpp
   - set-function/and-convolution.hpp
   - template/template.hpp
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2024-05-03 23:21:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-0304.test.cpp
@@ -1546,6 +1561,7 @@ data:
   - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
+  - verify/verify-yosupo-math/yosupo-matrix-product-mod-2.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
   - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
@@ -1587,6 +1603,7 @@ data:
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
   - verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
@@ -1739,6 +1756,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-exp.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
+  - verify/verify-yosupo-fps/yosupo-polynomial-interpolation-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-factorial.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
   - verify/verify-yosupo-fps/yosupo-sparse-exp.test.cpp
@@ -1760,6 +1778,8 @@ data:
   - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
+  - verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp-ofps.test.cpp
   - verify/verify-yosupo-fps/yosupo-sparse-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp

@@ -157,10 +157,10 @@ data:
     \ 1 == (int)rhs.f.size() ? \"\" : \", \");\n    }\n    return os << \" ]\";\n\
     \  }\n\n  long long _id(int) { return 0; }\n  template <typename Head, typename...\
     \ Tail>\n  long long _id(int i, Head&& head, Tail&&... tail) {\n    assert(i <\
-    \ (int)base.size() && (int)head < base[i]);\n    return head + _id(i + 1, forward<Tail>(tail)...)\
+    \ (int)base.size() && (int)head < base[i]);\n    return head + _id(i + 1, std::forward<Tail>(tail)...)\
     \ * base[i];\n  }\n  template <typename... Args>\n  long long id(Args&&... args)\
-    \ {\n    return _id(0, forward<Args>(args)...);\n  }\n  template <typename...\
-    \ Args>\n  mint& operator()(Args&&... args) {\n    return f[id(forward<Args>(args)...)];\n\
+    \ {\n    return _id(0, std::forward<Args>(args)...);\n  }\n  template <typename...\
+    \ Args>\n  mint& operator()(Args&&... args) {\n    return f[id(std::forward<Args>(args)...)];\n\
     \  }\n\n  mfps& operator+=(const mfps& rhs) {\n    assert(base == rhs.base &&\
     \ f.size() == rhs.f.size());\n    for (int i = 0; i < (int)f.size(); i++) f[i]\
     \ += rhs.f[i];\n    return *this;\n  }\n  mfps& operator-=(const mfps& rhs) {\n\
@@ -241,10 +241,10 @@ data:
     \ 1 == (int)rhs.f.size() ? \"\" : \", \");\n    }\n    return os << \" ]\";\n\
     \  }\n\n  long long _id(int) { return 0; }\n  template <typename Head, typename...\
     \ Tail>\n  long long _id(int i, Head&& head, Tail&&... tail) {\n    assert(i <\
-    \ (int)base.size() && (int)head < base[i]);\n    return head + _id(i + 1, forward<Tail>(tail)...)\
+    \ (int)base.size() && (int)head < base[i]);\n    return head + _id(i + 1, std::forward<Tail>(tail)...)\
     \ * base[i];\n  }\n  template <typename... Args>\n  long long id(Args&&... args)\
-    \ {\n    return _id(0, forward<Args>(args)...);\n  }\n  template <typename...\
-    \ Args>\n  mint& operator()(Args&&... args) {\n    return f[id(forward<Args>(args)...)];\n\
+    \ {\n    return _id(0, std::forward<Args>(args)...);\n  }\n  template <typename...\
+    \ Args>\n  mint& operator()(Args&&... args) {\n    return f[id(std::forward<Args>(args)...)];\n\
     \  }\n\n  mfps& operator+=(const mfps& rhs) {\n    assert(base == rhs.base &&\
     \ f.size() == rhs.f.size());\n    for (int i = 0; i < (int)f.size(); i++) f[i]\
     \ += rhs.f[i];\n    return *this;\n  }\n  mfps& operator-=(const mfps& rhs) {\n\
@@ -315,7 +315,7 @@ data:
   isVerificationFile: false
   path: fps/multivariate-fps.hpp
   requiredBy: []
-  timestamp: '2023-08-31 20:44:07+09:00'
+  timestamp: '2024-05-03 23:21:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1783.test.cpp

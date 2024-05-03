@@ -35,22 +35,23 @@ data:
     \ 1;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n   \
     \ T c;\n    cin >> c;\n    if (is_1origin) x--, y--;\n    g[x].emplace_back(x,\
     \ y, c);\n    if (!is_directed) g[y].emplace_back(y, x, c);\n  }\n  return g;\n\
-    }\n\n// Input of Edges\ntemplate <typename T>\nEdges<T> esgraph(int N, int M,\
-    \ int is_weighted = true, bool is_1origin = true) {\n  Edges<T> es;\n  for (int\
-    \ _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n\
-    \      cin >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    es.emplace_back(x,\
-    \ y, c);\n  }\n  return es;\n}\n\n// Input of Adjacency Matrix\ntemplate <typename\
-    \ T>\nvector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,\n\
-    \                           bool is_directed = false, bool is_1origin = true)\
-    \ {\n  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++)\
-    \ {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n     \
-    \ cin >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y]\
-    \ = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
-    \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
-    \ */\n#line 4 \"graph/strongly-connected-components.hpp\"\n\n// Strongly Connected\
-    \ Components\n// DAG of SC graph   ... scc.dag (including multiedges)\n// new\
-    \ node of k     ... scc[k]\n// inv of scc[k] = i ... scc.belong(i)\ntemplate <typename\
-    \ G>\nstruct StronglyConnectedComponents {\n private:\n  const G &g;\n  vector<vector<int>>\
+    }\n\n// Input of Edges\ntemplate <typename T>\nEdges<T> esgraph([[maybe_unused]]\
+    \ int N, int M, int is_weighted = true,\n                 bool is_1origin = true)\
+    \ {\n  Edges<T> es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >>\
+    \ x >> y;\n    T c;\n    if (is_weighted)\n      cin >> c;\n    else\n      c\
+    \ = 1;\n    if (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n  }\n  return\
+    \ es;\n}\n\n// Input of Adjacency Matrix\ntemplate <typename T>\nvector<vector<T>>\
+    \ adjgraph(int N, int M, T INF, int is_weighted = true,\n                    \
+    \       bool is_directed = false, bool is_1origin = true) {\n  vector<vector<T>>\
+    \ d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n \
+    \   cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin >> c;\n    else\n\
+    \      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] = c;\n    if (!is_directed)\
+    \ d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\
+    \u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n */\n#line\
+    \ 4 \"graph/strongly-connected-components.hpp\"\n\n// Strongly Connected Components\n\
+    // DAG of SC graph   ... scc.dag (including multiedges)\n// new node of k    \
+    \ ... scc[k]\n// inv of scc[k] = i ... scc.belong(i)\ntemplate <typename G>\n\
+    struct StronglyConnectedComponents {\n private:\n  const G &g;\n  vector<vector<int>>\
     \ rg;\n  vector<int> comp, order;\n  vector<char> used;\n  vector<vector<int>>\
     \ blng;\n\n public:\n  vector<vector<int>> dag;\n  StronglyConnectedComponents(G\
     \ &_g) : g(_g), used(g.size(), 0) { build(); }\n\n  int operator[](int k) { return\
@@ -98,7 +99,7 @@ data:
   isVerificationFile: false
   path: graph/strongly-connected-components.hpp
   requiredBy: []
-  timestamp: '2021-11-23 10:22:25+09:00'
+  timestamp: '2024-05-03 23:21:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-grl/aoj-grl-3-c.test.cpp

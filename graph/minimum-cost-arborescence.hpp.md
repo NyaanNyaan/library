@@ -66,28 +66,29 @@ data:
     \ y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n    if (is_1origin) x--, y--;\n\
     \    g[x].emplace_back(x, y, c);\n    if (!is_directed) g[y].emplace_back(y, x,\
     \ c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate <typename T>\nEdges<T>\
-    \ esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {\n  Edges<T>\
-    \ es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n  \
-    \  T c;\n    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if\
-    \ (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n  }\n  return es;\n}\n\
-    \n// Input of Adjacency Matrix\ntemplate <typename T>\nvector<vector<T>> adjgraph(int\
-    \ N, int M, T INF, int is_weighted = true,\n                           bool is_directed\
-    \ = false, bool is_1origin = true) {\n  vector<vector<T>> d(N, vector<T>(N, INF));\n\
-    \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
-    \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
-    \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
-    \n * @docs docs/graph/graph-template.md\n */\n#line 6 \"graph/minimum-cost-arborescence.hpp\"\
-    \n\ntemplate <typename T>\nEdges<T> MinimumCostArborescence(int N, int root, const\
-    \ Edges<T> &es) {\n  using Heap = SkewHeap<T>;\n  using Ptr = typename Heap::Ptr;\n\
-    \  UnionFind uf(N);\n  vector<int> used(N, -1), from(N);\n  vector<T> from_cost(N);\n\
-    \  vector<Ptr> come(N, nullptr);\n\n  used[root] = root;\n  vector<int> par_e(es.size(),\
-    \ -1), stem(N, -1), idxs;\n\n  for (int i = 0; i < (int)es.size(); i++) {\n  \
-    \  auto &e = es[i];\n    come[e] = Heap::push(come[e], e.cost, i);\n  }\n\n  T\
-    \ costs = 0;\n\n  for (int start = 0; start < N; start++) {\n    if (used[start]\
-    \ != -1) continue;\n    int cur = start;\n    vector<int> chi_e;\n    int cycle\
-    \ = 0;\n    while (used[cur] == -1 || used[cur] == start) {\n      used[cur] =\
-    \ start;\n      if (come[cur] == nullptr) return {};\n      int src = uf.find(es[come[cur]->idx].src);\n\
+    \ esgraph([[maybe_unused]] int N, int M, int is_weighted = true,\n           \
+    \      bool is_1origin = true) {\n  Edges<T> es;\n  for (int _ = 0; _ < M; _++)\
+    \ {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n     \
+    \ cin >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    es.emplace_back(x,\
+    \ y, c);\n  }\n  return es;\n}\n\n// Input of Adjacency Matrix\ntemplate <typename\
+    \ T>\nvector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,\n\
+    \                           bool is_directed = false, bool is_1origin = true)\
+    \ {\n  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++)\
+    \ {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n     \
+    \ cin >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y]\
+    \ = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
+    \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
+    \ */\n#line 6 \"graph/minimum-cost-arborescence.hpp\"\n\ntemplate <typename T>\n\
+    Edges<T> MinimumCostArborescence(int N, int root, const Edges<T> &es) {\n  using\
+    \ Heap = SkewHeap<T>;\n  using Ptr = typename Heap::Ptr;\n  UnionFind uf(N);\n\
+    \  vector<int> used(N, -1), from(N);\n  vector<T> from_cost(N);\n  vector<Ptr>\
+    \ come(N, nullptr);\n\n  used[root] = root;\n  vector<int> par_e(es.size(), -1),\
+    \ stem(N, -1), idxs;\n\n  for (int i = 0; i < (int)es.size(); i++) {\n    auto\
+    \ &e = es[i];\n    come[e] = Heap::push(come[e], e.cost, i);\n  }\n\n  T costs\
+    \ = 0;\n\n  for (int start = 0; start < N; start++) {\n    if (used[start] !=\
+    \ -1) continue;\n    int cur = start;\n    vector<int> chi_e;\n    int cycle =\
+    \ 0;\n    while (used[cur] == -1 || used[cur] == start) {\n      used[cur] = start;\n\
+    \      if (come[cur] == nullptr) return {};\n      int src = uf.find(es[come[cur]->idx].src);\n\
     \      T cost = come[cur]->key + come[cur]->laz;\n      int idx = come[cur]->idx;\n\
     \      come[cur] = Heap::pop(come[cur]);\n      if (src == cur) continue;\n\n\
     \      from[cur] = src;\n      from_cost[cur] = cost;\n      if (stem[cur] ==\
@@ -139,7 +140,7 @@ data:
   isVerificationFile: false
   path: graph/minimum-cost-arborescence.hpp
   requiredBy: []
-  timestamp: '2021-11-23 10:22:25+09:00'
+  timestamp: '2024-05-03 23:21:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp

@@ -14,6 +14,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/fps-composition-fast-old.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
+  - icon: ':heavy_check_mark:'
+    path: fps/online-fps.hpp
+    title: fps/online-fps.hpp
   - icon: ':warning:'
     path: math/bigint-all.hpp
     title: math/bigint-all.hpp
@@ -277,6 +280,9 @@ data:
     path: verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-exp-ofps.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-exp-ofps.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -301,6 +307,9 @@ data:
     path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -321,6 +330,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-polynomial-interpolation-fast.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-polynomial-interpolation-fast.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
     title: verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
@@ -700,6 +712,7 @@ data:
   - fps/arbitrary-fps.hpp
   - fps/fps-composition-fast-old.hpp
   - fps/fps-circular.hpp
+  - fps/online-fps.hpp
   - fps/fast-multieval.hpp
   - string/wildcard-pattern-matching.hpp
   - math/bigint-all.hpp
@@ -817,6 +830,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-exp.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
+  - verify/verify-yosupo-fps/yosupo-polynomial-interpolation-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-factorial.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
   - verify/verify-yosupo-fps/yosupo-sparse-exp.test.cpp
@@ -838,6 +852,8 @@ data:
   - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
+  - verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp-ofps.test.cpp
   - verify/verify-yosupo-fps/yosupo-sparse-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp

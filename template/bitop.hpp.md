@@ -733,6 +733,9 @@ data:
     path: verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-exp-ofps.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-exp-ofps.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -757,6 +760,9 @@ data:
     path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -777,6 +783,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-polynomial-interpolation-fast.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-polynomial-interpolation-fast.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
     title: verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
@@ -955,6 +964,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   - icon: ':heavy_check_mark:'
@@ -996,6 +1008,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-longest-increasing-sequence.test.cpp
     title: verify/verify-yosupo-math/yosupo-longest-increasing-sequence.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-matrix-product-mod-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-matrix-product-mod-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
     title: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
@@ -1419,23 +1434,23 @@ data:
   attributes:
     links: []
   bundledCode: "#line 1 \"template/bitop.hpp\"\nnamespace Nyaan {\n__attribute__((target(\"\
-    popcnt\"))) inline int popcnt(const u64 &a) {\n  return _mm_popcnt_u64(a);\n}\n\
-    inline int lsb(const u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline int\
-    \ ctz(const u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline int msb(const\
+    popcnt\"))) inline int popcnt(const u64 &a) {\n  return __builtin_popcountll(a);\n\
+    }\ninline int lsb(const u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline\
+    \ int ctz(const u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline int msb(const\
     \ u64 &a) { return a ? 63 - __builtin_clzll(a) : -1; }\ntemplate <typename T>\n\
     inline int gbit(const T &a, int i) {\n  return (a >> i) & 1;\n}\ntemplate <typename\
     \ T>\ninline void sbit(T &a, int i, bool b) {\n  if (gbit(a, i) != b) a ^= T(1)\
     \ << i;\n}\nconstexpr long long PW(int n) { return 1LL << n; }\nconstexpr long\
     \ long MSK(int n) { return (1LL << n) - 1; }\n}  // namespace Nyaan\n"
   code: "namespace Nyaan {\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
-    \ u64 &a) {\n  return _mm_popcnt_u64(a);\n}\ninline int lsb(const u64 &a) { return\
-    \ a ? __builtin_ctzll(a) : 64; }\ninline int ctz(const u64 &a) { return a ? __builtin_ctzll(a)\
-    \ : 64; }\ninline int msb(const u64 &a) { return a ? 63 - __builtin_clzll(a) :\
-    \ -1; }\ntemplate <typename T>\ninline int gbit(const T &a, int i) {\n  return\
-    \ (a >> i) & 1;\n}\ntemplate <typename T>\ninline void sbit(T &a, int i, bool\
-    \ b) {\n  if (gbit(a, i) != b) a ^= T(1) << i;\n}\nconstexpr long long PW(int\
-    \ n) { return 1LL << n; }\nconstexpr long long MSK(int n) { return (1LL << n)\
-    \ - 1; }\n}  // namespace Nyaan\n"
+    \ u64 &a) {\n  return __builtin_popcountll(a);\n}\ninline int lsb(const u64 &a)\
+    \ { return a ? __builtin_ctzll(a) : 64; }\ninline int ctz(const u64 &a) { return\
+    \ a ? __builtin_ctzll(a) : 64; }\ninline int msb(const u64 &a) { return a ? 63\
+    \ - __builtin_clzll(a) : -1; }\ntemplate <typename T>\ninline int gbit(const T\
+    \ &a, int i) {\n  return (a >> i) & 1;\n}\ntemplate <typename T>\ninline void\
+    \ sbit(T &a, int i, bool b) {\n  if (gbit(a, i) != b) a ^= T(1) << i;\n}\nconstexpr\
+    \ long long PW(int n) { return 1LL << n; }\nconstexpr long long MSK(int n) { return\
+    \ (1LL << n) - 1; }\n}  // namespace Nyaan\n"
   dependsOn: []
   isVerificationFile: false
   path: template/bitop.hpp
@@ -1447,7 +1462,7 @@ data:
   - set-function/xor-convolution.hpp
   - set-function/and-convolution.hpp
   - template/template.hpp
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2024-05-03 23:21:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-0304.test.cpp
@@ -1482,6 +1497,7 @@ data:
   - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
+  - verify/verify-yosupo-math/yosupo-matrix-product-mod-2.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
   - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
@@ -1523,6 +1539,7 @@ data:
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
   - verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
@@ -1675,6 +1692,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-exp.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
+  - verify/verify-yosupo-fps/yosupo-polynomial-interpolation-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-factorial.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
   - verify/verify-yosupo-fps/yosupo-sparse-exp.test.cpp
@@ -1696,6 +1714,8 @@ data:
   - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
+  - verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp-ofps.test.cpp
   - verify/verify-yosupo-fps/yosupo-sparse-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp

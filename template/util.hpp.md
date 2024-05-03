@@ -733,6 +733,9 @@ data:
     path: verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-exp-ofps.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-exp-ofps.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -757,6 +760,9 @@ data:
     path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -777,6 +783,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-polynomial-interpolation-fast.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-polynomial-interpolation-fast.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
     title: verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
@@ -955,6 +964,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   - icon: ':heavy_check_mark:'
@@ -996,6 +1008,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-longest-increasing-sequence.test.cpp
     title: verify/verify-yosupo-math/yosupo-longest-increasing-sequence.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-matrix-product-mod-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-matrix-product-mod-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
     title: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
@@ -1467,9 +1482,9 @@ data:
     \ inv;\n}\n\nvector<int> mkiota(int n) {\n  vector<int> ret(n);\n  iota(begin(ret),\
     \ end(ret), 0);\n  return ret;\n}\n\ntemplate <typename T>\nT mkrev(const T &v)\
     \ {\n  T w{v};\n  reverse(begin(w), end(w));\n  return w;\n}\n\ntemplate <typename\
-    \ T>\nbool nxp(vector<T> &v) {\n  return next_permutation(begin(v), end(v));\n\
-    }\n\n// \u8FD4\u308A\u5024\u306E\u578B\u306F\u5165\u529B\u306E T \u306B\u4F9D\u5B58\
-    \n// i \u8981\u7D20\u76EE : [0, a[i])\ntemplate <typename T>\nvector<vector<T>>\
+    \ T>\nbool nxp(T &v) {\n  return next_permutation(begin(v), end(v));\n}\n\n//\
+    \ \u8FD4\u308A\u5024\u306E\u578B\u306F\u5165\u529B\u306E T \u306B\u4F9D\u5B58\n\
+    // i \u8981\u7D20\u76EE : [0, a[i])\ntemplate <typename T>\nvector<vector<T>>\
     \ product(const vector<T> &a) {\n  vector<vector<T>> ret;\n  vector<T> v;\n  auto\
     \ dfs = [&](auto rc, int i) -> void {\n    if (i == (int)a.size()) {\n      ret.push_back(v);\n\
     \      return;\n    }\n    for (int j = 0; j < a[i]; j++) v.push_back(j), rc(rc,\
@@ -1480,8 +1495,19 @@ data:
     \ &)> &f) {\n  T res = I;\n  for (; n; f(a = a * a), n >>= 1) {\n    if (n & 1)\
     \ f(res = res * a);\n  }\n  return res;\n}\n// T : \u6574\u6570\u578B\u306E\u3068\
     \u304D\u306F\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u306B\u6CE8\u610F\u3059\
-    \u308B\ntemplate <typename T>\nT Power(T a, long long n, const T &I) {\n  return\
-    \ Power(a, n, I, function<void(T &)>{[](T &) -> void {}});\n}\n\n}  // namespace\
+    \u308B\ntemplate <typename T>\nT Power(T a, long long n, const T &I = T{1}) {\n\
+    \  return Power(a, n, I, function<void(T &)>{[](T &) -> void {}});\n}\n\ntemplate\
+    \ <typename T>\nT Rev(const T &v) {\n  T res = v;\n  reverse(begin(res), end(res));\n\
+    \  return res;\n}\n\ntemplate <typename T>\nvector<T> Transpose(const vector<T>\
+    \ &v) {\n  using U = typename T::value_type;\n  if(v.empty()) return {};\n  int\
+    \ H = v.size(), W = v[0].size();\n  vector res(W, T(H, U{}));\n  for (int i =\
+    \ 0; i < H; i++) {\n    for (int j = 0; j < W; j++) {\n      res[j][i] = v[i][j];\n\
+    \    }\n  }\n  return res;\n}\n\ntemplate <typename T>\nvector<T> Rotate(const\
+    \ vector<T> &v, int clockwise = true) {\n  using U = typename T::value_type;\n\
+    \  int H = v.size(), W = v[0].size();\n  vector res(W, T(H, U{}));\n  for (int\
+    \ i = 0; i < H; i++) {\n    for (int j = 0; j < W; j++) {\n      if (clockwise)\
+    \ {\n        res[W - 1 - j][i] = v[i][j];\n      } else {\n        res[j][H -\
+    \ 1 - i] = v[i][j];\n      }\n    }\n  }\n  return res;\n}\n\n}  // namespace\
     \ Nyaan\n"
   code: "namespace Nyaan {\nusing ll = long long;\nusing i64 = long long;\nusing u64\
     \ = unsigned long long;\nusing i128 = __int128_t;\nusing u128 = __uint128_t;\n\
@@ -1531,9 +1557,9 @@ data:
     \ inv;\n}\n\nvector<int> mkiota(int n) {\n  vector<int> ret(n);\n  iota(begin(ret),\
     \ end(ret), 0);\n  return ret;\n}\n\ntemplate <typename T>\nT mkrev(const T &v)\
     \ {\n  T w{v};\n  reverse(begin(w), end(w));\n  return w;\n}\n\ntemplate <typename\
-    \ T>\nbool nxp(vector<T> &v) {\n  return next_permutation(begin(v), end(v));\n\
-    }\n\n// \u8FD4\u308A\u5024\u306E\u578B\u306F\u5165\u529B\u306E T \u306B\u4F9D\u5B58\
-    \n// i \u8981\u7D20\u76EE : [0, a[i])\ntemplate <typename T>\nvector<vector<T>>\
+    \ T>\nbool nxp(T &v) {\n  return next_permutation(begin(v), end(v));\n}\n\n//\
+    \ \u8FD4\u308A\u5024\u306E\u578B\u306F\u5165\u529B\u306E T \u306B\u4F9D\u5B58\n\
+    // i \u8981\u7D20\u76EE : [0, a[i])\ntemplate <typename T>\nvector<vector<T>>\
     \ product(const vector<T> &a) {\n  vector<vector<T>> ret;\n  vector<T> v;\n  auto\
     \ dfs = [&](auto rc, int i) -> void {\n    if (i == (int)a.size()) {\n      ret.push_back(v);\n\
     \      return;\n    }\n    for (int j = 0; j < a[i]; j++) v.push_back(j), rc(rc,\
@@ -1544,8 +1570,19 @@ data:
     \ &)> &f) {\n  T res = I;\n  for (; n; f(a = a * a), n >>= 1) {\n    if (n & 1)\
     \ f(res = res * a);\n  }\n  return res;\n}\n// T : \u6574\u6570\u578B\u306E\u3068\
     \u304D\u306F\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u306B\u6CE8\u610F\u3059\
-    \u308B\ntemplate <typename T>\nT Power(T a, long long n, const T &I) {\n  return\
-    \ Power(a, n, I, function<void(T &)>{[](T &) -> void {}});\n}\n\n}  // namespace\
+    \u308B\ntemplate <typename T>\nT Power(T a, long long n, const T &I = T{1}) {\n\
+    \  return Power(a, n, I, function<void(T &)>{[](T &) -> void {}});\n}\n\ntemplate\
+    \ <typename T>\nT Rev(const T &v) {\n  T res = v;\n  reverse(begin(res), end(res));\n\
+    \  return res;\n}\n\ntemplate <typename T>\nvector<T> Transpose(const vector<T>\
+    \ &v) {\n  using U = typename T::value_type;\n  if(v.empty()) return {};\n  int\
+    \ H = v.size(), W = v[0].size();\n  vector res(W, T(H, U{}));\n  for (int i =\
+    \ 0; i < H; i++) {\n    for (int j = 0; j < W; j++) {\n      res[j][i] = v[i][j];\n\
+    \    }\n  }\n  return res;\n}\n\ntemplate <typename T>\nvector<T> Rotate(const\
+    \ vector<T> &v, int clockwise = true) {\n  using U = typename T::value_type;\n\
+    \  int H = v.size(), W = v[0].size();\n  vector res(W, T(H, U{}));\n  for (int\
+    \ i = 0; i < H; i++) {\n    for (int j = 0; j < W; j++) {\n      if (clockwise)\
+    \ {\n        res[W - 1 - j][i] = v[i][j];\n      } else {\n        res[j][H -\
+    \ 1 - i] = v[i][j];\n      }\n    }\n  }\n  return res;\n}\n\n}  // namespace\
     \ Nyaan\n"
   dependsOn: []
   isVerificationFile: false
@@ -1558,7 +1595,7 @@ data:
   - set-function/xor-convolution.hpp
   - set-function/and-convolution.hpp
   - template/template.hpp
-  timestamp: '2023-08-10 13:25:59+09:00'
+  timestamp: '2024-05-03 23:21:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-0304.test.cpp
@@ -1593,6 +1630,7 @@ data:
   - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
+  - verify/verify-yosupo-math/yosupo-matrix-product-mod-2.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
   - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
@@ -1634,6 +1672,7 @@ data:
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
   - verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
@@ -1786,6 +1825,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-exp.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
+  - verify/verify-yosupo-fps/yosupo-polynomial-interpolation-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-factorial.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
   - verify/verify-yosupo-fps/yosupo-sparse-exp.test.cpp
@@ -1807,6 +1847,8 @@ data:
   - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
+  - verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp-ofps.test.cpp
   - verify/verify-yosupo-fps/yosupo-sparse-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
