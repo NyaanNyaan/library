@@ -5,11 +5,11 @@
 #include "../../atcoder/mincostflow.hpp"
 #include "../../graph/graph-template.hpp"
 #include "../../tree/convert-tree.hpp"
-#include "../../tree/tree-hash.hpp"
+#include "../../tree/rooted-tree-hash.hpp"
 
 using namespace Nyaan;
 
-using Hash = typename TreeHash<vvi>::Hash;
+using Hash = typename RootedTreeHash<vvi>::Hash;
 
 vi sub(vvi g, int r) {
   int N = sz(g);
@@ -31,8 +31,8 @@ map<pair<Hash, Hash>, int> memo;
 int sol(int, vvi g, int, vvi h, int hr) {
   g = rooted_tree(g, 0);
   h = rooted_tree(h, hr);
-  TreeHash hag(g, 0);
-  TreeHash hah(h, hr);
+  RootedTreeHash hag(g, 0);
+  RootedTreeHash hah(h, hr);
   vi subg = sub(g, 0);
   vi subh = sub(h, hr);
 

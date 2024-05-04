@@ -1,49 +1,15 @@
 #pragma once
 
-#include <array>
-#include <chrono>
-#include <random>
-#include <vector>
-using namespace std;
-
-#include "../internal/internal-hash.hpp"
+#include "centroid.hpp"
+#include "rooted-tree-hash.hpp"
 
 template <typename G>
-struct TreeHash {
-  using Hash = internal::Hash<3>;
-
-  const G& g;
-  int n;
-  vector<Hash> hash;
-  vector<int> depth;
-
-  static vector<Hash>& xs() {
-    static vector<Hash> _xs;
-    return _xs;
-  }
-
-  TreeHash(const G& _g, int root = 0) : g(_g), n(g.size()) {
-    hash.resize(n);
-    depth.resize(n, 0);
-    while ((int)xs().size() <= n) xs().push_back(Hash::get_basis());
-    dfs(root, -1);
-  }
-
- private:
-  int dfs(int c, int p) {
-    int dep = 0;
-    for (auto& d : g[c]) {
-      if (d != p) dep = max(dep, dfs(d, c) + 1);
-    }
-    Hash x = xs()[dep], h = Hash::set(1);
-    for (auto& d : g[c]) {
-      if (d != p) h = h * (x + hash[d]);
-    }
-    hash[c] = h;
-    return depth[c] = dep;
-  }
-};
-
-/**
- * @brief 根付き木のハッシュ
- */
+vector<typename RootedTreeHash<G>::Hash> tree_hash(const G& g) {
+  using Hash = typename RootedTreeHash<G>::Hash;
+  auto cs = centroid(g);
+  if ((int)cs.size() == 1) cs.push_back(cs[0]);
+  vector<Hash> hs;
+  for (auto& c : cs) hs.push_back(RootedTreeHash{g, c}.hash[c]);
+  sort(begin(hs), end(hs));
+  return hs;
+}

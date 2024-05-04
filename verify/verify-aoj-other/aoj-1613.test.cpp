@@ -2,7 +2,7 @@
 
 #include "../../template/template.hpp"
 //
-#include "../../tree/tree-hash.hpp"
+#include "../../tree/rooted-tree-hash.hpp"
 
 using namespace Nyaan;
 
@@ -65,7 +65,7 @@ vector<set<int> > make_tree(vector<vector<bool> > const& f) {
   return g;
 }
 
-using Hash = typename TreeHash<vvi>::Hash;
+using Hash = typename RootedTreeHash<vvi>::Hash;
 
 Hash tree_hash(vector<set<int> > f) {
   vvi g(sz(f));
@@ -75,7 +75,7 @@ Hash tree_hash(vector<set<int> > f) {
       g[x].push_back(i);
     }
   }
-  TreeHash hash(g);
+  RootedTreeHash hash(g);
   return hash.hash[0];
 }
 
