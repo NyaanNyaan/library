@@ -4,7 +4,7 @@
 //
 #include "../../hashmap/hashmap-unerasable.hpp"
 //
-#include "../../tree/tree-hash.hpp"
+#include "../../tree/rooted-tree-hash.hpp"
 using namespace Nyaan;
 
 void q() {
@@ -14,8 +14,8 @@ void q() {
     ini(p);
     g[p].push_back(i);
   }
-  TreeHash th{g};
-  UnerasableHashMap<typename TreeHash<vvi>::Hash, int> mp;
+  RootedTreeHash th{g};
+  UnerasableHashMap<typename RootedTreeHash<vvi>::Hash, int> mp;
   int K = 0;
   vi ans(N, -1);
 
