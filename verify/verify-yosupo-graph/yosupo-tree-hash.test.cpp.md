@@ -35,7 +35,7 @@ data:
     path: template/util.hpp
     title: template/util.hpp
   - icon: ':heavy_check_mark:'
-    path: tree/tree-hash.hpp
+    path: tree/rooted-tree-hash.hpp
     title: "\u6839\u4ED8\u304D\u6728\u306E\u30CF\u30C3\u30B7\u30E5"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
@@ -336,21 +336,21 @@ data:
     \ Key& k) { return flag[hint(k)]; }\n  int size() const { return occupied_num;\
     \ }\n  void reset() { init(default_size, true); }\n  void clear() { init(default_size,\
     \ true); }\n};\n#line 6 \"verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp\"\
-    \n//\n#line 2 \"tree/tree-hash.hpp\"\n\n#line 7 \"tree/tree-hash.hpp\"\nusing\
-    \ namespace std;\n\n#line 2 \"internal/internal-hash.hpp\"\n\nnamespace internal\
-    \ {\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing u128 = __uint128_t;\n\
-    \ntemplate <int BASE_NUM = 2>\nstruct Hash : array<u64, BASE_NUM> {\n  using array<u64,\
-    \ BASE_NUM>::operator[];\n  static constexpr int n = BASE_NUM;\n\n  Hash() : array<u64,\
-    \ BASE_NUM>() {}\n\n  static constexpr u64 md = (1ull << 61) - 1;\n\n  constexpr\
-    \ static Hash set(const i64 &a) {\n    Hash res;\n    fill(begin(res), end(res),\
-    \ cast(a));\n    return res;\n  }\n  Hash &operator+=(const Hash &r) {\n    for\
-    \ (int i = 0; i < n; i++)\n      if (((*this)[i] += r[i]) >= md) (*this)[i] -=\
-    \ md;\n    return *this;\n  }\n  Hash &operator+=(const i64 &r) {\n    u64 s =\
-    \ cast(r);\n    for (int i = 0; i < n; i++)\n      if (((*this)[i] += s) >= md)\
-    \ (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator-=(const Hash &r)\
-    \ {\n    for (int i = 0; i < n; i++)\n      if (((*this)[i] += md - r[i]) >= md)\
-    \ (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator-=(const i64 &r)\
-    \ {\n    u64 s = cast(r);\n    for (int i = 0; i < n; i++)\n      if (((*this)[i]\
+    \n//\n#line 2 \"tree/rooted-tree-hash.hpp\"\n\n#line 7 \"tree/rooted-tree-hash.hpp\"\
+    \nusing namespace std;\n\n#line 2 \"internal/internal-hash.hpp\"\n\nnamespace\
+    \ internal {\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing u128\
+    \ = __uint128_t;\n\ntemplate <int BASE_NUM = 2>\nstruct Hash : array<u64, BASE_NUM>\
+    \ {\n  using array<u64, BASE_NUM>::operator[];\n  static constexpr int n = BASE_NUM;\n\
+    \n  Hash() : array<u64, BASE_NUM>() {}\n\n  static constexpr u64 md = (1ull <<\
+    \ 61) - 1;\n\n  constexpr static Hash set(const i64 &a) {\n    Hash res;\n   \
+    \ fill(begin(res), end(res), cast(a));\n    return res;\n  }\n  Hash &operator+=(const\
+    \ Hash &r) {\n    for (int i = 0; i < n; i++)\n      if (((*this)[i] += r[i])\
+    \ >= md) (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator+=(const i64\
+    \ &r) {\n    u64 s = cast(r);\n    for (int i = 0; i < n; i++)\n      if (((*this)[i]\
+    \ += s) >= md) (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator-=(const\
+    \ Hash &r) {\n    for (int i = 0; i < n; i++)\n      if (((*this)[i] += md - r[i])\
+    \ >= md) (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator-=(const i64\
+    \ &r) {\n    u64 s = cast(r);\n    for (int i = 0; i < n; i++)\n      if (((*this)[i]\
     \ += md - s) >= md) (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator*=(const\
     \ Hash &r) {\n    for (int i = 0; i < n; i++) (*this)[i] = modmul((*this)[i],\
     \ r[i]);\n    return *this;\n  }\n  Hash &operator*=(const i64 &r) {\n    u64\
@@ -386,35 +386,35 @@ data:
     \ * b + c;\n    u64 ret = (d >> 61) + (u64(d) & md);\n    return ret >= md ? ret\
     \ - md : ret;\n  }\n};\n\n}  // namespace internal\n\n/**\n * @brief \u30CF\u30C3\
     \u30B7\u30E5\u69CB\u9020\u4F53\n * @docs docs/internal/internal-hash.md\n */\n\
-    #line 10 \"tree/tree-hash.hpp\"\n\ntemplate <typename G>\nstruct TreeHash {\n\
-    \  using Hash = internal::Hash<3>;\n\n  const G& g;\n  int n;\n  vector<Hash>\
+    #line 10 \"tree/rooted-tree-hash.hpp\"\n\ntemplate <typename G>\nstruct RootedTreeHash\
+    \ {\n  using Hash = internal::Hash<1>;\n\n  const G& g;\n  int n;\n  vector<Hash>\
     \ hash;\n  vector<int> depth;\n\n  static vector<Hash>& xs() {\n    static vector<Hash>\
-    \ _xs;\n    return _xs;\n  }\n\n  TreeHash(const G& _g, int root = 0) : g(_g),\
-    \ n(g.size()) {\n    hash.resize(n);\n    depth.resize(n, 0);\n    while ((int)xs().size()\
-    \ <= n) xs().push_back(Hash::get_basis());\n    dfs(root, -1);\n  }\n\n private:\n\
-    \  int dfs(int c, int p) {\n    int dep = 0;\n    for (auto& d : g[c]) {\n   \
-    \   if (d != p) dep = max(dep, dfs(d, c) + 1);\n    }\n    Hash x = xs()[dep],\
-    \ h = Hash::set(1);\n    for (auto& d : g[c]) {\n      if (d != p) h = h * (x\
-    \ + hash[d]);\n    }\n    hash[c] = h;\n    return depth[c] = dep;\n  }\n};\n\n\
-    /**\n * @brief \u6839\u4ED8\u304D\u6728\u306E\u30CF\u30C3\u30B7\u30E5\n */\n#line\
-    \ 8 \"verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp\"\nusing namespace\
-    \ Nyaan;\n\nvoid q() {\n  ini(N);\n  vvi g(N);\n  for (int i = 1; i < N; i++)\
-    \ {\n    ini(p);\n    g[p].push_back(i);\n  }\n  TreeHash th{g};\n  UnerasableHashMap<typename\
-    \ TreeHash<vvi>::Hash, int> mp;\n  int K = 0;\n  vi ans(N, -1);\n\n  rep(i, N)\
-    \ {\n    if (mp.count(th.hash[i]) == 0) {\n      mp[th.hash[i]] = ans[i] = K++;\n\
-    \    } else {\n      ans[i] = mp[th.hash[i]];\n    }\n  }\n  out(K);\n  rep(i,\
-    \ N) cout << ans[i] << \" \";\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n  //\
-    \ in(t);\n  while (t--) q();\n}\n"
+    \ _xs;\n    return _xs;\n  }\n\n  RootedTreeHash(const G& _g, int root = 0) :\
+    \ g(_g), n(g.size()) {\n    hash.resize(n);\n    depth.resize(n, 0);\n    while\
+    \ ((int)xs().size() <= n) xs().push_back(Hash::get_basis());\n    dfs(root, -1);\n\
+    \  }\n\n private:\n  int dfs(int c, int p) {\n    int dep = 0;\n    for (auto&\
+    \ d : g[c]) {\n      if (d != p) dep = max(dep, dfs(d, c) + 1);\n    }\n    Hash\
+    \ x = xs()[dep], h = Hash::set(1);\n    for (auto& d : g[c]) {\n      if (d !=\
+    \ p) h = h * (x + hash[d]);\n    }\n    hash[c] = h;\n    return depth[c] = dep;\n\
+    \  }\n};\n\n/**\n * @brief \u6839\u4ED8\u304D\u6728\u306E\u30CF\u30C3\u30B7\u30E5\
+    \n */\n#line 8 \"verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp\"\nusing\
+    \ namespace Nyaan;\n\nvoid q() {\n  ini(N);\n  vvi g(N);\n  for (int i = 1; i\
+    \ < N; i++) {\n    ini(p);\n    g[p].push_back(i);\n  }\n  RootedTreeHash th{g};\n\
+    \  UnerasableHashMap<typename RootedTreeHash<vvi>::Hash, int> mp;\n  int K = 0;\n\
+    \  vi ans(N, -1);\n\n  rep(i, N) {\n    if (mp.count(th.hash[i]) == 0) {\n   \
+    \   mp[th.hash[i]] = ans[i] = K++;\n    } else {\n      ans[i] = mp[th.hash[i]];\n\
+    \    }\n  }\n  out(K);\n  rep(i, N) cout << ans[i] << \" \";\n}\n\nvoid Nyaan::solve()\
+    \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/rooted_tree_isomorphism_classification\"\
     \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../hashmap/hashmap-unerasable.hpp\"\
-    \n//\n#include \"../../tree/tree-hash.hpp\"\nusing namespace Nyaan;\n\nvoid q()\
-    \ {\n  ini(N);\n  vvi g(N);\n  for (int i = 1; i < N; i++) {\n    ini(p);\n  \
-    \  g[p].push_back(i);\n  }\n  TreeHash th{g};\n  UnerasableHashMap<typename TreeHash<vvi>::Hash,\
-    \ int> mp;\n  int K = 0;\n  vi ans(N, -1);\n\n  rep(i, N) {\n    if (mp.count(th.hash[i])\
-    \ == 0) {\n      mp[th.hash[i]] = ans[i] = K++;\n    } else {\n      ans[i] =\
-    \ mp[th.hash[i]];\n    }\n  }\n  out(K);\n  rep(i, N) cout << ans[i] << \" \"\
-    ;\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n\
-    }\n"
+    \n//\n#include \"../../tree/rooted-tree-hash.hpp\"\nusing namespace Nyaan;\n\n\
+    void q() {\n  ini(N);\n  vvi g(N);\n  for (int i = 1; i < N; i++) {\n    ini(p);\n\
+    \    g[p].push_back(i);\n  }\n  RootedTreeHash th{g};\n  UnerasableHashMap<typename\
+    \ RootedTreeHash<vvi>::Hash, int> mp;\n  int K = 0;\n  vi ans(N, -1);\n\n  rep(i,\
+    \ N) {\n    if (mp.count(th.hash[i]) == 0) {\n      mp[th.hash[i]] = ans[i] =\
+    \ K++;\n    } else {\n      ans[i] = mp[th.hash[i]];\n    }\n  }\n  out(K);\n\
+    \  rep(i, N) cout << ans[i] << \" \";\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n\
+    \  // in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -426,12 +426,12 @@ data:
   - internal/internal-hash-function.hpp
   - internal/internal-seed.hpp
   - internal/internal-type-traits.hpp
-  - tree/tree-hash.hpp
+  - tree/rooted-tree-hash.hpp
   - internal/internal-hash.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
   requiredBy: []
-  timestamp: '2024-05-03 23:21:26+09:00'
+  timestamp: '2024-05-04 15:53:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp

@@ -90,12 +90,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/rerooting.hpp
     title: "Rerooting(\u5168\u65B9\u4F4D\u6728DP)"
+  - icon: ':warning:'
+    path: tree/static-top-tree-edge-based.hpp
+    title: tree/static-top-tree-edge-based.hpp
   - icon: ':heavy_check_mark:'
     path: tree/static-top-tree-vertex-based.hpp
     title: Static Top Tree
-  - icon: ':warning:'
-    path: tree/static-top-tree.hpp
-    title: tree/static-top-tree.hpp
   - icon: ':heavy_check_mark:'
     path: tree/tree-query.hpp
     title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
@@ -160,6 +160,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2171.test.cpp
     title: verify/verify-aoj-other/aoj-2171.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2821.test.cpp
+    title: verify/verify-aoj-other/aoj-2821.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2891-2.test.cpp
     title: verify/verify-aoj-other/aoj-2891-2.test.cpp
@@ -386,6 +389,7 @@ data:
   - shortest-path/restore-shortest-path.hpp
   - tree/cartesian-tree.hpp
   - tree/auxiliary-tree.hpp
+  - tree/static-top-tree-edge-based.hpp
   - tree/dynamic-diameter.hpp
   - tree/euler-tour.hpp
   - tree/tree-query.hpp
@@ -394,7 +398,6 @@ data:
   - tree/static-top-tree-vertex-based.hpp
   - tree/dsu-on-tree.hpp
   - tree/heavy-light-decomposition.hpp
-  - tree/static-top-tree.hpp
   - tree/block-cut-tree.hpp
   timestamp: '2024-05-03 23:21:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -404,6 +407,7 @@ data:
   - verify/verify-aoj-other/aoj-2891.test.cpp
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+  - verify/verify-aoj-other/aoj-2821.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-aoj-other/aoj-3506.test.cpp
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp

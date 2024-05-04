@@ -2,8 +2,14 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: internal/internal-hash.hpp
-    title: "\u30CF\u30C3\u30B7\u30E5\u69CB\u9020\u4F53"
+    path: modint/montgomery-modint.hpp
+    title: modint/montgomery-modint.hpp
+  - icon: ':heavy_check_mark:'
+    path: modulo/binomial-table.hpp
+    title: modulo/binomial-table.hpp
+  - icon: ':heavy_check_mark:'
+    path: modulo/binomial.hpp
+    title: modulo/binomial.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -22,9 +28,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
-  - icon: ':heavy_check_mark:'
-    path: tree/rooted-tree-hash.hpp
-    title: "\u6839\u4ED8\u304D\u6728\u306E\u30CF\u30C3\u30B7\u30E5"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -32,31 +35,30 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1613
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1613
-    - https://kimiyuki.net/writeups/algo-etc-icpc-2016-domestic-f/
-  bundledCode: "#line 1 \"verify/verify-aoj-other/aoj-1613.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1613\"\n\n#line\
-    \ 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
-    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
-    \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
-    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <deque>\n#include\
-    \ <fstream>\n#include <functional>\n#include <initializer_list>\n#include <iomanip>\n\
-    #include <ios>\n#include <iostream>\n#include <istream>\n#include <iterator>\n\
-    #include <limits>\n#include <list>\n#include <map>\n#include <memory>\n#include\
-    \ <new>\n#include <numeric>\n#include <ostream>\n#include <queue>\n#include <random>\n\
-    #include <set>\n#include <sstream>\n#include <stack>\n#include <streambuf>\n#include\
-    \ <string>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include\
-    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
-    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
-    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
-    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
-    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
-    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
-    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\ntemplate\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/binomial-table.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <cstdarg>\n#include\
+    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
+    \ <cstring>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
+    \ <initializer_list>\n#include <iomanip>\n#include <ios>\n#include <iostream>\n\
+    #include <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n\
+    #include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include\
+    \ <ostream>\n#include <queue>\n#include <random>\n#include <set>\n#include <sstream>\n\
+    #include <stack>\n#include <streambuf>\n#include <string>\n#include <tuple>\n\
+    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
+    \ <unordered_set>\n#include <utility>\n#include <vector>\n\n// utility\n#line\
+    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
+    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
+    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
+    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
+    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\ntemplate\
     \ <typename T>\nusing minpq = priority_queue<T, vector<T>, greater<T>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
@@ -222,126 +224,97 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-aoj-other/aoj-1613.test.cpp\"\n//\n#line 2 \"tree/rooted-tree-hash.hpp\"\
-    \n\n#line 7 \"tree/rooted-tree-hash.hpp\"\nusing namespace std;\n\n#line 2 \"\
-    internal/internal-hash.hpp\"\n\nnamespace internal {\nusing i64 = long long;\n\
-    using u64 = unsigned long long;\nusing u128 = __uint128_t;\n\ntemplate <int BASE_NUM\
-    \ = 2>\nstruct Hash : array<u64, BASE_NUM> {\n  using array<u64, BASE_NUM>::operator[];\n\
-    \  static constexpr int n = BASE_NUM;\n\n  Hash() : array<u64, BASE_NUM>() {}\n\
-    \n  static constexpr u64 md = (1ull << 61) - 1;\n\n  constexpr static Hash set(const\
-    \ i64 &a) {\n    Hash res;\n    fill(begin(res), end(res), cast(a));\n    return\
-    \ res;\n  }\n  Hash &operator+=(const Hash &r) {\n    for (int i = 0; i < n; i++)\n\
-    \      if (((*this)[i] += r[i]) >= md) (*this)[i] -= md;\n    return *this;\n\
-    \  }\n  Hash &operator+=(const i64 &r) {\n    u64 s = cast(r);\n    for (int i\
-    \ = 0; i < n; i++)\n      if (((*this)[i] += s) >= md) (*this)[i] -= md;\n   \
-    \ return *this;\n  }\n  Hash &operator-=(const Hash &r) {\n    for (int i = 0;\
-    \ i < n; i++)\n      if (((*this)[i] += md - r[i]) >= md) (*this)[i] -= md;\n\
-    \    return *this;\n  }\n  Hash &operator-=(const i64 &r) {\n    u64 s = cast(r);\n\
-    \    for (int i = 0; i < n; i++)\n      if (((*this)[i] += md - s) >= md) (*this)[i]\
-    \ -= md;\n    return *this;\n  }\n  Hash &operator*=(const Hash &r) {\n    for\
-    \ (int i = 0; i < n; i++) (*this)[i] = modmul((*this)[i], r[i]);\n    return *this;\n\
-    \  }\n  Hash &operator*=(const i64 &r) {\n    u64 s = cast(r);\n    for (int i\
-    \ = 0; i < n; i++) (*this)[i] = modmul((*this)[i], s);\n    return *this;\n  }\n\
-    \n  Hash operator+(const Hash &r) { return Hash(*this) += r; }\n  Hash operator+(const\
-    \ i64 &r) { return Hash(*this) += r; }\n  Hash operator-(const Hash &r) { return\
-    \ Hash(*this) -= r; }\n  Hash operator-(const i64 &r) { return Hash(*this) -=\
-    \ r; }\n  Hash operator*(const Hash &r) { return Hash(*this) *= r; }\n  Hash operator*(const\
-    \ i64 &r) { return Hash(*this) *= r; }\n  Hash operator-() const {\n    Hash res;\n\
-    \    for (int i = 0; i < n; i++) res[i] = (*this)[i] == 0 ? 0 : md - (*this)[i];\n\
-    \    return res;\n  }\n  friend Hash pfma(const Hash &a, const Hash &b, const\
-    \ Hash &c) {\n    Hash res;\n    for (int i = 0; i < n; i++) res[i] = modfma(a[i],\
-    \ b[i], c[i]);\n    return res;\n  }\n  friend Hash pfma(const Hash &a, const\
-    \ Hash &b, const i64 &c) {\n    Hash res;\n    u64 s = cast(c);\n    for (int\
-    \ i = 0; i < n; i++) res[i] = modfma(a[i], b[i], s);\n    return res;\n  }\n\n\
-    \  Hash pow(long long e) {\n    Hash a{*this}, res{Hash::set(1)};\n    for (;\
-    \ e; a *= a, e >>= 1) {\n      if (e & 1) res *= a;\n    }\n    return res;\n\
-    \  }\n\n  static Hash get_basis() {\n    static auto rand_time =\n        chrono::duration_cast<chrono::nanoseconds>(\n\
-    \            chrono::high_resolution_clock::now().time_since_epoch())\n      \
-    \      .count();\n    static mt19937_64 rng(rand_time);\n    Hash h;\n    for\
-    \ (int i = 0; i < n; i++) {\n      while (isPrimitive(h[i] = rng() % (md - 1)\
-    \ + 1) == false)\n        ;\n    }\n    return h;\n  }\n\n private:\n  static\
-    \ u64 modpow(u64 a, u64 b) {\n    u64 r = 1;\n    for (a %= md; b; a = modmul(a,\
-    \ a), b >>= 1) r = modmul(r, a);\n    return r;\n  }\n  static bool isPrimitive(u64\
-    \ x) {\n    for (auto &d : vector<u64>{2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331,\
-    \ 1321})\n      if (modpow(x, (md - 1) / d) <= 1) return false;\n    return true;\n\
-    \  }\n  static inline constexpr u64 cast(const long long &a) {\n    return a <\
-    \ 0 ? a + md : a;\n  }\n  static inline constexpr u64 modmul(const u64 &a, const\
-    \ u64 &b) { \n    u128 d = u128(a) * b;\n    u64 ret = (u64(d) & md) + u64(d >>\
-    \ 61);\n    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr\
-    \ u64 modfma(const u64 &a, const u64 &b, const u64 &c) {\n    u128 d = u128(a)\
-    \ * b + c;\n    u64 ret = (d >> 61) + (u64(d) & md);\n    return ret >= md ? ret\
-    \ - md : ret;\n  }\n};\n\n}  // namespace internal\n\n/**\n * @brief \u30CF\u30C3\
-    \u30B7\u30E5\u69CB\u9020\u4F53\n * @docs docs/internal/internal-hash.md\n */\n\
-    #line 10 \"tree/rooted-tree-hash.hpp\"\n\ntemplate <typename G>\nstruct RootedTreeHash\
-    \ {\n  using Hash = internal::Hash<1>;\n\n  const G& g;\n  int n;\n  vector<Hash>\
-    \ hash;\n  vector<int> depth;\n\n  static vector<Hash>& xs() {\n    static vector<Hash>\
-    \ _xs;\n    return _xs;\n  }\n\n  RootedTreeHash(const G& _g, int root = 0) :\
-    \ g(_g), n(g.size()) {\n    hash.resize(n);\n    depth.resize(n, 0);\n    while\
-    \ ((int)xs().size() <= n) xs().push_back(Hash::get_basis());\n    dfs(root, -1);\n\
-    \  }\n\n private:\n  int dfs(int c, int p) {\n    int dep = 0;\n    for (auto&\
-    \ d : g[c]) {\n      if (d != p) dep = max(dep, dfs(d, c) + 1);\n    }\n    Hash\
-    \ x = xs()[dep], h = Hash::set(1);\n    for (auto& d : g[c]) {\n      if (d !=\
-    \ p) h = h * (x + hash[d]);\n    }\n    hash[c] = h;\n    return depth[c] = dep;\n\
-    \  }\n};\n\n/**\n * @brief \u6839\u4ED8\u304D\u6728\u306E\u30CF\u30C3\u30B7\u30E5\
-    \n */\n#line 6 \"verify/verify-aoj-other/aoj-1613.test.cpp\"\n\nusing namespace\
-    \ Nyaan;\n\n// https://kimiyuki.net/writeups/algo-etc-icpc-2016-domestic-f/\n\n\
-    #define whole(f, x, ...) \\\n  ([&](decltype((x)) y) { return (f)(begin(y), end(y),\
-    \ ##__VA_ARGS__); })(x)\ntemplate <typename T, typename X>\nauto vectors(T a,\
-    \ X x) {\n  return vector<T>(x, a);\n}\ntemplate <typename T, typename X, typename\
-    \ Y, typename... Zs>\nauto vectors(T a, X x, Y y, Zs... zs) {\n  auto cont = vectors(a,\
-    \ y, zs...);\n  return vector<decltype(cont)>(x, cont);\n}\n\nconst int dy[] =\
-    \ {-1, 1, 0, 0, -1, 1, -1, 1};\nconst int dx[] = {0, 0, 1, -1, -1, 1, 1, -1};\n\
-    \nvector<vector<bool> > load_image() {\n  int h, w;\n  cin >> h >> w;\n  if (h\
-    \ == 0 and w == 0) return vector<vector<bool> >();\n  vector<vector<bool> > f\
-    \ = vectors(false, h + 2, w + 2);\n  rep(y, h) rep(x, w) {\n    char c;\n    cin\
-    \ >> c;\n    f[y + 1][x + 1] = c == '#';\n  }\n  return f;\n}\n\nvector<set<int>\
-    \ > make_tree(vector<vector<bool> > const& f) {\n  int h = f.size();\n  int w\
-    \ = f.front().size();\n  vector<vector<int> > k = vectors(-1, h, w);\n  vector<set<int>\
-    \ > g;\n  function<void(int, int, int)> dfs = [&](int y, int x, int cur_k) {\n\
-    \    k[y][x] = cur_k;\n    rep(i, f[y][x] ? 8 : 4) {\n      int ny = y + dy[i];\n\
-    \      int nx = x + dx[i];\n      if (ny < 0 or h <= ny or nx < 0 or w <= nx)\
-    \ continue;\n      if (f[ny][nx] == f[y][x]) {\n        if (k[ny][nx] == -1) {\n\
-    \          dfs(ny, nx, cur_k);\n        }\n      } else {\n        if (k[ny][nx]\
-    \ != -1) {\n          g[k[ny][nx]].insert(k[y][x]);\n        }\n      }\n    }\n\
-    \  };\n  rep(y, h) rep(x, w) if (k[y][x] == -1) {\n    g.emplace_back();\n   \
-    \ dfs(y, x, g.size() - 1);\n  }\n  return g;\n}\n\nusing Hash = typename RootedTreeHash<vvi>::Hash;\n\
-    \nHash tree_hash(vector<set<int> > f) {\n  vvi g(sz(f));\n  rep(i, sz(f)) {\n\
-    \    each(x, f[i]) {\n      g[i].push_back(x);\n      g[x].push_back(i);\n   \
-    \ }\n  }\n  RootedTreeHash hash(g);\n  return hash.hash[0];\n}\n\nvoid Nyaan::solve()\
-    \ {\n  while (true) {\n    auto g1 = load_image();\n    if (g1.empty()) exit(0);\n\
-    \    auto g2 = load_image();\n    auto t1 = make_tree(g1);\n    auto t2 = make_tree(g2);\n\
-    \    auto h1 = tree_hash(t1);\n    auto h2 = tree_hash(t2);\n    out(h1 == h2\
-    \ ? \"yes\" : \"no\");\n  }\n}\n"
-  code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1613\"\
-    \n\n#include \"../../template/template.hpp\"\n//\n#include \"../../tree/rooted-tree-hash.hpp\"\
-    \n\nusing namespace Nyaan;\n\n// https://kimiyuki.net/writeups/algo-etc-icpc-2016-domestic-f/\n\
-    \n#define whole(f, x, ...) \\\n  ([&](decltype((x)) y) { return (f)(begin(y),\
-    \ end(y), ##__VA_ARGS__); })(x)\ntemplate <typename T, typename X>\nauto vectors(T\
-    \ a, X x) {\n  return vector<T>(x, a);\n}\ntemplate <typename T, typename X, typename\
-    \ Y, typename... Zs>\nauto vectors(T a, X x, Y y, Zs... zs) {\n  auto cont = vectors(a,\
-    \ y, zs...);\n  return vector<decltype(cont)>(x, cont);\n}\n\nconst int dy[] =\
-    \ {-1, 1, 0, 0, -1, 1, -1, 1};\nconst int dx[] = {0, 0, 1, -1, -1, 1, 1, -1};\n\
-    \nvector<vector<bool> > load_image() {\n  int h, w;\n  cin >> h >> w;\n  if (h\
-    \ == 0 and w == 0) return vector<vector<bool> >();\n  vector<vector<bool> > f\
-    \ = vectors(false, h + 2, w + 2);\n  rep(y, h) rep(x, w) {\n    char c;\n    cin\
-    \ >> c;\n    f[y + 1][x + 1] = c == '#';\n  }\n  return f;\n}\n\nvector<set<int>\
-    \ > make_tree(vector<vector<bool> > const& f) {\n  int h = f.size();\n  int w\
-    \ = f.front().size();\n  vector<vector<int> > k = vectors(-1, h, w);\n  vector<set<int>\
-    \ > g;\n  function<void(int, int, int)> dfs = [&](int y, int x, int cur_k) {\n\
-    \    k[y][x] = cur_k;\n    rep(i, f[y][x] ? 8 : 4) {\n      int ny = y + dy[i];\n\
-    \      int nx = x + dx[i];\n      if (ny < 0 or h <= ny or nx < 0 or w <= nx)\
-    \ continue;\n      if (f[ny][nx] == f[y][x]) {\n        if (k[ny][nx] == -1) {\n\
-    \          dfs(ny, nx, cur_k);\n        }\n      } else {\n        if (k[ny][nx]\
-    \ != -1) {\n          g[k[ny][nx]].insert(k[y][x]);\n        }\n      }\n    }\n\
-    \  };\n  rep(y, h) rep(x, w) if (k[y][x] == -1) {\n    g.emplace_back();\n   \
-    \ dfs(y, x, g.size() - 1);\n  }\n  return g;\n}\n\nusing Hash = typename RootedTreeHash<vvi>::Hash;\n\
-    \nHash tree_hash(vector<set<int> > f) {\n  vvi g(sz(f));\n  rep(i, sz(f)) {\n\
-    \    each(x, f[i]) {\n      g[i].push_back(x);\n      g[x].push_back(i);\n   \
-    \ }\n  }\n  RootedTreeHash hash(g);\n  return hash.hash[0];\n}\n\nvoid Nyaan::solve()\
-    \ {\n  while (true) {\n    auto g1 = load_image();\n    if (g1.empty()) exit(0);\n\
-    \    auto g2 = load_image();\n    auto t1 = make_tree(g1);\n    auto t2 = make_tree(g2);\n\
-    \    auto h1 = tree_hash(t1);\n    auto h2 = tree_hash(t2);\n    out(h1 == h2\
-    \ ? \"yes\" : \"no\");\n  }\n}"
+    \ 4 \"verify/verify-unit-test/binomial-table.test.cpp\"\n//\n#line 2 \"modint/montgomery-modint.hpp\"\
+    \n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
+    \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
+    \  static constexpr u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i <\
+    \ 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32\
+    \ r = get_r();\n  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(mod\
+    \ < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"\
+    invalid, mod % 2 == 0\");\n  static_assert(r * mod == 1, \"this code has bugs.\"\
+    );\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
+    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
+    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
+    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
+    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
+    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
+    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
+    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
+    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
+    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
+    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
+    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
+    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
+    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
+    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
+    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
+    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
+    \ }\n  constexpr mint operator+() const { return mint(*this); }\n\n  constexpr\
+    \ mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n    while (n > 0) {\n\
+    \      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return\
+    \ ret;\n  }\n\n  constexpr mint inverse() const {\n    int x = get(), y = mod,\
+    \ u = 1, v = 0, t = 0, tmp = 0;\n    while (y > 0) {\n      t = x / y;\n     \
+    \ x -= t * y, u -= t * v;\n      tmp = x, x = y, y = tmp;\n      tmp = u, u =\
+    \ v, v = tmp;\n    }\n    return mint{u};\n  }\n\n  friend ostream &operator<<(ostream\
+    \ &os, const mint &b) {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream\
+    \ &is, mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
+    \    return (is);\n  }\n\n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
+    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
+    \ { return mod; }\n};\n#line 2 \"modulo/binomial-table.hpp\"\n\n#line 4 \"modulo/binomial-table.hpp\"\
+    \nusing namespace std;\n\ntemplate <typename mint>\nvector<vector<mint>> binomial_table(int\
+    \ n) {\n  n += 10;\n  vector dp(n, vector(n, mint{0}));\n  dp[0][0] = 1;\n  for\
+    \ (int i = 0; i + 1 < n; i++) {\n    for (int j = 0; j <= i; j++) {\n      dp[i\
+    \ + 1][j + 0] += dp[i][j];\n      dp[i + 1][j + 1] += dp[i][j];\n    }\n  }\n\
+    \  return dp;\n}\n#line 2 \"modulo/binomial.hpp\"\n\n#line 6 \"modulo/binomial.hpp\"\
+    \nusing namespace std;\n\n// \u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u306E\
+    \ MAX \u306B \u300CC(n, r) \u3084 fac(n) \u3067\u30AF\u30A8\u30EA\u3092\u6295\u3052\
+    \u308B\u6700\u5927\u306E n \u300D\n// \u3092\u5165\u308C\u308B\u3068\u500D\u901F\
+    \u304F\u3089\u3044\u306B\u306A\u308B\n// mod \u3092\u8D85\u3048\u3066\u524D\u8A08\
+    \u7B97\u3057\u3066 0 \u5272\u308A\u3092\u8E0F\u3080\u30D0\u30B0\u306F\u5BFE\u7B56\
+    \u6E08\u307F\ntemplate <typename T>\nstruct Binomial {\n  vector<T> f, g, h;\n\
+    \  Binomial(int MAX = 0) {\n    assert(T::get_mod() != 0 && \"Binomial<mint>()\"\
+    );\n    f.resize(1, T{1});\n    g.resize(1, T{1});\n    h.resize(1, T{1});\n \
+    \   if (MAX > 0) extend(MAX + 1);\n  }\n\n  void extend(int m = -1) {\n    int\
+    \ n = f.size();\n    if (m == -1) m = n * 2;\n    m = min<int>(m, T::get_mod());\n\
+    \    if (n >= m) return;\n    f.resize(m);\n    g.resize(m);\n    h.resize(m);\n\
+    \    for (int i = n; i < m; i++) f[i] = f[i - 1] * T(i);\n    g[m - 1] = f[m -\
+    \ 1].inverse();\n    h[m - 1] = g[m - 1] * f[m - 2];\n    for (int i = m - 2;\
+    \ i >= n; i--) {\n      g[i] = g[i + 1] * T(i + 1);\n      h[i] = g[i] * f[i -\
+    \ 1];\n    }\n  }\n\n  T fac(int i) {\n    if (i < 0) return T(0);\n    while\
+    \ (i >= (int)f.size()) extend();\n    return f[i];\n  }\n\n  T finv(int i) {\n\
+    \    if (i < 0) return T(0);\n    while (i >= (int)g.size()) extend();\n    return\
+    \ g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return -inv(-i);\n    while (i\
+    \ >= (int)h.size()) extend();\n    return h[i];\n  }\n\n  T C(int n, int r) {\n\
+    \    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r)\
+    \ * finv(r);\n  }\n\n  inline T operator()(int n, int r) { return C(n, r); }\n\
+    \n  template <typename I>\n  T multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
+    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
+    \ T(0);\n      n += x;\n    }\n    T res = fac(n);\n    for (auto& x : r) res\
+    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  T operator()(const\
+    \ vector<I>& r) {\n    return multinomial(r);\n  }\n\n  T C_naive(int n, int r)\
+    \ {\n    if (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r =\
+    \ min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n  \
+    \  return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0)\
+    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n\
+    \  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
+    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 8 \"verify/verify-unit-test/binomial-table.test.cpp\"\
+    \n//\nusing namespace Nyaan;\nusing mint = LazyMontgomeryModInt<998244353>;\n\
+    // using mint = LazyMontgomeryModInt<1000000007>;\nusing vm = vector<mint>;\n\
+    using vvm = vector<vm>;\nBinomial<mint> C;\n\nusing namespace Nyaan;\n\nvoid q()\
+    \ {\n  int N = 1000;\n  auto D = binomial_table<mint>(N);\n  rep(i, N) rep(j,\
+    \ N) assert(C(i, j) == D[i][j]);\n  trc2(\"OK\");\n\n  {\n    ini(a, b);\n   \
+    \ out(a + b);\n  }\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while\
+    \ (t--) q();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../modint/montgomery-modint.hpp\"\
+    \n#include \"../../modulo/binomial-table.hpp\"\n#include \"../../modulo/binomial.hpp\"\
+    \n//\nusing namespace Nyaan;\nusing mint = LazyMontgomeryModInt<998244353>;\n\
+    // using mint = LazyMontgomeryModInt<1000000007>;\nusing vm = vector<mint>;\n\
+    using vvm = vector<vm>;\nBinomial<mint> C;\n\nusing namespace Nyaan;\n\nvoid q()\
+    \ {\n  int N = 1000;\n  auto D = binomial_table<mint>(N);\n  rep(i, N) rep(j,\
+    \ N) assert(C(i, j) == D[i][j]);\n  trc2(\"OK\");\n\n  {\n    ini(a, b);\n   \
+    \ out(a + b);\n  }\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while\
+    \ (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -349,18 +322,19 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - tree/rooted-tree-hash.hpp
-  - internal/internal-hash.hpp
+  - modint/montgomery-modint.hpp
+  - modulo/binomial-table.hpp
+  - modulo/binomial.hpp
   isVerificationFile: true
-  path: verify/verify-aoj-other/aoj-1613.test.cpp
+  path: verify/verify-unit-test/binomial-table.test.cpp
   requiredBy: []
   timestamp: '2024-05-04 15:53:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-aoj-other/aoj-1613.test.cpp
+documentation_of: verify/verify-unit-test/binomial-table.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-aoj-other/aoj-1613.test.cpp
-- /verify/verify/verify-aoj-other/aoj-1613.test.cpp.html
-title: verify/verify-aoj-other/aoj-1613.test.cpp
+- /verify/verify/verify-unit-test/binomial-table.test.cpp
+- /verify/verify/verify-unit-test/binomial-table.test.cpp.html
+title: verify/verify-unit-test/binomial-table.test.cpp
 ---

@@ -97,6 +97,9 @@ data:
     path: verify/verify-unit-test/bigrational.test.cpp
     title: verify/verify-unit-test/bigrational.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/binomial-table.test.cpp
+    title: verify/verify-unit-test/binomial-table.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/composite-exp.test.cpp
     title: verify/verify-unit-test/composite-exp.test.cpp
   - icon: ':heavy_check_mark:'
@@ -803,6 +806,7 @@ data:
   - verify/verify-unit-test/mf.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/sum-of-mf.test.cpp
+  - verify/verify-unit-test/binomial-table.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
   - verify/verify-unit-test/fast-inv.test.cpp
   - verify/verify-unit-test/template.test.cpp

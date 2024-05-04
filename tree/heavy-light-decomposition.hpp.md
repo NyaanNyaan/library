@@ -14,12 +14,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/dynamic-diameter.hpp
     title: tree/dynamic-diameter.hpp
+  - icon: ':warning:'
+    path: tree/static-top-tree-edge-based.hpp
+    title: tree/static-top-tree-edge-based.hpp
   - icon: ':heavy_check_mark:'
     path: tree/static-top-tree-vertex-based.hpp
     title: Static Top Tree
-  - icon: ':warning:'
-    path: tree/static-top-tree.hpp
-    title: tree/static-top-tree.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
@@ -188,9 +188,9 @@ data:
   requiredBy:
   - graph/namori.hpp
   - tree/auxiliary-tree.hpp
+  - tree/static-top-tree-edge-based.hpp
   - tree/dynamic-diameter.hpp
   - tree/static-top-tree-vertex-based.hpp
-  - tree/static-top-tree.hpp
   timestamp: '2024-05-03 23:21:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

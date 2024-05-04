@@ -15,8 +15,11 @@ data:
     path: string/rolling-hash.hpp
     title: Rolling Hash
   - icon: ':heavy_check_mark:'
-    path: tree/tree-hash.hpp
+    path: tree/rooted-tree-hash.hpp
     title: "\u6839\u4ED8\u304D\u6728\u306E\u30CF\u30C3\u30B7\u30E5"
+  - icon: ':heavy_check_mark:'
+    path: tree/tree-hash.hpp
+    title: tree/tree-hash.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
@@ -24,6 +27,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-1613.test.cpp
     title: verify/verify-aoj-other/aoj-1613.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2821.test.cpp
+    title: verify/verify-aoj-other/aoj-2821.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/inner-hash.test.cpp
     title: verify/verify-unit-test/inner-hash.test.cpp
@@ -157,10 +163,12 @@ data:
   - string/rolling-hash-2d.hpp
   - string/rolling-hash-on-segment-tree.hpp
   - string/rolling-hash.hpp
+  - tree/rooted-tree-hash.hpp
   - tree/tree-hash.hpp
   timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-aoj-other/aoj-2821.test.cpp
   - verify/verify-aoj-other/aoj-1613.test.cpp
   - verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
   - verify/verify-unit-test/parallel-union-find.test.cpp

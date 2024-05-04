@@ -18,6 +18,9 @@ data:
     path: ntt/multivariate-circular-convolution.hpp
     title: "\u591A\u5909\u6570\u5DE1\u56DE\u7573\u307F\u8FBC\u307F"
   - icon: ':heavy_check_mark:'
+    path: ntt/ntt-64bit.hpp
+    title: ntt/ntt-64bit.hpp
+  - icon: ':heavy_check_mark:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
   - icon: ':heavy_check_mark:'
@@ -33,6 +36,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/internal-math.test.cpp
     title: verify/verify-unit-test/internal-math.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/ntt-64bit.test.cpp
+    title: verify/verify-unit-test/ntt-64bit.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/osak.test.cpp
     title: verify/verify-unit-test/osak.test.cpp
@@ -164,6 +170,7 @@ data:
   requiredBy:
   - math/primitive-root-ll.hpp
   - ntt/multivariate-circular-convolution.hpp
+  - ntt/ntt-64bit.hpp
   - prime/miller-rabin.hpp
   - prime/fast-factorize.hpp
   - modulo/mod-log.hpp
@@ -184,6 +191,7 @@ data:
   - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/internal-math.test.cpp
   - verify/verify-unit-test/primality-test.test.cpp
+  - verify/verify-unit-test/ntt-64bit.test.cpp
   - verify/verify-yuki/yuki-0002.test.cpp
   - verify/verify-yuki/yuki-0103.test.cpp
 documentation_of: internal/internal-math.hpp

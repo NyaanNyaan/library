@@ -247,6 +247,9 @@ data:
     path: verify/verify-aoj-other/aoj-2171.test.cpp
     title: verify/verify-aoj-other/aoj-2171.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2821.test.cpp
+    title: verify/verify-aoj-other/aoj-2821.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2891-2.test.cpp
     title: verify/verify-aoj-other/aoj-2891-2.test.cpp
   - icon: ':heavy_check_mark:'
@@ -300,6 +303,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigrational.test.cpp
     title: verify/verify-unit-test/bigrational.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/binomial-table.test.cpp
+    title: verify/verify-unit-test/binomial-table.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bitset-find-prev.test.cpp
     title: verify/verify-unit-test/bitset-find-prev.test.cpp
@@ -429,6 +435,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/nimber.test.cpp
     title: verify/verify-unit-test/nimber.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/ntt-64bit.test.cpp
+    title: verify/verify-unit-test/ntt-64bit.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/orderedmap.test.cpp
     title: verify/verify-unit-test/orderedmap.test.cpp
@@ -1605,6 +1614,7 @@ data:
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-aoj-other/aoj-0412.test.cpp
+  - verify/verify-aoj-other/aoj-2821.test.cpp
   - verify/verify-aoj-other/aoj-1377.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-aoj-other/aoj-3277.test.cpp
@@ -1776,6 +1786,7 @@ data:
   - verify/verify-unit-test/interval-union.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/sum-of-mf.test.cpp
+  - verify/verify-unit-test/binomial-table.test.cpp
   - verify/verify-unit-test/radix-sort.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
   - verify/verify-unit-test/fast-inv.test.cpp
@@ -1784,6 +1795,7 @@ data:
   - verify/verify-unit-test/fast-bs.test.cpp
   - verify/verify-unit-test/int-div.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
+  - verify/verify-unit-test/ntt-64bit.test.cpp
   - verify/verify-unit-test/bigint2.test.cpp
   - verify/verify-unit-test/math-fast.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp

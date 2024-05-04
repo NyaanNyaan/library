@@ -18,8 +18,8 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"tree/static-top-tree.hpp\"\n\n#include <cassert>\n#include\
-    \ <utility>\n#include <vector>\nusing namespace std;\n\n#line 2 \"tree/convert-tree.hpp\"\
+  bundledCode: "#line 2 \"tree/static-top-tree-edge-based.hpp\"\n\n#include <cassert>\n\
+    #include <utility>\n#include <vector>\nusing namespace std;\n\n#line 2 \"tree/convert-tree.hpp\"\
     \n\n#line 2 \"graph/graph-template.hpp\"\n\ntemplate <typename T>\nstruct edge\
     \ {\n  int src, to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to),\
     \ cost(_cost) {}\n  edge(int _src, int _to, T _cost) : src(_src), to(_to), cost(_cost)\
@@ -105,8 +105,8 @@ data:
     \ return depth[a] < depth[b] ? a : b;\n  }\n\n  int dist(int a, int b) { return\
     \ depth[a] + depth[b] - depth[lca(a, b)] * 2; }\n};\n\n/**\n * @brief Heavy Light\
     \ Decomposition(\u91CD\u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n\
-    \ */\n#line 10 \"tree/static-top-tree.hpp\"\n\nnamespace StaticTopTreeImpl {\n\
-    \nenum Type { Edge, Compress, Rake };\n\ntemplate <typename G>\nstruct StaticTopTree\
+    \ */\n#line 10 \"tree/static-top-tree-edge-based.hpp\"\n\nnamespace StaticTopTreeImpl\
+    \ {\n\nenum Type { Edge, Compress, Rake };\n\ntemplate <typename G>\nstruct StaticTopTree\
     \ {\n  const HeavyLightDecomposition<G>& hld;\n  vector<vector<int>> g;\n  int\
     \ root;     // \u5143\u306E\u6728\u306E root\n  int tt_root;  // top tree \u306E\
     \ root\n  vector<int> P, L, R;\n  vector<Type> T;\n\n  StaticTopTree(const HeavyLightDecomposition<G>&\
@@ -202,15 +202,15 @@ data:
   - graph/graph-template.hpp
   - tree/heavy-light-decomposition.hpp
   isVerificationFile: false
-  path: tree/static-top-tree.hpp
+  path: tree/static-top-tree-edge-based.hpp
   requiredBy: []
-  timestamp: '2024-05-03 23:21:26+09:00'
+  timestamp: '2024-05-04 15:53:37+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: tree/static-top-tree.hpp
+documentation_of: tree/static-top-tree-edge-based.hpp
 layout: document
 redirect_from:
-- /library/tree/static-top-tree.hpp
-- /library/tree/static-top-tree.hpp.html
-title: tree/static-top-tree.hpp
+- /library/tree/static-top-tree-edge-based.hpp
+- /library/tree/static-top-tree-edge-based.hpp.html
+title: tree/static-top-tree-edge-based.hpp
 ---

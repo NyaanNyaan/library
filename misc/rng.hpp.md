@@ -27,6 +27,9 @@ data:
     path: ntt/multivariate-circular-convolution.hpp
     title: "\u591A\u5909\u6570\u5DE1\u56DE\u7573\u307F\u8FBC\u307F"
   - icon: ':heavy_check_mark:'
+    path: ntt/ntt-64bit.hpp
+    title: ntt/ntt-64bit.hpp
+  - icon: ':heavy_check_mark:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
   - icon: ':heavy_check_mark:'
@@ -159,6 +162,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/nimber.test.cpp
     title: verify/verify-unit-test/nimber.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/ntt-64bit.test.cpp
+    title: verify/verify-unit-test/ntt-64bit.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/orderedmap.test.cpp
     title: verify/verify-unit-test/orderedmap.test.cpp
@@ -351,6 +357,7 @@ data:
   - matrix/black-box-linear-algebra.hpp
   - math/primitive-root-ll.hpp
   - ntt/multivariate-circular-convolution.hpp
+  - ntt/ntt-64bit.hpp
   - prime/fast-factorize.hpp
   - modulo/mod-kth-root.hpp
   - tree/pruefer-code.hpp
@@ -427,6 +434,7 @@ data:
   - verify/verify-unit-test/run-length-encoding.test.cpp
   - verify/verify-unit-test/fast-bs.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
+  - verify/verify-unit-test/ntt-64bit.test.cpp
   - verify/verify-unit-test/bigint2.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-unit-test/arbitrary-modint.test.cpp
