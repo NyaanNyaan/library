@@ -106,9 +106,9 @@ data:
   timestamp: '2024-05-04 00:10:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
   - verify/verify-yosupo-math/yosupo-matrix-product-mod-2.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
-  - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
 documentation_of: matrix/f2_matrix.hpp
 layout: document
 redirect_from:

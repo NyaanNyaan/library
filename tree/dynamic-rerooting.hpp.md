@@ -267,14 +267,14 @@ data:
   timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-0768.test.cpp
-  - verify/verify-yuki/yuki-1976.test.cpp
-  - verify/verify-yuki/yuki-1787.test.cpp
-  - verify/verify-yuki/yuki-2677.test.cpp
-  - verify/verify-yuki/yuki-2360.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a-dynamic-rerooting.test.cpp
-  - verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root-2.test.cpp
+  - verify/verify-yuki/yuki-2360.test.cpp
+  - verify/verify-yuki/yuki-0768.test.cpp
+  - verify/verify-yuki/yuki-2677.test.cpp
+  - verify/verify-yuki/yuki-1787.test.cpp
+  - verify/verify-yuki/yuki-1976.test.cpp
   - verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum.test.cpp
+  - verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root-2.test.cpp
 documentation_of: tree/dynamic-rerooting.hpp
 layout: document
 redirect_from:

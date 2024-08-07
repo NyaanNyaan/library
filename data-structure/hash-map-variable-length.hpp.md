@@ -100,8 +100,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
 documentation_of: data-structure/hash-map-variable-length.hpp
 layout: document
 redirect_from:

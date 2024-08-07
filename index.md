@@ -2417,6 +2417,12 @@ data:
       path: verify/verify-yuki/yuki-0361.test.cpp
       title: verify/verify-yuki/yuki-0361.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0430-2.test.cpp
+      title: verify/verify-yuki/yuki-0430-2.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0430.test.cpp
+      title: verify/verify-yuki/yuki-0430.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0502-base64.test.cpp
       title: verify/verify-yuki/yuki-0502-base64.test.cpp
     - icon: ':heavy_check_mark:'

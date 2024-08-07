@@ -350,105 +350,105 @@ data:
   isVerificationFile: false
   path: misc/rng.hpp
   requiredBy:
-  - marathon/multi-armed-bandit.hpp
-  - marathon/sa-manager.hpp
   - rbst/treap.hpp
-  - misc/all.hpp
-  - matrix/black-box-linear-algebra.hpp
-  - math/primitive-root-ll.hpp
-  - ntt/multivariate-circular-convolution.hpp
-  - ntt/ntt-64bit.hpp
-  - prime/fast-factorize.hpp
-  - modulo/mod-kth-root.hpp
   - tree/pruefer-code.hpp
+  - prime/fast-factorize.hpp
+  - ntt/ntt-64bit.hpp
+  - ntt/multivariate-circular-convolution.hpp
+  - math/primitive-root-ll.hpp
+  - modulo/mod-kth-root.hpp
+  - misc/all.hpp
+  - marathon/sa-manager.hpp
+  - marathon/multi-armed-bandit.hpp
+  - matrix/black-box-linear-algebra.hpp
   timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-other/aoj-1068.test.cpp
+  - verify/verify-yuki/yuki-1112.test.cpp
+  - verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - verify/verify-yuki/yuki-0002.test.cpp
+  - verify/verify-yuki/yuki-1775.test.cpp
+  - verify/verify-yuki/yuki-0952.test.cpp
+  - verify/verify-yuki/yuki-0103.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+  - verify/verify-aoj-other/aoj-1068.test.cpp
   - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp
-  - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
-  - verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
-  - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
-  - verify/verify-unit-test/enumerate-quotient.test.cpp
-  - verify/verify-unit-test/set-function.test.cpp
-  - verify/verify-unit-test/factorize.test.cpp
-  - verify/verify-unit-test/fast-inv-o1.test.cpp
+  - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
+  - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - verify/verify-unit-test/interval-union.test.cpp
   - verify/verify-unit-test/manacher.test.cpp
-  - verify/verify-unit-test/barrett-reduction.test.cpp
-  - verify/verify-unit-test/rbst-segment-tree.test.cpp
-  - verify/verify-unit-test/nimber.test.cpp
-  - verify/verify-unit-test/primitive-root.test.cpp
-  - verify/verify-unit-test/garner.test.cpp
-  - verify/verify-unit-test/parallel-union-find.test.cpp
-  - verify/verify-unit-test/fps-sparse.test.cpp
-  - verify/verify-unit-test/strassen.test.cpp
-  - verify/verify-unit-test/sa-manager.test.cpp
-  - verify/verify-unit-test/osak.test.cpp
-  - verify/verify-unit-test/garner-bigint.test.cpp
-  - verify/verify-unit-test/bigint3.test.cpp
-  - verify/verify-unit-test/composition.test.cpp
-  - verify/verify-unit-test/internal-math.test.cpp
-  - verify/verify-unit-test/li-chao-tree-abstruct.test.cpp
-  - verify/verify-unit-test/segment-tree-beats.test.cpp
-  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
-  - verify/verify-unit-test/math.test.cpp
-  - verify/verify-unit-test/semiring.test.cpp
-  - verify/verify-unit-test/lazyseg-setval-2.test.cpp
-  - verify/verify-unit-test/rerooting.test.cpp
-  - verify/verify-unit-test/sparse-table.test.cpp
-  - verify/verify-unit-test/complex-fft.test.cpp
   - verify/verify-unit-test/primality-test.test.cpp
-  - verify/verify-unit-test/dynamic-diameter.test.cpp
-  - verify/verify-unit-test/lazyseg-bsearch.test.cpp
+  - verify/verify-unit-test/bigint2.test.cpp
+  - verify/verify-unit-test/arbitrary-modint.test.cpp
+  - verify/verify-unit-test/factorize.test.cpp
+  - verify/verify-unit-test/parallel-union-find.test.cpp
+  - verify/verify-unit-test/fast-inv.test.cpp
+  - verify/verify-unit-test/math.test.cpp
+  - verify/verify-unit-test/strassen.test.cpp
+  - verify/verify-unit-test/lazyseg-setval.test.cpp
+  - verify/verify-unit-test/ntt-64bit.test.cpp
   - verify/verify-unit-test/multieval.test.cpp
-  - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
-  - verify/verify-unit-test/string-search.test.cpp
-  - verify/verify-unit-test/dijkstra.test.cpp
-  - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
-  - verify/verify-unit-test/karatsuba.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
-  - verify/verify-unit-test/fps.test.cpp
+  - verify/verify-unit-test/fast-inv-o1.test.cpp
   - verify/verify-unit-test/composite-exp.test.cpp
-  - verify/verify-unit-test/modint.test.cpp
+  - verify/verify-unit-test/barrett-reduction.test.cpp
+  - verify/verify-unit-test/fps.test.cpp
+  - verify/verify-unit-test/run-length-encoding.test.cpp
+  - verify/verify-unit-test/garner-bigint.test.cpp
+  - verify/verify-unit-test/dijkstra.test.cpp
+  - verify/verify-unit-test/garner.test.cpp
+  - verify/verify-unit-test/segment-set.test.cpp
+  - verify/verify-unit-test/lazyseg-bsearch.test.cpp
+  - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - verify/verify-unit-test/sparse-table.test.cpp
+  - verify/verify-unit-test/radix-sort.test.cpp
+  - verify/verify-unit-test/sa-manager.test.cpp
+  - verify/verify-unit-test/set-function.test.cpp
+  - verify/verify-unit-test/bigint-gcd.test.cpp
+  - verify/verify-unit-test/internal-type-traits.test.cpp
+  - verify/verify-unit-test/bigint.test.cpp
+  - verify/verify-unit-test/semiring.test.cpp
+  - verify/verify-unit-test/gauss-elimination.test.cpp
+  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-unit-test/segment-tree-beats.test.cpp
+  - verify/verify-unit-test/nimber.test.cpp
+  - verify/verify-unit-test/enumerate-quotient.test.cpp
+  - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
+  - verify/verify-unit-test/bigint3.test.cpp
+  - verify/verify-unit-test/li-chao-tree-abstruct.test.cpp
+  - verify/verify-unit-test/rbst-segment-tree.test.cpp
+  - verify/verify-unit-test/dynamic-diameter.test.cpp
+  - verify/verify-unit-test/rational-number.test.cpp
   - verify/verify-unit-test/fft2d.test.cpp
+  - verify/verify-unit-test/template.test.cpp
+  - verify/verify-unit-test/fps-sparse.test.cpp
+  - verify/verify-unit-test/rerooting.test.cpp
   - verify/verify-unit-test/rbst-sequence.test.cpp
   - verify/verify-unit-test/simulated-annealing.test.cpp
-  - verify/verify-unit-test/segment-set.test.cpp
-  - verify/verify-unit-test/relaxed-convolution.test.cpp
-  - verify/verify-unit-test/rational-number.test.cpp
+  - verify/verify-unit-test/string-search.test.cpp
+  - verify/verify-unit-test/internal-math.test.cpp
+  - verify/verify-unit-test/karatsuba.test.cpp
   - verify/verify-unit-test/bigrational.test.cpp
   - verify/verify-unit-test/orderedmap.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
-  - verify/verify-unit-test/interval-union.test.cpp
-  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
-  - verify/verify-unit-test/radix-sort.test.cpp
-  - verify/verify-unit-test/bigint.test.cpp
-  - verify/verify-unit-test/fast-inv.test.cpp
-  - verify/verify-unit-test/template.test.cpp
-  - verify/verify-unit-test/run-length-encoding.test.cpp
   - verify/verify-unit-test/fast-bs.test.cpp
+  - verify/verify-unit-test/primitive-root.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
-  - verify/verify-unit-test/ntt-64bit.test.cpp
-  - verify/verify-unit-test/bigint2.test.cpp
-  - verify/verify-unit-test/gauss-elimination.test.cpp
-  - verify/verify-unit-test/arbitrary-modint.test.cpp
-  - verify/verify-unit-test/bigint-gcd.test.cpp
-  - verify/verify-unit-test/internal-type-traits.test.cpp
-  - verify/verify-unit-test/lazyseg-setval.test.cpp
-  - verify/verify-yuki/yuki-0952.test.cpp
-  - verify/verify-yuki/yuki-0002.test.cpp
-  - verify/verify-yuki/yuki-1112-sparse.test.cpp
-  - verify/verify-yuki/yuki-1775.test.cpp
-  - verify/verify-yuki/yuki-0103.test.cpp
-  - verify/verify-yuki/yuki-1112.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+  - verify/verify-unit-test/relaxed-convolution.test.cpp
+  - verify/verify-unit-test/osak.test.cpp
+  - verify/verify-unit-test/complex-fft.test.cpp
+  - verify/verify-unit-test/lazyseg-setval-2.test.cpp
+  - verify/verify-unit-test/composition.test.cpp
+  - verify/verify-unit-test/modint.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
 documentation_of: misc/rng.hpp
 layout: document
 redirect_from:

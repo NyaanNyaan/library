@@ -384,9 +384,9 @@ data:
   timestamp: '2024-05-03 21:06:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/p-recursive.test.cpp
-  - verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
   - verify/verify-yuki/yuki-1533.test.cpp
+  - verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
+  - verify/verify-unit-test/p-recursive.test.cpp
 documentation_of: fps/find-p-recursive.hpp
 layout: document
 redirect_from:

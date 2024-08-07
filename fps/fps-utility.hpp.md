@@ -145,9 +145,9 @@ data:
   timestamp: '2023-08-31 20:44:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
-  - verify/verify-yosupo-fps/yosupo-product-of-polynomial-sequence.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
+  - verify/verify-yosupo-fps/yosupo-product-of-polynomial-sequence.test.cpp
+  - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
 documentation_of: fps/fps-utility.hpp
 layout: document
 redirect_from:

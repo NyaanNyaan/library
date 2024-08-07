@@ -74,8 +74,8 @@ data:
   timestamp: '2023-05-26 23:34:57+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-other/aoj-3506.test.cpp
   - verify/verify-yuki/yuki-1170-divide-interval.test.cpp
+  - verify/verify-aoj-other/aoj-3506.test.cpp
 documentation_of: data-structure/divide-interval.hpp
 layout: document
 redirect_from:

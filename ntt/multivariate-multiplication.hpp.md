@@ -62,8 +62,8 @@ data:
   timestamp: '2023-05-28 20:44:00+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
   - verify/verify-yuki/yuki-1783.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
 documentation_of: ntt/multivariate-multiplication.hpp
 layout: document
 redirect_from:

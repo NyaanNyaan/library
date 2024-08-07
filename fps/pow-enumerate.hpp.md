@@ -241,12 +241,12 @@ data:
   timestamp: '2024-03-28 20:36:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/composition.test.cpp
-  - verify/verify-yosupo-fps/yosupo-compositional-inverse-large.test.cpp
-  - verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
   - verify/verify-yuki/yuki-2661.test.cpp
   - verify/verify-yuki/yuki-1939-2.test.cpp
   - verify/verify-yuki/yuki-1939.test.cpp
+  - verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
+  - verify/verify-yosupo-fps/yosupo-compositional-inverse-large.test.cpp
+  - verify/verify-unit-test/composition.test.cpp
 documentation_of: fps/pow-enumerate.hpp
 layout: document
 redirect_from:

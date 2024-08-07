@@ -90,8 +90,8 @@ data:
   verifiedWith:
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
   - verify/verify-unit-test/lazyseg-setval-2.test.cpp
-  - verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-affine-point-get.test.cpp
+  - verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-set-range-composite.test.cpp
 documentation_of: segment-tree/lazy-segment-tree.hpp
 layout: document

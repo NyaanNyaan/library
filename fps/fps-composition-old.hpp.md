@@ -195,9 +195,9 @@ data:
   timestamp: '2024-03-23 07:13:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/composition.test.cpp
-  - verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition.test.cpp
+  - verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
+  - verify/verify-unit-test/composition.test.cpp
 documentation_of: fps/fps-composition-old.hpp
 layout: document
 redirect_from:
