@@ -2,7 +2,7 @@
 
 #include "trie.hpp"
 
-template <size_t X = 26, char margin = 'a'>
+template <size_t X = 26, char margin = 'a', bool heavy = false>
 struct AhoCorasick : Trie<X + 1, margin> {
   using TRIE = Trie<X + 1, margin>;
   using TRIE::next;
@@ -10,7 +10,7 @@ struct AhoCorasick : Trie<X + 1, margin> {
   using TRIE::TRIE;
   vector<int> cnt;
 
-  void build(int heavy = true) {
+  void build() {
     int n = st.size();
     cnt.resize(n);
     for (int i = 0; i < n; i++) {
@@ -55,15 +55,24 @@ struct AhoCorasick : Trie<X + 1, margin> {
     }
   }
 
-  vector<int> match(string s, int heavy = true) {
-    vector<int> res(heavy ? TRIE::size() : 1);
+  // heavy
+  // true  : 各パターン文字列に対してマッチした回数を計算
+  // false : 全てのパターン文字列にマッチした回数の総和
+  conditional_t<heavy, unordered_map<int, long long>, long long> match(
+      string s) {
+    unordered_map<int, int> pos_cnt;
     int pos = 0;
     for (auto &c : s) {
       pos = next(pos, c - margin);
-      if (heavy)
-        for (auto &x : st[pos].idxs) res[x]++;
-      else
-        res[0] += cnt[pos];
+      pos_cnt[pos]++;
+    }
+    conditional_t<heavy, unordered_map<int, long long>, long long> res{};
+    for (auto &[key, val] : pos_cnt) {
+      if constexpr (heavy) {
+        for (auto &x : st[key].idxs) res[x] += val;
+      } else {
+        res += 1LL * cnt[key] * val;
+      }
     }
     return res;
   }
