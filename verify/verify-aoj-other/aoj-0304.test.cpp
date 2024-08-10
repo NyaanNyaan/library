@@ -6,15 +6,13 @@
 
 using namespace Nyaan;
 
-void Nyaan::solve() {
-  ini(n, c);
-
+string calc(int n, int c, vector<string> S) {
   using T = tuple<ll, string, ll, string, ll>;
   vector<T> cons;
   vector<int> undef;
 
   rep(_, c) {
-    ins(s);
+    string& s = S[_];
     ll a = 0, b = 0, d = 0;
     string o, e;
 
@@ -53,16 +51,36 @@ void Nyaan::solve() {
         }
       }
     }
-    auto d = g.solve();
 
+    auto d = g.solve(0);
     if (sz(d)) {
       if (*min_element(all(d)) < 0) continue;
       amax(ans, *max_element(all(d)));
     }
   }
 
-  if (ans > 1e18)
-    out("inf");
-  else
-    out(ans);
+  if (ans > 1e18) {
+    return "inf";
+  } else {
+    return to_string(ans);
+  }
+}
+
+void Nyaan::solve() {
+  {
+    // https://tokoharuland.hateblo.jp/entry/2016/12/01/215953
+    int n = 5, c = 4;
+    vector<string> S{
+        "1<=2-2",
+        "4>=3-2",
+        "5>=4-1",
+        "5>=3+4",
+    };
+    assert(calc(n, c, S) == "-1"s);
+  }
+
+  ini(n, c);
+  V<string> S(c);
+  in(S);
+  out(calc(n, c, S));
 }
