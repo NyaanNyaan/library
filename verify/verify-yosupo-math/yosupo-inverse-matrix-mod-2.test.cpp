@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/matrix_det_mod_2"
+#define PROBLEM "https://judge.yosupo.jp/problem/inverse_matrix_mod_2"
 //
 #include "../../template/template.hpp"
 //
@@ -12,8 +12,12 @@ void q() {
     ins(S);
     m[i] = bitset<4096>{Rev(S)};
   }
-  int d = m.determinant();
-  out(d);
+  auto [f, ans] = m.inverse();
+  if (!f) {
+    out(-1);
+  } else {
+    rep(i, N) cout << Rev(ans[i].to_string()).substr(0, N) << "\n";
+  }
 }
 
 void Nyaan::solve() {

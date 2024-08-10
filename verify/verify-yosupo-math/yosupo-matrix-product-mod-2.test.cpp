@@ -2,7 +2,7 @@
 //
 #include "../../template/template.hpp"
 //
-#include "../../matrix/f2_matrix.hpp"
+#include "../../matrix/f2-matrix.hpp"
 using namespace Nyaan;
 
 void q() {

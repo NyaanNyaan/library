@@ -4,7 +4,7 @@
 //
 using namespace Nyaan;
 
-#include "../../matrix/f2_matrix.hpp"
+#include "../../matrix/f2-matrix.hpp"
 
 using M = F2_Matrix<100, 128>;
 

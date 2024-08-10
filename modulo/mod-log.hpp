@@ -3,6 +3,7 @@
 #include "../hashmap/hashmap.hpp"
 #include "../internal/internal-math.hpp"
 
+// a^x = b (mod p) である最小の非負整数 x を返す
 int64_t mod_log(int64_t a, int64_t b, int64_t p) {
   if ((a %= p) < 0) a += p;
   if ((b %= p) < 0) b += p;
