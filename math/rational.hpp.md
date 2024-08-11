@@ -130,7 +130,7 @@ data:
     \    T a = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n\
     \      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return U((u\
     \ % mod + mod) % mod) * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long\
-    \ long, __int128_t>;\n"
+    \ long, __int128_t>;\nusing Fraction = Rational;\n"
   code: "#pragma once\n\n#include <cassert>\n#include <numeric>\n#include <vector>\n\
     using namespace std;\n\n#include \"../internal/internal-type-traits.hpp\"\n#include\
     \ \"../math-fast/gcd.hpp\"\n\n// T : \u5024, U : \u6BD4\u8F03\u7528\ntemplate\
@@ -174,7 +174,8 @@ data:
     \n  T to_mint(T mod) const {\n    assert(mod != 0);\n    T a = y, b = mod, u =\
     \ 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b,\
     \ b);\n      swap(u -= t * v, v);\n    }\n    return U((u % mod + mod) % mod)\
-    \ * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long long, __int128_t>;\n"
+    \ * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long long, __int128_t>;\n\
+    using Fraction = Rational;\n"
   dependsOn:
   - internal/internal-type-traits.hpp
   - math-fast/gcd.hpp
@@ -185,7 +186,7 @@ data:
   - math/bigint-all.hpp
   - math/bigint-rational.hpp
   - math/rational-fps.hpp
-  timestamp: '2023-12-18 23:52:12+09:00'
+  timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-2262.test.cpp

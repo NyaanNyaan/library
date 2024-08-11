@@ -33,6 +33,9 @@ data:
     path: math/bigint-rational.hpp
     title: math/bigint-rational.hpp
   - icon: ':heavy_check_mark:'
+    path: math/bigint-to-hex.hpp
+    title: math/bigint-to-hex.hpp
+  - icon: ':heavy_check_mark:'
     path: math/bigint.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
@@ -343,6 +346,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
     title: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
+    title: verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
     title: verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
   - icon: ':heavy_check_mark:'
@@ -539,6 +545,7 @@ data:
   - math/bigint-garner.hpp
   - math/bigint.hpp
   - math/rational.hpp
+  - math/bigint-to-hex.hpp
   - math/bigint-gcd.hpp
   - modulo/mod-kth-root.hpp
   - modulo/mod-log.hpp
@@ -594,6 +601,7 @@ data:
   - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
   - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
   - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
+  - verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
   - verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
   - verify/verify-yosupo-math/yosupo-primality-test-u64.test.cpp

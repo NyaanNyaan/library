@@ -148,6 +148,9 @@ data:
     path: verify/verify-unit-test/math.test.cpp
     title: verify/verify-unit-test/math.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/modint-2-61m1.test.cpp
+    title: verify/verify-unit-test/modint-2-61m1.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/modint.test.cpp
     title: verify/verify-unit-test/modint.test.cpp
   - icon: ':heavy_check_mark:'
@@ -417,6 +420,7 @@ data:
   - verify/verify-unit-test/semiring.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-unit-test/modint-2-61m1.test.cpp
   - verify/verify-unit-test/segment-tree-beats.test.cpp
   - verify/verify-unit-test/nimber.test.cpp
   - verify/verify-unit-test/enumerate-quotient.test.cpp

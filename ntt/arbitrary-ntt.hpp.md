@@ -15,6 +15,9 @@ data:
     path: math/bigint-all.hpp
     title: math/bigint-all.hpp
   - icon: ':heavy_check_mark:'
+    path: math/bigint-binary.hpp
+    title: math/bigint-binary.hpp
+  - icon: ':heavy_check_mark:'
     path: math/bigint-garner.hpp
     title: Garner's algorithm for bigint
   - icon: ':heavy_check_mark:'
@@ -23,6 +26,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/bigint-rational.hpp
     title: math/bigint-rational.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/bigint-to-hex.hpp
+    title: math/bigint-to-hex.hpp
   - icon: ':heavy_check_mark:'
     path: math/bigint.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
@@ -103,11 +109,20 @@ data:
     path: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
     title: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp
+    title: verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
     title: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
+    title: verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
     title: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-multiplication-of-hex.test.cpp
+    title: verify/verify-yosupo-math/yosupo-multiplication-of-hex.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
@@ -374,9 +389,11 @@ data:
   - ntt/chirp-z.hpp
   - ntt/multivariate-circular-convolution.hpp
   - math/bigint-all.hpp
+  - math/bigint-binary.hpp
   - math/bigint-rational.hpp
   - math/bigint-garner.hpp
   - math/bigint.hpp
+  - math/bigint-to-hex.hpp
   - math/bigint-gcd.hpp
   - fps/arbitrary-fps.hpp
   timestamp: '2023-05-29 20:50:32+09:00'
@@ -407,8 +424,11 @@ data:
   - verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
   - verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
+  - verify/verify-yosupo-math/yosupo-multiplication-of-hex.test.cpp
   - verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
+  - verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
   - verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
+  - verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-log-arb.test.cpp

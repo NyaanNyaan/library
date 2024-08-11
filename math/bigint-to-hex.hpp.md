@@ -5,17 +5,8 @@ data:
     path: internal/internal-type-traits.hpp
     title: internal/internal-type-traits.hpp
   - icon: ':heavy_check_mark:'
-    path: math-fast/gcd.hpp
-    title: binary GCD
-  - icon: ':heavy_check_mark:'
-    path: math/bigint-gcd.hpp
-    title: math/bigint-gcd.hpp
-  - icon: ':heavy_check_mark:'
     path: math/bigint.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':heavy_check_mark:'
-    path: math/rational.hpp
-    title: math/rational.hpp
   - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
@@ -25,50 +16,31 @@ data:
   - icon: ':heavy_check_mark:'
     path: ntt/ntt.hpp
     title: ntt/ntt.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: math/bigint-all.hpp
-    title: math/bigint-all.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
-    title: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+    path: verify/verify-unit-test/bigint-gcd.test.cpp
+    title: verify/verify-unit-test/bigint-gcd.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/bigrational.test.cpp
-    title: verify/verify-unit-test/bigrational.test.cpp
+    path: verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
+    title: verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"math/bigint-rational.hpp\"\n\n#line 2 \"math/bigint-gcd.hpp\"\
-    \n\n#include <numeric>\nusing namespace std;\n\n#line 2 \"math-fast/gcd.hpp\"\n\
-    \n#include <algorithm>\nusing namespace std;\n\nnamespace BinaryGCDImpl {\nusing\
-    \ u64 = unsigned long long;\nusing i8 = char;\n\nu64 binary_gcd(u64 a, u64 b)\
-    \ {\n  if (a == 0 || b == 0) return a + b;\n  i8 n = __builtin_ctzll(a);\n  i8\
-    \ m = __builtin_ctzll(b);\n  a >>= n;\n  b >>= m;\n  n = min(n, m);\n  while (a\
-    \ != b) {\n    u64 d = a - b;\n    i8 s = __builtin_ctzll(d);\n    bool f = a\
-    \ > b;\n    b = f ? b : a;\n    a = (f ? d : -d) >> s;\n  }\n  return a << n;\n\
-    }\n\nusing u128 = __uint128_t;\n// a > 0\nint ctz128(u128 a) {\n  u64 lo = a &\
-    \ u64(-1);\n  return lo ? __builtin_ctzll(lo) : 64 + __builtin_ctzll(a >> 64);\n\
-    }\nu128 binary_gcd128(u128 a, u128 b) {\n  if (a == 0 || b == 0) return a + b;\n\
-    \  i8 n = ctz128(a);\n  i8 m = ctz128(b);\n  a >>= n;\n  b >>= m;\n  n = min(n,\
-    \ m);\n  while (a != b) {\n    u128 d = a - b;\n    i8 s = ctz128(d);\n    bool\
-    \ f = a > b;\n    b = f ? b : a;\n    a = (f ? d : -d) >> s;\n  }\n  return a\
-    \ << n;\n}\n\n}  // namespace BinaryGCDImpl\n\nlong long binary_gcd(long long\
-    \ a, long long b) {\n  return BinaryGCDImpl::binary_gcd(abs(a), abs(b));\n}\n\
-    __int128_t binary_gcd128(__int128_t a, __int128_t b) {\n  if (a < 0) a = -a;\n\
-    \  if (b < 0) b = -b;\n  return BinaryGCDImpl::binary_gcd128(a, b);\n}\n\n/**\n\
-    \ * @brief binary GCD\n */\n#line 2 \"math/bigint.hpp\"\n\n#line 4 \"math/bigint.hpp\"\
-    \n#include <cassert>\n#include <cmath>\n#include <iostream>\n#include <tuple>\n\
-    #include <utility>\n#include <vector>\nusing namespace std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\
-    \n\n#include <type_traits>\nusing namespace std;\n\nnamespace internal {\ntemplate\
-    \ <typename T>\nusing is_broadly_integral =\n    typename conditional_t<is_integral_v<T>\
-    \ || is_same_v<T, __int128_t> ||\n                               is_same_v<T,\
-    \ __uint128_t>,\n                           true_type, false_type>::type;\n\n\
-    template <typename T>\nusing is_broadly_signed =\n    typename conditional_t<is_signed_v<T>\
-    \ || is_same_v<T, __int128_t>,\n                           true_type, false_type>::type;\n\
-    \ntemplate <typename T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
+  bundledCode: "#line 2 \"math/bigint-to-hex.hpp\"\n\n#include <map>\n#include <string>\n\
+    #include <vector>\nusing namespace std;\n\n#line 2 \"math/bigint.hpp\"\n\n#include\
+    \ <algorithm>\n#include <cassert>\n#include <cmath>\n#include <iostream>\n#include\
+    \ <tuple>\n#include <utility>\n#line 10 \"math/bigint.hpp\"\nusing namespace std;\n\
+    \n#line 2 \"internal/internal-type-traits.hpp\"\n\n#include <type_traits>\nusing\
+    \ namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
+    \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
+    \                               is_same_v<T, __uint128_t>,\n                 \
+    \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
+    \ =\n    typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n\
+    \                           true_type, false_type>::type;\n\ntemplate <typename\
+    \ T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
     \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
     \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
     \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
@@ -440,117 +412,63 @@ data:
     \ s << \" : \";\n    cerr << \"{ \";\n    for (int i = 0; i < (int)a.size(); i++)\
     \ cerr << a[i] << \", \";\n    cerr << \"}\" << endl;\n  }\n};\n\nusing bigint\
     \ = MultiPrecisionInteger;\n\n/**\n * @brief \u591A\u500D\u9577\u6574\u6570\n\
-    \ */\n#line 8 \"math/bigint-gcd.hpp\"\n\nnamespace GCDforBigintImpl {\n\nbigint\
-    \ bigint_pow(bigint a, long long k) {\n  if (k == 0) return 1;\n  bigint half\
-    \ = bigint_pow(a, k / 2);\n  bigint res = half * half;\n  return k % 2 ? res *\
-    \ a : res;\n}\n\n// a = 2^x 5^y \u306E\u5F62\u3067\u8868\u73FE\u3059\u308B\npair<int,\
-    \ int> shrink(int a) {\n  assert(a > 0);\n  int x = __builtin_ctz(a);\n  a >>=\
-    \ x;\n  int y = a == 1        ? 0\n          : a == 5      ? 1\n          : a\
-    \ == 25     ? 2\n          : a == 125    ? 3\n          : a == 625    ? 4\n  \
-    \        : a == 3125   ? 5\n          : a == 15625  ? 6\n          : a == 78125\
-    \  ? 7\n          : a == 390625 ? 8\n                        : 9;\n  return {x,\
-    \ y};\n}\n\npair<int, int> shrink(bigint& a) {\n  assert(a.neg == false);\n  if\
-    \ (a.dat.empty()) return {0, 0};\n  pair<int, int> res{0, 0};\n  while (true)\
-    \ {\n    int g = gcd(bigint::D, a.dat[0]);\n    if (g == 1) break;\n    if (g\
-    \ != bigint::D) a *= bigint::D / g;\n    a.dat.erase(begin(a.dat));\n    auto\
-    \ s = shrink(g);\n    res.first += s.first, res.second += s.second;\n  }\n  return\
-    \ res;\n}\n\ntemplate <bool FAST = false>\nbigint gcd_d_ary(bigint a, bigint b)\
-    \ {\n  a.neg = b.neg = false;\n  if constexpr (FAST) {\n    if (max<int>(a.dat.size(),\
-    \ b.dat.size()) <= 4) {\n      return __int128_t(BinaryGCDImpl::binary_gcd128(a.to_i128(),\
-    \ b.to_i128()));\n    }\n  }\n  if (a.dat.empty()) return b;\n  if (b.dat.empty())\
-    \ return a;\n  pair<int, int> s = shrink(a), t = shrink(b);\n  if (a < b) swap(a,\
-    \ b);\n  while (true) {\n    if (b.dat.empty()) break;\n    if constexpr (FAST)\
-    \ {\n      if ((int)a.dat.size() <= 4) break;\n    }\n    a = a - b;\n    if (!a.dat.empty())\
-    \ {\n      while ((a.dat[0] & 1) == 0) {\n        int m = a.dat[0] ? __builtin_ctz(a.dat[0])\
-    \ : 32;\n        m = min(m, bigint::logD);\n        int mask = (1 << m) - 1, prod\
-    \ = bigint::D >> m;\n        a.dat[0] >>= m;\n        for (int i = 1; i < (int)a.dat.size();\
-    \ i++) {\n          a.dat[i - 1] += prod * (a.dat[i] & mask);\n          a.dat[i]\
-    \ >>= m;\n        }\n        if (a.dat.back() == 0) a.dat.pop_back();\n      }\n\
-    \    }\n    if (a < b) swap(a, b);\n  }\n  assert(a >= b);\n  bigint g;\n  if\
-    \ constexpr (FAST) {\n    if (b.dat.empty()) {\n      g = a;\n    } else {\n \
-    \     g = __int128_t(BinaryGCDImpl::binary_gcd128(a.to_i128(), b.to_i128()));\n\
-    \    }\n  } else {\n    g = a;\n  }\n  int e2 = min(s.first, t.first);\n  int\
-    \ e5 = min(s.second, t.second);\n  if (e2) g *= bigint_pow(bigint{2}, e2);\n \
-    \ if (e5) g *= bigint_pow(bigint{5}, e5);\n  return g;\n}\n}  // namespace GCDforBigintImpl\n\
-    \nMultiPrecisionInteger gcd(const MultiPrecisionInteger& a,\n                \
-    \          const MultiPrecisionInteger& b) {\n  return GCDforBigintImpl::gcd_d_ary<true>(a,\
-    \ b);\n}\n\nMultiPrecisionInteger lcm(const MultiPrecisionInteger& a,\n      \
-    \                    const MultiPrecisionInteger& b) {\n  return a / gcd(a, b)\
-    \ * b;\n}\n#line 2 \"math/rational.hpp\"\n\n#line 6 \"math/rational.hpp\"\nusing\
-    \ namespace std;\n\n#line 10 \"math/rational.hpp\"\n\n// T : \u5024, U : \u6BD4\
-    \u8F03\u7528\ntemplate <typename T, typename U>\nstruct RationalBase {\n  using\
-    \ R = RationalBase;\n  using Key = T;\n  T x, y;\n  RationalBase() : x(0), y(1)\
-    \ {}\n  template <typename T1>\n  RationalBase(const T1& _x) : RationalBase<T,\
-    \ U>(_x, T1{1}) {}\n  template <typename T1, typename T2>\n  RationalBase(const\
-    \ pair<T1, T2>& _p)\n      : RationalBase<T, U>(_p.first, _p.second) {}\n  template\
-    \ <typename T1, typename T2>\n  RationalBase(const T1& _x, const T2& _y) : x(_x),\
-    \ y(_y) {\n    assert(y != 0);\n    if (y == -1) x = -x, y = -y;\n    if (y !=\
-    \ 1) {\n      T g;\n      if constexpr (internal::is_broadly_integral_v<T>) {\n\
-    \        if constexpr (sizeof(T) == 16) {\n          g = binary_gcd128(x, y);\n\
-    \        } else {\n          g = binary_gcd(x, y);\n        }\n      } else {\n\
-    \        g = gcd(x, y);\n      }\n      if (g != 0) x /= g, y /= g;\n      if\
-    \ (y < 0) x = -x, y = -y;\n    }\n  }\n  // y = 0 \u306E\u4EE3\u5165\u3082\u8A8D\
-    \u3081\u308B\n  static R raw(T _x, T _y) {\n    R r;\n    r.x = _x, r.y = _y;\n\
-    \    return r;\n  }\n  friend R operator+(const R& l, const R& r) {\n    if (l.y\
-    \ == r.y) return R{l.x + r.x, l.y};\n    return R{l.x * r.y + l.y * r.x, l.y *\
-    \ r.y};\n  }\n  friend R operator-(const R& l, const R& r) {\n    if (l.y == r.y)\
-    \ return R{l.x - r.x, l.y};\n    return R{l.x * r.y - l.y * r.x, l.y * r.y};\n\
-    \  }\n  friend R operator*(const R& l, const R& r) { return R{l.x * r.x, l.y *\
-    \ r.y}; }\n  friend R operator/(const R& l, const R& r) { return R{l.x * r.y,\
-    \ l.y * r.x}; }\n  R& operator+=(const R& r) { return (*this) = (*this) + r; }\n\
-    \  R& operator-=(const R& r) { return (*this) = (*this) - r; }\n  R& operator*=(const\
-    \ R& r) { return (*this) = (*this) * r; }\n  R& operator/=(const R& r) { return\
-    \ (*this) = (*this) / r; }\n  R operator-() const { return raw(-x, y); }\n  R\
-    \ inverse() const {\n    assert(x != 0);\n    R r = raw(y, x);\n    if (r.y <\
-    \ 0) r.x = -r.x, r.y = -r.y;\n    return r;\n  }\n  R pow(long long p) const {\n\
-    \    R res{1}, base{*this};\n    while (p) {\n      if (p & 1) res *= base;\n\
-    \      base *= base;\n      p >>= 1;\n    }\n    return res;\n  }\n  friend bool\
-    \ operator==(const R& l, const R& r) {\n    return l.x == r.x && l.y == r.y;\n\
-    \  };\n  friend bool operator!=(const R& l, const R& r) {\n    return l.x != r.x\
-    \ || l.y != r.y;\n  };\n  friend bool operator<(const R& l, const R& r) {\n  \
-    \  return U{l.x} * r.y < U{l.y} * r.x;\n  };\n  friend bool operator<=(const R&\
-    \ l, const R& r) { return l < r || l == r; }\n  friend bool operator>(const R&\
-    \ l, const R& r) {\n    return U{l.x} * r.y > U{l.y} * r.x;\n  };\n  friend bool\
-    \ operator>=(const R& l, const R& r) { return l > r || l == r; }\n  friend ostream&\
-    \ operator<<(ostream& os, const R& r) {\n    os << r.x;\n    if (r.x != 0 && r.y\
-    \ != 1) os << \"/\" << r.y;\n    return os;\n  }\n\n  // T \u306B\u30AD\u30E3\u30B9\
-    \u30C8\u3055\u308C\u308B\u306E\u3067 T \u304C bigint \u306E\u5834\u5408\u306F\
-    \ to_ll \u3082\u8981\u308B\n  T to_mint(T mod) const {\n    assert(mod != 0);\n\
-    \    T a = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n\
-    \      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return U((u\
-    \ % mod + mod) % mod) * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long\
-    \ long, __int128_t>;\nusing Fraction = Rational;\n#line 5 \"math/bigint-rational.hpp\"\
-    \n\nusing BigRational = RationalBase<bigint, bigint>;\n\ndouble to_double(const\
-    \ BigRational& r) {\n  pair<long double, int> a = r.x.dfp();\n  pair<long double,\
-    \ int> b = r.y.dfp();\n  return a.first / b.first * powl(10.0, a.second - b.second);\n\
-    }\n"
-  code: "#pragma once\n\n#include \"bigint-gcd.hpp\"\n#include \"rational.hpp\"\n\n\
-    using BigRational = RationalBase<bigint, bigint>;\n\ndouble to_double(const BigRational&\
-    \ r) {\n  pair<long double, int> a = r.x.dfp();\n  pair<long double, int> b =\
-    \ r.y.dfp();\n  return a.first / b.first * powl(10.0, a.second - b.second);\n\
-    }\n"
+    \ */\n#line 9 \"math/bigint-to-hex.hpp\"\n\n// hex to bigint\nbigint HtoB(string\
+    \ S) {\n  int neg = 0;\n  if (S[0] == '-') neg = 1, S.erase(begin(S));\n\n  map<int,\
+    \ bigint> memo;\n\n  auto power = [&](int e) {\n    bigint res = 1, x = 16;\n\
+    \    for (; e; e >>= 1, x *= x) {\n      if (e & 1) res *= x;\n    }\n    return\
+    \ res;\n  };\n  auto pow16 = [&](int e) {\n    if (memo.count(e)) return memo[e];\n\
+    \    return memo[e] = power(e);\n  };\n  auto dfs = [&](auto rc, int l, int r)\
+    \ -> bigint {\n    if (l + 1 == r) {\n      if ('0' <= S[l] and S[l] <= '9') return\
+    \ S[l] - '0';\n      if ('A' <= S[l] and S[l] <= 'F') return S[l] - 'A' + 10;\n\
+    \      return S[l] - 'a' + 10;\n    }\n    int m = (l + r) / 2;\n    auto L =\
+    \ rc(rc, l, m);\n    auto R = rc(rc, m, r);\n    return L * pow16(r - m) + R;\n\
+    \  };\n  bigint res = dfs(dfs, 0, S.size());\n  if (neg) res.neg = true;\n  return\
+    \ res;\n}\n\n// bigint to hex\nstring BtoH(bigint x) {\n  if (x.neg) return \"\
+    -\" + BtoH(-x);\n  if (x < 16) {\n    if (x < 10) return string(1, '0' + x.to_ll());\n\
+    \    return string(1, 'A' + x.to_ll() - 10);\n  }\n  static vector<bigint> ys{16};\n\
+    \  int log_e = 0;\n  while (true) {\n    if (log_e + 1 == (int)ys.size()) ys.push_back(ys.back()\
+    \ * ys.back());\n    if (ys[log_e + 1] > x) break;\n    log_e++;\n  }\n  int e\
+    \ = 1 << log_e;\n  bigint y = ys[log_e];\n  bigint q = x / y;\n  bigint r = x\
+    \ - q * y;\n  string hi = BtoH(q);\n  string lo = BtoH(r);\n  return hi + string(e\
+    \ - lo.size(), '0') + lo;\n}\n"
+  code: "#pragma once\n\n#include <map>\n#include <string>\n#include <vector>\nusing\
+    \ namespace std;\n\n#include \"bigint.hpp\"\n\n// hex to bigint\nbigint HtoB(string\
+    \ S) {\n  int neg = 0;\n  if (S[0] == '-') neg = 1, S.erase(begin(S));\n\n  map<int,\
+    \ bigint> memo;\n\n  auto power = [&](int e) {\n    bigint res = 1, x = 16;\n\
+    \    for (; e; e >>= 1, x *= x) {\n      if (e & 1) res *= x;\n    }\n    return\
+    \ res;\n  };\n  auto pow16 = [&](int e) {\n    if (memo.count(e)) return memo[e];\n\
+    \    return memo[e] = power(e);\n  };\n  auto dfs = [&](auto rc, int l, int r)\
+    \ -> bigint {\n    if (l + 1 == r) {\n      if ('0' <= S[l] and S[l] <= '9') return\
+    \ S[l] - '0';\n      if ('A' <= S[l] and S[l] <= 'F') return S[l] - 'A' + 10;\n\
+    \      return S[l] - 'a' + 10;\n    }\n    int m = (l + r) / 2;\n    auto L =\
+    \ rc(rc, l, m);\n    auto R = rc(rc, m, r);\n    return L * pow16(r - m) + R;\n\
+    \  };\n  bigint res = dfs(dfs, 0, S.size());\n  if (neg) res.neg = true;\n  return\
+    \ res;\n}\n\n// bigint to hex\nstring BtoH(bigint x) {\n  if (x.neg) return \"\
+    -\" + BtoH(-x);\n  if (x < 16) {\n    if (x < 10) return string(1, '0' + x.to_ll());\n\
+    \    return string(1, 'A' + x.to_ll() - 10);\n  }\n  static vector<bigint> ys{16};\n\
+    \  int log_e = 0;\n  while (true) {\n    if (log_e + 1 == (int)ys.size()) ys.push_back(ys.back()\
+    \ * ys.back());\n    if (ys[log_e + 1] > x) break;\n    log_e++;\n  }\n  int e\
+    \ = 1 << log_e;\n  bigint y = ys[log_e];\n  bigint q = x / y;\n  bigint r = x\
+    \ - q * y;\n  string hi = BtoH(q);\n  string lo = BtoH(r);\n  return hi + string(e\
+    \ - lo.size(), '0') + lo;\n}\n"
   dependsOn:
-  - math/bigint-gcd.hpp
-  - math-fast/gcd.hpp
   - math/bigint.hpp
   - internal/internal-type-traits.hpp
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
   - ntt/ntt.hpp
-  - math/rational.hpp
   isVerificationFile: false
-  path: math/bigint-rational.hpp
-  requiredBy:
-  - math/bigint-all.hpp
+  path: math/bigint-to-hex.hpp
+  requiredBy: []
   timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
-  - verify/verify-unit-test/bigrational.test.cpp
-documentation_of: math/bigint-rational.hpp
+  - verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
+  - verify/verify-unit-test/bigint-gcd.test.cpp
+documentation_of: math/bigint-to-hex.hpp
 layout: document
 redirect_from:
-- /library/math/bigint-rational.hpp
-- /library/math/bigint-rational.hpp.html
-title: math/bigint-rational.hpp
+- /library/math/bigint-to-hex.hpp
+- /library/math/bigint-to-hex.hpp.html
+title: math/bigint-to-hex.hpp
 ---

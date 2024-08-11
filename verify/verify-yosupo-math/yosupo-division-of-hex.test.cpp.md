@@ -2,33 +2,20 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: fps/formal-power-series.hpp
-    title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
-      \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
-    path: fps/fps-famous-series.hpp
-    title: "\u6709\u540D\u306A\u6570\u5217"
-  - icon: ':heavy_check_mark:'
-    path: fps/fualhuber.hpp
-    title: fps/fualhuber.hpp
-  - icon: ':heavy_check_mark:'
-    path: fps/ntt-friendly-fps.hpp
-    title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
-    path: fps/taylor-shift.hpp
-    title: "\u5E73\u884C\u79FB\u52D5"
-  - icon: ':heavy_check_mark:'
     path: internal/internal-type-traits.hpp
     title: internal/internal-type-traits.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/bigint-to-hex.hpp
+    title: math/bigint-to-hex.hpp
   - icon: ':heavy_check_mark:'
     path: math/bigint.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
+    path: misc/timer.hpp
+    title: misc/timer.hpp
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
-    path: modulo/binomial.hpp
-    title: modulo/binomial.hpp
   - icon: ':heavy_check_mark:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
@@ -60,30 +47,30 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/2580
+    PROBLEM: https://judge.yosupo.jp/problem/division_of_hex_big_integers
     links:
-    - https://yukicoder.me/problems/no/2580
-  bundledCode: "#line 1 \"verify/verify-yuki/yuki-2580.test.cpp\"\n#define PROBLEM\
-    \ \"https://yukicoder.me/problems/no/2580\"\n//\n#line 2 \"template/template.hpp\"\
-    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
-    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
-    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
-    \ <climits>\n#include <cmath>\n#include <complex>\n#include <cstdarg>\n#include\
-    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
-    \ <cstring>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
-    \ <initializer_list>\n#include <iomanip>\n#include <ios>\n#include <iostream>\n\
-    #include <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n\
-    #include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include\
-    \ <ostream>\n#include <queue>\n#include <random>\n#include <set>\n#include <sstream>\n\
-    #include <stack>\n#include <streambuf>\n#include <string>\n#include <tuple>\n\
-    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
-    \ <unordered_set>\n#include <utility>\n#include <vector>\n\n// utility\n#line\
-    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
-    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
-    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
-    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
-    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
-    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\ntemplate\
+    - https://judge.yosupo.jp/problem/division_of_hex_big_integers
+  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/division_of_hex_big_integers\"\
+    \n//\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
+    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
+    \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
+    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <deque>\n#include\
+    \ <fstream>\n#include <functional>\n#include <initializer_list>\n#include <iomanip>\n\
+    #include <ios>\n#include <iostream>\n#include <istream>\n#include <iterator>\n\
+    #include <limits>\n#include <list>\n#include <map>\n#include <memory>\n#include\
+    \ <new>\n#include <numeric>\n#include <ostream>\n#include <queue>\n#include <random>\n\
+    #include <set>\n#include <sstream>\n#include <stack>\n#include <streambuf>\n#include\
+    \ <string>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include\
+    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
+    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
+    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
+    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
+    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
+    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
+    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\ntemplate\
     \ <typename T>\nusing minpq = priority_queue<T, vector<T>, greater<T>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
@@ -249,18 +236,25 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yuki/yuki-2580.test.cpp\"\n//\n#line 2 \"math/bigint.hpp\"\
-    \n\n#line 10 \"math/bigint.hpp\"\nusing namespace std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\
-    \n\n#line 4 \"internal/internal-type-traits.hpp\"\nusing namespace std;\n\nnamespace\
-    \ internal {\ntemplate <typename T>\nusing is_broadly_integral =\n    typename\
-    \ conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n            \
-    \                   is_same_v<T, __uint128_t>,\n                           true_type,\
-    \ false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed =\n   \
-    \ typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n       \
-    \                    true_type, false_type>::type;\n\ntemplate <typename T>\n\
-    using is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T> || is_same_v<T,\
+    \ 4 \"verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp\"\n//\n#line 2\
+    \ \"misc/timer.hpp\"\n\n#line 4 \"misc/timer.hpp\"\nusing namespace std;\n\nstruct\
+    \ Timer {\n  chrono::high_resolution_clock::time_point st;\n\n  Timer() { reset();\
+    \ }\n  void reset() { st = chrono::high_resolution_clock::now(); }\n\n  long long\
+    \ elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n    return\
+    \ chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n  long long\
+    \ operator()() { return elapsed(); }\n};\n#line 6 \"verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp\"\
+    \n//\n#line 2 \"math/bigint-to-hex.hpp\"\n\n#line 6 \"math/bigint-to-hex.hpp\"\
+    \nusing namespace std;\n\n#line 2 \"math/bigint.hpp\"\n\n#line 10 \"math/bigint.hpp\"\
+    \nusing namespace std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\n\n#line\
+    \ 4 \"internal/internal-type-traits.hpp\"\nusing namespace std;\n\nnamespace internal\
+    \ {\ntemplate <typename T>\nusing is_broadly_integral =\n    typename conditional_t<is_integral_v<T>\
+    \ || is_same_v<T, __int128_t> ||\n                               is_same_v<T,\
     \ __uint128_t>,\n                           true_type, false_type>::type;\n\n\
-    #define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
+    template <typename T>\nusing is_broadly_signed =\n    typename conditional_t<is_signed_v<T>\
+    \ || is_same_v<T, __int128_t>,\n                           true_type, false_type>::type;\n\
+    \ntemplate <typename T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
+    \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
+    \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
     \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
     ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
     \                                   \\\n  template <class, class = void>     \
@@ -630,233 +624,36 @@ data:
     \ s << \" : \";\n    cerr << \"{ \";\n    for (int i = 0; i < (int)a.size(); i++)\
     \ cerr << a[i] << \", \";\n    cerr << \"}\" << endl;\n  }\n};\n\nusing bigint\
     \ = MultiPrecisionInteger;\n\n/**\n * @brief \u591A\u500D\u9577\u6574\u6570\n\
-    \ */\n#line 6 \"verify/verify-yuki/yuki-2580.test.cpp\"\n//\n#line 2 \"fps/fualhuber.hpp\"\
-    \n\n#line 2 \"modulo/binomial.hpp\"\n\n#line 6 \"modulo/binomial.hpp\"\nusing\
-    \ namespace std;\n\n// \u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u306E MAX \u306B\
-    \ \u300CC(n, r) \u3084 fac(n) \u3067\u30AF\u30A8\u30EA\u3092\u6295\u3052\u308B\
-    \u6700\u5927\u306E n \u300D\n// \u3092\u5165\u308C\u308B\u3068\u500D\u901F\u304F\
-    \u3089\u3044\u306B\u306A\u308B\n// mod \u3092\u8D85\u3048\u3066\u524D\u8A08\u7B97\
-    \u3057\u3066 0 \u5272\u308A\u3092\u8E0F\u3080\u30D0\u30B0\u306F\u5BFE\u7B56\u6E08\
-    \u307F\ntemplate <typename T>\nstruct Binomial {\n  vector<T> f, g, h;\n  Binomial(int\
-    \ MAX = 0) {\n    assert(T::get_mod() != 0 && \"Binomial<mint>()\");\n    f.resize(1,\
-    \ T{1});\n    g.resize(1, T{1});\n    h.resize(1, T{1});\n    if (MAX > 0) extend(MAX\
-    \ + 1);\n  }\n\n  void extend(int m = -1) {\n    int n = f.size();\n    if (m\
-    \ == -1) m = n * 2;\n    m = min<int>(m, T::get_mod());\n    if (n >= m) return;\n\
-    \    f.resize(m);\n    g.resize(m);\n    h.resize(m);\n    for (int i = n; i <\
-    \ m; i++) f[i] = f[i - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n    h[m\
-    \ - 1] = g[m - 1] * f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n      g[i]\
-    \ = g[i + 1] * T(i + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int\
-    \ i) {\n    if (i < 0) return T(0);\n    while (i >= (int)f.size()) extend();\n\
-    \    return f[i];\n  }\n\n  T finv(int i) {\n    if (i < 0) return T(0);\n   \
-    \ while (i >= (int)g.size()) extend();\n    return g[i];\n  }\n\n  T inv(int i)\
-    \ {\n    if (i < 0) return -inv(-i);\n    while (i >= (int)h.size()) extend();\n\
-    \    return h[i];\n  }\n\n  T C(int n, int r) {\n    if (n < 0 || n < r || r <\
-    \ 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n  inline\
-    \ T operator()(int n, int r) { return C(n, r); }\n\n  template <typename I>\n\
-    \  T multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
-    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
-    \ T(0);\n      n += x;\n    }\n    T res = fac(n);\n    for (auto& x : r) res\
-    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  T operator()(const\
-    \ vector<I>& r) {\n    return multinomial(r);\n  }\n\n  T C_naive(int n, int r)\
-    \ {\n    if (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r =\
-    \ min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n  \
-    \  return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0)\
-    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n\
-    \  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
-    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 2 \"fps/formal-power-series.hpp\"\n\
-    \ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n  using\
-    \ vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
-    \ FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n    for\
-    \ (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
-    \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
-    \    (*this)[0] += r;\n    return *this;\n  }\n\n  FPS &operator-=(const FPS &r)\
-    \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
-    \ = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n\
-    \  FPS &operator-=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
-    \    (*this)[0] -= r;\n    return *this;\n  }\n\n  FPS &operator*=(const mint\
-    \ &v) {\n    for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;\n  \
-    \  return *this;\n  }\n\n  FPS &operator/=(const FPS &r) {\n    if (this->size()\
-    \ < r.size()) {\n      this->clear();\n      return *this;\n    }\n    int n =\
-    \ this->size() - r.size() + 1;\n    if ((int)r.size() <= 64) {\n      FPS f(*this),\
-    \ g(r);\n      g.shrink();\n      mint coeff = g.back().inverse();\n      for\
-    \ (auto &x : g) x *= coeff;\n      int deg = (int)f.size() - (int)g.size() + 1;\n\
-    \      int gs = g.size();\n      FPS quo(deg);\n      for (int i = deg - 1; i\
-    \ >= 0; i--) {\n        quo[i] = f[i + gs - 1];\n        for (int j = 0; j < gs;\
-    \ j++) f[i + j] -= quo[i] * g[j];\n      }\n      *this = quo * coeff;\n     \
-    \ this->resize(n, mint(0));\n      return *this;\n    }\n    return *this = ((*this).rev().pre(n)\
-    \ * r.rev().inv(n)).pre(n).rev();\n  }\n\n  FPS &operator%=(const FPS &r) {\n\
-    \    *this -= *this / r * r;\n    shrink();\n    return *this;\n  }\n\n  FPS operator+(const\
-    \ FPS &r) const { return FPS(*this) += r; }\n  FPS operator+(const mint &v) const\
-    \ { return FPS(*this) += v; }\n  FPS operator-(const FPS &r) const { return FPS(*this)\
-    \ -= r; }\n  FPS operator-(const mint &v) const { return FPS(*this) -= v; }\n\
-    \  FPS operator*(const FPS &r) const { return FPS(*this) *= r; }\n  FPS operator*(const\
-    \ mint &v) const { return FPS(*this) *= v; }\n  FPS operator/(const FPS &r) const\
-    \ { return FPS(*this) /= r; }\n  FPS operator%(const FPS &r) const { return FPS(*this)\
-    \ %= r; }\n  FPS operator-() const {\n    FPS ret(this->size());\n    for (int\
-    \ i = 0; i < (int)this->size(); i++) ret[i] = -(*this)[i];\n    return ret;\n\
-    \  }\n\n  void shrink() {\n    while (this->size() && this->back() == mint(0))\
-    \ this->pop_back();\n  }\n\n  FPS rev() const {\n    FPS ret(*this);\n    reverse(begin(ret),\
-    \ end(ret));\n    return ret;\n  }\n\n  FPS dot(FPS r) const {\n    FPS ret(min(this->size(),\
-    \ r.size()));\n    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i]\
-    \ * r[i];\n    return ret;\n  }\n\n  // \u524D sz \u9805\u3092\u53D6\u3063\u3066\
-    \u304F\u308B\u3002sz \u306B\u8DB3\u308A\u306A\u3044\u9805\u306F 0 \u57CB\u3081\
-    \u3059\u308B\n  FPS pre(int sz) const {\n    FPS ret(begin(*this), begin(*this)\
-    \ + min((int)this->size(), sz));\n    if ((int)ret.size() < sz) ret.resize(sz);\n\
-    \    return ret;\n  }\n\n  FPS operator>>(int sz) const {\n    if ((int)this->size()\
-    \ <= sz) return {};\n    FPS ret(*this);\n    ret.erase(ret.begin(), ret.begin()\
-    \ + sz);\n    return ret;\n  }\n\n  FPS operator<<(int sz) const {\n    FPS ret(*this);\n\
-    \    ret.insert(ret.begin(), sz, mint(0));\n    return ret;\n  }\n\n  FPS diff()\
-    \ const {\n    const int n = (int)this->size();\n    FPS ret(max(0, n - 1));\n\
-    \    mint one(1), coeff(1);\n    for (int i = 1; i < n; i++) {\n      ret[i -\
-    \ 1] = (*this)[i] * coeff;\n      coeff += one;\n    }\n    return ret;\n  }\n\
-    \n  FPS integral() const {\n    const int n = (int)this->size();\n    FPS ret(n\
-    \ + 1);\n    ret[0] = mint(0);\n    if (n > 0) ret[1] = mint(1);\n    auto mod\
-    \ = mint::get_mod();\n    for (int i = 2; i <= n; i++) ret[i] = (-ret[mod % i])\
-    \ * (mod / i);\n    for (int i = 0; i < n; i++) ret[i + 1] *= (*this)[i];\n  \
-    \  return ret;\n  }\n\n  mint eval(mint x) const {\n    mint r = 0, w = 1;\n \
-    \   for (auto &v : *this) r += w * v, w *= x;\n    return r;\n  }\n\n  FPS log(int\
-    \ deg = -1) const {\n    assert(!(*this).empty() && (*this)[0] == mint(1));\n\
-    \    if (deg == -1) deg = (int)this->size();\n    return (this->diff() * this->inv(deg)).pre(deg\
-    \ - 1).integral();\n  }\n\n  FPS pow(int64_t k, int deg = -1) const {\n    const\
-    \ int n = (int)this->size();\n    if (deg == -1) deg = n;\n    if (k == 0) {\n\
-    \      FPS ret(deg);\n      if (deg) ret[0] = 1;\n      return ret;\n    }\n \
-    \   for (int i = 0; i < n; i++) {\n      if ((*this)[i] != mint(0)) {\n      \
-    \  mint rev = mint(1) / (*this)[i];\n        FPS ret = (((*this * rev) >> i).log(deg)\
-    \ * k).exp(deg);\n        ret *= (*this)[i].pow(k);\n        ret = (ret << (i\
-    \ * k)).pre(deg);\n        if ((int)ret.size() < deg) ret.resize(deg, mint(0));\n\
-    \        return ret;\n      }\n      if (__int128_t(i + 1) * k >= deg) return\
-    \ FPS(deg, mint(0));\n    }\n    return FPS(deg, mint(0));\n  }\n\n  static void\
-    \ *ntt_ptr;\n  static void set_fft();\n  FPS &operator*=(const FPS &r);\n  void\
-    \ ntt();\n  void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n  FPS\
-    \ inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate <typename\
-    \ mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\
-    \u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\
-    \n * @docs docs/fps/formal-power-series.md\n */\n#line 2 \"fps/fps-famous-series.hpp\"\
-    \n\n#line 4 \"fps/taylor-shift.hpp\"\n\n// calculate F(x + a)\ntemplate <typename\
-    \ mint>\nFormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint> f, mint a,\n\
-    \                                    Binomial<mint>& C) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  int N = f.size();\n  for (int i = 0; i < N; i++) f[i] *= C.fac(i);\n  reverse(begin(f),\
-    \ end(f));\n  fps g(N, mint(1));\n  for (int i = 1; i < N; i++) g[i] = g[i - 1]\
-    \ * a * C.inv(i);\n  f = (f * g).pre(N);\n  reverse(begin(f), end(f));\n  for\
-    \ (int i = 0; i < N; i++) f[i] *= C.finv(i);\n  return f;\n}\n\n/**\n * @brief\
-    \ \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n */\n#line\
-    \ 6 \"fps/fps-famous-series.hpp\"\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ Stirling1st(int N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  if (N <= 0) return fps{1};\n  int lg = 31 - __builtin_clz(N);\n  fps f = {0,\
-    \ 1};\n  for (int i = lg - 1; i >= 0; i--) {\n    int n = N >> i;\n    f *= TaylorShift(f,\
-    \ mint(n >> 1), C);\n    if (n & 1) f = (f << 1) + f * (n - 1);\n  }\n  return\
-    \ f;\n}\n\n// S(0, K), S(1, K), ..., S(upper, K) \u3092\u5217\u6319\ntemplate\
-    \ <typename mint>\nFormalPowerSeries<mint> Stirling1stRow(int K, int upper, Binomial<mint>\
-    \ &C) {\n  using fps = FormalPowerSeries<mint>;\n  if (upper < K) return {};\n\
-    \  fps f(upper + 1);\n  for (int i = 1; i < (int)f.size(); i++) f[i] = C.inv(i);\n\
-    \  f = f.pow(K) * C.finv(K);\n  for (int n = K; n <= upper; n++) f[n] *= C.fac(n);\n\
-    \  return f;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Stirling2nd(int\
-    \ N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
-    \ 1), g(N + 1);\n  for (int i = 0; i <= N; i++) {\n    f[i] = mint(i).pow(N) *\
-    \ C.finv(i);\n    g[i] = (i & 1) ? -C.finv(i) : C.finv(i);\n  }\n  return (f *\
-    \ g).pre(N + 1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Stirling2ndRow(int\
-    \ K, int upper, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  if (upper < K) return {};\n  fps f(upper + 1);\n  for (int i = 1; i <= upper;\
-    \ i++) f[i] = C.finv(i);\n  f = f.pow(K) * C.finv(K);\n  for (int i = K; i <=\
-    \ upper; i++) f[i] *= C.fac(i);\n  return f;\n}\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> BernoulliEGF(int N, Binomial<mint> &C) {\n  using fps\
-    \ = FormalPowerSeries<mint>;\n  fps f(N + 1);\n  for (int i = 0; i <= N; i++)\
-    \ f[i] = C.finv(i + 1);\n  return f.inv(N + 1);\n}\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> Partition(int N, Binomial<mint> &) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  fps f(N + 1);\n  f[0] = 1;\n  for (int k = 1; k <= N; k++) {\n    long long\
-    \ k1 = 1LL * k * (3 * k + 1) / 2;\n    long long k2 = 1LL * k * (3 * k - 1) /\
-    \ 2;\n    if (k2 > N) break;\n    if (k1 <= N) f[k1] += ((k & 1) ? -1 : 1);\n\
-    \    if (k2 <= N) f[k2] += ((k & 1) ? -1 : 1);\n  }\n  return f.inv();\n}\n\n\
-    template <typename mint>\nvector<mint> Montmort(int N) {\n  if (N <= 1) return\
-    \ {0};\n  if (N == 2) return {0, 1};\n  vector<mint> f(N);\n  f[0] = 0, f[1] =\
-    \ 1;\n  mint coeff = 2, one = 1;\n  for (int i = 2; i < N; i++) {\n    f[i] =\
-    \ (f[i - 1] + f[i - 2]) * coeff;\n    coeff += one;\n  }\n  return f;\n};\n\n\
-    /**\n * @brief \u6709\u540D\u306A\u6570\u5217\n */\n#line 6 \"fps/fualhuber.hpp\"\
-    \n\n// \u6570\u5217 a_0, a_1, ... \u306E\u4E00\u822C\u9805 a_n \u304C\u591A\u9805\
-    \u5F0F f(n) \u3067\u8868\u305B\u308B\u3068\u3059\u308B\n// \u3053\u306E\u3068\u304D\
-    \ b_i = sum_{0<=j<=i} a_i \u306E\u4E00\u822C\u9805\u3092\u8868\u3059\u591A\u9805\
-    \u5F0F\u3092\u6C42\u3081\u308B\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ fualhuber(const FormalPowerSeries<mint>& f,\n                              \
-    \    Binomial<mint>& C) {\n  using fps = FormalPowerSeries<mint>;\n  int N = f.size();\n\
-    \  auto B = BernoulliEGF(N + 3, C);\n  B[1] = -B[1];\n  fps s(N), t(N);\n  for\
-    \ (int i = 0; i < N; i++) s[i] = f[i] * C.fac(i), t[i] = B[i];\n  fps u = s *\
-    \ t.rev();\n  fps g(N + 1);\n  g[0] = f[0];\n  for (int i = 0; i < N; i++) g[i\
-    \ + 1] = u[i + N - 1] * C.finv(i + 1);\n  return g;\n}\n#line 9 \"verify/verify-yuki/yuki-2580.test.cpp\"\
-    \n//\n#line 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 5 \"fps/ntt-friendly-fps.hpp\"\
-    \n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft() {\n  if\
-    \ (!ntt_ptr) ntt_ptr = new NTT<mint>;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>&\
-    \ FormalPowerSeries<mint>::operator*=(\n    const FormalPowerSeries<mint>& r)\
-    \ {\n  if (this->empty() || r.empty()) {\n    this->clear();\n    return *this;\n\
-    \  }\n  set_fft();\n  auto ret = static_cast<NTT<mint>*>(ntt_ptr)->multiply(*this,\
-    \ r);\n  return *this = FormalPowerSeries<mint>(ret.begin(), ret.end());\n}\n\n\
-    template <typename mint>\nvoid FormalPowerSeries<mint>::ntt() {\n  set_fft();\n\
-    \  static_cast<NTT<mint>*>(ntt_ptr)->ntt(*this);\n}\n\ntemplate <typename mint>\n\
-    void FormalPowerSeries<mint>::intt() {\n  set_fft();\n  static_cast<NTT<mint>*>(ntt_ptr)->intt(*this);\n\
-    }\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::ntt_doubling() {\n\
-    \  set_fft();\n  static_cast<NTT<mint>*>(ntt_ptr)->ntt_doubling(*this);\n}\n\n\
-    template <typename mint>\nint FormalPowerSeries<mint>::ntt_pr() {\n  set_fft();\n\
-    \  return static_cast<NTT<mint>*>(ntt_ptr)->pr;\n}\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {\n  assert((*this)[0]\
-    \ != mint(0));\n  if (deg == -1) deg = (int)this->size();\n  FormalPowerSeries<mint>\
-    \ res(deg);\n  res[0] = {mint(1) / (*this)[0]};\n  for (int d = 1; d < deg; d\
-    \ <<= 1) {\n    FormalPowerSeries<mint> f(2 * d), g(2 * d);\n    for (int j =\
-    \ 0; j < min((int)this->size(), 2 * d); j++) f[j] = (*this)[j];\n    for (int\
-    \ j = 0; j < d; j++) g[j] = res[j];\n    f.ntt();\n    g.ntt();\n    for (int\
-    \ j = 0; j < 2 * d; j++) f[j] *= g[j];\n    f.intt();\n    for (int j = 0; j <\
-    \ d; j++) f[j] = 0;\n    f.ntt();\n    for (int j = 0; j < 2 * d; j++) f[j] *=\
-    \ g[j];\n    f.intt();\n    for (int j = d; j < min(2 * d, deg); j++) res[j] =\
-    \ -f[j];\n  }\n  return res.pre(deg);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ FormalPowerSeries<mint>::exp(int deg) const {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  assert((*this).size() == 0 || (*this)[0] == mint(0));\n  if (deg == -1) deg\
-    \ = this->size();\n\n  fps inv;\n  inv.reserve(deg + 1);\n  inv.push_back(mint(0));\n\
-    \  inv.push_back(mint(1));\n\n  auto inplace_integral = [&](fps& F) -> void {\n\
-    \    const int n = (int)F.size();\n    auto mod = mint::get_mod();\n    while\
-    \ ((int)inv.size() <= n) {\n      int i = inv.size();\n      inv.push_back((-inv[mod\
-    \ % i]) * (mod / i));\n    }\n    F.insert(begin(F), mint(0));\n    for (int i\
-    \ = 1; i <= n; i++) F[i] *= inv[i];\n  };\n\n  auto inplace_diff = [](fps& F)\
-    \ -> void {\n    if (F.empty()) return;\n    F.erase(begin(F));\n    mint coeff\
-    \ = 1, one = 1;\n    for (int i = 0; i < (int)F.size(); i++) {\n      F[i] *=\
-    \ coeff;\n      coeff += one;\n    }\n  };\n\n  fps b{1, 1 < (int)this->size()\
-    \ ? (*this)[1] : 0}, c{1}, z1, z2{1, 1};\n  for (int m = 2; m < deg; m *= 2) {\n\
-    \    auto y = b;\n    y.resize(2 * m);\n    y.ntt();\n    z1 = z2;\n    fps z(m);\n\
-    \    for (int i = 0; i < m; ++i) z[i] = y[i] * z1[i];\n    z.intt();\n    fill(begin(z),\
-    \ begin(z) + m / 2, mint(0));\n    z.ntt();\n    for (int i = 0; i < m; ++i) z[i]\
-    \ *= -z1[i];\n    z.intt();\n    c.insert(end(c), begin(z) + m / 2, end(z));\n\
-    \    z2 = c;\n    z2.resize(2 * m);\n    z2.ntt();\n    fps x(begin(*this), begin(*this)\
-    \ + min<int>(this->size(), m));\n    x.resize(m);\n    inplace_diff(x);\n    x.push_back(mint(0));\n\
-    \    x.ntt();\n    for (int i = 0; i < m; ++i) x[i] *= y[i];\n    x.intt();\n\
-    \    x -= b.diff();\n    x.resize(2 * m);\n    for (int i = 0; i < m - 1; ++i)\
-    \ x[m + i] = x[i], x[i] = mint(0);\n    x.ntt();\n    for (int i = 0; i < 2 *\
-    \ m; ++i) x[i] *= z2[i];\n    x.intt();\n    x.pop_back();\n    inplace_integral(x);\n\
-    \    for (int i = m; i < min<int>(this->size(), 2 * m); ++i) x[i] += (*this)[i];\n\
-    \    fill(begin(x), begin(x) + m, mint(0));\n    x.ntt();\n    for (int i = 0;\
-    \ i < 2 * m; ++i) x[i] *= y[i];\n    x.intt();\n    b.insert(end(b), begin(x)\
-    \ + m, end(x));\n  }\n  return fps{begin(b), begin(b) + deg};\n}\n\n/**\n * @brief\
-    \ NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/ntt-friendly-fps.md\n\
-    \ */\n#line 13 \"verify/verify-yuki/yuki-2580.test.cpp\"\n//\nusing namespace\
-    \ Nyaan;\nusing mint = LazyMontgomeryModInt<998244353>;\n// using mint = LazyMontgomeryModInt<1000000007>;\n\
-    using vm = vector<mint>;\nusing vvm = vector<vm>;\nBinomial<mint> C;\nusing fps\
-    \ = FormalPowerSeries<mint>;\nusing namespace Nyaan;\n\nfps select(int r, int\
-    \ a, fps f) {\n  int N = sz(f);\n  f = TaylorShift<mint>(f, r, C);\n  rep(i, N)\
-    \ f[i] *= mint{a}.pow(i);\n  return f;\n}\nvoid q() {\n  inl(N);\n  vl A(N - 1);\n\
-    \  in(A);\n  bigint M;\n  in(M);\n  fps f{1};\n  each(a, A) {\n    auto [q, r]\
-    \ = divmod(M, a);\n    f = select(r.to_ll(), a, f);\n    f = fualhuber(f, C);\n\
-    \    M = q;\n  }\n  out(f.eval((M % 998244353).to_ll()));\n}\n\nvoid Nyaan::solve()\
-    \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/2580\"\n//\n#include \"\
-    ../../template/template.hpp\"\n//\n#include \"../../math/bigint.hpp\"\n//\n#include\
-    \ \"../../fps/fualhuber.hpp\"\n#include \"../../fps/taylor-shift.hpp\"\n//\n#include\
-    \ \"../../fps/ntt-friendly-fps.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
-    \n#include \"../../modulo/binomial.hpp\"\n//\nusing namespace Nyaan;\nusing mint\
-    \ = LazyMontgomeryModInt<998244353>;\n// using mint = LazyMontgomeryModInt<1000000007>;\n\
-    using vm = vector<mint>;\nusing vvm = vector<vm>;\nBinomial<mint> C;\nusing fps\
-    \ = FormalPowerSeries<mint>;\nusing namespace Nyaan;\n\nfps select(int r, int\
-    \ a, fps f) {\n  int N = sz(f);\n  f = TaylorShift<mint>(f, r, C);\n  rep(i, N)\
-    \ f[i] *= mint{a}.pow(i);\n  return f;\n}\nvoid q() {\n  inl(N);\n  vl A(N - 1);\n\
-    \  in(A);\n  bigint M;\n  in(M);\n  fps f{1};\n  each(a, A) {\n    auto [q, r]\
-    \ = divmod(M, a);\n    f = select(r.to_ll(), a, f);\n    f = fualhuber(f, C);\n\
-    \    M = q;\n  }\n  out(f.eval((M % 998244353).to_ll()));\n}\n\nvoid Nyaan::solve()\
-    \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
+    \ */\n#line 9 \"math/bigint-to-hex.hpp\"\n\n// hex to bigint\nbigint HtoB(string\
+    \ S) {\n  int neg = 0;\n  if (S[0] == '-') neg = 1, S.erase(begin(S));\n\n  map<int,\
+    \ bigint> memo;\n\n  auto power = [&](int e) {\n    bigint res = 1, x = 16;\n\
+    \    for (; e; e >>= 1, x *= x) {\n      if (e & 1) res *= x;\n    }\n    return\
+    \ res;\n  };\n  auto pow16 = [&](int e) {\n    if (memo.count(e)) return memo[e];\n\
+    \    return memo[e] = power(e);\n  };\n  auto dfs = [&](auto rc, int l, int r)\
+    \ -> bigint {\n    if (l + 1 == r) {\n      if ('0' <= S[l] and S[l] <= '9') return\
+    \ S[l] - '0';\n      if ('A' <= S[l] and S[l] <= 'F') return S[l] - 'A' + 10;\n\
+    \      return S[l] - 'a' + 10;\n    }\n    int m = (l + r) / 2;\n    auto L =\
+    \ rc(rc, l, m);\n    auto R = rc(rc, m, r);\n    return L * pow16(r - m) + R;\n\
+    \  };\n  bigint res = dfs(dfs, 0, S.size());\n  if (neg) res.neg = true;\n  return\
+    \ res;\n}\n\n// bigint to hex\nstring BtoH(bigint x) {\n  if (x.neg) return \"\
+    -\" + BtoH(-x);\n  if (x < 16) {\n    if (x < 10) return string(1, '0' + x.to_ll());\n\
+    \    return string(1, 'A' + x.to_ll() - 10);\n  }\n  static vector<bigint> ys{16};\n\
+    \  int log_e = 0;\n  while (true) {\n    if (log_e + 1 == (int)ys.size()) ys.push_back(ys.back()\
+    \ * ys.back());\n    if (ys[log_e + 1] > x) break;\n    log_e++;\n  }\n  int e\
+    \ = 1 << log_e;\n  bigint y = ys[log_e];\n  bigint q = x / y;\n  bigint r = x\
+    \ - q * y;\n  string hi = BtoH(q);\n  string lo = BtoH(r);\n  return hi + string(e\
+    \ - lo.size(), '0') + lo;\n}\n#line 9 \"verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp\"\
+    \nusing namespace Nyaan;\n\nvoid q() {\n  Timer t;\n  ins(A, B);\n  bigint a =\
+    \ HtoB(A), b = HtoB(B);\n  bigint q = a / b;\n  bigint r = a - q * b;\n  out(BtoH(q),\
+    \ BtoH(r));\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n  in(t);\n  while (t--)\
+    \ q();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/division_of_hex_big_integers\"\
+    \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../misc/timer.hpp\"\
+    \n//\n#include \"../../math/bigint-to-hex.hpp\"\n#include \"../../math/bigint.hpp\"\
+    \nusing namespace Nyaan;\n\nvoid q() {\n  Timer t;\n  ins(A, B);\n  bigint a =\
+    \ HtoB(A), b = HtoB(B);\n  bigint q = a / b;\n  bigint r = a - q * b;\n  out(BtoH(q),\
+    \ BtoH(r));\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n  in(t);\n  while (t--)\
+    \ q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -864,27 +661,23 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
+  - misc/timer.hpp
+  - math/bigint-to-hex.hpp
   - math/bigint.hpp
   - internal/internal-type-traits.hpp
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
   - ntt/ntt.hpp
-  - fps/fualhuber.hpp
-  - modulo/binomial.hpp
-  - fps/formal-power-series.hpp
-  - fps/fps-famous-series.hpp
-  - fps/taylor-shift.hpp
-  - fps/ntt-friendly-fps.hpp
   isVerificationFile: true
-  path: verify/verify-yuki/yuki-2580.test.cpp
+  path: verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
   requiredBy: []
   timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yuki/yuki-2580.test.cpp
+documentation_of: verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yuki/yuki-2580.test.cpp
-- /verify/verify/verify-yuki/yuki-2580.test.cpp.html
-title: verify/verify-yuki/yuki-2580.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp.html
+title: verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
 ---

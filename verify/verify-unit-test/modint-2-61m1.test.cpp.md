@@ -2,8 +2,14 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: matrix/f2-matrix.hpp
-    title: matrix/f2-matrix.hpp
+    path: internal/internal-seed.hpp
+    title: internal/internal-seed.hpp
+  - icon: ':heavy_check_mark:'
+    path: misc/rng.hpp
+    title: misc/rng.hpp
+  - icon: ':heavy_check_mark:'
+    path: modint/modint-2-61m1.hpp
+    title: modint/modint-2-61m1.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -29,30 +35,30 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/matrix_det_mod_2
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - https://judge.yosupo.jp/problem/matrix_det_mod_2
-  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det_mod_2\"\n//\n#line\
-    \ 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
-    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
-    \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
-    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <deque>\n#include\
-    \ <fstream>\n#include <functional>\n#include <initializer_list>\n#include <iomanip>\n\
-    #include <ios>\n#include <iostream>\n#include <istream>\n#include <iterator>\n\
-    #include <limits>\n#include <list>\n#include <map>\n#include <memory>\n#include\
-    \ <new>\n#include <numeric>\n#include <ostream>\n#include <queue>\n#include <random>\n\
-    #include <set>\n#include <sstream>\n#include <stack>\n#include <streambuf>\n#include\
-    \ <string>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include\
-    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
-    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
-    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
-    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
-    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
-    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
-    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\ntemplate\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/modint-2-61m1.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <cstdarg>\n#include\
+    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
+    \ <cstring>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
+    \ <initializer_list>\n#include <iomanip>\n#include <ios>\n#include <iostream>\n\
+    #include <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n\
+    #include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include\
+    \ <ostream>\n#include <queue>\n#include <random>\n#include <set>\n#include <sstream>\n\
+    #include <stack>\n#include <streambuf>\n#include <string>\n#include <tuple>\n\
+    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
+    \ <unordered_set>\n#include <utility>\n#include <vector>\n\n// utility\n#line\
+    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
+    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
+    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
+    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
+    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\ntemplate\
     \ <typename T>\nusing minpq = priority_queue<T, vector<T>, greater<T>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
@@ -218,58 +224,96 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp\"\n\
-    //\n#line 2 \"matrix/f2-matrix.hpp\"\n\n#line 5 \"matrix/f2-matrix.hpp\"\nusing\
-    \ namespace std;\n\nnamespace std {\ntemplate <size_t N>\nbool operator<(const\
-    \ bitset<N> &a, const bitset<N> &b) {\n  int f = (a ^ b)._Find_first();\n  return\
-    \ f == N ? false : a[f];\n}\n}  // namespace std\n\ntemplate <size_t H_MAX, size_t\
-    \ W_MAX>\nstruct F2_Matrix {\n  using Mat = F2_Matrix;\n\n  int H, W;\n  array<bitset<W_MAX>,\
-    \ H_MAX> A;\n  F2_Matrix(int h = H_MAX, int w = W_MAX) : H(h), W(w) {\n    assert(0\
-    \ <= h and h <= (int)H_MAX);\n    assert(0 <= w and w <= (int)W_MAX);\n    for\
-    \ (int i = 0; i < (int)H_MAX; i++) A[i].reset();\n  }\n  inline bitset<W_MAX>\
-    \ &operator[](int i) { return A[i]; }\n  inline const bitset<W_MAX> &operator[](int\
-    \ i) const { return A[i]; }\n\n  static Mat I(int n) {\n    Mat a(n, n);\n   \
-    \ for (int i = 0; i < n; i++) a[i][i] = true;\n    return a;\n  }\n\n  // (AND,\
-    \ XOR) \u534A\u74B0\n  // (AND, OR) \u534A\u74B0\u306B\u306F operator/ \u3092\u5272\
-    \u308A\u5F53\u3066\u305F\n  Mat &operator*=(const Mat &B) {\n    Mat C(H, B.W);\n\
-    \    for (int i = 0; i < H; i++) {\n      for (int j = 0; j < W; j++) {\n    \
-    \    if (A[i][j]) C[i] ^= B[j];\n      }\n    }\n    swap(A, C.A);\n    return\
-    \ *this;\n  }\n  Mat operator*(const Mat &B) const { return Mat(*this) *= B; }\n\
-    \n  // (AND, OR) \u534A\u74B0\n  friend Mat and_or_product(const Mat &A, const\
-    \ Mat &B) {\n    Mat C(A.H, B.W);\n    for (int i = 0; i < A.H; i++) {\n     \
-    \ for (int j = 0; j < A.W; j++) {\n        if (A[i][j]) C[i] |= B[j];\n      }\n\
-    \    }\n    return C;\n  }\n\n  // [0, wr) \u306E\u7BC4\u56F2\u3067\u6383\u304D\
-    \u51FA\u3057, rank \u3092\u8FD4\u3059\n  int sweep(int wr = -1) {\n    if (wr\
-    \ == -1) wr = W;\n    int t = 0;\n    for (int u = 0; u < wr; u++) {\n      int\
-    \ piv = -1;\n      for (int i = t; i < H; i++) {\n        if (A[i][u]) {\n   \
-    \       piv = i;\n          break;\n        }\n      }\n      if (piv == -1) continue;\n\
-    \      if (piv != t) swap(A[piv], A[t]);\n      for (int i = 0; i < H; i++) {\n\
-    \        if (i != t && A[i][u]) A[i] ^= A[t];\n      }\n      t++;\n    }\n  \
-    \  return t;\n  }\n\n  pair<bool, Mat> inverse() const {\n    assert(H == W);\n\
-    \    int N = H;\n    F2_Matrix<H_MAX, W_MAX * 2> c(H, W * 2);\n    for (int i\
-    \ = 0; i < N; i++) {\n      c[i][i + N] = 1;\n      for (int j = 0; j < N; j++)\
-    \ {\n        c[i][j] = A[i][j];\n      }\n    }\n    int r = c.sweep(N);\n   \
-    \ if (r != N) return {false, Mat{N, N}};\n    Mat b(H, W);\n    for (int i = 0;\
-    \ i < N; i++) {\n      for (int j = 0; j < N; j++) {\n        b[i][j] = c[i][j\
-    \ + N];\n      }\n    }\n    return {true, b};\n  }\n\n  int determinant() const\
-    \ {\n    assert(H == W);\n    F2_Matrix<H_MAX, W_MAX> c{*this};\n    int r = c.sweep();\n\
-    \    return r == H ? 1 : 0;\n  }\n\n  bool operator<(const Mat &rhs) const {\n\
-    \    if (H != rhs.H) return H < rhs.H;\n    if (W != rhs.W) return W < rhs.W;\n\
-    \    return A < rhs.A;\n  }\n  bool operator==(const Mat &rhs) const {\n    return\
-    \ H == rhs.H and W == rhs.W and A == rhs.A;\n  }\n\n  friend ostream &operator<<(ostream\
-    \ &os, const Mat &b) {\n    for (int i = 0; i < b.H; i++) {\n      os << \"[ \"\
-    ;\n      for (int j = 0; j < b.W; j++) {\n        os << b[i][j] << \", \";\n \
-    \     }\n      os << \"],\\n\";\n    }\n    return os;\n  }\n};\n#line 6 \"verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp\"\
-    \nusing namespace Nyaan;\n\nvoid q() {\n  ini(N);\n  F2_Matrix<4096, 4096> m(N,\
-    \ N);\n  rep(i, N) {\n    ins(S);\n    m[i] = bitset<4096>{Rev(S)};\n  }\n  int\
-    \ d = m.determinant();\n  out(d);\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n\
-    \  // in(t);\n  while (t--) q();\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det_mod_2\"\n//\n\
-    #include \"../../template/template.hpp\"\n//\n#include \"../../matrix/f2-matrix.hpp\"\
-    \nusing namespace Nyaan;\n\nvoid q() {\n  ini(N);\n  F2_Matrix<4096, 4096> m(N,\
-    \ N);\n  rep(i, N) {\n    ins(S);\n    m[i] = bitset<4096>{Rev(S)};\n  }\n  int\
-    \ d = m.determinant();\n  out(d);\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n\
-    \  // in(t);\n  while (t--) q();\n}\n"
+    \ 4 \"verify/verify-unit-test/modint-2-61m1.test.cpp\"\n//\n#line 2 \"modint/modint-2-61m1.hpp\"\
+    \n\n#line 5 \"modint/modint-2-61m1.hpp\"\nusing namespace std;\n\nstruct modint_2_61m1\
+    \ {\n  using M = modint_2_61m1;\n  using u64 = unsigned long long;\n  using u128\
+    \ = __uint128_t;\n\n  static constexpr u64 mod = (1uLL << 61) - 1;\n  u64 x;\n\
+    \n  static constexpr u64 modulo(u128 y) {\n    u64 val = (y >> 61) + (y & mod);\n\
+    \    return val >= mod ? val - mod : val;\n  }\n\n  modint_2_61m1() : x(0) {}\n\
+    \  modint_2_61m1(long long _x) {\n    long long y = _x % (long long)mod;\n   \
+    \ if (y < 0) y += mod;\n    x = y;\n  }\n\n  static M raw(u64 y) {\n    M res;\n\
+    \    res.x = y;\n    return res;\n  }\n  u64 get() const { return x; }\n  static\
+    \ u64 get_mod() { return mod; }\n\n  friend M operator+(const M& l, const M& r)\
+    \ {\n    u64 y = l.x + r.x;\n    if (y >= mod) y -= mod;\n    return raw(y);\n\
+    \  }\n  friend M operator-(const M& l, const M& r) {\n    u64 y = l.x - r.x;\n\
+    \    if (y >= mod) y += mod;\n    return raw(y);\n  }\n  friend M operator*(const\
+    \ M& l, const M& r) {\n    return raw(modulo(u128(l.x) * r.x));\n  }\n  friend\
+    \ M operator/(const M& l, const M& r) { return l * r.inverse(); }\n\n  M& operator+=(const\
+    \ M& r) { return *this = *this + r; }\n  M& operator-=(const M& r) { return *this\
+    \ = *this - r; }\n  M& operator*=(const M& r) { return *this = *this * r; }\n\
+    \  M& operator/=(const M& r) { return *this = *this / r; }\n  M operator-() const\
+    \ { return raw(x ? mod - x : u64{0}); }\n  M operator+() const { return *this;\
+    \ }\n\n  M pow(u64 e) const {\n    M res{1}, a{*this};\n    while (e) {\n    \
+    \  if (e & 1) res = res * a;\n      a = a * a;\n      e >>= 1;\n    }\n    return\
+    \ res;\n  }\n  M inverse() const {\n    assert(x != 0);\n    return this->pow(mod\
+    \ - 2);\n  }\n\n  friend bool operator==(const M& l, const M& r) { return l.x\
+    \ == r.x; }\n  friend bool operator!=(const M& l, const M& r) { return l.x !=\
+    \ r.x; }\n  friend ostream& operator<<(ostream& os, const M& r) { return os <<\
+    \ r.x; }\n};\n#line 6 \"verify/verify-unit-test/modint-2-61m1.test.cpp\"\n//\n\
+    #line 2 \"misc/rng.hpp\"\n\n#line 2 \"internal/internal-seed.hpp\"\n\n#line 4\
+    \ \"internal/internal-seed.hpp\"\nusing namespace std;\n\nnamespace internal {\n\
+    unsigned long long non_deterministic_seed() {\n  unsigned long long m =\n    \
+    \  chrono::duration_cast<chrono::nanoseconds>(\n          chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \          .count();\n  m ^= 9845834732710364265uLL;\n  m ^= m << 24, m ^= m >>\
+    \ 31, m ^= m << 35;\n  return m;\n}\nunsigned long long deterministic_seed() {\
+    \ return 88172645463325252UL; }\n\n// 64 bit \u306E seed \u5024\u3092\u751F\u6210\
+    \ (\u624B\u5143\u3067\u306F seed \u56FA\u5B9A)\n// \u9023\u7D9A\u3067\u547C\u3073\
+    \u51FA\u3059\u3068\u540C\u3058\u5024\u304C\u4F55\u5EA6\u3082\u8FD4\u3063\u3066\
+    \u304F\u308B\u306E\u3067\u6CE8\u610F\n// #define RANDOMIZED_SEED \u3059\u308B\u3068\
+    \u30B7\u30FC\u30C9\u304C\u30E9\u30F3\u30C0\u30E0\u306B\u306A\u308B\nunsigned long\
+    \ long seed() {\n#if defined(NyaanLocal) && !defined(RANDOMIZED_SEED)\n  return\
+    \ deterministic_seed();\n#else\n  return non_deterministic_seed();\n#endif\n}\n\
+    \n}  // namespace internal\n#line 4 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\
+    using i64 = long long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 - 1)\n\
+    u64 rng() {\n  static u64 _x = internal::seed();\n  return _x ^= _x << 7, _x ^=\
+    \ _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n  return\
+    \ l + rng() % u64(r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r) {\n \
+    \ assert(l < r);\n  return l + rng() % u64(r - l);\n}\n\n// choose n numbers from\
+    \ [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n  assert(l\
+    \ <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i; --i) {\n\
+    \    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m = r - i;\n\
+    \    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  sort(begin(ret), end(ret));\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd()\
+    \ { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
+    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
+    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
+    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
+    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 8 \"verify/verify-unit-test/modint-2-61m1.test.cpp\"\
+    \nusing namespace Nyaan;\n\nusing mint = modint_2_61m1;\nconstexpr ll mod = (1ll\
+    \ << 61) - 1;\nvoid check(ll a, ll b) {\n  mint A{a}, B{b};\n  {\n    ll c = a\
+    \ + b;\n    c %= mod, c += mod, c %= mod;\n    assert((ll)((A + B).get()) == c);\n\
+    \  }\n  {\n    ll c = a - b;\n    c %= mod, c += mod, c %= mod;\n    assert((ll)((A\
+    \ - B).get()) == c);\n  }\n  {\n    i128 c = i128(a) * b;\n    c %= mod, c +=\
+    \ mod, c %= mod;\n    assert((A * B).get() == u64(c));\n  }\n  if (b % mod !=\
+    \ 0) {\n    mint C = (A / B).get();\n    assert(C * B == A);\n  }\n  {\n    ll\
+    \ c = -a;\n    c %= mod, c += mod, c %= mod;\n    assert(ll((-A).get()) == c);\n\
+    \  }\n  {\n    ll e = rng(1, TEN(9));\n    ll x = Power<i128>(a, e, 1LL, [](i128&\
+    \ z) { z %= ll(mod); });\n    assert(A.pow(e) == mint{x});\n  }\n}\n\nvoid q()\
+    \ {\n  reg(s, -10, 10) reg(t, -10, 10) {\n    check(s, t);\n    check(mod - s,\
+    \ t);\n    check(s, mod - t);\n    check(mod - s, mod - t);\n  }\n  rep(t, TEN(6))\
+    \ {\n    ll a = rng(-mod, mod);\n    ll b = rng(-mod, mod);\n    check(a, b);\n\
+    \  }\n  trc2(\"OK\");\n\n  {\n    int a, b;\n    cin >> a >> b;\n    cout << a\
+    \ + b << \"\\n\";\n  }\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n\
+    \  while (t--) q();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../modint/modint-2-61m1.hpp\"\
+    \n//\n#include \"../../misc/rng.hpp\"\nusing namespace Nyaan;\n\nusing mint =\
+    \ modint_2_61m1;\nconstexpr ll mod = (1ll << 61) - 1;\nvoid check(ll a, ll b)\
+    \ {\n  mint A{a}, B{b};\n  {\n    ll c = a + b;\n    c %= mod, c += mod, c %=\
+    \ mod;\n    assert((ll)((A + B).get()) == c);\n  }\n  {\n    ll c = a - b;\n \
+    \   c %= mod, c += mod, c %= mod;\n    assert((ll)((A - B).get()) == c);\n  }\n\
+    \  {\n    i128 c = i128(a) * b;\n    c %= mod, c += mod, c %= mod;\n    assert((A\
+    \ * B).get() == u64(c));\n  }\n  if (b % mod != 0) {\n    mint C = (A / B).get();\n\
+    \    assert(C * B == A);\n  }\n  {\n    ll c = -a;\n    c %= mod, c += mod, c\
+    \ %= mod;\n    assert(ll((-A).get()) == c);\n  }\n  {\n    ll e = rng(1, TEN(9));\n\
+    \    ll x = Power<i128>(a, e, 1LL, [](i128& z) { z %= ll(mod); });\n    assert(A.pow(e)\
+    \ == mint{x});\n  }\n}\n\nvoid q() {\n  reg(s, -10, 10) reg(t, -10, 10) {\n  \
+    \  check(s, t);\n    check(mod - s, t);\n    check(s, mod - t);\n    check(mod\
+    \ - s, mod - t);\n  }\n  rep(t, TEN(6)) {\n    ll a = rng(-mod, mod);\n    ll\
+    \ b = rng(-mod, mod);\n    check(a, b);\n  }\n  trc2(\"OK\");\n\n  {\n    int\
+    \ a, b;\n    cin >> a >> b;\n    cout << a + b << \"\\n\";\n  }\n}\n\nvoid Nyaan::solve()\
+    \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -277,17 +321,19 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - matrix/f2-matrix.hpp
+  - modint/modint-2-61m1.hpp
+  - misc/rng.hpp
+  - internal/internal-seed.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+  path: verify/verify-unit-test/modint-2-61m1.test.cpp
   requiredBy: []
   timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+documentation_of: verify/verify-unit-test/modint-2-61m1.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
-- /verify/verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp.html
-title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+- /verify/verify/verify-unit-test/modint-2-61m1.test.cpp
+- /verify/verify/verify-unit-test/modint-2-61m1.test.cpp.html
+title: verify/verify-unit-test/modint-2-61m1.test.cpp
 ---

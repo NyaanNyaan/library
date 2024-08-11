@@ -21,6 +21,9 @@ data:
     path: math/bigint-all.hpp
     title: math/bigint-all.hpp
   - icon: ':heavy_check_mark:'
+    path: math/bigint-binary.hpp
+    title: math/bigint-binary.hpp
+  - icon: ':heavy_check_mark:'
     path: math/bigint-garner.hpp
     title: Garner's algorithm for bigint
   - icon: ':heavy_check_mark:'
@@ -29,6 +32,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/bigint-rational.hpp
     title: math/bigint-rational.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/bigint-to-hex.hpp
+    title: math/bigint-to-hex.hpp
   - icon: ':heavy_check_mark:'
     path: math/bigint.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
@@ -373,6 +379,12 @@ data:
     path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
     title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-stirling-2nd-row.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-stirling-2nd-row.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-stirling-2nd.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-stirling-2nd.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
   - icon: ':heavy_check_mark:'
@@ -403,6 +415,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
     title: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp
+    title: verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp
     title: verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp
   - icon: ':heavy_check_mark:'
@@ -420,6 +435,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
     title: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
+    title: verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
     title: verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
@@ -447,6 +465,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
     title: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-multiplication-of-hex.test.cpp
+    title: verify/verify-yosupo-math/yosupo-multiplication-of-hex.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
     title: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
@@ -720,9 +741,11 @@ data:
   - ntt/multivariate-circular-convolution.hpp
   - ntt/arbitrary-ntt.hpp
   - math/bigint-all.hpp
+  - math/bigint-binary.hpp
   - math/bigint-rational.hpp
   - math/bigint-garner.hpp
   - math/bigint.hpp
+  - math/bigint-to-hex.hpp
   - math/bigint-gcd.hpp
   - modulo/strassen.hpp
   - fps/fast-multieval.hpp
@@ -794,6 +817,7 @@ data:
   - verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
   - verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+  - verify/verify-yosupo-math/yosupo-multiplication-of-hex.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp
   - verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
@@ -805,9 +829,11 @@ data:
   - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
   - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
+  - verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
   - verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
   - verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
+  - verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp
   - verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
@@ -846,6 +872,8 @@ data:
   - verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
   - verify/verify-yosupo-fps/yosupo-product-of-polynomial-sequence.test.cpp
   - verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
+  - verify/verify-yosupo-fps/yosupo-stirling-2nd.test.cpp
+  - verify/verify-yosupo-fps/yosupo-stirling-2nd-row.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp

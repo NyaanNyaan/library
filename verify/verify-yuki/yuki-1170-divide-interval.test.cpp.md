@@ -253,12 +253,12 @@ data:
     \ < 0 ? k : data[k] = find(data[k]); }\n\n  int unite(int x, int y) {\n    if\
     \ ((x = find(x)) == (y = find(y))) return false;\n    if (data[x] > data[y]) swap(x,\
     \ y);\n    data[x] += data[y];\n    data[y] = x;\n    return true;\n  }\n\n  //\
-    \ f ... merge function\n  template<typename F>\n  int unite(int x, int y,const\
-    \ F &f) {\n    if ((x = find(x)) == (y = find(y))) return false;\n    if (data[x]\
-    \ > data[y]) swap(x, y);\n    data[x] += data[y];\n    data[y] = x;\n    f(x,\
-    \ y);\n    return true;\n  }\n\n  int size(int k) { return -data[find(k)]; }\n\
-    \n  int same(int x, int y) { return find(x) == find(y); }\n};\n\n/**\n * @brief\
-    \ Union Find(Disjoint Set Union)\n * @docs docs/data-structure/union-find.md\n\
+    \ f(x, y) : x \u306B y \u3092\u30DE\u30FC\u30B8\n  template<typename F>\n  int\
+    \ unite(int x, int y,const F &f) {\n    if ((x = find(x)) == (y = find(y))) return\
+    \ false;\n    if (data[x] > data[y]) swap(x, y);\n    data[x] += data[y];\n  \
+    \  data[y] = x;\n    f(x, y);\n    return true;\n  }\n\n  int size(int k) { return\
+    \ -data[find(k)]; }\n\n  int same(int x, int y) { return find(x) == find(y); }\n\
+    };\n\n/**\n * @brief Union Find(Disjoint Set Union)\n * @docs docs/data-structure/union-find.md\n\
     \ */\n#line 7 \"verify/verify-yuki/yuki-1170-divide-interval.test.cpp\"\nusing\
     \ namespace Nyaan;\n\nvoid q() {\n  inl(N, a, b);\n  vl X(N);\n  in(X);\n\n  DivideInterval\
     \ d(N);\n  int B = d.B;\n  UnionFind uf(2 * B);\n  vi num(2 * B);\n  rep(i, N)\
@@ -295,7 +295,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yuki/yuki-1170-divide-interval.test.cpp
   requiredBy: []
-  timestamp: '2024-05-03 23:21:26+09:00'
+  timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yuki/yuki-1170-divide-interval.test.cpp

@@ -810,29 +810,29 @@ data:
     \    T a = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n\
     \      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return U((u\
     \ % mod + mod) % mod) * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long\
-    \ long, __int128_t>;\n#line 5 \"math/bigint-rational.hpp\"\n\nusing BigRational\
-    \ = RationalBase<bigint, bigint>;\n\ndouble to_double(const BigRational& r) {\n\
-    \  pair<long double, int> a = r.x.dfp();\n  pair<long double, int> b = r.y.dfp();\n\
-    \  return a.first / b.first * powl(10.0, a.second - b.second);\n}\n#line 2 \"\
-    matrix/linear-equation.hpp\"\n\n#line 2 \"matrix/gauss-elimination.hpp\"\n\n#line\
-    \ 5 \"matrix/gauss-elimination.hpp\"\nusing namespace std;\n\n// {rank, det(\u975E\
-    \u6B63\u65B9\u884C\u5217\u306E\u5834\u5408\u306F\u672A\u5B9A\u7FA9)} \u3092\u8FD4\
-    \u3059\n// \u578B\u304C double \u3084 Rational \u3067\u3082\u52D5\u304F\u306F\u305A\
-    \uFF1F(\u672A\u691C\u8A3C)\n//\n// pivot \u5019\u88DC : [0, pivot_end)\ntemplate\
-    \ <typename T>\nstd::pair<int, T> GaussElimination(vector<vector<T>> &a, int pivot_end\
-    \ = -1,\n                                   bool diagonalize = false) {\n  if\
-    \ (a.empty()) return {0, 1};\n  int H = a.size(), W = a[0].size(), rank = 0;\n\
-    \  if (pivot_end == -1) pivot_end = W;\n  T det = 1;\n  for (int j = 0; j < pivot_end;\
-    \ j++) {\n    int idx = -1;\n    for (int i = rank; i < H; i++) {\n      if (a[i][j]\
-    \ != T(0)) {\n        idx = i;\n        break;\n      }\n    }\n    if (idx ==\
-    \ -1) {\n      det = 0;\n      continue;\n    }\n    if (rank != idx) det = -det,\
-    \ swap(a[rank], a[idx]);\n    det *= a[rank][j];\n    if (diagonalize && a[rank][j]\
-    \ != T(1)) {\n      T coeff = T(1) / a[rank][j];\n      for (int k = j; k < W;\
-    \ k++) a[rank][k] *= coeff;\n    }\n    int is = diagonalize ? 0 : rank + 1;\n\
-    \    for (int i = is; i < H; i++) {\n      if (i == rank) continue;\n      if\
-    \ (a[i][j] != T(0)) {\n        T coeff = a[i][j] / a[rank][j];\n        for (int\
-    \ k = j; k < W; k++) a[i][k] -= a[rank][k] * coeff;\n      }\n    }\n    rank++;\n\
-    \  }\n  return make_pair(rank, det);\n}\n#line 4 \"matrix/linear-equation.hpp\"\
+    \ long, __int128_t>;\nusing Fraction = Rational;\n#line 5 \"math/bigint-rational.hpp\"\
+    \n\nusing BigRational = RationalBase<bigint, bigint>;\n\ndouble to_double(const\
+    \ BigRational& r) {\n  pair<long double, int> a = r.x.dfp();\n  pair<long double,\
+    \ int> b = r.y.dfp();\n  return a.first / b.first * powl(10.0, a.second - b.second);\n\
+    }\n#line 2 \"matrix/linear-equation.hpp\"\n\n#line 2 \"matrix/gauss-elimination.hpp\"\
+    \n\n#line 5 \"matrix/gauss-elimination.hpp\"\nusing namespace std;\n\n// {rank,\
+    \ det(\u975E\u6B63\u65B9\u884C\u5217\u306E\u5834\u5408\u306F\u672A\u5B9A\u7FA9\
+    )} \u3092\u8FD4\u3059\n// \u578B\u304C double \u3084 Rational \u3067\u3082\u52D5\
+    \u304F\u306F\u305A\uFF1F(\u672A\u691C\u8A3C)\n//\n// pivot \u5019\u88DC : [0,\
+    \ pivot_end)\ntemplate <typename T>\nstd::pair<int, T> GaussElimination(vector<vector<T>>\
+    \ &a, int pivot_end = -1,\n                                   bool diagonalize\
+    \ = false) {\n  if (a.empty()) return {0, 1};\n  int H = a.size(), W = a[0].size(),\
+    \ rank = 0;\n  if (pivot_end == -1) pivot_end = W;\n  T det = 1;\n  for (int j\
+    \ = 0; j < pivot_end; j++) {\n    int idx = -1;\n    for (int i = rank; i < H;\
+    \ i++) {\n      if (a[i][j] != T(0)) {\n        idx = i;\n        break;\n   \
+    \   }\n    }\n    if (idx == -1) {\n      det = 0;\n      continue;\n    }\n \
+    \   if (rank != idx) det = -det, swap(a[rank], a[idx]);\n    det *= a[rank][j];\n\
+    \    if (diagonalize && a[rank][j] != T(1)) {\n      T coeff = T(1) / a[rank][j];\n\
+    \      for (int k = j; k < W; k++) a[rank][k] *= coeff;\n    }\n    int is = diagonalize\
+    \ ? 0 : rank + 1;\n    for (int i = is; i < H; i++) {\n      if (i == rank) continue;\n\
+    \      if (a[i][j] != T(0)) {\n        T coeff = a[i][j] / a[rank][j];\n     \
+    \   for (int k = j; k < W; k++) a[i][k] -= a[rank][k] * coeff;\n      }\n    }\n\
+    \    rank++;\n  }\n  return make_pair(rank, det);\n}\n#line 4 \"matrix/linear-equation.hpp\"\
     \n\n// \u89E3\u304C\u5B58\u5728\u3059\u308B\u5834\u5408\u306F, \u89E3\u304C v\
     \ + C_1 w_1 + ... + C_k w_k \u3068\u8868\u305B\u308B\u3068\u3057\u3066\n// (v,\
     \ w_1, ..., w_k) \u3092\u8FD4\u3059\n// \u89E3\u304C\u5B58\u5728\u3057\u306A\u3044\
@@ -921,7 +921,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
   requiredBy: []
-  timestamp: '2024-05-03 23:21:26+09:00'
+  timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp

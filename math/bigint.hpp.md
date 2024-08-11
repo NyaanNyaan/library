@@ -26,6 +26,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/bigint-rational.hpp
     title: math/bigint-rational.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/bigint-to-hex.hpp
+    title: math/bigint-to-hex.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
@@ -72,6 +75,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
     title: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
+    title: verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
     title: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
@@ -687,6 +693,7 @@ data:
   - math/bigint-all.hpp
   - math/bigint-rational.hpp
   - math/bigint-garner.hpp
+  - math/bigint-to-hex.hpp
   - math/bigint-gcd.hpp
   timestamp: '2024-03-28 20:36:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -702,6 +709,7 @@ data:
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
   - verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
   - verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
+  - verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
   - verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
   - verify/verify-unit-test/bigint2.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp

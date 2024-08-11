@@ -36,6 +36,12 @@ data:
     path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
     title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-stirling-2nd-row.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-stirling-2nd-row.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-stirling-2nd.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-stirling-2nd.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - icon: ':heavy_check_mark:'
@@ -198,6 +204,8 @@ data:
   - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp
+  - verify/verify-yosupo-fps/yosupo-stirling-2nd.test.cpp
+  - verify/verify-yosupo-fps/yosupo-stirling-2nd-row.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - verify/verify-unit-test/dual-fps.test.cpp

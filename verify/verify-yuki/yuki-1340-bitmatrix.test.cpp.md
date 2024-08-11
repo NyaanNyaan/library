@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: matrix/f2_matrix.hpp
-    title: matrix/f2_matrix.hpp
+    path: matrix/f2-matrix.hpp
+    title: matrix/f2-matrix.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -219,7 +219,7 @@ data:
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
     \ 4 \"verify/verify-yuki/yuki-1340-bitmatrix.test.cpp\"\n//\nusing namespace Nyaan;\n\
-    \n#line 2 \"matrix/f2_matrix.hpp\"\n\n#line 5 \"matrix/f2_matrix.hpp\"\nusing\
+    \n#line 2 \"matrix/f2-matrix.hpp\"\n\n#line 5 \"matrix/f2-matrix.hpp\"\nusing\
     \ namespace std;\n\nnamespace std {\ntemplate <size_t N>\nbool operator<(const\
     \ bitset<N> &a, const bitset<N> &b) {\n  int f = (a ^ b)._Find_first();\n  return\
     \ f == N ? false : a[f];\n}\n}  // namespace std\n\ntemplate <size_t H_MAX, size_t\
@@ -245,21 +245,21 @@ data:
     \       piv = i;\n          break;\n        }\n      }\n      if (piv == -1) continue;\n\
     \      if (piv != t) swap(A[piv], A[t]);\n      for (int i = 0; i < H; i++) {\n\
     \        if (i != t && A[i][u]) A[i] ^= A[t];\n      }\n      t++;\n    }\n  \
-    \  return t;\n  }\n\n  Mat inverse() const {\n    assert(H == W);\n    int N =\
-    \ H;\n    F2_Matrix<H_MAX, W_MAX * 2> c(H, W * 2);\n    for (int i = 0; i < N;\
-    \ i++) {\n      c[i][i + N] = 1;\n      for (int j = 0; j < N; j++) {\n      \
-    \  c[i][j] = A[i][j];\n      }\n    }\n    int r = c.sweep();\n    assert(r ==\
-    \ N);\n    Mat b(H, W);\n    for (int i = 0; i < N; i++) {\n      for (int j =\
-    \ 0; j < N; j++) {\n        b[i][j] = c[i][j + N];\n      }\n    }\n    return\
-    \ b;\n  }\n\n  int determinant() const {\n    assert(H == W);\n    F2_Matrix<H_MAX,\
-    \ W_MAX> c{*this};\n    int r = c.sweep();\n    return r == H ? 1 : 0;\n  }\n\n\
-    \  bool operator<(const Mat &rhs) const {\n    if (H != rhs.H) return H < rhs.H;\n\
-    \    if (W != rhs.W) return W < rhs.W;\n    return A < rhs.A;\n  }\n  bool operator==(const\
-    \ Mat &rhs) const {\n    return H == rhs.H and W == rhs.W and A == rhs.A;\n  }\n\
-    \n  friend ostream &operator<<(ostream &os, const Mat &b) {\n    for (int i =\
-    \ 0; i < b.H; i++) {\n      os << \"[ \";\n      for (int j = 0; j < b.W; j++)\
-    \ {\n        os << b[i][j] << \", \";\n      }\n      os << \"],\\n\";\n    }\n\
-    \    return os;\n  }\n};\n#line 8 \"verify/verify-yuki/yuki-1340-bitmatrix.test.cpp\"\
+    \  return t;\n  }\n\n  pair<bool, Mat> inverse() const {\n    assert(H == W);\n\
+    \    int N = H;\n    F2_Matrix<H_MAX, W_MAX * 2> c(H, W * 2);\n    for (int i\
+    \ = 0; i < N; i++) {\n      c[i][i + N] = 1;\n      for (int j = 0; j < N; j++)\
+    \ {\n        c[i][j] = A[i][j];\n      }\n    }\n    int r = c.sweep(N);\n   \
+    \ if (r != N) return {false, Mat{N, N}};\n    Mat b(H, W);\n    for (int i = 0;\
+    \ i < N; i++) {\n      for (int j = 0; j < N; j++) {\n        b[i][j] = c[i][j\
+    \ + N];\n      }\n    }\n    return {true, b};\n  }\n\n  int determinant() const\
+    \ {\n    assert(H == W);\n    F2_Matrix<H_MAX, W_MAX> c{*this};\n    int r = c.sweep();\n\
+    \    return r == H ? 1 : 0;\n  }\n\n  bool operator<(const Mat &rhs) const {\n\
+    \    if (H != rhs.H) return H < rhs.H;\n    if (W != rhs.W) return W < rhs.W;\n\
+    \    return A < rhs.A;\n  }\n  bool operator==(const Mat &rhs) const {\n    return\
+    \ H == rhs.H and W == rhs.W and A == rhs.A;\n  }\n\n  friend ostream &operator<<(ostream\
+    \ &os, const Mat &b) {\n    for (int i = 0; i < b.H; i++) {\n      os << \"[ \"\
+    ;\n      for (int j = 0; j < b.W; j++) {\n        os << b[i][j] << \", \";\n \
+    \     }\n      os << \"],\\n\";\n    }\n    return os;\n  }\n};\n#line 8 \"verify/verify-yuki/yuki-1340-bitmatrix.test.cpp\"\
     \n\nusing M = F2_Matrix<100, 128>;\n\nvoid Nyaan::solve() {\n  ll n, m, t;\n \
     \ in(n, m, t);\n  M mat(n, n);\n  rep(i, m) {\n    int a, b;\n    in(a, b);\n\
     \    mat[a][b] = 1;\n  }\n\n  M a = M::I(n);\n  {\n    while (t) {\n      if (t\
@@ -267,7 +267,7 @@ data:
     \    t >>= 1;\n    }\n  }\n  int ans = 0;\n  rep(i, n) if (a[0][i] != 0) ans++;\n\
     \  out(ans);\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/1340\"\n//\n#include \"\
-    ../../template/template.hpp\"\n//\nusing namespace Nyaan;\n\n#include \"../../matrix/f2_matrix.hpp\"\
+    ../../template/template.hpp\"\n//\nusing namespace Nyaan;\n\n#include \"../../matrix/f2-matrix.hpp\"\
     \n\nusing M = F2_Matrix<100, 128>;\n\nvoid Nyaan::solve() {\n  ll n, m, t;\n \
     \ in(n, m, t);\n  M mat(n, n);\n  rep(i, m) {\n    int a, b;\n    in(a, b);\n\
     \    mat[a][b] = 1;\n  }\n\n  M a = M::I(n);\n  {\n    while (t) {\n      if (t\
@@ -281,11 +281,11 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - matrix/f2_matrix.hpp
+  - matrix/f2-matrix.hpp
   isVerificationFile: true
   path: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
   requiredBy: []
-  timestamp: '2024-05-04 00:10:20+09:00'
+  timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp

@@ -22,6 +22,9 @@ data:
       path: data-structure/dynamic-union-find.hpp
       title: "\u52D5\u7684Union Find"
     - icon: ':heavy_check_mark:'
+      path: data-structure/erasable-priority-queue.hpp
+      title: data-structure/erasable-priority-queue.hpp
+    - icon: ':heavy_check_mark:'
       path: data-structure/hash-map-variable-length.hpp
       title: "Hash Map(\u53EF\u5909\u9577\u7248)"
     - icon: ':heavy_check_mark:'
@@ -485,6 +488,9 @@ data:
       path: math/bigint-all.hpp
       title: math/bigint-all.hpp
     - icon: ':heavy_check_mark:'
+      path: math/bigint-binary.hpp
+      title: math/bigint-binary.hpp
+    - icon: ':heavy_check_mark:'
       path: math/bigint-garner.hpp
       title: Garner's algorithm for bigint
     - icon: ':heavy_check_mark:'
@@ -493,6 +499,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/bigint-rational.hpp
       title: math/bigint-rational.hpp
+    - icon: ':heavy_check_mark:'
+      path: math/bigint-to-hex.hpp
+      title: math/bigint-to-hex.hpp
     - icon: ':heavy_check_mark:'
       path: math/bigint.hpp
       title: "\u591A\u500D\u9577\u6574\u6570"
@@ -612,8 +621,8 @@ data:
       path: matrix/determinant-arbitrary-mod.hpp
       title: matrix/determinant-arbitrary-mod.hpp
     - icon: ':heavy_check_mark:'
-      path: matrix/f2_matrix.hpp
-      title: matrix/f2_matrix.hpp
+      path: matrix/f2-matrix.hpp
+      title: matrix/f2-matrix.hpp
     - icon: ':heavy_check_mark:'
       path: matrix/gauss-elimination.hpp
       title: matrix/gauss-elimination.hpp
@@ -702,6 +711,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/barrett-reduction.hpp
       title: modint/barrett-reduction.hpp
+    - icon: ':heavy_check_mark:'
+      path: modint/modint-2-61m1.hpp
+      title: modint/modint-2-61m1.hpp
     - icon: ':warning:'
       path: modint/modint-cpp11.hpp
       title: modint/modint-cpp11.hpp
@@ -1492,6 +1504,9 @@ data:
       path: verify/verify-unit-test/enumerate-quotient.test.cpp
       title: verify/verify-unit-test/enumerate-quotient.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/erasable-priority-queue.test.cpp
+      title: verify/verify-unit-test/erasable-priority-queue.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/factorize.test.cpp
       title: verify/verify-unit-test/factorize.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1578,6 +1593,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/mf.test.cpp
       title: verify/verify-unit-test/mf.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/modint-2-61m1.test.cpp
+      title: verify/verify-unit-test/modint-2-61m1.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/modint.test.cpp
       title: verify/verify-unit-test/modint.test.cpp
@@ -1997,6 +2015,12 @@ data:
       path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
       title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-stirling-2nd-row.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-stirling-2nd-row.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-stirling-2nd.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-stirling-2nd.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2094,6 +2118,9 @@ data:
       path: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
       title: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp
+      title: verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
       title: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2154,6 +2181,9 @@ data:
       path: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
       title: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
+      title: verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
       title: verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2165,6 +2195,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
       title: verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-inverse-matrix-mod-2.test.cpp
+      title: verify/verify-yosupo-math/yosupo-inverse-matrix-mod-2.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
       title: verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
@@ -2204,6 +2237,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
       title: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-multiplication-of-hex.test.cpp
+      title: verify/verify-yosupo-math/yosupo-multiplication-of-hex.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
       title: verify/verify-yosupo-math/yosupo-nim-product.test.cpp

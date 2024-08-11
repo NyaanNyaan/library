@@ -197,26 +197,29 @@ data:
     \ [g, im] = inv_gcd(m0, m1);\n    T u1 = m1 / g;\n    if ((r1 - r0) % g) return\
     \ {0, 0};\n    T x = (r1 - r0) / g % u1 * im % u1;\n    r0 += x * m0;\n    m0\
     \ *= u1;\n    if (r0 < 0) r0 += m0;\n  }\n  return {r0, m0};\n}\n\n}  // namespace\
-    \ internal\n#line 5 \"modulo/mod-log.hpp\"\n\nint64_t mod_log(int64_t a, int64_t\
-    \ b, int64_t p) {\n  if ((a %= p) < 0) a += p;\n  if ((b %= p) < 0) b += p;\n\
-    \  int64_t f, g, r = 1 % p;\n  for (f = 0; (g = gcd(a, p)) > 1; ++f) {\n    if\
-    \ (b % g) return (r == b) ? f : -1;\n    b /= g;\n    p /= g;\n    (r *= (a /\
-    \ g)) %= p;\n  }\n  if (p == 1) return f;\n  int64_t ir = internal::inv(r, p);\n\
-    \  (b *= ir) %= p;\n  int64_t k = 0, ak = 1;\n  HashMap<int64_t, int64_t> baby;\n\
-    \  for (; k * k < p; ++k) {\n    if(baby.find(ak) == baby.end()) baby[ak] = k;\n\
-    \    (ak *= a) %= p;\n  }\n  int64_t iak = internal::inv(ak, p);\n  for (int64_t\
-    \ i = 0; i < k; ++i) {\n    if (baby.find(b) != baby.end()) return f + i * k +\
-    \ baby[b];\n    (b *= iak) %= p;\n  }\n  return -1;\n}\n"
+    \ internal\n#line 5 \"modulo/mod-log.hpp\"\n\n// a^x = b (mod p) \u3067\u3042\u308B\
+    \u6700\u5C0F\u306E\u975E\u8CA0\u6574\u6570 x \u3092\u8FD4\u3059\nint64_t mod_log(int64_t\
+    \ a, int64_t b, int64_t p) {\n  if ((a %= p) < 0) a += p;\n  if ((b %= p) < 0)\
+    \ b += p;\n  int64_t f, g, r = 1 % p;\n  for (f = 0; (g = gcd(a, p)) > 1; ++f)\
+    \ {\n    if (b % g) return (r == b) ? f : -1;\n    b /= g;\n    p /= g;\n    (r\
+    \ *= (a / g)) %= p;\n  }\n  if (p == 1) return f;\n  int64_t ir = internal::inv(r,\
+    \ p);\n  (b *= ir) %= p;\n  int64_t k = 0, ak = 1;\n  HashMap<int64_t, int64_t>\
+    \ baby;\n  for (; k * k < p; ++k) {\n    if(baby.find(ak) == baby.end()) baby[ak]\
+    \ = k;\n    (ak *= a) %= p;\n  }\n  int64_t iak = internal::inv(ak, p);\n  for\
+    \ (int64_t i = 0; i < k; ++i) {\n    if (baby.find(b) != baby.end()) return f\
+    \ + i * k + baby[b];\n    (b *= iak) %= p;\n  }\n  return -1;\n}\n"
   code: "#pragma once\n\n#include \"../hashmap/hashmap.hpp\"\n#include \"../internal/internal-math.hpp\"\
-    \n\nint64_t mod_log(int64_t a, int64_t b, int64_t p) {\n  if ((a %= p) < 0) a\
-    \ += p;\n  if ((b %= p) < 0) b += p;\n  int64_t f, g, r = 1 % p;\n  for (f = 0;\
-    \ (g = gcd(a, p)) > 1; ++f) {\n    if (b % g) return (r == b) ? f : -1;\n    b\
-    \ /= g;\n    p /= g;\n    (r *= (a / g)) %= p;\n  }\n  if (p == 1) return f;\n\
-    \  int64_t ir = internal::inv(r, p);\n  (b *= ir) %= p;\n  int64_t k = 0, ak =\
-    \ 1;\n  HashMap<int64_t, int64_t> baby;\n  for (; k * k < p; ++k) {\n    if(baby.find(ak)\
-    \ == baby.end()) baby[ak] = k;\n    (ak *= a) %= p;\n  }\n  int64_t iak = internal::inv(ak,\
-    \ p);\n  for (int64_t i = 0; i < k; ++i) {\n    if (baby.find(b) != baby.end())\
-    \ return f + i * k + baby[b];\n    (b *= iak) %= p;\n  }\n  return -1;\n}"
+    \n\n// a^x = b (mod p) \u3067\u3042\u308B\u6700\u5C0F\u306E\u975E\u8CA0\u6574\u6570\
+    \ x \u3092\u8FD4\u3059\nint64_t mod_log(int64_t a, int64_t b, int64_t p) {\n \
+    \ if ((a %= p) < 0) a += p;\n  if ((b %= p) < 0) b += p;\n  int64_t f, g, r =\
+    \ 1 % p;\n  for (f = 0; (g = gcd(a, p)) > 1; ++f) {\n    if (b % g) return (r\
+    \ == b) ? f : -1;\n    b /= g;\n    p /= g;\n    (r *= (a / g)) %= p;\n  }\n \
+    \ if (p == 1) return f;\n  int64_t ir = internal::inv(r, p);\n  (b *= ir) %= p;\n\
+    \  int64_t k = 0, ak = 1;\n  HashMap<int64_t, int64_t> baby;\n  for (; k * k <\
+    \ p; ++k) {\n    if(baby.find(ak) == baby.end()) baby[ak] = k;\n    (ak *= a)\
+    \ %= p;\n  }\n  int64_t iak = internal::inv(ak, p);\n  for (int64_t i = 0; i <\
+    \ k; ++i) {\n    if (baby.find(b) != baby.end()) return f + i * k + baby[b];\n\
+    \    (b *= iak) %= p;\n  }\n  return -1;\n}"
   dependsOn:
   - hashmap/hashmap.hpp
   - hashmap/hashmap-base.hpp
@@ -225,7 +228,7 @@ data:
   isVerificationFile: false
   path: modulo/mod-log.hpp
   requiredBy: []
-  timestamp: '2024-03-04 16:48:10+09:00'
+  timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp

@@ -334,6 +334,9 @@ data:
     path: verify/verify-unit-test/enumerate-quotient.test.cpp
     title: verify/verify-unit-test/enumerate-quotient.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/erasable-priority-queue.test.cpp
+    title: verify/verify-unit-test/erasable-priority-queue.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/factorize.test.cpp
     title: verify/verify-unit-test/factorize.test.cpp
   - icon: ':heavy_check_mark:'
@@ -417,6 +420,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/mf.test.cpp
     title: verify/verify-unit-test/mf.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/modint-2-61m1.test.cpp
+    title: verify/verify-unit-test/modint-2-61m1.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/modint.test.cpp
     title: verify/verify-unit-test/modint.test.cpp
@@ -832,6 +838,12 @@ data:
     path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
     title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-stirling-2nd-row.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-stirling-2nd-row.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-stirling-2nd.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-stirling-2nd.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
   - icon: ':heavy_check_mark:'
@@ -925,6 +937,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
     title: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp
+    title: verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
     title: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
   - icon: ':heavy_check_mark:'
@@ -985,6 +1000,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
     title: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
+    title: verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
     title: verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
   - icon: ':heavy_check_mark:'
@@ -996,6 +1014,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
     title: verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-inverse-matrix-mod-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-inverse-matrix-mod-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
     title: verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
@@ -1032,6 +1053,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
     title: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-multiplication-of-hex.test.cpp
+    title: verify/verify-yosupo-math/yosupo-multiplication-of-hex.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
     title: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
@@ -1663,6 +1687,7 @@ data:
   - verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
   - verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+  - verify/verify-yosupo-math/yosupo-multiplication-of-hex.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp
   - verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
@@ -1692,10 +1717,12 @@ data:
   - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
+  - verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
   - verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
   - verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp
   - verify/verify-yosupo-math/yosupo-count-squarefrees.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
   - verify/verify-yosupo-math/yosupo-primality-test-u64.test.cpp
@@ -1710,6 +1737,7 @@ data:
   - verify/verify-yosupo-math/yosupo-sum-of-totient-3.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
   - verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
+  - verify/verify-yosupo-math/yosupo-inverse-matrix-mod-2.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
@@ -1746,6 +1774,8 @@ data:
   - verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
   - verify/verify-yosupo-fps/yosupo-product-of-polynomial-sequence.test.cpp
   - verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
+  - verify/verify-yosupo-fps/yosupo-stirling-2nd.test.cpp
+  - verify/verify-yosupo-fps/yosupo-stirling-2nd-row.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-ofps.test.cpp
@@ -1849,6 +1879,8 @@ data:
   - verify/verify-unit-test/semiring.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-unit-test/erasable-priority-queue.test.cpp
+  - verify/verify-unit-test/modint-2-61m1.test.cpp
   - verify/verify-unit-test/segment-tree-beats.test.cpp
   - verify/verify-unit-test/nimber.test.cpp
   - verify/verify-unit-test/enumerate-quotient.test.cpp

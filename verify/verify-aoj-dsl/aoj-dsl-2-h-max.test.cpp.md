@@ -253,14 +253,14 @@ data:
     \ (int i = log; i >= 1; i--) {\n      if (((k >> i) << i) != k || (((k + 1) >>\
     \ i) << i) != (k + 1))\n        _push(k >> i);\n    }\n    return val[k];\n  }\n\
     \n  template <class G>\n  int max_right(int l, G check) {\n    assert(0 <= l &&\
-    \ l <= s);\n    assert(check(ei()));\n    if (l == n) return n;\n    l += n;\n\
+    \ l <= s);\n    assert(check(ti()));\n    if (l == n) return n;\n    l += n;\n\
     \    for (int i = log; i >= 1; i--) _push(l >> i);\n    T sm = ti();\n    do {\n\
     \      while (l % 2 == 0) l >>= 1;\n      if (!check(f(sm, val[l]))) {\n     \
     \   while (l < n) {\n          _push(l);\n          l = (2 * l);\n          if\
     \ (check(f(sm, val[l]))) {\n            sm = f(sm, val[l]);\n            l++;\n\
     \          }\n        }\n        return l - n;\n      }\n      sm = f(sm, val[l]);\n\
     \      l++;\n    } while ((l & -l) != l);\n    return s;\n  }\n\n  template <class\
-    \ G>\n  int min_left(int r, G check) {\n    assert(0 <= r && r <= s);\n    assert(check(ei()));\n\
+    \ G>\n  int min_left(int r, G check) {\n    assert(0 <= r && r <= s);\n    assert(check(ti()));\n\
     \    if (r == 0) return 0;\n    r += n;\n    for (int i = log; i >= 1; i--) _push((r\
     \ - 1) >> i);\n    T sm = ti();\n    do {\n      r--;\n      while (r > 1 && (r\
     \ % 2)) r >>= 1;\n      if (!check(f(val[r], sm))) {\n        while (r < n) {\n\
@@ -344,7 +344,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-2-h-max.test.cpp
   requiredBy: []
-  timestamp: '2024-05-03 23:21:26+09:00'
+  timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-2-h-max.test.cpp

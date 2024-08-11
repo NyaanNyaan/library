@@ -11,8 +11,14 @@ data:
     path: math-fast/gcd.hpp
     title: binary GCD
   - icon: ':heavy_check_mark:'
+    path: math/bigint-binary.hpp
+    title: math/bigint-binary.hpp
+  - icon: ':heavy_check_mark:'
     path: math/bigint-gcd.hpp
     title: math/bigint-gcd.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/bigint-to-hex.hpp
+    title: math/bigint-to-hex.hpp
   - icon: ':heavy_check_mark:'
     path: math/bigint.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
@@ -725,50 +731,166 @@ data:
     \ b);\n}\n\nMultiPrecisionInteger lcm(const MultiPrecisionInteger& a,\n      \
     \                    const MultiPrecisionInteger& b) {\n  return a / gcd(a, b)\
     \ * b;\n}\n#line 9 \"verify/verify-unit-test/bigint-gcd.test.cpp\"\n//\n#line\
-    \ 2 \"matrix/matrix.hpp\"\n\n#line 2 \"matrix/inverse-matrix.hpp\"\n\n#line 2\
-    \ \"matrix/gauss-elimination.hpp\"\n\n#line 5 \"matrix/gauss-elimination.hpp\"\
-    \nusing namespace std;\n\n// {rank, det(\u975E\u6B63\u65B9\u884C\u5217\u306E\u5834\
-    \u5408\u306F\u672A\u5B9A\u7FA9)} \u3092\u8FD4\u3059\n// \u578B\u304C double \u3084\
-    \ Rational \u3067\u3082\u52D5\u304F\u306F\u305A\uFF1F(\u672A\u691C\u8A3C)\n//\n\
-    // pivot \u5019\u88DC : [0, pivot_end)\ntemplate <typename T>\nstd::pair<int,\
-    \ T> GaussElimination(vector<vector<T>> &a, int pivot_end = -1,\n            \
-    \                       bool diagonalize = false) {\n  if (a.empty()) return {0,\
-    \ 1};\n  int H = a.size(), W = a[0].size(), rank = 0;\n  if (pivot_end == -1)\
-    \ pivot_end = W;\n  T det = 1;\n  for (int j = 0; j < pivot_end; j++) {\n    int\
-    \ idx = -1;\n    for (int i = rank; i < H; i++) {\n      if (a[i][j] != T(0))\
-    \ {\n        idx = i;\n        break;\n      }\n    }\n    if (idx == -1) {\n\
-    \      det = 0;\n      continue;\n    }\n    if (rank != idx) det = -det, swap(a[rank],\
-    \ a[idx]);\n    det *= a[rank][j];\n    if (diagonalize && a[rank][j] != T(1))\
-    \ {\n      T coeff = T(1) / a[rank][j];\n      for (int k = j; k < W; k++) a[rank][k]\
-    \ *= coeff;\n    }\n    int is = diagonalize ? 0 : rank + 1;\n    for (int i =\
-    \ is; i < H; i++) {\n      if (i == rank) continue;\n      if (a[i][j] != T(0))\
-    \ {\n        T coeff = a[i][j] / a[rank][j];\n        for (int k = j; k < W; k++)\
-    \ a[i][k] -= a[rank][k] * coeff;\n      }\n    }\n    rank++;\n  }\n  return make_pair(rank,\
-    \ det);\n}\n#line 4 \"matrix/inverse-matrix.hpp\"\n\ntemplate <typename mint>\n\
-    vector<vector<mint>> inverse_matrix(const vector<vector<mint>>& a) {\n  int N\
-    \ = a.size();\n  assert(N > 0);\n  assert(N == (int)a[0].size());\n\n  vector<vector<mint>>\
-    \ m(N, vector<mint>(2 * N));\n  for (int i = 0; i < N; i++) {\n    copy(begin(a[i]),\
-    \ end(a[i]), begin(m[i]));\n    m[i][N + i] = 1;\n  }\n\n  auto [rank, det] =\
-    \ GaussElimination(m, N, true);\n  if (rank != N) return {};\n\n  vector<vector<mint>>\
-    \ b(N);\n  for (int i = 0; i < N; i++) {\n    copy(begin(m[i]) + N, end(m[i]),\
-    \ back_inserter(b[i]));\n  }\n  return b;\n}\n#line 4 \"matrix/matrix.hpp\"\n\n\
-    template <class T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix() = default;\n\
-    \  Matrix(int n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int n) : A(n, vector<T>(n,\
-    \ T())){};\n\n  int H() const { return A.size(); }\n\n  int W() const { return\
-    \ A[0].size(); }\n\n  int size() const { return A.size(); }\n\n  inline const\
-    \ vector<T> &operator[](int k) const { return A[k]; }\n\n  inline vector<T> &operator[](int\
-    \ k) { return A[k]; }\n\n  static Matrix I(int n) {\n    Matrix mat(n);\n    for\
-    \ (int i = 0; i < n; i++) mat[i][i] = 1;\n    return (mat);\n  }\n\n  Matrix &operator+=(const\
-    \ Matrix &B) {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n\
-    \    for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j]\
-    \ += B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B)\
-    \ {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for\
-    \ (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -=\
-    \ B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B)\
-    \ {\n    int n = H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T>\
-    \ > C(n, vector<T>(m, T{}));\n    for (int i = 0; i < n; i++)\n      for (int\
-    \ k = 0; k < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k]\
-    \ * B[k][j];\n    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long\
+    \ 1 \"math/bigint-binary.hpp\"\n\n#line 9 \"math/bigint-binary.hpp\"\nusing namespace\
+    \ std;\n\n#line 12 \"math/bigint-binary.hpp\"\n\nnamespace BinaryBigIntImpl {\n\
+    \nusing u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i64 = long\
+    \ long;\n\n// 0 \u306F neg=false, dat={} \u3068\u3057\u3066\u6271\u3046\nstruct\
+    \ BinaryBigInt {\n  using M = BinaryBigInt;\n  bool neg;\n  vector<u32> dat;\n\
+    \n  BinaryBigInt() : neg(false), dat() {}\n\n  BinaryBigInt(bool _neg, const vector<u32>&\
+    \ _dat) : neg(_neg), dat(_dat) {}\n\n  BinaryBigInt(const string& S, int base)\
+    \ : neg(false) {\n    assert(base == 16);\n    int ie = -1;\n    if (S[0] == '-')\
+    \ neg = true, ie++;\n    for (int r = S.size() - 1; r > ie; r -= 8) {\n      int\
+    \ l = max(r - 8, ie);\n      u32 x = 0;\n      for (int i = l + 1; i <= r; i++)\
+    \ {\n        int c = 0;\n        if ('0' <= S[i] and S[i] <= '9') {\n        \
+    \  c = S[i] - '0';\n        } else if ('A' <= S[i] and S[i] <= 'F') {\n      \
+    \    c = S[i] - 'A' + 10;\n        } else {\n          c = S[i] - 'a' + 10;\n\
+    \        }\n        x = c + (x << 4);\n      }\n      dat.push_back(x);\n    }\n\
+    \    _shrink();\n  }\n\n  friend M operator+(const M& lhs, const M& rhs) {\n \
+    \   if (lhs.neg == rhs.neg) return {lhs.neg, _add(lhs.dat, rhs.dat)};\n    if\
+    \ (_leq(lhs.dat, rhs.dat)) {\n      // |l| <= |r|\n      auto c = _sub(rhs.dat,\
+    \ lhs.dat);\n      bool n = _is_zero(c) ? false : rhs.neg;\n      return {n, c};\n\
+    \    }\n    auto c = _sub(lhs.dat, rhs.dat);\n    bool n = _is_zero(c) ? false\
+    \ : lhs.neg;\n    return {n, c};\n  }\n  friend M operator-(const M& lhs, const\
+    \ M& rhs) { return lhs + (-rhs); }\n  friend M operator*(const M& lhs, const M&\
+    \ rhs) {\n    auto c = _mul(lhs.dat, rhs.dat);\n    bool n = _is_zero(c) ? false\
+    \ : (lhs.neg ^ rhs.neg);\n    return {n, c};\n  }\n\n  M& operator+=(const M&\
+    \ rhs) { return (*this) = (*this) + rhs; }\n  M& operator-=(const M& rhs) { return\
+    \ (*this) = (*this) - rhs; }\n  M& operator*=(const M& rhs) { return (*this) =\
+    \ (*this) * rhs; }\n\n  M operator-() const {\n    if (is_zero()) return *this;\n\
+    \    return {!neg, dat};\n  }\n  M operator+() const { return *this; }\n  friend\
+    \ M abs(const M& m) { return {false, m.dat}; }\n  bool is_zero() const { return\
+    \ _is_zero(dat); }\n\n  friend bool operator==(const M& lhs, const M& rhs) {\n\
+    \    return lhs.neg == rhs.neg && lhs.dat == rhs.dat;\n  }\n  friend bool operator!=(const\
+    \ M& lhs, const M& rhs) {\n    return lhs.neg != rhs.neg || lhs.dat != rhs.dat;\n\
+    \  }\n  friend bool operator<(const M& lhs, const M& rhs) {\n    return lhs ==\
+    \ rhs ? false : _neq_lt(lhs, rhs);\n  }\n  friend bool operator<=(const M& lhs,\
+    \ const M& rhs) {\n    return lhs == rhs ? true : _neq_lt(lhs, rhs);\n  }\n  friend\
+    \ bool operator>(const M& lhs, const M& rhs) {\n    return lhs == rhs ? false\
+    \ : _neq_lt(rhs, lhs);\n  }\n  friend bool operator>=(const M& lhs, const M& rhs)\
+    \ {\n    return lhs == rhs ? true : _neq_lt(rhs, lhs);\n  }\n\n  // 0 \u306E\u6642\
+    \ 0 \u3092\u8FD4\u3059\n  int ctz() const {\n    if (dat.empty()) return 0;\n\
+    \    int i = 0;\n    while (dat[i] == 0) i++;\n    return 32 * i + __builtin_ctzll(dat[i]);\n\
+    \  }\n  M& operator<<=(int s) {\n    assert(s >= 0);\n    if (dat.empty()) return\
+    \ *this;\n    int q = s / 32, r = s % 32;\n    dat.push_back(0);\n    if (r) {\n\
+    \      for (int i = (int)dat.size() - 1; i >= 1; i--) {\n        dat[i] = (dat[i]\
+    \ << r) | (dat[i - 1] >> (32 - r));\n      }\n      dat[0] <<= r;\n    }\n   \
+    \ dat.insert(begin(dat), q, 0);\n    return *this;\n  }\n  M& operator>>=(int\
+    \ s) {\n    assert(s >= 0);\n    int q = s / 32, r = s % 32;\n    if ((int)dat.size()\
+    \ <= q) {\n      dat.clear();\n      return *this;\n    }\n    dat.erase(begin(dat),\
+    \ begin(dat) + q);\n    if (r) {\n      for (int i = 0; i + 1 < (int)dat.size();\
+    \ i++) {\n        dat[i] = (dat[i] >> r) | (dat[i + 1] << (32 - r));\n      }\n\
+    \      dat.back() >>= r;\n    }\n    _shrink();\n    return *this;\n  }\n\n  friend\
+    \ M gcd(M a, M b) {\n    a.neg = b.neg = false;\n    if(a.dat.empty()) return\
+    \ b;\n    if(b.dat.empty()) return a;\n    int at = a.ctz(), bt = b.ctz();\n \
+    \   a >>= at, b >>= bt;\n    if (a < b) swap(a, b);\n    while (!b.dat.empty())\
+    \ {\n      a -= b;\n      a >>= a.ctz();\n      if (a < b) swap(a, b);\n    }\n\
+    \    return a <<= min(at, bt);\n  }\n\n  string to_hex() const {\n    if (dat.empty())\
+    \ return \"0\";\n    string res;\n    for (int i = 0; i < (int)dat.size(); i++)\
+    \ {\n      u32 x = dat[i];\n      for (int j = 0; j < 8; j++) {\n        res.push_back(\"\
+    0123456789ABCDEF\"[x & 15]);\n        x >>= 4;\n      }\n    }\n    while (res.back()\
+    \ == '0') res.pop_back();\n    reverse(begin(res), end(res));\n    if (neg) res.insert(begin(res),\
+    \ '-');\n    return res;\n  }\n\n private:\n  // size\n  int _size() const { return\
+    \ dat.size(); }\n  // a == b\n  static bool _eq(const vector<u32>& a, const vector<u32>&\
+    \ b) { return a == b; }\n  // a < b\n  static bool _lt(const vector<u32>& a, const\
+    \ vector<u32>& b) {\n    if (a.size() != b.size()) return a.size() < b.size();\n\
+    \    for (int i = a.size() - 1; i >= 0; i--) {\n      if (a[i] != b[i]) return\
+    \ a[i] < b[i];\n    }\n    return false;\n  }\n  // a <= b\n  static bool _leq(const\
+    \ vector<u32>& a, const vector<u32>& b) {\n    return _eq(a, b) || _lt(a, b);\n\
+    \  }\n  // a < b (s.t. a != b)\n  static bool _neq_lt(const M& lhs, const M& rhs)\
+    \ {\n    assert(lhs != rhs);\n    if (lhs.neg != rhs.neg) return lhs.neg;\n  \
+    \  bool f = _lt(lhs.dat, rhs.dat);\n    if (f) return !lhs.neg;\n    return lhs.neg;\n\
+    \  }\n  // a == 0\n  static bool _is_zero(const vector<u32>& a) { return a.empty();\
+    \ }\n  // \u672B\u5C3E 0 \u3092\u524A\u9664\n  static void _shrink(vector<u32>&\
+    \ a) {\n    while (a.size() && a.back() == 0) a.pop_back();\n  }\n  // \u672B\u5C3E\
+    \ 0 \u3092\u524A\u9664\n  void _shrink() {\n    while (_size() && dat.back() ==\
+    \ 0) dat.pop_back();\n  }\n  // a + b\n  static vector<u32> _add(const vector<u32>&\
+    \ a, const vector<u32>& b) {\n    vector<u32> c(max(a.size(), b.size()) + 1);\n\
+    \    int carry = 0;\n    for (int i = 0; i < (int)c.size(); i++) {\n      u64\
+    \ s = carry;\n      carry = 0;\n      if (i < (int)a.size()) s += a[i];\n    \
+    \  if (i < (int)b.size()) s += b[i];\n      if (s >= (1uLL << 32)) s -= 1uLL <<\
+    \ 32, carry = 1;\n      c[i] = s;\n    }\n    _shrink(c);\n    return c;\n  }\n\
+    \  // a - b\n  static vector<u32> _sub(const vector<u32>& a, const vector<u32>&\
+    \ b) {\n    assert(_leq(b, a));\n    vector<u32> c{a};\n    i64 borrow = 0;\n\
+    \    for (int i = 0; i < (int)a.size(); i++) {\n      if (i < (int)b.size()) borrow\
+    \ += b[i];\n      i64 x = c[i] - borrow;\n      borrow = 0;\n      if (x < 0)\
+    \ x += 1uLL << 32, borrow = 1;\n      c[i] = x;\n    }\n    assert(borrow == 0);\n\
+    \    _shrink(c);\n    return c;\n  }\n  // a * b (fft)\n  static vector<u32> _mul(const\
+    \ vector<u32>& a, const vector<u32>& b) {\n    if (a.empty() || b.empty()) return\
+    \ {};\n    vector<int> a2(a.size() * 2), b2(b.size() * 2);\n    for (int i = 0;\
+    \ i < (int)a.size(); i++) {\n      a2[i * 2 + 0] = a[i] & 65535;\n      a2[i *\
+    \ 2 + 1] = a[i] >> 16;\n    }\n    for (int i = 0; i < (int)b.size(); i++) {\n\
+    \      b2[i * 2 + 0] = b[i] & 65535;\n      b2[i * 2 + 1] = b[i] >> 16;\n    }\n\
+    \    auto m = ArbitraryNTT::multiply_u128(a2, b2);\n    vector<u32> c;\n    c.reserve(a.size()\
+    \ + b.size() + 3);\n    __uint128_t x = 0;\n    for (int i = 0;; i += 2) {\n \
+    \     if (i >= (int)m.size() && x == 0) break;\n      if (i + 0 < (int)m.size())\
+    \ x += m[i + 0];\n      if (i + 1 < (int)m.size()) x += m[i + 1] << 16;\n    \
+    \  c.push_back(x & ((1uLL << 32) - 1));\n      x >>= 32;\n    }\n    _shrink(c);\n\
+    \    return c;\n  }\n};\n\n}  // namespace BinaryBigIntImpl\n\nusing BinaryBigIntImpl::BinaryBigInt;\n\
+    #line 2 \"math/bigint-to-hex.hpp\"\n\n#line 6 \"math/bigint-to-hex.hpp\"\nusing\
+    \ namespace std;\n\n#line 9 \"math/bigint-to-hex.hpp\"\n\n// hex to bigint\nbigint\
+    \ HtoB(string S) {\n  int neg = 0;\n  if (S[0] == '-') neg = 1, S.erase(begin(S));\n\
+    \n  map<int, bigint> memo;\n\n  auto power = [&](int e) {\n    bigint res = 1,\
+    \ x = 16;\n    for (; e; e >>= 1, x *= x) {\n      if (e & 1) res *= x;\n    }\n\
+    \    return res;\n  };\n  auto pow16 = [&](int e) {\n    if (memo.count(e)) return\
+    \ memo[e];\n    return memo[e] = power(e);\n  };\n  auto dfs = [&](auto rc, int\
+    \ l, int r) -> bigint {\n    if (l + 1 == r) {\n      if ('0' <= S[l] and S[l]\
+    \ <= '9') return S[l] - '0';\n      if ('A' <= S[l] and S[l] <= 'F') return S[l]\
+    \ - 'A' + 10;\n      return S[l] - 'a' + 10;\n    }\n    int m = (l + r) / 2;\n\
+    \    auto L = rc(rc, l, m);\n    auto R = rc(rc, m, r);\n    return L * pow16(r\
+    \ - m) + R;\n  };\n  bigint res = dfs(dfs, 0, S.size());\n  if (neg) res.neg =\
+    \ true;\n  return res;\n}\n\n// bigint to hex\nstring BtoH(bigint x) {\n  if (x.neg)\
+    \ return \"-\" + BtoH(-x);\n  if (x < 16) {\n    if (x < 10) return string(1,\
+    \ '0' + x.to_ll());\n    return string(1, 'A' + x.to_ll() - 10);\n  }\n  static\
+    \ vector<bigint> ys{16};\n  int log_e = 0;\n  while (true) {\n    if (log_e +\
+    \ 1 == (int)ys.size()) ys.push_back(ys.back() * ys.back());\n    if (ys[log_e\
+    \ + 1] > x) break;\n    log_e++;\n  }\n  int e = 1 << log_e;\n  bigint y = ys[log_e];\n\
+    \  bigint q = x / y;\n  bigint r = x - q * y;\n  string hi = BtoH(q);\n  string\
+    \ lo = BtoH(r);\n  return hi + string(e - lo.size(), '0') + lo;\n}\n#line 12 \"\
+    verify/verify-unit-test/bigint-gcd.test.cpp\"\n//\n#line 2 \"matrix/matrix.hpp\"\
+    \n\n#line 2 \"matrix/inverse-matrix.hpp\"\n\n#line 2 \"matrix/gauss-elimination.hpp\"\
+    \n\n#line 5 \"matrix/gauss-elimination.hpp\"\nusing namespace std;\n\n// {rank,\
+    \ det(\u975E\u6B63\u65B9\u884C\u5217\u306E\u5834\u5408\u306F\u672A\u5B9A\u7FA9\
+    )} \u3092\u8FD4\u3059\n// \u578B\u304C double \u3084 Rational \u3067\u3082\u52D5\
+    \u304F\u306F\u305A\uFF1F(\u672A\u691C\u8A3C)\n//\n// pivot \u5019\u88DC : [0,\
+    \ pivot_end)\ntemplate <typename T>\nstd::pair<int, T> GaussElimination(vector<vector<T>>\
+    \ &a, int pivot_end = -1,\n                                   bool diagonalize\
+    \ = false) {\n  if (a.empty()) return {0, 1};\n  int H = a.size(), W = a[0].size(),\
+    \ rank = 0;\n  if (pivot_end == -1) pivot_end = W;\n  T det = 1;\n  for (int j\
+    \ = 0; j < pivot_end; j++) {\n    int idx = -1;\n    for (int i = rank; i < H;\
+    \ i++) {\n      if (a[i][j] != T(0)) {\n        idx = i;\n        break;\n   \
+    \   }\n    }\n    if (idx == -1) {\n      det = 0;\n      continue;\n    }\n \
+    \   if (rank != idx) det = -det, swap(a[rank], a[idx]);\n    det *= a[rank][j];\n\
+    \    if (diagonalize && a[rank][j] != T(1)) {\n      T coeff = T(1) / a[rank][j];\n\
+    \      for (int k = j; k < W; k++) a[rank][k] *= coeff;\n    }\n    int is = diagonalize\
+    \ ? 0 : rank + 1;\n    for (int i = is; i < H; i++) {\n      if (i == rank) continue;\n\
+    \      if (a[i][j] != T(0)) {\n        T coeff = a[i][j] / a[rank][j];\n     \
+    \   for (int k = j; k < W; k++) a[i][k] -= a[rank][k] * coeff;\n      }\n    }\n\
+    \    rank++;\n  }\n  return make_pair(rank, det);\n}\n#line 4 \"matrix/inverse-matrix.hpp\"\
+    \n\ntemplate <typename mint>\nvector<vector<mint>> inverse_matrix(const vector<vector<mint>>&\
+    \ a) {\n  int N = a.size();\n  assert(N > 0);\n  assert(N == (int)a[0].size());\n\
+    \n  vector<vector<mint>> m(N, vector<mint>(2 * N));\n  for (int i = 0; i < N;\
+    \ i++) {\n    copy(begin(a[i]), end(a[i]), begin(m[i]));\n    m[i][N + i] = 1;\n\
+    \  }\n\n  auto [rank, det] = GaussElimination(m, N, true);\n  if (rank != N) return\
+    \ {};\n\n  vector<vector<mint>> b(N);\n  for (int i = 0; i < N; i++) {\n    copy(begin(m[i])\
+    \ + N, end(m[i]), back_inserter(b[i]));\n  }\n  return b;\n}\n#line 4 \"matrix/matrix.hpp\"\
+    \n\ntemplate <class T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix()\
+    \ = default;\n  Matrix(int n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int\
+    \ n) : A(n, vector<T>(n, T())){};\n\n  int H() const { return A.size(); }\n\n\
+    \  int W() const { return A[0].size(); }\n\n  int size() const { return A.size();\
+    \ }\n\n  inline const vector<T> &operator[](int k) const { return A[k]; }\n\n\
+    \  inline vector<T> &operator[](int k) { return A[k]; }\n\n  static Matrix I(int\
+    \ n) {\n    Matrix mat(n);\n    for (int i = 0; i < n; i++) mat[i][i] = 1;\n \
+    \   return (mat);\n  }\n\n  Matrix &operator+=(const Matrix &B) {\n    int n =\
+    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
+    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] += B[i][j];\n   \
+    \ return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B) {\n    int n =\
+    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
+    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -= B[i][j];\n   \
+    \ return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B) {\n    int n =\
+    \ H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T> > C(n,\
+    \ vector<T>(m, T{}));\n    for (int i = 0; i < n; i++)\n      for (int k = 0;\
+    \ k < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k] *\
+    \ B[k][j];\n    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long\
     \ long k) {\n    Matrix B = Matrix::I(H());\n    while (k > 0) {\n      if (k\
     \ & 1) B *= *this;\n      *this *= *this;\n      k >>= 1LL;\n    }\n    A.swap(B.A);\n\
     \    return (*this);\n  }\n\n  Matrix operator+(const Matrix &B) const { return\
@@ -797,7 +919,7 @@ data:
     \ {\n        T a = B[j][i];\n        if (a == 0) continue;\n        for (int k\
     \ = i; k < W(); k++) {\n          B[j][k] -= B[i][k] * a;\n        }\n      }\n\
     \    }\n    return ret;\n  }\n};\n\n/**\n * @brief \u884C\u5217\u30E9\u30A4\u30D6\
-    \u30E9\u30EA\n */\n#line 12 \"verify/verify-unit-test/bigint-gcd.test.cpp\"\n\n\
+    \u30E9\u30EA\n */\n#line 15 \"verify/verify-unit-test/bigint-gcd.test.cpp\"\n\n\
     namespace GCDforBigintImpl {\n\nusing Mat = Matrix<bigint>;\n\n// \u4E0B\u4F4D\
     \ d \u6841\u3092\u9664\u304F\nbigint suf(const bigint& n, int d) {\n  d = min(d,\
     \ (int)n.dat.size());\n  return bigint{false, vector<int>{begin(n.dat) + d, end(n.dat)}};\n\
@@ -836,72 +958,82 @@ data:
     \ p;\n    p[0][0].neg = p[1][0].neg = false;\n    if (p[0][0] < p[1][0]) swap(p[0][0],\
     \ p[1][0]);\n    inner_succ(m1, p);\n  }\n  return p[0][0];\n}\n\n}  // namespace\
     \ GCDforBigintImpl\n\nusing GCDforBigintImpl::gcd_d_ary;\nusing GCDforBigintImpl::gcd_half;\n\
-    using GCDforBigintImpl::gcd_naive;\n\nusing namespace Nyaan;\n\nvoid q() {\n \
-    \ {\n    bigint a =\n        \"1234567900000000000000000000000000000000000000000000000000000000000\"\
+    using GCDforBigintImpl::gcd_naive;\n\nbigint gcd_via_binary(bigint a, bigint b)\
+    \ {\n  BinaryBigInt A{BtoH(a), 16};\n  BinaryBigInt B{BtoH(b), 16};\n  BinaryBigInt\
+    \ C = gcd(A, B);\n  return HtoB(C.to_hex());\n}\n\nusing namespace Nyaan;\n\n\
+    void q() {\n  {\n    bigint a =\n        \"1234567900000000000000000000000000000000000000000000000000000000000\"\
     s;\n    bigint b =\n        \"111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000\"\
-    s;\n    bigint g = gcd_half(a, b);\n    trc(a, b, g);\n  }\n  auto gen = [&](int\
-    \ d) {\n    string S(d, '0');\n    each(c, S) c += rng(0, 9);\n    while (sz(S)\
-    \ and S[0] == '0') S.erase(begin(S));\n    if (S.empty()) return bigint{};\n \
-    \   return bigint{S};\n  };\n\n#ifdef PROFILER\n  {\n    for (int d = 1; d <=\
-    \ 256; d *= 2) {\n      V<bigint> as, bs;\n      int T = 1000;\n      rep(i, T)\
-    \ {\n        as.push_back(gen(d));\n        bs.push_back(gen(d));\n      }\n\n\
-    \      Timer timer;\n      bigint g1 = 0, g2 = 0;\n\n      timer.reset();\n  \
-    \    rep(i, T) g2 += gcd_d_ary(as[i], bs[i]);\n      ll t2 = timer.elapsed();\n\
-    \n      trc2(d, t2);\n    }\n    exit(0);\n  }\n#endif\n\n  auto check = [&](bigint\
-    \ a, bigint b) -> void {\n    bigint g1 = gcd_half(a, b);\n    bigint g2 = gcd_naive(a,\
-    \ b);\n    bigint g3 = gcd_d_ary<false>(a, b);\n    bigint g4 = gcd_d_ary<true>(a,\
-    \ b);\n    if (g1 != g2 or g2 != g3 or g3 != g4) {\n      trc2(a, b);\n      trc2(g1);\n\
-    \      trc2(g2);\n      trc2(g3);\n      trc2(g4);\n      trc2(divmod(g3, g4));\n\
-    \      exit(1);\n    }\n    if (g1 == 0) return;\n    auto [aq, ar] = divmod(a,\
-    \ g1);\n    auto [bq, br] = divmod(b, g1);\n    assert(ar == 0 and br == 0);\n\
-    \    assert(gcd_half(aq, bq) == 1);\n    assert(gcd_naive(aq, bq) == 1);\n   \
-    \ assert(gcd_d_ary<false>(aq, bq) == 1);\n    assert(gcd_d_ary<true>(aq, bq) ==\
-    \ 1);\n  };\n\n  rep(s, 100) rep(t, 100) {\n    bigint a = s;\n    bigint b =\
-    \ t;\n    check(a, b);\n    if (a != 0) check(-a, b);\n    if (b != 0) check(a,\
+    s;\n    bigint g = gcd_half(a, b);\n  }\n  auto gen = [&](int d) {\n    string\
+    \ S(d, '0');\n    each(c, S) c += rng(0, 9);\n    while (sz(S) and S[0] == '0')\
+    \ S.erase(begin(S));\n    if (S.empty()) return bigint{};\n    return bigint{S};\n\
+    \  };\n\n#ifdef PROFILER\n  {\n    for (int d = 1; d <= 256; d *= 2) {\n     \
+    \ V<bigint> as, bs;\n      int T = 1000;\n      rep(i, T) {\n        as.push_back(gen(d));\n\
+    \        bs.push_back(gen(d));\n      }\n\n      Timer timer;\n      bigint g1\
+    \ = 0, g2 = 0;\n\n      timer.reset();\n      rep(i, T) g2 += gcd_d_ary(as[i],\
+    \ bs[i]);\n      ll t2 = timer.elapsed();\n\n      trc2(d, t2);\n    }\n    exit(0);\n\
+    \  }\n#endif\n\n  auto check = [&](bigint a, bigint b) -> void {\n    // trc(a,\
+    \ b);\n    bigint g1 = gcd_half(a, b);\n    bigint g2 = gcd_naive(a, b);\n   \
+    \ bigint g3 = gcd_d_ary<false>(a, b);\n    bigint g4 = gcd_d_ary<true>(a, b);\n\
+    \    bigint g5 = gcd_via_binary(a, b);\n    if (g1 != g2 or g2 != g3 or g3 !=\
+    \ g4 or g4 != g5) {\n      trc2(a, b);\n      trc2(g1);\n      trc2(g2);\n   \
+    \   trc2(g3);\n      trc2(g4);\n      trc2(g5);\n      exit(1);\n    }\n    if\
+    \ (g1 == 0) return;\n    auto [aq, ar] = divmod(a, g1);\n    auto [bq, br] = divmod(b,\
+    \ g1);\n    assert(ar == 0 and br == 0);\n    assert(gcd_half(aq, bq) == 1);\n\
+    \    assert(gcd_naive(aq, bq) == 1);\n    assert(gcd_d_ary<false>(aq, bq) == 1);\n\
+    \    assert(gcd_d_ary<true>(aq, bq) == 1);\n  };\n\n  rep(s, 100) rep(t, 100)\
+    \ {\n    bigint a = s;\n    bigint b = t;\n    check(a, b);\n    if (a != 0) check(-a,\
+    \ b);\n    if (b != 0) check(a, -b);\n    if (a != 0 and b != 0) check(-a, -b);\n\
+    \  }\n  rep(t, 500) {\n    bigint a = gen(rng(1, 100));\n    bigint b = gen(rng(1,\
+    \ 100));\n    check(a, b);\n    if (a != 0) check(-a, b);\n    if (b != 0) check(a,\
     \ -b);\n    if (a != 0 and b != 0) check(-a, -b);\n  }\n  rep(t, 500) {\n    bigint\
-    \ a = gen(rng(1, 100));\n    bigint b = gen(rng(1, 100));\n    check(a, b);\n\
-    \    if (a != 0) check(-a, b);\n    if (b != 0) check(a, -b);\n    if (a != 0\
-    \ and b != 0) check(-a, -b);\n  }\n  rep(t, 500) {\n    bigint a = gen(rng(1,\
-    \ 50));\n    bigint b = gen(rng(1, 50));\n    bigint c = gen(rng(1, 50));\n  \
-    \  a *= c, b *= c;\n    check(a, b);\n    if (a != 0) check(-a, b);\n    if (b\
-    \ != 0) check(a, -b);\n    if (a != 0 and b != 0) check(-a, -b);\n  }\n  reg(a,\
-    \ 90, 110) reg(b, 90, 110) {\n    string s(a + 1, '0'), t(b + 1, '0');\n    s[0]\
-    \ = t[0] = '1';\n    check(s, t);\n  }\n\n  cerr << \"OK\" << endl;\n\n  // \u5B9F\
-    \u884C\u6642\u9593\u306E\u6BD4\u8F03\n  /**\n  for (int d = 1; d <= 256; d *=\
-    \ 2) {\n    V<bigint> as, bs;\n    int T = 1000;\n    rep(i, T) {\n      as.push_back(gen(d));\n\
-    \      bs.push_back(gen(d));\n    }\n\n    Timer timer;\n    bigint g1 = 0, g2\
-    \ = 0, g3 = 0;\n\n    timer.reset();\n    rep(i, T) g1 += gcd_half(as[i], bs[i]);\n\
-    \    ll t1 = timer.elapsed();\n\n    timer.reset();\n    rep(i, T) g2 += gcd_d_ary(as[i],\
-    \ bs[i]);\n    ll t2 = timer.elapsed();\n\n    timer.reset();\n    rep(i, T) g3\
-    \ += gcd_d_ary<true>(as[i], bs[i]);\n    ll t3 = timer.elapsed();\n\n    assert(g1\
-    \ == g2 and g2 == g3);\n    trc2(d, t1, t2, t3);\n  }\n  //*/\n\n  {\n    int\
-    \ a, b;\n    cin >> a >> b;\n    cout << a + b << \"\\n\";\n  }\n}\n\nvoid Nyaan::solve()\
-    \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
+    \ a = gen(rng(1, 50));\n    bigint b = gen(rng(1, 50));\n    bigint c = gen(rng(1,\
+    \ 50));\n    a *= c, b *= c;\n    check(a, b);\n    if (a != 0) check(-a, b);\n\
+    \    if (b != 0) check(a, -b);\n    if (a != 0 and b != 0) check(-a, -b);\n  }\n\
+    \  reg(a, 90, 110) reg(b, 90, 110) {\n    string s(a + 1, '0'), t(b + 1, '0');\n\
+    \    s[0] = t[0] = '1';\n    check(s, t);\n  }\n  reg(a, 90, 110) reg(b, 90, 110)\
+    \ {\n    string s(a + 1, '0'), t(b + 1, '0');\n    s[0] = t[0] = '1';\n    rep(i,\
+    \ 3) {\n      if (i == 1) {\n        rep(j, 20) s[j] = rng('0', '9');\n      }\n\
+    \      if (i == 2) {\n        rep(j, 20) t[j] = rng('0', '9');\n      }\n    \
+    \  bigint S = HtoB(s);\n      bigint T = HtoB(t);\n      string u = S.to_string();\n\
+    \      string v = T.to_string();\n      check(u, v);\n    }\n  }\n\n  cerr <<\
+    \ \"OK\" << endl;\n\n  // \u5B9F\u884C\u6642\u9593\u306E\u6BD4\u8F03\n  /**\n\
+    \  for (int d = 1; d <= 1024; d *= 2) {\n    V<bigint> as, bs;\n    int T = 1000;\n\
+    \    rep(i, T) {\n      as.push_back(gen(d));\n      bs.push_back(gen(d));\n \
+    \   }\n\n    Timer timer;\n    bigint g1 = 0, g2 = 0, g3 = 0, g4 = 0;\n\n    timer.reset();\n\
+    \    rep(i, T) g1 += gcd_half(as[i], bs[i]);\n    ll t1 = timer.elapsed();\n\n\
+    \    timer.reset();\n    rep(i, T) g2 += gcd_d_ary(as[i], bs[i]);\n    ll t2 =\
+    \ timer.elapsed();\n\n    timer.reset();\n    rep(i, T) g3 += gcd_d_ary<true>(as[i],\
+    \ bs[i]);\n    ll t3 = timer.elapsed();\n\n    timer.reset();\n    rep(i, T) g4\
+    \ += gcd_via_binary(as[i], bs[i]);\n    ll t4 = timer.elapsed();\n\n    assert(g1\
+    \ == g2 and g2 == g3 and g3 == g4);\n    trc2(d, t1, t2, t3, t4);\n  }\n  //*/\n\
+    \n  {\n    int a, b;\n    cin >> a >> b;\n    cout << a + b << \"\\n\";\n  }\n\
+    }\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\n#include\
     \ \"../../misc/timer.hpp\"\n//\n#include \"../../math/bigint-gcd.hpp\"\n//\n#include\
-    \ \"../../math/bigint.hpp\"\n#include \"../../matrix/matrix.hpp\"\n\nnamespace\
-    \ GCDforBigintImpl {\n\nusing Mat = Matrix<bigint>;\n\n// \u4E0B\u4F4D d \u6841\
-    \u3092\u9664\u304F\nbigint suf(const bigint& n, int d) {\n  d = min(d, (int)n.dat.size());\n\
-    \  return bigint{false, vector<int>{begin(n.dat) + d, end(n.dat)}};\n}\n\n// \u7E26\
-    \u30D9\u30AF\u30C8\u30EB (p00, p10) \u3092\u4F5C\u308B\nMat make_vec(const bigint&\
-    \ p00, const bigint& p10) {\n  Mat m(2, 1);\n  m[0][0] = p00, m[1][0] = p10;\n\
-    \  return m;\n}\n\ntemplate <typename I>\nMat inner_naive(Mat& p) {\n  assert(p[0][0]\
-    \ >= p[1][0]);\n  assert((int)p[0][0].dat.size() <= 4);\n  I g = 1;\n  // solve\
-    \ : ax + by = gcd(a, b)\n  // return : pair(x, y)\n  auto extgcd = [&](auto rc,\
-    \ I a, I b) -> pair<I, I> {\n    if (b == 0) {\n      g = a;\n      return make_pair(1,\
-    \ 0);\n    }\n    I x, y;\n    tie(y, x) = rc(rc, b, a % b);\n    y -= a / b *\
-    \ x;\n    return make_pair(x, y);\n  };\n  I a = p[0][0].to_i128(), b = p[1][0].to_i128(),\
-    \ x, y;\n  tie(x, y) = extgcd(extgcd, a, b);\n  Mat m(2);\n  m[0][0] = x, m[0][1]\
-    \ = y;\n  m[1][0] = b / g, m[1][1] = -a / g;\n  return m;\n}\n// p_0 >= p_1, 1\
-    \ \u624B\u9032\u3081\u308B\nvoid inner_succ(Mat& m, Mat& p) {\n  assert(p[0][0]\
-    \ >= p[1][0]);\n  if (p[1][0] == 0) return;\n  auto [quo, rem] = divmod(p[0][0],\
-    \ p[1][0]);\n  m[0][0] -= m[1][0] * quo;\n  m[0][1] -= m[1][1] * quo;\n  swap(m[0][0],\
-    \ m[1][0]), swap(m[0][1], m[1][1]);\n  p[0][0] = p[1][0], p[1][0] = rem;\n}\n\
-    Mat inner_half_gcd(Mat p) {\n  assert(p[0][0] >= p[1][0]);\n  int n = p[0][0].dat.size(),\
-    \ m = p[1][0].dat.size();\n  if (n <= 2) return inner_naive<long long>(p);\n \
-    \ if (n <= 4) return inner_naive<__int128_t>(p);\n  int k = (n + 1) / 2;\n  if\
-    \ (m <= k) return Mat::I(2);\n  Mat m1 = inner_half_gcd(make_vec(suf(p[0][0],\
+    \ \"../../math/bigint-binary.hpp\"\n#include \"../../math/bigint-to-hex.hpp\"\n\
+    //\n#include \"../../math/bigint.hpp\"\n#include \"../../matrix/matrix.hpp\"\n\
+    \nnamespace GCDforBigintImpl {\n\nusing Mat = Matrix<bigint>;\n\n// \u4E0B\u4F4D\
+    \ d \u6841\u3092\u9664\u304F\nbigint suf(const bigint& n, int d) {\n  d = min(d,\
+    \ (int)n.dat.size());\n  return bigint{false, vector<int>{begin(n.dat) + d, end(n.dat)}};\n\
+    }\n\n// \u7E26\u30D9\u30AF\u30C8\u30EB (p00, p10) \u3092\u4F5C\u308B\nMat make_vec(const\
+    \ bigint& p00, const bigint& p10) {\n  Mat m(2, 1);\n  m[0][0] = p00, m[1][0]\
+    \ = p10;\n  return m;\n}\n\ntemplate <typename I>\nMat inner_naive(Mat& p) {\n\
+    \  assert(p[0][0] >= p[1][0]);\n  assert((int)p[0][0].dat.size() <= 4);\n  I g\
+    \ = 1;\n  // solve : ax + by = gcd(a, b)\n  // return : pair(x, y)\n  auto extgcd\
+    \ = [&](auto rc, I a, I b) -> pair<I, I> {\n    if (b == 0) {\n      g = a;\n\
+    \      return make_pair(1, 0);\n    }\n    I x, y;\n    tie(y, x) = rc(rc, b,\
+    \ a % b);\n    y -= a / b * x;\n    return make_pair(x, y);\n  };\n  I a = p[0][0].to_i128(),\
+    \ b = p[1][0].to_i128(), x, y;\n  tie(x, y) = extgcd(extgcd, a, b);\n  Mat m(2);\n\
+    \  m[0][0] = x, m[0][1] = y;\n  m[1][0] = b / g, m[1][1] = -a / g;\n  return m;\n\
+    }\n// p_0 >= p_1, 1 \u624B\u9032\u3081\u308B\nvoid inner_succ(Mat& m, Mat& p)\
+    \ {\n  assert(p[0][0] >= p[1][0]);\n  if (p[1][0] == 0) return;\n  auto [quo,\
+    \ rem] = divmod(p[0][0], p[1][0]);\n  m[0][0] -= m[1][0] * quo;\n  m[0][1] -=\
+    \ m[1][1] * quo;\n  swap(m[0][0], m[1][0]), swap(m[0][1], m[1][1]);\n  p[0][0]\
+    \ = p[1][0], p[1][0] = rem;\n}\nMat inner_half_gcd(Mat p) {\n  assert(p[0][0]\
+    \ >= p[1][0]);\n  int n = p[0][0].dat.size(), m = p[1][0].dat.size();\n  if (n\
+    \ <= 2) return inner_naive<long long>(p);\n  if (n <= 4) return inner_naive<__int128_t>(p);\n\
+    \  int k = (n + 1) / 2;\n  if (m <= k) return Mat::I(2);\n  Mat m1 = inner_half_gcd(make_vec(suf(p[0][0],\
     \ k), suf(p[1][0], k)));\n  p = m1 * p;\n  for (int i = 0; i < 2; i++) {\n   \
     \ if (p[i][0] < 0) {\n      m1[i][0] = -m1[i][0], m1[i][1] = -m1[i][1], p[i][0]\
     \ = -p[i][0];\n    }\n  }\n  if (p[0][0] < p[1][0]) {\n    swap(m1[0][0], m1[1][0]),\
@@ -919,47 +1051,56 @@ data:
     \ p;\n    p[0][0].neg = p[1][0].neg = false;\n    if (p[0][0] < p[1][0]) swap(p[0][0],\
     \ p[1][0]);\n    inner_succ(m1, p);\n  }\n  return p[0][0];\n}\n\n}  // namespace\
     \ GCDforBigintImpl\n\nusing GCDforBigintImpl::gcd_d_ary;\nusing GCDforBigintImpl::gcd_half;\n\
-    using GCDforBigintImpl::gcd_naive;\n\nusing namespace Nyaan;\n\nvoid q() {\n \
-    \ {\n    bigint a =\n        \"1234567900000000000000000000000000000000000000000000000000000000000\"\
+    using GCDforBigintImpl::gcd_naive;\n\nbigint gcd_via_binary(bigint a, bigint b)\
+    \ {\n  BinaryBigInt A{BtoH(a), 16};\n  BinaryBigInt B{BtoH(b), 16};\n  BinaryBigInt\
+    \ C = gcd(A, B);\n  return HtoB(C.to_hex());\n}\n\nusing namespace Nyaan;\n\n\
+    void q() {\n  {\n    bigint a =\n        \"1234567900000000000000000000000000000000000000000000000000000000000\"\
     s;\n    bigint b =\n        \"111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000\"\
-    s;\n    bigint g = gcd_half(a, b);\n    trc(a, b, g);\n  }\n  auto gen = [&](int\
-    \ d) {\n    string S(d, '0');\n    each(c, S) c += rng(0, 9);\n    while (sz(S)\
-    \ and S[0] == '0') S.erase(begin(S));\n    if (S.empty()) return bigint{};\n \
-    \   return bigint{S};\n  };\n\n#ifdef PROFILER\n  {\n    for (int d = 1; d <=\
-    \ 256; d *= 2) {\n      V<bigint> as, bs;\n      int T = 1000;\n      rep(i, T)\
-    \ {\n        as.push_back(gen(d));\n        bs.push_back(gen(d));\n      }\n\n\
-    \      Timer timer;\n      bigint g1 = 0, g2 = 0;\n\n      timer.reset();\n  \
-    \    rep(i, T) g2 += gcd_d_ary(as[i], bs[i]);\n      ll t2 = timer.elapsed();\n\
-    \n      trc2(d, t2);\n    }\n    exit(0);\n  }\n#endif\n\n  auto check = [&](bigint\
-    \ a, bigint b) -> void {\n    bigint g1 = gcd_half(a, b);\n    bigint g2 = gcd_naive(a,\
-    \ b);\n    bigint g3 = gcd_d_ary<false>(a, b);\n    bigint g4 = gcd_d_ary<true>(a,\
-    \ b);\n    if (g1 != g2 or g2 != g3 or g3 != g4) {\n      trc2(a, b);\n      trc2(g1);\n\
-    \      trc2(g2);\n      trc2(g3);\n      trc2(g4);\n      trc2(divmod(g3, g4));\n\
-    \      exit(1);\n    }\n    if (g1 == 0) return;\n    auto [aq, ar] = divmod(a,\
-    \ g1);\n    auto [bq, br] = divmod(b, g1);\n    assert(ar == 0 and br == 0);\n\
-    \    assert(gcd_half(aq, bq) == 1);\n    assert(gcd_naive(aq, bq) == 1);\n   \
-    \ assert(gcd_d_ary<false>(aq, bq) == 1);\n    assert(gcd_d_ary<true>(aq, bq) ==\
-    \ 1);\n  };\n\n  rep(s, 100) rep(t, 100) {\n    bigint a = s;\n    bigint b =\
-    \ t;\n    check(a, b);\n    if (a != 0) check(-a, b);\n    if (b != 0) check(a,\
+    s;\n    bigint g = gcd_half(a, b);\n  }\n  auto gen = [&](int d) {\n    string\
+    \ S(d, '0');\n    each(c, S) c += rng(0, 9);\n    while (sz(S) and S[0] == '0')\
+    \ S.erase(begin(S));\n    if (S.empty()) return bigint{};\n    return bigint{S};\n\
+    \  };\n\n#ifdef PROFILER\n  {\n    for (int d = 1; d <= 256; d *= 2) {\n     \
+    \ V<bigint> as, bs;\n      int T = 1000;\n      rep(i, T) {\n        as.push_back(gen(d));\n\
+    \        bs.push_back(gen(d));\n      }\n\n      Timer timer;\n      bigint g1\
+    \ = 0, g2 = 0;\n\n      timer.reset();\n      rep(i, T) g2 += gcd_d_ary(as[i],\
+    \ bs[i]);\n      ll t2 = timer.elapsed();\n\n      trc2(d, t2);\n    }\n    exit(0);\n\
+    \  }\n#endif\n\n  auto check = [&](bigint a, bigint b) -> void {\n    // trc(a,\
+    \ b);\n    bigint g1 = gcd_half(a, b);\n    bigint g2 = gcd_naive(a, b);\n   \
+    \ bigint g3 = gcd_d_ary<false>(a, b);\n    bigint g4 = gcd_d_ary<true>(a, b);\n\
+    \    bigint g5 = gcd_via_binary(a, b);\n    if (g1 != g2 or g2 != g3 or g3 !=\
+    \ g4 or g4 != g5) {\n      trc2(a, b);\n      trc2(g1);\n      trc2(g2);\n   \
+    \   trc2(g3);\n      trc2(g4);\n      trc2(g5);\n      exit(1);\n    }\n    if\
+    \ (g1 == 0) return;\n    auto [aq, ar] = divmod(a, g1);\n    auto [bq, br] = divmod(b,\
+    \ g1);\n    assert(ar == 0 and br == 0);\n    assert(gcd_half(aq, bq) == 1);\n\
+    \    assert(gcd_naive(aq, bq) == 1);\n    assert(gcd_d_ary<false>(aq, bq) == 1);\n\
+    \    assert(gcd_d_ary<true>(aq, bq) == 1);\n  };\n\n  rep(s, 100) rep(t, 100)\
+    \ {\n    bigint a = s;\n    bigint b = t;\n    check(a, b);\n    if (a != 0) check(-a,\
+    \ b);\n    if (b != 0) check(a, -b);\n    if (a != 0 and b != 0) check(-a, -b);\n\
+    \  }\n  rep(t, 500) {\n    bigint a = gen(rng(1, 100));\n    bigint b = gen(rng(1,\
+    \ 100));\n    check(a, b);\n    if (a != 0) check(-a, b);\n    if (b != 0) check(a,\
     \ -b);\n    if (a != 0 and b != 0) check(-a, -b);\n  }\n  rep(t, 500) {\n    bigint\
-    \ a = gen(rng(1, 100));\n    bigint b = gen(rng(1, 100));\n    check(a, b);\n\
-    \    if (a != 0) check(-a, b);\n    if (b != 0) check(a, -b);\n    if (a != 0\
-    \ and b != 0) check(-a, -b);\n  }\n  rep(t, 500) {\n    bigint a = gen(rng(1,\
-    \ 50));\n    bigint b = gen(rng(1, 50));\n    bigint c = gen(rng(1, 50));\n  \
-    \  a *= c, b *= c;\n    check(a, b);\n    if (a != 0) check(-a, b);\n    if (b\
-    \ != 0) check(a, -b);\n    if (a != 0 and b != 0) check(-a, -b);\n  }\n  reg(a,\
-    \ 90, 110) reg(b, 90, 110) {\n    string s(a + 1, '0'), t(b + 1, '0');\n    s[0]\
-    \ = t[0] = '1';\n    check(s, t);\n  }\n\n  cerr << \"OK\" << endl;\n\n  // \u5B9F\
-    \u884C\u6642\u9593\u306E\u6BD4\u8F03\n  /**\n  for (int d = 1; d <= 256; d *=\
-    \ 2) {\n    V<bigint> as, bs;\n    int T = 1000;\n    rep(i, T) {\n      as.push_back(gen(d));\n\
-    \      bs.push_back(gen(d));\n    }\n\n    Timer timer;\n    bigint g1 = 0, g2\
-    \ = 0, g3 = 0;\n\n    timer.reset();\n    rep(i, T) g1 += gcd_half(as[i], bs[i]);\n\
-    \    ll t1 = timer.elapsed();\n\n    timer.reset();\n    rep(i, T) g2 += gcd_d_ary(as[i],\
-    \ bs[i]);\n    ll t2 = timer.elapsed();\n\n    timer.reset();\n    rep(i, T) g3\
-    \ += gcd_d_ary<true>(as[i], bs[i]);\n    ll t3 = timer.elapsed();\n\n    assert(g1\
-    \ == g2 and g2 == g3);\n    trc2(d, t1, t2, t3);\n  }\n  //*/\n\n  {\n    int\
-    \ a, b;\n    cin >> a >> b;\n    cout << a + b << \"\\n\";\n  }\n}\n\nvoid Nyaan::solve()\
-    \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
+    \ a = gen(rng(1, 50));\n    bigint b = gen(rng(1, 50));\n    bigint c = gen(rng(1,\
+    \ 50));\n    a *= c, b *= c;\n    check(a, b);\n    if (a != 0) check(-a, b);\n\
+    \    if (b != 0) check(a, -b);\n    if (a != 0 and b != 0) check(-a, -b);\n  }\n\
+    \  reg(a, 90, 110) reg(b, 90, 110) {\n    string s(a + 1, '0'), t(b + 1, '0');\n\
+    \    s[0] = t[0] = '1';\n    check(s, t);\n  }\n  reg(a, 90, 110) reg(b, 90, 110)\
+    \ {\n    string s(a + 1, '0'), t(b + 1, '0');\n    s[0] = t[0] = '1';\n    rep(i,\
+    \ 3) {\n      if (i == 1) {\n        rep(j, 20) s[j] = rng('0', '9');\n      }\n\
+    \      if (i == 2) {\n        rep(j, 20) t[j] = rng('0', '9');\n      }\n    \
+    \  bigint S = HtoB(s);\n      bigint T = HtoB(t);\n      string u = S.to_string();\n\
+    \      string v = T.to_string();\n      check(u, v);\n    }\n  }\n\n  cerr <<\
+    \ \"OK\" << endl;\n\n  // \u5B9F\u884C\u6642\u9593\u306E\u6BD4\u8F03\n  /**\n\
+    \  for (int d = 1; d <= 1024; d *= 2) {\n    V<bigint> as, bs;\n    int T = 1000;\n\
+    \    rep(i, T) {\n      as.push_back(gen(d));\n      bs.push_back(gen(d));\n \
+    \   }\n\n    Timer timer;\n    bigint g1 = 0, g2 = 0, g3 = 0, g4 = 0;\n\n    timer.reset();\n\
+    \    rep(i, T) g1 += gcd_half(as[i], bs[i]);\n    ll t1 = timer.elapsed();\n\n\
+    \    timer.reset();\n    rep(i, T) g2 += gcd_d_ary(as[i], bs[i]);\n    ll t2 =\
+    \ timer.elapsed();\n\n    timer.reset();\n    rep(i, T) g3 += gcd_d_ary<true>(as[i],\
+    \ bs[i]);\n    ll t3 = timer.elapsed();\n\n    timer.reset();\n    rep(i, T) g4\
+    \ += gcd_via_binary(as[i], bs[i]);\n    ll t4 = timer.elapsed();\n\n    assert(g1\
+    \ == g2 and g2 == g3 and g3 == g4);\n    trc2(d, t1, t2, t3, t4);\n  }\n  //*/\n\
+    \n  {\n    int a, b;\n    cin >> a >> b;\n    cout << a + b << \"\\n\";\n  }\n\
+    }\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -977,13 +1118,15 @@ data:
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
   - ntt/ntt.hpp
+  - math/bigint-binary.hpp
+  - math/bigint-to-hex.hpp
   - matrix/matrix.hpp
   - matrix/inverse-matrix.hpp
   - matrix/gauss-elimination.hpp
   isVerificationFile: true
   path: verify/verify-unit-test/bigint-gcd.test.cpp
   requiredBy: []
-  timestamp: '2024-05-03 23:21:26+09:00'
+  timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/bigint-gcd.test.cpp

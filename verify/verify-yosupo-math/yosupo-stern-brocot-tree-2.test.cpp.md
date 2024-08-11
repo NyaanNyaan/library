@@ -314,9 +314,9 @@ data:
     \    T a = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n\
     \      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return U((u\
     \ % mod + mod) % mod) * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long\
-    \ long, __int128_t>;\n#line 2 \"math/stern-brocot-tree-binary-search.hpp\"\n\n\
-    #line 5 \"math/stern-brocot-tree-binary-search.hpp\"\nusing namespace std;\n\n\
-    #line 2 \"math/stern-brocot-tree.hpp\"\n\n#line 6 \"math/stern-brocot-tree.hpp\"\
+    \ long, __int128_t>;\nusing Fraction = Rational;\n#line 2 \"math/stern-brocot-tree-binary-search.hpp\"\
+    \n\n#line 5 \"math/stern-brocot-tree-binary-search.hpp\"\nusing namespace std;\n\
+    \n#line 2 \"math/stern-brocot-tree.hpp\"\n\n#line 6 \"math/stern-brocot-tree.hpp\"\
     \nusing namespace std;\n\n// x / y (x > 0, y > 0) \u3092\u7BA1\u7406\u3001\u30C7\
     \u30D5\u30A9\u30EB\u30C8\u3067 1 / 1\n// \u5165\u529B\u304C\u4E92\u3044\u306B\u7D20\
     \u3067\u306A\u3044\u5834\u5408\u306F gcd \u3092\u53D6\u3063\u3066\u683C\u7D0D\n\
@@ -453,7 +453,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
   requiredBy: []
-  timestamp: '2024-05-03 23:21:26+09:00'
+  timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp

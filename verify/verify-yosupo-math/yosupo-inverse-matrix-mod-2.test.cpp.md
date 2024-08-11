@@ -29,12 +29,12 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/matrix_det_mod_2
+    PROBLEM: https://judge.yosupo.jp/problem/inverse_matrix_mod_2
     links:
-    - https://judge.yosupo.jp/problem/matrix_det_mod_2
-  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det_mod_2\"\n//\n#line\
-    \ 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
+    - https://judge.yosupo.jp/problem/inverse_matrix_mod_2
+  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-inverse-matrix-mod-2.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/inverse_matrix_mod_2\"\n//\n\
+    #line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
     \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
@@ -218,12 +218,12 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp\"\n\
-    //\n#line 2 \"matrix/f2-matrix.hpp\"\n\n#line 5 \"matrix/f2-matrix.hpp\"\nusing\
-    \ namespace std;\n\nnamespace std {\ntemplate <size_t N>\nbool operator<(const\
-    \ bitset<N> &a, const bitset<N> &b) {\n  int f = (a ^ b)._Find_first();\n  return\
-    \ f == N ? false : a[f];\n}\n}  // namespace std\n\ntemplate <size_t H_MAX, size_t\
-    \ W_MAX>\nstruct F2_Matrix {\n  using Mat = F2_Matrix;\n\n  int H, W;\n  array<bitset<W_MAX>,\
+    \ 4 \"verify/verify-yosupo-math/yosupo-inverse-matrix-mod-2.test.cpp\"\n//\n#line\
+    \ 2 \"matrix/f2-matrix.hpp\"\n\n#line 5 \"matrix/f2-matrix.hpp\"\nusing namespace\
+    \ std;\n\nnamespace std {\ntemplate <size_t N>\nbool operator<(const bitset<N>\
+    \ &a, const bitset<N> &b) {\n  int f = (a ^ b)._Find_first();\n  return f == N\
+    \ ? false : a[f];\n}\n}  // namespace std\n\ntemplate <size_t H_MAX, size_t W_MAX>\n\
+    struct F2_Matrix {\n  using Mat = F2_Matrix;\n\n  int H, W;\n  array<bitset<W_MAX>,\
     \ H_MAX> A;\n  F2_Matrix(int h = H_MAX, int w = W_MAX) : H(h), W(w) {\n    assert(0\
     \ <= h and h <= (int)H_MAX);\n    assert(0 <= w and w <= (int)W_MAX);\n    for\
     \ (int i = 0; i < (int)H_MAX; i++) A[i].reset();\n  }\n  inline bitset<W_MAX>\
@@ -259,17 +259,19 @@ data:
     \ H == rhs.H and W == rhs.W and A == rhs.A;\n  }\n\n  friend ostream &operator<<(ostream\
     \ &os, const Mat &b) {\n    for (int i = 0; i < b.H; i++) {\n      os << \"[ \"\
     ;\n      for (int j = 0; j < b.W; j++) {\n        os << b[i][j] << \", \";\n \
-    \     }\n      os << \"],\\n\";\n    }\n    return os;\n  }\n};\n#line 6 \"verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp\"\
+    \     }\n      os << \"],\\n\";\n    }\n    return os;\n  }\n};\n#line 6 \"verify/verify-yosupo-math/yosupo-inverse-matrix-mod-2.test.cpp\"\
     \nusing namespace Nyaan;\n\nvoid q() {\n  ini(N);\n  F2_Matrix<4096, 4096> m(N,\
-    \ N);\n  rep(i, N) {\n    ins(S);\n    m[i] = bitset<4096>{Rev(S)};\n  }\n  int\
-    \ d = m.determinant();\n  out(d);\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n\
-    \  // in(t);\n  while (t--) q();\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det_mod_2\"\n//\n\
-    #include \"../../template/template.hpp\"\n//\n#include \"../../matrix/f2-matrix.hpp\"\
+    \ N);\n  rep(i, N) {\n    ins(S);\n    m[i] = bitset<4096>{Rev(S)};\n  }\n  auto\
+    \ [f, ans] = m.inverse();\n  if (!f) {\n    out(-1);\n  } else {\n    rep(i, N)\
+    \ cout << Rev(ans[i].to_string()).substr(0, N) << \"\\n\";\n  }\n}\n\nvoid Nyaan::solve()\
+    \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inverse_matrix_mod_2\"\n\
+    //\n#include \"../../template/template.hpp\"\n//\n#include \"../../matrix/f2-matrix.hpp\"\
     \nusing namespace Nyaan;\n\nvoid q() {\n  ini(N);\n  F2_Matrix<4096, 4096> m(N,\
-    \ N);\n  rep(i, N) {\n    ins(S);\n    m[i] = bitset<4096>{Rev(S)};\n  }\n  int\
-    \ d = m.determinant();\n  out(d);\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n\
-    \  // in(t);\n  while (t--) q();\n}\n"
+    \ N);\n  rep(i, N) {\n    ins(S);\n    m[i] = bitset<4096>{Rev(S)};\n  }\n  auto\
+    \ [f, ans] = m.inverse();\n  if (!f) {\n    out(-1);\n  } else {\n    rep(i, N)\
+    \ cout << Rev(ans[i].to_string()).substr(0, N) << \"\\n\";\n  }\n}\n\nvoid Nyaan::solve()\
+    \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -279,15 +281,15 @@ data:
   - template/macro.hpp
   - matrix/f2-matrix.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+  path: verify/verify-yosupo-math/yosupo-inverse-matrix-mod-2.test.cpp
   requiredBy: []
   timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+documentation_of: verify/verify-yosupo-math/yosupo-inverse-matrix-mod-2.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
-- /verify/verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp.html
-title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-inverse-matrix-mod-2.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-inverse-matrix-mod-2.test.cpp.html
+title: verify/verify-yosupo-math/yosupo-inverse-matrix-mod-2.test.cpp
 ---

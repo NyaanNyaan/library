@@ -2,24 +2,14 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: fps/formal-power-series.hpp
-    title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
-      \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
-    path: fps/fps-famous-series.hpp
-    title: "\u6709\u540D\u306A\u6570\u5217"
-  - icon: ':heavy_check_mark:'
-    path: fps/ntt-friendly-fps.hpp
-    title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
-    path: fps/taylor-shift.hpp
-    title: "\u5E73\u884C\u79FB\u52D5"
+    path: math/bigint-binary.hpp
+    title: math/bigint-binary.hpp
   - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
-    path: modulo/binomial.hpp
-    title: modulo/binomial.hpp
+    path: ntt/arbitrary-ntt.hpp
+    title: ntt/arbitrary-ntt.hpp
   - icon: ':heavy_check_mark:'
     path: ntt/ntt.hpp
     title: ntt/ntt.hpp
@@ -48,12 +38,12 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
+    PROBLEM: https://judge.yosupo.jp/problem/addition_of_hex_big_integers
     links:
-    - https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
-  bundledCode: "#line 1 \"verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp\"\n\
-    #define PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
-    \n\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    - https://judge.yosupo.jp/problem/addition_of_hex_big_integers
+  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/addition_of_hex_big_integers\"\
+    \n//\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
     #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
@@ -237,9 +227,46 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp\"\n//\n#line 2 \"\
-    fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt.hpp\"\n\ntemplate <typename mint>\n\
-    struct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t _mod = mint::get_mod();\n\
+    \ 4 \"verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp\"\n//\n#line 1\
+    \ \"math/bigint-binary.hpp\"\n\n#line 9 \"math/bigint-binary.hpp\"\nusing namespace\
+    \ std;\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line 2 \"modint/montgomery-modint.hpp\"\
+    \n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
+    \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
+    \  static constexpr u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i <\
+    \ 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32\
+    \ r = get_r();\n  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(mod\
+    \ < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"\
+    invalid, mod % 2 == 0\");\n  static_assert(r * mod == 1, \"this code has bugs.\"\
+    );\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
+    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
+    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
+    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
+    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
+    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
+    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
+    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
+    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
+    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
+    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
+    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
+    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
+    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
+    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
+    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
+    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
+    \ }\n  constexpr mint operator+() const { return mint(*this); }\n\n  constexpr\
+    \ mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n    while (n > 0) {\n\
+    \      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return\
+    \ ret;\n  }\n\n  constexpr mint inverse() const {\n    int x = get(), y = mod,\
+    \ u = 1, v = 0, t = 0, tmp = 0;\n    while (y > 0) {\n      t = x / y;\n     \
+    \ x -= t * y, u -= t * v;\n      tmp = x, x = y, y = tmp;\n      tmp = u, u =\
+    \ v, v = tmp;\n    }\n    return mint{u};\n  }\n\n  friend ostream &operator<<(ostream\
+    \ &os, const mint &b) {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream\
+    \ &is, mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
+    \    return (is);\n  }\n\n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
+    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
+    \ { return mod; }\n};\n#line 2 \"ntt/ntt.hpp\"\n\ntemplate <typename mint>\nstruct\
+    \ NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t _mod = mint::get_mod();\n\
     \    using u64 = uint64_t;\n    u64 ds[32] = {};\n    int idx = 0;\n    u64 m\
     \ = _mod - 1;\n    for (u64 i = 2; i * i <= m; ++i) {\n      if (m % i == 0) {\n\
     \        ds[idx++] = i;\n        while (m % i == 0) m /= i;\n      }\n    }\n\
@@ -318,245 +345,147 @@ data:
     \ &a) {\n    int M = (int)a.size();\n    auto b = a;\n    intt(b);\n    mint r\
     \ = 1, zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for (int i\
     \ = 0; i < M; i++) b[i] *= r, r *= zeta;\n    ntt(b);\n    copy(begin(b), end(b),\
-    \ back_inserter(a));\n  }\n};\n#line 2 \"fps/formal-power-series.hpp\"\n\ntemplate\
-    \ <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n\
-    \  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if\
-    \ (r.size() > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
-    \ i++) (*this)[i] += r[i];\n    return *this;\n  }\n\n  FPS &operator+=(const\
-    \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] += r;\n\
-    \    return *this;\n  }\n\n  FPS &operator-=(const FPS &r) {\n    if (r.size()\
-    \ > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
-    \ i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n  FPS &operator-=(const\
-    \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] -= r;\n\
-    \    return *this;\n  }\n\n  FPS &operator*=(const mint &v) {\n    for (int k\
-    \ = 0; k < (int)this->size(); k++) (*this)[k] *= v;\n    return *this;\n  }\n\n\
-    \  FPS &operator/=(const FPS &r) {\n    if (this->size() < r.size()) {\n     \
-    \ this->clear();\n      return *this;\n    }\n    int n = this->size() - r.size()\
-    \ + 1;\n    if ((int)r.size() <= 64) {\n      FPS f(*this), g(r);\n      g.shrink();\n\
-    \      mint coeff = g.back().inverse();\n      for (auto &x : g) x *= coeff;\n\
-    \      int deg = (int)f.size() - (int)g.size() + 1;\n      int gs = g.size();\n\
-    \      FPS quo(deg);\n      for (int i = deg - 1; i >= 0; i--) {\n        quo[i]\
-    \ = f[i + gs - 1];\n        for (int j = 0; j < gs; j++) f[i + j] -= quo[i] *\
-    \ g[j];\n      }\n      *this = quo * coeff;\n      this->resize(n, mint(0));\n\
-    \      return *this;\n    }\n    return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();\n\
-    \  }\n\n  FPS &operator%=(const FPS &r) {\n    *this -= *this / r * r;\n    shrink();\n\
-    \    return *this;\n  }\n\n  FPS operator+(const FPS &r) const { return FPS(*this)\
-    \ += r; }\n  FPS operator+(const mint &v) const { return FPS(*this) += v; }\n\
-    \  FPS operator-(const FPS &r) const { return FPS(*this) -= r; }\n  FPS operator-(const\
-    \ mint &v) const { return FPS(*this) -= v; }\n  FPS operator*(const FPS &r) const\
-    \ { return FPS(*this) *= r; }\n  FPS operator*(const mint &v) const { return FPS(*this)\
-    \ *= v; }\n  FPS operator/(const FPS &r) const { return FPS(*this) /= r; }\n \
-    \ FPS operator%(const FPS &r) const { return FPS(*this) %= r; }\n  FPS operator-()\
-    \ const {\n    FPS ret(this->size());\n    for (int i = 0; i < (int)this->size();\
-    \ i++) ret[i] = -(*this)[i];\n    return ret;\n  }\n\n  void shrink() {\n    while\
-    \ (this->size() && this->back() == mint(0)) this->pop_back();\n  }\n\n  FPS rev()\
-    \ const {\n    FPS ret(*this);\n    reverse(begin(ret), end(ret));\n    return\
-    \ ret;\n  }\n\n  FPS dot(FPS r) const {\n    FPS ret(min(this->size(), r.size()));\n\
-    \    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i] * r[i];\n \
-    \   return ret;\n  }\n\n  // \u524D sz \u9805\u3092\u53D6\u3063\u3066\u304F\u308B\
-    \u3002sz \u306B\u8DB3\u308A\u306A\u3044\u9805\u306F 0 \u57CB\u3081\u3059\u308B\
-    \n  FPS pre(int sz) const {\n    FPS ret(begin(*this), begin(*this) + min((int)this->size(),\
-    \ sz));\n    if ((int)ret.size() < sz) ret.resize(sz);\n    return ret;\n  }\n\
-    \n  FPS operator>>(int sz) const {\n    if ((int)this->size() <= sz) return {};\n\
-    \    FPS ret(*this);\n    ret.erase(ret.begin(), ret.begin() + sz);\n    return\
-    \ ret;\n  }\n\n  FPS operator<<(int sz) const {\n    FPS ret(*this);\n    ret.insert(ret.begin(),\
-    \ sz, mint(0));\n    return ret;\n  }\n\n  FPS diff() const {\n    const int n\
-    \ = (int)this->size();\n    FPS ret(max(0, n - 1));\n    mint one(1), coeff(1);\n\
-    \    for (int i = 1; i < n; i++) {\n      ret[i - 1] = (*this)[i] * coeff;\n \
-    \     coeff += one;\n    }\n    return ret;\n  }\n\n  FPS integral() const {\n\
-    \    const int n = (int)this->size();\n    FPS ret(n + 1);\n    ret[0] = mint(0);\n\
-    \    if (n > 0) ret[1] = mint(1);\n    auto mod = mint::get_mod();\n    for (int\
-    \ i = 2; i <= n; i++) ret[i] = (-ret[mod % i]) * (mod / i);\n    for (int i =\
-    \ 0; i < n; i++) ret[i + 1] *= (*this)[i];\n    return ret;\n  }\n\n  mint eval(mint\
-    \ x) const {\n    mint r = 0, w = 1;\n    for (auto &v : *this) r += w * v, w\
-    \ *= x;\n    return r;\n  }\n\n  FPS log(int deg = -1) const {\n    assert(!(*this).empty()\
-    \ && (*this)[0] == mint(1));\n    if (deg == -1) deg = (int)this->size();\n  \
-    \  return (this->diff() * this->inv(deg)).pre(deg - 1).integral();\n  }\n\n  FPS\
-    \ pow(int64_t k, int deg = -1) const {\n    const int n = (int)this->size();\n\
-    \    if (deg == -1) deg = n;\n    if (k == 0) {\n      FPS ret(deg);\n      if\
-    \ (deg) ret[0] = 1;\n      return ret;\n    }\n    for (int i = 0; i < n; i++)\
-    \ {\n      if ((*this)[i] != mint(0)) {\n        mint rev = mint(1) / (*this)[i];\n\
-    \        FPS ret = (((*this * rev) >> i).log(deg) * k).exp(deg);\n        ret\
-    \ *= (*this)[i].pow(k);\n        ret = (ret << (i * k)).pre(deg);\n        if\
-    \ ((int)ret.size() < deg) ret.resize(deg, mint(0));\n        return ret;\n   \
-    \   }\n      if (__int128_t(i + 1) * k >= deg) return FPS(deg, mint(0));\n   \
-    \ }\n    return FPS(deg, mint(0));\n  }\n\n  static void *ntt_ptr;\n  static void\
-    \ set_fft();\n  FPS &operator*=(const FPS &r);\n  void ntt();\n  void intt();\n\
-    \  void ntt_doubling();\n  static int ntt_pr();\n  FPS inv(int deg = -1) const;\n\
-    \  FPS exp(int deg = -1) const;\n};\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr\
-    \ = nullptr;\n\n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\
-    \u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n\
-    \ */\n#line 5 \"fps/ntt-friendly-fps.hpp\"\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft()\
-    \ {\n  if (!ntt_ptr) ntt_ptr = new NTT<mint>;\n}\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(\n    const FormalPowerSeries<mint>&\
-    \ r) {\n  if (this->empty() || r.empty()) {\n    this->clear();\n    return *this;\n\
-    \  }\n  set_fft();\n  auto ret = static_cast<NTT<mint>*>(ntt_ptr)->multiply(*this,\
-    \ r);\n  return *this = FormalPowerSeries<mint>(ret.begin(), ret.end());\n}\n\n\
-    template <typename mint>\nvoid FormalPowerSeries<mint>::ntt() {\n  set_fft();\n\
-    \  static_cast<NTT<mint>*>(ntt_ptr)->ntt(*this);\n}\n\ntemplate <typename mint>\n\
-    void FormalPowerSeries<mint>::intt() {\n  set_fft();\n  static_cast<NTT<mint>*>(ntt_ptr)->intt(*this);\n\
-    }\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::ntt_doubling() {\n\
-    \  set_fft();\n  static_cast<NTT<mint>*>(ntt_ptr)->ntt_doubling(*this);\n}\n\n\
-    template <typename mint>\nint FormalPowerSeries<mint>::ntt_pr() {\n  set_fft();\n\
-    \  return static_cast<NTT<mint>*>(ntt_ptr)->pr;\n}\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {\n  assert((*this)[0]\
-    \ != mint(0));\n  if (deg == -1) deg = (int)this->size();\n  FormalPowerSeries<mint>\
-    \ res(deg);\n  res[0] = {mint(1) / (*this)[0]};\n  for (int d = 1; d < deg; d\
-    \ <<= 1) {\n    FormalPowerSeries<mint> f(2 * d), g(2 * d);\n    for (int j =\
-    \ 0; j < min((int)this->size(), 2 * d); j++) f[j] = (*this)[j];\n    for (int\
-    \ j = 0; j < d; j++) g[j] = res[j];\n    f.ntt();\n    g.ntt();\n    for (int\
-    \ j = 0; j < 2 * d; j++) f[j] *= g[j];\n    f.intt();\n    for (int j = 0; j <\
-    \ d; j++) f[j] = 0;\n    f.ntt();\n    for (int j = 0; j < 2 * d; j++) f[j] *=\
-    \ g[j];\n    f.intt();\n    for (int j = d; j < min(2 * d, deg); j++) res[j] =\
-    \ -f[j];\n  }\n  return res.pre(deg);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ FormalPowerSeries<mint>::exp(int deg) const {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  assert((*this).size() == 0 || (*this)[0] == mint(0));\n  if (deg == -1) deg\
-    \ = this->size();\n\n  fps inv;\n  inv.reserve(deg + 1);\n  inv.push_back(mint(0));\n\
-    \  inv.push_back(mint(1));\n\n  auto inplace_integral = [&](fps& F) -> void {\n\
-    \    const int n = (int)F.size();\n    auto mod = mint::get_mod();\n    while\
-    \ ((int)inv.size() <= n) {\n      int i = inv.size();\n      inv.push_back((-inv[mod\
-    \ % i]) * (mod / i));\n    }\n    F.insert(begin(F), mint(0));\n    for (int i\
-    \ = 1; i <= n; i++) F[i] *= inv[i];\n  };\n\n  auto inplace_diff = [](fps& F)\
-    \ -> void {\n    if (F.empty()) return;\n    F.erase(begin(F));\n    mint coeff\
-    \ = 1, one = 1;\n    for (int i = 0; i < (int)F.size(); i++) {\n      F[i] *=\
-    \ coeff;\n      coeff += one;\n    }\n  };\n\n  fps b{1, 1 < (int)this->size()\
-    \ ? (*this)[1] : 0}, c{1}, z1, z2{1, 1};\n  for (int m = 2; m < deg; m *= 2) {\n\
-    \    auto y = b;\n    y.resize(2 * m);\n    y.ntt();\n    z1 = z2;\n    fps z(m);\n\
-    \    for (int i = 0; i < m; ++i) z[i] = y[i] * z1[i];\n    z.intt();\n    fill(begin(z),\
-    \ begin(z) + m / 2, mint(0));\n    z.ntt();\n    for (int i = 0; i < m; ++i) z[i]\
-    \ *= -z1[i];\n    z.intt();\n    c.insert(end(c), begin(z) + m / 2, end(z));\n\
-    \    z2 = c;\n    z2.resize(2 * m);\n    z2.ntt();\n    fps x(begin(*this), begin(*this)\
-    \ + min<int>(this->size(), m));\n    x.resize(m);\n    inplace_diff(x);\n    x.push_back(mint(0));\n\
-    \    x.ntt();\n    for (int i = 0; i < m; ++i) x[i] *= y[i];\n    x.intt();\n\
-    \    x -= b.diff();\n    x.resize(2 * m);\n    for (int i = 0; i < m - 1; ++i)\
-    \ x[m + i] = x[i], x[i] = mint(0);\n    x.ntt();\n    for (int i = 0; i < 2 *\
-    \ m; ++i) x[i] *= z2[i];\n    x.intt();\n    x.pop_back();\n    inplace_integral(x);\n\
-    \    for (int i = m; i < min<int>(this->size(), 2 * m); ++i) x[i] += (*this)[i];\n\
-    \    fill(begin(x), begin(x) + m, mint(0));\n    x.ntt();\n    for (int i = 0;\
-    \ i < 2 * m; ++i) x[i] *= y[i];\n    x.intt();\n    b.insert(end(b), begin(x)\
-    \ + m, end(x));\n  }\n  return fps{begin(b), begin(b) + deg};\n}\n\n/**\n * @brief\
-    \ NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/ntt-friendly-fps.md\n\
-    \ */\n#line 2 \"modint/montgomery-modint.hpp\"\n\ntemplate <uint32_t mod>\nstruct\
-    \ LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32 =\
-    \ int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
-    \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
-    \ - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32 r = get_r();\n\
-    \  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(mod < (1 << 30),\
-    \ \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod\
-    \ % 2 == 0\");\n  static_assert(r * mod == 1, \"this code has bugs.\");\n\n  u32\
-    \ a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
-    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
-    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
-    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
-    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
-    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
-    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
-    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
-    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
-    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
-    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
-    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
-    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
-    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
-    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
-    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
-    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
-    \ }\n  constexpr mint operator+() const { return mint(*this); }\n\n  constexpr\
-    \ mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n    while (n > 0) {\n\
-    \      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return\
-    \ ret;\n  }\n\n  constexpr mint inverse() const {\n    int x = get(), y = mod,\
-    \ u = 1, v = 0, t = 0, tmp = 0;\n    while (y > 0) {\n      t = x / y;\n     \
-    \ x -= t * y, u -= t * v;\n      tmp = x, x = y, y = tmp;\n      tmp = u, u =\
-    \ v, v = tmp;\n    }\n    return mint{u};\n  }\n\n  friend ostream &operator<<(ostream\
-    \ &os, const mint &b) {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream\
-    \ &is, mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
-    \    return (is);\n  }\n\n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
-    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 2 \"modulo/binomial.hpp\"\n\n#line 6 \"modulo/binomial.hpp\"\
-    \nusing namespace std;\n\n// \u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u306E\
-    \ MAX \u306B \u300CC(n, r) \u3084 fac(n) \u3067\u30AF\u30A8\u30EA\u3092\u6295\u3052\
-    \u308B\u6700\u5927\u306E n \u300D\n// \u3092\u5165\u308C\u308B\u3068\u500D\u901F\
-    \u304F\u3089\u3044\u306B\u306A\u308B\n// mod \u3092\u8D85\u3048\u3066\u524D\u8A08\
-    \u7B97\u3057\u3066 0 \u5272\u308A\u3092\u8E0F\u3080\u30D0\u30B0\u306F\u5BFE\u7B56\
-    \u6E08\u307F\ntemplate <typename T>\nstruct Binomial {\n  vector<T> f, g, h;\n\
-    \  Binomial(int MAX = 0) {\n    assert(T::get_mod() != 0 && \"Binomial<mint>()\"\
-    );\n    f.resize(1, T{1});\n    g.resize(1, T{1});\n    h.resize(1, T{1});\n \
-    \   if (MAX > 0) extend(MAX + 1);\n  }\n\n  void extend(int m = -1) {\n    int\
-    \ n = f.size();\n    if (m == -1) m = n * 2;\n    m = min<int>(m, T::get_mod());\n\
-    \    if (n >= m) return;\n    f.resize(m);\n    g.resize(m);\n    h.resize(m);\n\
-    \    for (int i = n; i < m; i++) f[i] = f[i - 1] * T(i);\n    g[m - 1] = f[m -\
-    \ 1].inverse();\n    h[m - 1] = g[m - 1] * f[m - 2];\n    for (int i = m - 2;\
-    \ i >= n; i--) {\n      g[i] = g[i + 1] * T(i + 1);\n      h[i] = g[i] * f[i -\
-    \ 1];\n    }\n  }\n\n  T fac(int i) {\n    if (i < 0) return T(0);\n    while\
-    \ (i >= (int)f.size()) extend();\n    return f[i];\n  }\n\n  T finv(int i) {\n\
-    \    if (i < 0) return T(0);\n    while (i >= (int)g.size()) extend();\n    return\
-    \ g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return -inv(-i);\n    while (i\
-    \ >= (int)h.size()) extend();\n    return h[i];\n  }\n\n  T C(int n, int r) {\n\
-    \    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r)\
-    \ * finv(r);\n  }\n\n  inline T operator()(int n, int r) { return C(n, r); }\n\
-    \n  template <typename I>\n  T multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
-    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
-    \ T(0);\n      n += x;\n    }\n    T res = fac(n);\n    for (auto& x : r) res\
-    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  T operator()(const\
-    \ vector<I>& r) {\n    return multinomial(r);\n  }\n\n  T C_naive(int n, int r)\
-    \ {\n    if (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r =\
-    \ min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n  \
-    \  return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0)\
-    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n\
-    \  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
-    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 9 \"verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp\"\
-    \nusing mint = LazyMontgomeryModInt<998244353>;\nBinomial<mint> C;\nusing vm =\
-    \ vector<mint>;\nusing vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\
-    // \n#line 2 \"fps/fps-famous-series.hpp\"\n\n#line 4 \"fps/taylor-shift.hpp\"\
-    \n\n// calculate F(x + a)\ntemplate <typename mint>\nFormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint>\
-    \ f, mint a,\n                                    Binomial<mint>& C) {\n  using\
-    \ fps = FormalPowerSeries<mint>;\n  int N = f.size();\n  for (int i = 0; i < N;\
-    \ i++) f[i] *= C.fac(i);\n  reverse(begin(f), end(f));\n  fps g(N, mint(1));\n\
-    \  for (int i = 1; i < N; i++) g[i] = g[i - 1] * a * C.inv(i);\n  f = (f * g).pre(N);\n\
-    \  reverse(begin(f), end(f));\n  for (int i = 0; i < N; i++) f[i] *= C.finv(i);\n\
-    \  return f;\n}\n\n/**\n * @brief \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n\
-    \ */\n#line 6 \"fps/fps-famous-series.hpp\"\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ Stirling1st(int N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  if (N <= 0) return fps{1};\n  int lg = 31 - __builtin_clz(N);\n  fps f = {0,\
-    \ 1};\n  for (int i = lg - 1; i >= 0; i--) {\n    int n = N >> i;\n    f *= TaylorShift(f,\
-    \ mint(n >> 1), C);\n    if (n & 1) f = (f << 1) + f * (n - 1);\n  }\n  return\
-    \ f;\n}\n\n// S(0, K), S(1, K), ..., S(upper, K) \u3092\u5217\u6319\ntemplate\
-    \ <typename mint>\nFormalPowerSeries<mint> Stirling1stRow(int K, int upper, Binomial<mint>\
-    \ &C) {\n  using fps = FormalPowerSeries<mint>;\n  if (upper < K) return {};\n\
-    \  fps f(upper + 1);\n  for (int i = 1; i < (int)f.size(); i++) f[i] = C.inv(i);\n\
-    \  f = f.pow(K) * C.finv(K);\n  for (int n = K; n <= upper; n++) f[n] *= C.fac(n);\n\
-    \  return f;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Stirling2nd(int\
-    \ N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
-    \ 1), g(N + 1);\n  for (int i = 0; i <= N; i++) {\n    f[i] = mint(i).pow(N) *\
-    \ C.finv(i);\n    g[i] = (i & 1) ? -C.finv(i) : C.finv(i);\n  }\n  return (f *\
-    \ g).pre(N + 1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Stirling2ndRow(int\
-    \ K, int upper, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  if (upper < K) return {};\n  fps f(upper + 1);\n  for (int i = 1; i <= upper;\
-    \ i++) f[i] = C.finv(i);\n  f = f.pow(K) * C.finv(K);\n  for (int i = K; i <=\
-    \ upper; i++) f[i] *= C.fac(i);\n  return f;\n}\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> BernoulliEGF(int N, Binomial<mint> &C) {\n  using fps\
-    \ = FormalPowerSeries<mint>;\n  fps f(N + 1);\n  for (int i = 0; i <= N; i++)\
-    \ f[i] = C.finv(i + 1);\n  return f.inv(N + 1);\n}\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> Partition(int N, Binomial<mint> &) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  fps f(N + 1);\n  f[0] = 1;\n  for (int k = 1; k <= N; k++) {\n    long long\
-    \ k1 = 1LL * k * (3 * k + 1) / 2;\n    long long k2 = 1LL * k * (3 * k - 1) /\
-    \ 2;\n    if (k2 > N) break;\n    if (k1 <= N) f[k1] += ((k & 1) ? -1 : 1);\n\
-    \    if (k2 <= N) f[k2] += ((k & 1) ? -1 : 1);\n  }\n  return f.inv();\n}\n\n\
-    template <typename mint>\nvector<mint> Montmort(int N) {\n  if (N <= 1) return\
-    \ {0};\n  if (N == 2) return {0, 1};\n  vector<mint> f(N);\n  f[0] = 0, f[1] =\
-    \ 1;\n  mint coeff = 2, one = 1;\n  for (int i = 2; i < N; i++) {\n    f[i] =\
-    \ (f[i - 1] + f[i - 2]) * coeff;\n    coeff += one;\n  }\n  return f;\n};\n\n\
-    /**\n * @brief \u6709\u540D\u306A\u6570\u5217\n */\n#line 16 \"verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp\"\
-    \nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  ini(n);\n  auto s1 = Stirling1st<mint>(n,\
-    \ C);\n  for(int i = n - 1; i>=0; i-=2) s1[i]=-s1[i];\n  out(s1);\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
-    \n\n#include \"../../template/template.hpp\"\n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\
-    \n#include \"../../modint/montgomery-modint.hpp\"\n#include \"../../modulo/binomial.hpp\"\
-    \n#include \"../../template/template.hpp\"\nusing mint = LazyMontgomeryModInt<998244353>;\n\
-    Binomial<mint> C;\nusing vm = vector<mint>;\nusing vvm = vector<vm>;\nusing fps\
-    \ = FormalPowerSeries<mint>;\n// \n#include \"../../fps/fps-famous-series.hpp\"\
-    \nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  ini(n);\n  auto s1 = Stirling1st<mint>(n,\
-    \ C);\n  for(int i = n - 1; i>=0; i-=2) s1[i]=-s1[i];\n  out(s1);\n}\n"
+    \ back_inserter(a));\n  }\n};\n#line 5 \"ntt/arbitrary-ntt.hpp\"\n\nnamespace\
+    \ ArbitraryNTT {\nusing i64 = int64_t;\nusing u128 = __uint128_t;\nconstexpr int32_t\
+    \ m0 = 167772161;\nconstexpr int32_t m1 = 469762049;\nconstexpr int32_t m2 = 754974721;\n\
+    using mint0 = LazyMontgomeryModInt<m0>;\nusing mint1 = LazyMontgomeryModInt<m1>;\n\
+    using mint2 = LazyMontgomeryModInt<m2>;\nconstexpr int r01 = mint1(m0).inverse().get();\n\
+    constexpr int r02 = mint2(m0).inverse().get();\nconstexpr int r12 = mint2(m1).inverse().get();\n\
+    constexpr int r02r12 = i64(r02) * r12 % m2;\nconstexpr i64 w1 = m0;\nconstexpr\
+    \ i64 w2 = i64(m0) * m1;\n\ntemplate <typename T, typename submint>\nvector<submint>\
+    \ mul(const vector<T> &a, const vector<T> &b) {\n  static NTT<submint> ntt;\n\
+    \  vector<submint> s(a.size()), t(b.size());\n  for (int i = 0; i < (int)a.size();\
+    \ ++i) s[i] = i64(a[i] % submint::get_mod());\n  for (int i = 0; i < (int)b.size();\
+    \ ++i) t[i] = i64(b[i] % submint::get_mod());\n  return ntt.multiply(s, t);\n\
+    }\n\ntemplate <typename T>\nvector<int> multiply(const vector<T> &s, const vector<T>\
+    \ &t, int mod) {\n  auto d0 = mul<T, mint0>(s, t);\n  auto d1 = mul<T, mint1>(s,\
+    \ t);\n  auto d2 = mul<T, mint2>(s, t);\n  int n = d0.size();\n  vector<int> ret(n);\n\
+    \  const int W1 = w1 % mod;\n  const int W2 = w2 % mod;\n  for (int i = 0; i <\
+    \ n; i++) {\n    int n1 = d1[i].get(), n2 = d2[i].get(), a = d0[i].get();\n  \
+    \  int b = i64(n1 + m1 - a) * r01 % m1;\n    int c = (i64(n2 + m2 - a) * r02r12\
+    \ + i64(m2 - b) * r12) % m2;\n    ret[i] = (i64(a) + i64(b) * W1 + i64(c) * W2)\
+    \ % mod;\n  }\n  return ret;\n}\n\ntemplate <typename mint>\nvector<mint> multiply(const\
+    \ vector<mint> &a, const vector<mint> &b) {\n  if (a.size() == 0 && b.size() ==\
+    \ 0) return {};\n  if (min<int>(a.size(), b.size()) < 128) {\n    vector<mint>\
+    \ ret(a.size() + b.size() - 1);\n    for (int i = 0; i < (int)a.size(); ++i)\n\
+    \      for (int j = 0; j < (int)b.size(); ++j) ret[i + j] += a[i] * b[j];\n  \
+    \  return ret;\n  }\n  vector<int> s(a.size()), t(b.size());\n  for (int i = 0;\
+    \ i < (int)a.size(); ++i) s[i] = a[i].get();\n  for (int i = 0; i < (int)b.size();\
+    \ ++i) t[i] = b[i].get();\n  vector<int> u = multiply<int>(s, t, mint::get_mod());\n\
+    \  vector<mint> ret(u.size());\n  for (int i = 0; i < (int)u.size(); ++i) ret[i]\
+    \ = mint(u[i]);\n  return ret;\n}\n\ntemplate <typename T>\nvector<u128> multiply_u128(const\
+    \ vector<T> &s, const vector<T> &t) {\n  if (s.size() == 0 && t.size() == 0) return\
+    \ {};\n  if (min<int>(s.size(), t.size()) < 128) {\n    vector<u128> ret(s.size()\
+    \ + t.size() - 1);\n    for (int i = 0; i < (int)s.size(); ++i)\n      for (int\
+    \ j = 0; j < (int)t.size(); ++j) ret[i + j] += i64(s[i]) * t[j];\n    return ret;\n\
+    \  }\n  auto d0 = mul<T, mint0>(s, t);\n  auto d1 = mul<T, mint1>(s, t);\n  auto\
+    \ d2 = mul<T, mint2>(s, t);\n  int n = d0.size();\n  vector<u128> ret(n);\n  for\
+    \ (int i = 0; i < n; i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n   \
+    \ i64 a = d0[i].get();\n    i64 b = (n1 + m1 - a) * r01 % m1;\n    i64 c = ((n2\
+    \ + m2 - a) * r02r12 + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + u128(c)\
+    \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 12 \"math/bigint-binary.hpp\"\
+    \n\nnamespace BinaryBigIntImpl {\n\nusing u32 = unsigned int;\nusing u64 = unsigned\
+    \ long long;\nusing i64 = long long;\n\n// 0 \u306F neg=false, dat={} \u3068\u3057\
+    \u3066\u6271\u3046\nstruct BinaryBigInt {\n  using M = BinaryBigInt;\n  bool neg;\n\
+    \  vector<u32> dat;\n\n  BinaryBigInt() : neg(false), dat() {}\n\n  BinaryBigInt(bool\
+    \ _neg, const vector<u32>& _dat) : neg(_neg), dat(_dat) {}\n\n  BinaryBigInt(const\
+    \ string& S, int base) : neg(false) {\n    assert(base == 16);\n    int ie = -1;\n\
+    \    if (S[0] == '-') neg = true, ie++;\n    for (int r = S.size() - 1; r > ie;\
+    \ r -= 8) {\n      int l = max(r - 8, ie);\n      u32 x = 0;\n      for (int i\
+    \ = l + 1; i <= r; i++) {\n        int c = 0;\n        if ('0' <= S[i] and S[i]\
+    \ <= '9') {\n          c = S[i] - '0';\n        } else if ('A' <= S[i] and S[i]\
+    \ <= 'F') {\n          c = S[i] - 'A' + 10;\n        } else {\n          c = S[i]\
+    \ - 'a' + 10;\n        }\n        x = c + (x << 4);\n      }\n      dat.push_back(x);\n\
+    \    }\n    _shrink();\n  }\n\n  friend M operator+(const M& lhs, const M& rhs)\
+    \ {\n    if (lhs.neg == rhs.neg) return {lhs.neg, _add(lhs.dat, rhs.dat)};\n \
+    \   if (_leq(lhs.dat, rhs.dat)) {\n      // |l| <= |r|\n      auto c = _sub(rhs.dat,\
+    \ lhs.dat);\n      bool n = _is_zero(c) ? false : rhs.neg;\n      return {n, c};\n\
+    \    }\n    auto c = _sub(lhs.dat, rhs.dat);\n    bool n = _is_zero(c) ? false\
+    \ : lhs.neg;\n    return {n, c};\n  }\n  friend M operator-(const M& lhs, const\
+    \ M& rhs) { return lhs + (-rhs); }\n  friend M operator*(const M& lhs, const M&\
+    \ rhs) {\n    auto c = _mul(lhs.dat, rhs.dat);\n    bool n = _is_zero(c) ? false\
+    \ : (lhs.neg ^ rhs.neg);\n    return {n, c};\n  }\n\n  M& operator+=(const M&\
+    \ rhs) { return (*this) = (*this) + rhs; }\n  M& operator-=(const M& rhs) { return\
+    \ (*this) = (*this) - rhs; }\n  M& operator*=(const M& rhs) { return (*this) =\
+    \ (*this) * rhs; }\n\n  M operator-() const {\n    if (is_zero()) return *this;\n\
+    \    return {!neg, dat};\n  }\n  M operator+() const { return *this; }\n  friend\
+    \ M abs(const M& m) { return {false, m.dat}; }\n  bool is_zero() const { return\
+    \ _is_zero(dat); }\n\n  friend bool operator==(const M& lhs, const M& rhs) {\n\
+    \    return lhs.neg == rhs.neg && lhs.dat == rhs.dat;\n  }\n  friend bool operator!=(const\
+    \ M& lhs, const M& rhs) {\n    return lhs.neg != rhs.neg || lhs.dat != rhs.dat;\n\
+    \  }\n  friend bool operator<(const M& lhs, const M& rhs) {\n    return lhs ==\
+    \ rhs ? false : _neq_lt(lhs, rhs);\n  }\n  friend bool operator<=(const M& lhs,\
+    \ const M& rhs) {\n    return lhs == rhs ? true : _neq_lt(lhs, rhs);\n  }\n  friend\
+    \ bool operator>(const M& lhs, const M& rhs) {\n    return lhs == rhs ? false\
+    \ : _neq_lt(rhs, lhs);\n  }\n  friend bool operator>=(const M& lhs, const M& rhs)\
+    \ {\n    return lhs == rhs ? true : _neq_lt(rhs, lhs);\n  }\n\n  // 0 \u306E\u6642\
+    \ 0 \u3092\u8FD4\u3059\n  int ctz() const {\n    if (dat.empty()) return 0;\n\
+    \    int i = 0;\n    while (dat[i] == 0) i++;\n    return 32 * i + __builtin_ctzll(dat[i]);\n\
+    \  }\n  M& operator<<=(int s) {\n    assert(s >= 0);\n    if (dat.empty()) return\
+    \ *this;\n    int q = s / 32, r = s % 32;\n    dat.push_back(0);\n    if (r) {\n\
+    \      for (int i = (int)dat.size() - 1; i >= 1; i--) {\n        dat[i] = (dat[i]\
+    \ << r) | (dat[i - 1] >> (32 - r));\n      }\n      dat[0] <<= r;\n    }\n   \
+    \ dat.insert(begin(dat), q, 0);\n    return *this;\n  }\n  M& operator>>=(int\
+    \ s) {\n    assert(s >= 0);\n    int q = s / 32, r = s % 32;\n    if ((int)dat.size()\
+    \ <= q) {\n      dat.clear();\n      return *this;\n    }\n    dat.erase(begin(dat),\
+    \ begin(dat) + q);\n    if (r) {\n      for (int i = 0; i + 1 < (int)dat.size();\
+    \ i++) {\n        dat[i] = (dat[i] >> r) | (dat[i + 1] << (32 - r));\n      }\n\
+    \      dat.back() >>= r;\n    }\n    _shrink();\n    return *this;\n  }\n\n  friend\
+    \ M gcd(M a, M b) {\n    a.neg = b.neg = false;\n    if(a.dat.empty()) return\
+    \ b;\n    if(b.dat.empty()) return a;\n    int at = a.ctz(), bt = b.ctz();\n \
+    \   a >>= at, b >>= bt;\n    if (a < b) swap(a, b);\n    while (!b.dat.empty())\
+    \ {\n      a -= b;\n      a >>= a.ctz();\n      if (a < b) swap(a, b);\n    }\n\
+    \    return a <<= min(at, bt);\n  }\n\n  string to_hex() const {\n    if (dat.empty())\
+    \ return \"0\";\n    string res;\n    for (int i = 0; i < (int)dat.size(); i++)\
+    \ {\n      u32 x = dat[i];\n      for (int j = 0; j < 8; j++) {\n        res.push_back(\"\
+    0123456789ABCDEF\"[x & 15]);\n        x >>= 4;\n      }\n    }\n    while (res.back()\
+    \ == '0') res.pop_back();\n    reverse(begin(res), end(res));\n    if (neg) res.insert(begin(res),\
+    \ '-');\n    return res;\n  }\n\n private:\n  // size\n  int _size() const { return\
+    \ dat.size(); }\n  // a == b\n  static bool _eq(const vector<u32>& a, const vector<u32>&\
+    \ b) { return a == b; }\n  // a < b\n  static bool _lt(const vector<u32>& a, const\
+    \ vector<u32>& b) {\n    if (a.size() != b.size()) return a.size() < b.size();\n\
+    \    for (int i = a.size() - 1; i >= 0; i--) {\n      if (a[i] != b[i]) return\
+    \ a[i] < b[i];\n    }\n    return false;\n  }\n  // a <= b\n  static bool _leq(const\
+    \ vector<u32>& a, const vector<u32>& b) {\n    return _eq(a, b) || _lt(a, b);\n\
+    \  }\n  // a < b (s.t. a != b)\n  static bool _neq_lt(const M& lhs, const M& rhs)\
+    \ {\n    assert(lhs != rhs);\n    if (lhs.neg != rhs.neg) return lhs.neg;\n  \
+    \  bool f = _lt(lhs.dat, rhs.dat);\n    if (f) return !lhs.neg;\n    return lhs.neg;\n\
+    \  }\n  // a == 0\n  static bool _is_zero(const vector<u32>& a) { return a.empty();\
+    \ }\n  // \u672B\u5C3E 0 \u3092\u524A\u9664\n  static void _shrink(vector<u32>&\
+    \ a) {\n    while (a.size() && a.back() == 0) a.pop_back();\n  }\n  // \u672B\u5C3E\
+    \ 0 \u3092\u524A\u9664\n  void _shrink() {\n    while (_size() && dat.back() ==\
+    \ 0) dat.pop_back();\n  }\n  // a + b\n  static vector<u32> _add(const vector<u32>&\
+    \ a, const vector<u32>& b) {\n    vector<u32> c(max(a.size(), b.size()) + 1);\n\
+    \    int carry = 0;\n    for (int i = 0; i < (int)c.size(); i++) {\n      u64\
+    \ s = carry;\n      carry = 0;\n      if (i < (int)a.size()) s += a[i];\n    \
+    \  if (i < (int)b.size()) s += b[i];\n      if (s >= (1uLL << 32)) s -= 1uLL <<\
+    \ 32, carry = 1;\n      c[i] = s;\n    }\n    _shrink(c);\n    return c;\n  }\n\
+    \  // a - b\n  static vector<u32> _sub(const vector<u32>& a, const vector<u32>&\
+    \ b) {\n    assert(_leq(b, a));\n    vector<u32> c{a};\n    i64 borrow = 0;\n\
+    \    for (int i = 0; i < (int)a.size(); i++) {\n      if (i < (int)b.size()) borrow\
+    \ += b[i];\n      i64 x = c[i] - borrow;\n      borrow = 0;\n      if (x < 0)\
+    \ x += 1uLL << 32, borrow = 1;\n      c[i] = x;\n    }\n    assert(borrow == 0);\n\
+    \    _shrink(c);\n    return c;\n  }\n  // a * b (fft)\n  static vector<u32> _mul(const\
+    \ vector<u32>& a, const vector<u32>& b) {\n    if (a.empty() || b.empty()) return\
+    \ {};\n    vector<int> a2(a.size() * 2), b2(b.size() * 2);\n    for (int i = 0;\
+    \ i < (int)a.size(); i++) {\n      a2[i * 2 + 0] = a[i] & 65535;\n      a2[i *\
+    \ 2 + 1] = a[i] >> 16;\n    }\n    for (int i = 0; i < (int)b.size(); i++) {\n\
+    \      b2[i * 2 + 0] = b[i] & 65535;\n      b2[i * 2 + 1] = b[i] >> 16;\n    }\n\
+    \    auto m = ArbitraryNTT::multiply_u128(a2, b2);\n    vector<u32> c;\n    c.reserve(a.size()\
+    \ + b.size() + 3);\n    __uint128_t x = 0;\n    for (int i = 0;; i += 2) {\n \
+    \     if (i >= (int)m.size() && x == 0) break;\n      if (i + 0 < (int)m.size())\
+    \ x += m[i + 0];\n      if (i + 1 < (int)m.size()) x += m[i + 1] << 16;\n    \
+    \  c.push_back(x & ((1uLL << 32) - 1));\n      x >>= 32;\n    }\n    _shrink(c);\n\
+    \    return c;\n  }\n};\n\n}  // namespace BinaryBigIntImpl\n\nusing BinaryBigIntImpl::BinaryBigInt;\n\
+    #line 6 \"verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp\"\n//\nusing\
+    \ namespace Nyaan;\n\nvoid q() {\n  ins(S, T);\n  BinaryBigInt A{S, 16};\n  BinaryBigInt\
+    \ B{T, 16};\n  auto C = A + B;\n  out(C.to_hex());\n}\n\nvoid Nyaan::solve() {\n\
+    \  int t = 1;\n  in(t);\n  while (t--) q();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/addition_of_hex_big_integers\"\
+    \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../math/bigint-binary.hpp\"\
+    \n//\nusing namespace Nyaan;\n\nvoid q() {\n  ins(S, T);\n  BinaryBigInt A{S,\
+    \ 16};\n  BinaryBigInt B{T, 16};\n  auto C = A + B;\n  out(C.to_hex());\n}\n\n\
+    void Nyaan::solve() {\n  int t = 1;\n  in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -564,23 +493,20 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - fps/ntt-friendly-fps.hpp
-  - ntt/ntt.hpp
-  - fps/formal-power-series.hpp
+  - math/bigint-binary.hpp
+  - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
-  - modulo/binomial.hpp
-  - fps/fps-famous-series.hpp
-  - fps/taylor-shift.hpp
+  - ntt/ntt.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
+  path: verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp
   requiredBy: []
   timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
+documentation_of: verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-- /verify/verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp.html
-title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp.html
+title: verify/verify-yosupo-math/yosupo-addition-of-hex.test.cpp
 ---

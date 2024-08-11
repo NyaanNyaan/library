@@ -341,48 +341,49 @@ data:
     \    T a = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n\
     \      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return U((u\
     \ % mod + mod) % mod) * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long\
-    \ long, __int128_t>;\n#line 4 \"math/rational-binomial.hpp\"\n\ntemplate <typename\
-    \ R = Rational>\nstruct Binomial_rational {\n  vector<R> fc;\n  Binomial_rational(int\
-    \ = 0) { fc.emplace_back(1); }\n  void extend() {\n    int n = fc.size();\n  \
-    \  R nxt = fc.back() * n;\n    fc.push_back(nxt);\n  }\n  R fac(int n) {\n   \
-    \ if (n < 0) return 0;\n    while ((int)fc.size() <= n) extend();\n    return\
-    \ fc[n];\n  }\n  R finv(int n) {\n    if (n < 0) return 0;\n    return fac(n).inverse();\n\
-    \  }\n  R inv(int n) {\n    if (n < 0) return -inv(-n);\n    return R{1, max(n,\
-    \ 1)};\n  }\n  R C(int n, int r) {\n    if (n < 0 or r < 0 or n < r) return R{0};\n\
-    \    return fac(n) * finv(n - r) * finv(r);\n  }\n  R operator()(int n, int r)\
-    \ { return C(n, r); }\n  template <typename I>\n  R multinomial(const vector<I>&\
-    \ r) {\n    static_assert(is_integral<I>::value == true);\n    int n = 0;\n  \
-    \  for (auto& x : r) {\n      if (x < 0) return R{0};\n      n += x;\n    }\n\
-    \    R res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
-    \  }\n\n  template <typename I>\n  R operator()(const vector<I>& r) {\n    return\
-    \ multinomial(r);\n  }\n  \n  R P(int n, int r) {\n    if (n < 0 || n < r || r\
-    \ < 0) return R(0);\n    return fac(n) * finv(n - r);\n  }\n  // [x^r] 1 / (1-x)^n\n\
-    \  R H(int n, int r) {\n    if (n < 0 || r < 0) return R(0);\n    return r ==\
-    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 2 \"math/rational-fps.hpp\"\n\n#line\
-    \ 5 \"math/rational-fps.hpp\"\n\ntemplate <typename R = Rational>\nstruct FormalPowerSeries_rational\
-    \ : vector<R> {\n  using vector<R>::vector;\n  using fps = FormalPowerSeries_rational;\n\
-    \n  fps &operator+=(const fps &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
-    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
-    \  }\n\n  fps &operator+=(const R &r) {\n    if (this->empty()) this->resize(1);\n\
-    \    (*this)[0] += r;\n    return *this;\n  }\n\n  fps &operator-=(const fps &r)\
-    \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
-    \ = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n\
-    \  fps &operator-=(const R &r) {\n    if (this->empty()) this->resize(1);\n  \
-    \  (*this)[0] -= r;\n    return *this;\n  }\n\n  fps &operator*=(const fps &r)\
-    \ {\n    int n = this->size() + r.size() - 1;\n    fps f(n);\n    for (int i =\
-    \ 0; i < (int)this->size(); i++) {\n      for (int j = 0; j < (int)r.size(); j++)\
-    \ {\n        f[i + j] += (*this)[i] * r[j];\n      }\n    }\n    return *this\
-    \ = f;\n  }\n\n  fps &operator*=(const R &v) {\n    for (int k = 0; k < (int)this->size();\
-    \ k++) (*this)[k] *= v;\n    return *this;\n  }\n\n  fps &operator/=(const fps\
-    \ &r) {\n    if (this->size() < r.size()) {\n      this->clear();\n      return\
-    \ *this;\n    }\n    int n = this->size() - r.size() + 1;\n    fps f(*this), g(r);\n\
-    \    g.shrink();\n    R coeff = g.back().inverse();\n    for (auto &x : g) x *=\
-    \ coeff;\n    int deg = (int)f.size() - (int)g.size() + 1;\n    int gs = g.size();\n\
-    \    fps quo(deg);\n    for (int i = deg - 1; i >= 0; i--) {\n      quo[i] = f[i\
-    \ + gs - 1];\n      for (int j = 0; j < gs; j++) f[i + j] -= quo[i] * g[j];\n\
-    \    }\n    *this = quo * coeff;\n    this->resize(n, R(0));\n    return *this;\n\
-    \  }\n\n  fps &operator%=(const fps &r) {\n    *this -= *this / r * r;\n    shrink();\n\
-    \    return *this;\n  }\n\n  fps operator+(const fps &r) const { return fps(*this)\
+    \ long, __int128_t>;\nusing Fraction = Rational;\n#line 4 \"math/rational-binomial.hpp\"\
+    \n\ntemplate <typename R = Rational>\nstruct Binomial_rational {\n  vector<R>\
+    \ fc;\n  Binomial_rational(int = 0) { fc.emplace_back(1); }\n  void extend() {\n\
+    \    int n = fc.size();\n    R nxt = fc.back() * n;\n    fc.push_back(nxt);\n\
+    \  }\n  R fac(int n) {\n    if (n < 0) return 0;\n    while ((int)fc.size() <=\
+    \ n) extend();\n    return fc[n];\n  }\n  R finv(int n) {\n    if (n < 0) return\
+    \ 0;\n    return fac(n).inverse();\n  }\n  R inv(int n) {\n    if (n < 0) return\
+    \ -inv(-n);\n    return R{1, max(n, 1)};\n  }\n  R C(int n, int r) {\n    if (n\
+    \ < 0 or r < 0 or n < r) return R{0};\n    return fac(n) * finv(n - r) * finv(r);\n\
+    \  }\n  R operator()(int n, int r) { return C(n, r); }\n  template <typename I>\n\
+    \  R multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
+    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
+    \ R{0};\n      n += x;\n    }\n    R res = fac(n);\n    for (auto& x : r) res\
+    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  R operator()(const\
+    \ vector<I>& r) {\n    return multinomial(r);\n  }\n  \n  R P(int n, int r) {\n\
+    \    if (n < 0 || n < r || r < 0) return R(0);\n    return fac(n) * finv(n - r);\n\
+    \  }\n  // [x^r] 1 / (1-x)^n\n  R H(int n, int r) {\n    if (n < 0 || r < 0) return\
+    \ R(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 2 \"math/rational-fps.hpp\"\
+    \n\n#line 5 \"math/rational-fps.hpp\"\n\ntemplate <typename R = Rational>\nstruct\
+    \ FormalPowerSeries_rational : vector<R> {\n  using vector<R>::vector;\n  using\
+    \ fps = FormalPowerSeries_rational;\n\n  fps &operator+=(const fps &r) {\n   \
+    \ if (r.size() > this->size()) this->resize(r.size());\n    for (int i = 0; i\
+    \ < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n  }\n\n  fps &operator+=(const\
+    \ R &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] += r;\n   \
+    \ return *this;\n  }\n\n  fps &operator-=(const fps &r) {\n    if (r.size() >\
+    \ this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
+    \ i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n  fps &operator-=(const\
+    \ R &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] -= r;\n   \
+    \ return *this;\n  }\n\n  fps &operator*=(const fps &r) {\n    int n = this->size()\
+    \ + r.size() - 1;\n    fps f(n);\n    for (int i = 0; i < (int)this->size(); i++)\
+    \ {\n      for (int j = 0; j < (int)r.size(); j++) {\n        f[i + j] += (*this)[i]\
+    \ * r[j];\n      }\n    }\n    return *this = f;\n  }\n\n  fps &operator*=(const\
+    \ R &v) {\n    for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;\n\
+    \    return *this;\n  }\n\n  fps &operator/=(const fps &r) {\n    if (this->size()\
+    \ < r.size()) {\n      this->clear();\n      return *this;\n    }\n    int n =\
+    \ this->size() - r.size() + 1;\n    fps f(*this), g(r);\n    g.shrink();\n   \
+    \ R coeff = g.back().inverse();\n    for (auto &x : g) x *= coeff;\n    int deg\
+    \ = (int)f.size() - (int)g.size() + 1;\n    int gs = g.size();\n    fps quo(deg);\n\
+    \    for (int i = deg - 1; i >= 0; i--) {\n      quo[i] = f[i + gs - 1];\n   \
+    \   for (int j = 0; j < gs; j++) f[i + j] -= quo[i] * g[j];\n    }\n    *this\
+    \ = quo * coeff;\n    this->resize(n, R(0));\n    return *this;\n  }\n\n  fps\
+    \ &operator%=(const fps &r) {\n    *this -= *this / r * r;\n    shrink();\n  \
+    \  return *this;\n  }\n\n  fps operator+(const fps &r) const { return fps(*this)\
     \ += r; }\n  fps operator+(const R &v) const { return fps(*this) += v; }\n  fps\
     \ operator-(const fps &r) const { return fps(*this) -= r; }\n  fps operator-(const\
     \ R &v) const { return fps(*this) -= v; }\n  fps operator*(const fps &r) const\
@@ -988,7 +989,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/bigrational.test.cpp
   requiredBy: []
-  timestamp: '2024-05-03 23:21:26+09:00'
+  timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/bigrational.test.cpp

@@ -148,30 +148,34 @@ data:
     \ N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
     \ 1), g(N + 1);\n  for (int i = 0; i <= N; i++) {\n    f[i] = mint(i).pow(N) *\
     \ C.finv(i);\n    g[i] = (i & 1) ? -C.finv(i) : C.finv(i);\n  }\n  return (f *\
-    \ g).pre(N + 1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> BernoulliEGF(int\
-    \ N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
-    \ 1);\n  for (int i = 0; i <= N; i++) f[i] = C.finv(i + 1);\n  return f.inv(N\
-    \ + 1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Partition(int\
-    \ N, Binomial<mint> &) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
-    \ 1);\n  f[0] = 1;\n  for (int k = 1; k <= N; k++) {\n    long long k1 = 1LL *\
-    \ k * (3 * k + 1) / 2;\n    long long k2 = 1LL * k * (3 * k - 1) / 2;\n    if\
-    \ (k2 > N) break;\n    if (k1 <= N) f[k1] += ((k & 1) ? -1 : 1);\n    if (k2 <=\
-    \ N) f[k2] += ((k & 1) ? -1 : 1);\n  }\n  return f.inv();\n}\n\ntemplate <typename\
-    \ mint>\nvector<mint> Montmort(int N) {\n  if (N <= 1) return {0};\n  if (N ==\
-    \ 2) return {0, 1};\n  vector<mint> f(N);\n  f[0] = 0, f[1] = 1;\n  mint coeff\
-    \ = 2, one = 1;\n  for (int i = 2; i < N; i++) {\n    f[i] = (f[i - 1] + f[i -\
-    \ 2]) * coeff;\n    coeff += one;\n  }\n  return f;\n};\n\n/**\n * @brief \u6709\
-    \u540D\u306A\u6570\u5217\n */\n#line 6 \"fps/fualhuber.hpp\"\n\n// \u6570\u5217\
-    \ a_0, a_1, ... \u306E\u4E00\u822C\u9805 a_n \u304C\u591A\u9805\u5F0F f(n) \u3067\
-    \u8868\u305B\u308B\u3068\u3059\u308B\n// \u3053\u306E\u3068\u304D b_i = sum_{0<=j<=i}\
-    \ a_i \u306E\u4E00\u822C\u9805\u3092\u8868\u3059\u591A\u9805\u5F0F\u3092\u6C42\
-    \u3081\u308B\ntemplate <typename mint>\nFormalPowerSeries<mint> fualhuber(const\
-    \ FormalPowerSeries<mint>& f,\n                                  Binomial<mint>&\
-    \ C) {\n  using fps = FormalPowerSeries<mint>;\n  int N = f.size();\n  auto B\
-    \ = BernoulliEGF(N + 3, C);\n  B[1] = -B[1];\n  fps s(N), t(N);\n  for (int i\
-    \ = 0; i < N; i++) s[i] = f[i] * C.fac(i), t[i] = B[i];\n  fps u = s * t.rev();\n\
-    \  fps g(N + 1);\n  g[0] = f[0];\n  for (int i = 0; i < N; i++) g[i + 1] = u[i\
-    \ + N - 1] * C.finv(i + 1);\n  return g;\n}\n"
+    \ g).pre(N + 1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Stirling2ndRow(int\
+    \ K, int upper, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  if (upper < K) return {};\n  fps f(upper + 1);\n  for (int i = 1; i <= upper;\
+    \ i++) f[i] = C.finv(i);\n  f = f.pow(K) * C.finv(K);\n  for (int i = K; i <=\
+    \ upper; i++) f[i] *= C.fac(i);\n  return f;\n}\n\ntemplate <typename mint>\n\
+    FormalPowerSeries<mint> BernoulliEGF(int N, Binomial<mint> &C) {\n  using fps\
+    \ = FormalPowerSeries<mint>;\n  fps f(N + 1);\n  for (int i = 0; i <= N; i++)\
+    \ f[i] = C.finv(i + 1);\n  return f.inv(N + 1);\n}\n\ntemplate <typename mint>\n\
+    FormalPowerSeries<mint> Partition(int N, Binomial<mint> &) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  fps f(N + 1);\n  f[0] = 1;\n  for (int k = 1; k <= N; k++) {\n    long long\
+    \ k1 = 1LL * k * (3 * k + 1) / 2;\n    long long k2 = 1LL * k * (3 * k - 1) /\
+    \ 2;\n    if (k2 > N) break;\n    if (k1 <= N) f[k1] += ((k & 1) ? -1 : 1);\n\
+    \    if (k2 <= N) f[k2] += ((k & 1) ? -1 : 1);\n  }\n  return f.inv();\n}\n\n\
+    template <typename mint>\nvector<mint> Montmort(int N) {\n  if (N <= 1) return\
+    \ {0};\n  if (N == 2) return {0, 1};\n  vector<mint> f(N);\n  f[0] = 0, f[1] =\
+    \ 1;\n  mint coeff = 2, one = 1;\n  for (int i = 2; i < N; i++) {\n    f[i] =\
+    \ (f[i - 1] + f[i - 2]) * coeff;\n    coeff += one;\n  }\n  return f;\n};\n\n\
+    /**\n * @brief \u6709\u540D\u306A\u6570\u5217\n */\n#line 6 \"fps/fualhuber.hpp\"\
+    \n\n// \u6570\u5217 a_0, a_1, ... \u306E\u4E00\u822C\u9805 a_n \u304C\u591A\u9805\
+    \u5F0F f(n) \u3067\u8868\u305B\u308B\u3068\u3059\u308B\n// \u3053\u306E\u3068\u304D\
+    \ b_i = sum_{0<=j<=i} a_i \u306E\u4E00\u822C\u9805\u3092\u8868\u3059\u591A\u9805\
+    \u5F0F\u3092\u6C42\u3081\u308B\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ fualhuber(const FormalPowerSeries<mint>& f,\n                              \
+    \    Binomial<mint>& C) {\n  using fps = FormalPowerSeries<mint>;\n  int N = f.size();\n\
+    \  auto B = BernoulliEGF(N + 3, C);\n  B[1] = -B[1];\n  fps s(N), t(N);\n  for\
+    \ (int i = 0; i < N; i++) s[i] = f[i] * C.fac(i), t[i] = B[i];\n  fps u = s *\
+    \ t.rev();\n  fps g(N + 1);\n  g[0] = f[0];\n  for (int i = 0; i < N; i++) g[i\
+    \ + 1] = u[i + N - 1] * C.finv(i + 1);\n  return g;\n}\n"
   code: "#pragma once\n\n#include \"../modulo/binomial.hpp\"\n#include \"formal-power-series.hpp\"\
     \n#include \"fps-famous-series.hpp\"\n\n// \u6570\u5217 a_0, a_1, ... \u306E\u4E00\
     \u822C\u9805 a_n \u304C\u591A\u9805\u5F0F f(n) \u3067\u8868\u305B\u308B\u3068\u3059\
@@ -191,7 +195,7 @@ data:
   isVerificationFile: false
   path: fps/fualhuber.hpp
   requiredBy: []
-  timestamp: '2023-12-22 19:57:12+09:00'
+  timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-2580.test.cpp

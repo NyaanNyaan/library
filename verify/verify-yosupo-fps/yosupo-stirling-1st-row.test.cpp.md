@@ -360,20 +360,24 @@ data:
     \ N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
     \ 1), g(N + 1);\n  for (int i = 0; i <= N; i++) {\n    f[i] = mint(i).pow(N) *\
     \ C.finv(i);\n    g[i] = (i & 1) ? -C.finv(i) : C.finv(i);\n  }\n  return (f *\
-    \ g).pre(N + 1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> BernoulliEGF(int\
-    \ N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
-    \ 1);\n  for (int i = 0; i <= N; i++) f[i] = C.finv(i + 1);\n  return f.inv(N\
-    \ + 1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Partition(int\
-    \ N, Binomial<mint> &) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
-    \ 1);\n  f[0] = 1;\n  for (int k = 1; k <= N; k++) {\n    long long k1 = 1LL *\
-    \ k * (3 * k + 1) / 2;\n    long long k2 = 1LL * k * (3 * k - 1) / 2;\n    if\
-    \ (k2 > N) break;\n    if (k1 <= N) f[k1] += ((k & 1) ? -1 : 1);\n    if (k2 <=\
-    \ N) f[k2] += ((k & 1) ? -1 : 1);\n  }\n  return f.inv();\n}\n\ntemplate <typename\
-    \ mint>\nvector<mint> Montmort(int N) {\n  if (N <= 1) return {0};\n  if (N ==\
-    \ 2) return {0, 1};\n  vector<mint> f(N);\n  f[0] = 0, f[1] = 1;\n  mint coeff\
-    \ = 2, one = 1;\n  for (int i = 2; i < N; i++) {\n    f[i] = (f[i - 1] + f[i -\
-    \ 2]) * coeff;\n    coeff += one;\n  }\n  return f;\n};\n\n/**\n * @brief \u6709\
-    \u540D\u306A\u6570\u5217\n */\n#line 6 \"verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp\"\
+    \ g).pre(N + 1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Stirling2ndRow(int\
+    \ K, int upper, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  if (upper < K) return {};\n  fps f(upper + 1);\n  for (int i = 1; i <= upper;\
+    \ i++) f[i] = C.finv(i);\n  f = f.pow(K) * C.finv(K);\n  for (int i = K; i <=\
+    \ upper; i++) f[i] *= C.fac(i);\n  return f;\n}\n\ntemplate <typename mint>\n\
+    FormalPowerSeries<mint> BernoulliEGF(int N, Binomial<mint> &C) {\n  using fps\
+    \ = FormalPowerSeries<mint>;\n  fps f(N + 1);\n  for (int i = 0; i <= N; i++)\
+    \ f[i] = C.finv(i + 1);\n  return f.inv(N + 1);\n}\n\ntemplate <typename mint>\n\
+    FormalPowerSeries<mint> Partition(int N, Binomial<mint> &) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  fps f(N + 1);\n  f[0] = 1;\n  for (int k = 1; k <= N; k++) {\n    long long\
+    \ k1 = 1LL * k * (3 * k + 1) / 2;\n    long long k2 = 1LL * k * (3 * k - 1) /\
+    \ 2;\n    if (k2 > N) break;\n    if (k1 <= N) f[k1] += ((k & 1) ? -1 : 1);\n\
+    \    if (k2 <= N) f[k2] += ((k & 1) ? -1 : 1);\n  }\n  return f.inv();\n}\n\n\
+    template <typename mint>\nvector<mint> Montmort(int N) {\n  if (N <= 1) return\
+    \ {0};\n  if (N == 2) return {0, 1};\n  vector<mint> f(N);\n  f[0] = 0, f[1] =\
+    \ 1;\n  mint coeff = 2, one = 1;\n  for (int i = 2; i < N; i++) {\n    f[i] =\
+    \ (f[i - 1] + f[i - 2]) * coeff;\n    coeff += one;\n  }\n  return f;\n};\n\n\
+    /**\n * @brief \u6709\u540D\u306A\u6570\u5217\n */\n#line 6 \"verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp\"\
     \n//\n#line 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt.hpp\"\n\ntemplate\
     \ <typename mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t\
     \ _mod = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32] = {};\n \
@@ -578,7 +582,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp
   requiredBy: []
-  timestamp: '2024-05-03 23:21:26+09:00'
+  timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp

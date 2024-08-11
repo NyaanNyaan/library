@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: matrix/f2-matrix.hpp
-    title: matrix/f2-matrix.hpp
+    path: data-structure/erasable-priority-queue.hpp
+    title: data-structure/erasable-priority-queue.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -29,30 +29,30 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/matrix_det_mod_2
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - https://judge.yosupo.jp/problem/matrix_det_mod_2
-  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det_mod_2\"\n//\n#line\
-    \ 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
-    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
-    \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
-    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <deque>\n#include\
-    \ <fstream>\n#include <functional>\n#include <initializer_list>\n#include <iomanip>\n\
-    #include <ios>\n#include <iostream>\n#include <istream>\n#include <iterator>\n\
-    #include <limits>\n#include <list>\n#include <map>\n#include <memory>\n#include\
-    \ <new>\n#include <numeric>\n#include <ostream>\n#include <queue>\n#include <random>\n\
-    #include <set>\n#include <sstream>\n#include <stack>\n#include <streambuf>\n#include\
-    \ <string>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include\
-    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
-    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
-    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
-    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
-    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
-    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
-    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\ntemplate\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/erasable-priority-queue.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <cstdarg>\n#include\
+    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
+    \ <cstring>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
+    \ <initializer_list>\n#include <iomanip>\n#include <ios>\n#include <iostream>\n\
+    #include <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n\
+    #include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include\
+    \ <ostream>\n#include <queue>\n#include <random>\n#include <set>\n#include <sstream>\n\
+    #include <stack>\n#include <streambuf>\n#include <string>\n#include <tuple>\n\
+    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
+    \ <unordered_set>\n#include <utility>\n#include <vector>\n\n// utility\n#line\
+    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
+    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
+    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
+    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
+    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\ntemplate\
     \ <typename T>\nusing minpq = priority_queue<T, vector<T>, greater<T>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
@@ -218,58 +218,29 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp\"\n\
-    //\n#line 2 \"matrix/f2-matrix.hpp\"\n\n#line 5 \"matrix/f2-matrix.hpp\"\nusing\
-    \ namespace std;\n\nnamespace std {\ntemplate <size_t N>\nbool operator<(const\
-    \ bitset<N> &a, const bitset<N> &b) {\n  int f = (a ^ b)._Find_first();\n  return\
-    \ f == N ? false : a[f];\n}\n}  // namespace std\n\ntemplate <size_t H_MAX, size_t\
-    \ W_MAX>\nstruct F2_Matrix {\n  using Mat = F2_Matrix;\n\n  int H, W;\n  array<bitset<W_MAX>,\
-    \ H_MAX> A;\n  F2_Matrix(int h = H_MAX, int w = W_MAX) : H(h), W(w) {\n    assert(0\
-    \ <= h and h <= (int)H_MAX);\n    assert(0 <= w and w <= (int)W_MAX);\n    for\
-    \ (int i = 0; i < (int)H_MAX; i++) A[i].reset();\n  }\n  inline bitset<W_MAX>\
-    \ &operator[](int i) { return A[i]; }\n  inline const bitset<W_MAX> &operator[](int\
-    \ i) const { return A[i]; }\n\n  static Mat I(int n) {\n    Mat a(n, n);\n   \
-    \ for (int i = 0; i < n; i++) a[i][i] = true;\n    return a;\n  }\n\n  // (AND,\
-    \ XOR) \u534A\u74B0\n  // (AND, OR) \u534A\u74B0\u306B\u306F operator/ \u3092\u5272\
-    \u308A\u5F53\u3066\u305F\n  Mat &operator*=(const Mat &B) {\n    Mat C(H, B.W);\n\
-    \    for (int i = 0; i < H; i++) {\n      for (int j = 0; j < W; j++) {\n    \
-    \    if (A[i][j]) C[i] ^= B[j];\n      }\n    }\n    swap(A, C.A);\n    return\
-    \ *this;\n  }\n  Mat operator*(const Mat &B) const { return Mat(*this) *= B; }\n\
-    \n  // (AND, OR) \u534A\u74B0\n  friend Mat and_or_product(const Mat &A, const\
-    \ Mat &B) {\n    Mat C(A.H, B.W);\n    for (int i = 0; i < A.H; i++) {\n     \
-    \ for (int j = 0; j < A.W; j++) {\n        if (A[i][j]) C[i] |= B[j];\n      }\n\
-    \    }\n    return C;\n  }\n\n  // [0, wr) \u306E\u7BC4\u56F2\u3067\u6383\u304D\
-    \u51FA\u3057, rank \u3092\u8FD4\u3059\n  int sweep(int wr = -1) {\n    if (wr\
-    \ == -1) wr = W;\n    int t = 0;\n    for (int u = 0; u < wr; u++) {\n      int\
-    \ piv = -1;\n      for (int i = t; i < H; i++) {\n        if (A[i][u]) {\n   \
-    \       piv = i;\n          break;\n        }\n      }\n      if (piv == -1) continue;\n\
-    \      if (piv != t) swap(A[piv], A[t]);\n      for (int i = 0; i < H; i++) {\n\
-    \        if (i != t && A[i][u]) A[i] ^= A[t];\n      }\n      t++;\n    }\n  \
-    \  return t;\n  }\n\n  pair<bool, Mat> inverse() const {\n    assert(H == W);\n\
-    \    int N = H;\n    F2_Matrix<H_MAX, W_MAX * 2> c(H, W * 2);\n    for (int i\
-    \ = 0; i < N; i++) {\n      c[i][i + N] = 1;\n      for (int j = 0; j < N; j++)\
-    \ {\n        c[i][j] = A[i][j];\n      }\n    }\n    int r = c.sweep(N);\n   \
-    \ if (r != N) return {false, Mat{N, N}};\n    Mat b(H, W);\n    for (int i = 0;\
-    \ i < N; i++) {\n      for (int j = 0; j < N; j++) {\n        b[i][j] = c[i][j\
-    \ + N];\n      }\n    }\n    return {true, b};\n  }\n\n  int determinant() const\
-    \ {\n    assert(H == W);\n    F2_Matrix<H_MAX, W_MAX> c{*this};\n    int r = c.sweep();\n\
-    \    return r == H ? 1 : 0;\n  }\n\n  bool operator<(const Mat &rhs) const {\n\
-    \    if (H != rhs.H) return H < rhs.H;\n    if (W != rhs.W) return W < rhs.W;\n\
-    \    return A < rhs.A;\n  }\n  bool operator==(const Mat &rhs) const {\n    return\
-    \ H == rhs.H and W == rhs.W and A == rhs.A;\n  }\n\n  friend ostream &operator<<(ostream\
-    \ &os, const Mat &b) {\n    for (int i = 0; i < b.H; i++) {\n      os << \"[ \"\
-    ;\n      for (int j = 0; j < b.W; j++) {\n        os << b[i][j] << \", \";\n \
-    \     }\n      os << \"],\\n\";\n    }\n    return os;\n  }\n};\n#line 6 \"verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp\"\
-    \nusing namespace Nyaan;\n\nvoid q() {\n  ini(N);\n  F2_Matrix<4096, 4096> m(N,\
-    \ N);\n  rep(i, N) {\n    ins(S);\n    m[i] = bitset<4096>{Rev(S)};\n  }\n  int\
-    \ d = m.determinant();\n  out(d);\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n\
-    \  // in(t);\n  while (t--) q();\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det_mod_2\"\n//\n\
-    #include \"../../template/template.hpp\"\n//\n#include \"../../matrix/f2-matrix.hpp\"\
-    \nusing namespace Nyaan;\n\nvoid q() {\n  ini(N);\n  F2_Matrix<4096, 4096> m(N,\
-    \ N);\n  rep(i, N) {\n    ins(S);\n    m[i] = bitset<4096>{Rev(S)};\n  }\n  int\
-    \ d = m.determinant();\n  out(d);\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n\
-    \  // in(t);\n  while (t--) q();\n}\n"
+    \ 4 \"verify/verify-unit-test/erasable-priority-queue.test.cpp\"\n//\n#line 2\
+    \ \"data-structure/erasable-priority-queue.hpp\"\n\n#line 5 \"data-structure/erasable-priority-queue.hpp\"\
+    \nusing namespace std;\n\ntemplate <typename T, bool Minimize = true>\nstruct\
+    \ ErasablePriorityQueue {\n  using Queue =\n      conditional_t<Minimize, priority_queue<T,\
+    \ vector<T>, greater<T>>,\n                    priority_queue<T>>;\n  Queue Q,\
+    \ Q2;\n\n  ErasablePriorityQueue() = default;\n\n  void push(const T& t) { Q.push(t);\
+    \ }\n  T top() {\n    normalize();\n    assert(!Q.empty());\n    return Q.top();\n\
+    \  }\n  void pop() {\n    normalize();\n    assert(!Q.empty());\n    Q.pop();\n\
+    \  }\n  void erase(const T& t) { Q2.push(t); }\n\n private:\n  void normalize()\
+    \ {\n    while (!Q.empty() and !Q2.empty() and Q.top() == Q2.top()) {\n      Q.pop(),\
+    \ Q2.pop();\n    }\n  }\n};\n#line 6 \"verify/verify-unit-test/erasable-priority-queue.test.cpp\"\
+    \nusing namespace Nyaan;\n\nvoid q() {\n  ErasablePriorityQueue<int> Q;\n  Q.push(1);\n\
+    \  Q.push(3);\n  Q.push(5);\n  assert(Q.top() == 1);\n  Q.pop();\n  assert(Q.top()\
+    \ == 3);\n  Q.erase(5);\n  Q.push(6);\n  assert(Q.top() == 3);\n  Q.pop();\n \
+    \ assert(Q.top() == 6);\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n\
+    }\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../data-structure/erasable-priority-queue.hpp\"\
+    \nusing namespace Nyaan;\n\nvoid q() {\n  ErasablePriorityQueue<int> Q;\n  Q.push(1);\n\
+    \  Q.push(3);\n  Q.push(5);\n  assert(Q.top() == 1);\n  Q.pop();\n  assert(Q.top()\
+    \ == 3);\n  Q.erase(5);\n  Q.push(6);\n  assert(Q.top() == 3);\n  Q.pop();\n \
+    \ assert(Q.top() == 6);\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n\
+    }\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -277,17 +248,17 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - matrix/f2-matrix.hpp
+  - data-structure/erasable-priority-queue.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+  path: verify/verify-unit-test/erasable-priority-queue.test.cpp
   requiredBy: []
   timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+documentation_of: verify/verify-unit-test/erasable-priority-queue.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
-- /verify/verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp.html
-title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+- /verify/verify/verify-unit-test/erasable-priority-queue.test.cpp
+- /verify/verify/verify-unit-test/erasable-priority-queue.test.cpp.html
+title: verify/verify-unit-test/erasable-priority-queue.test.cpp
 ---
