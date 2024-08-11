@@ -14,7 +14,7 @@ struct UnionFind {
     return true;
   }
 
-  // f ... merge function
+  // f(x, y) : x に y をマージ
   template<typename F>
   int unite(int x, int y,const F &f) {
     if ((x = find(x)) == (y = find(y))) return false;

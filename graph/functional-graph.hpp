@@ -13,6 +13,7 @@ namespace FunctionalGraphImpl {
 
 ENABLE_HAS_VAR(cost)
 
+// 全ての頂点の出次数が 1
 template <typename T = int>
 struct FunctionalGraph {
   int N;

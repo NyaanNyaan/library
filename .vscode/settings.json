@@ -95,7 +95,8 @@
     "compare": "cpp",
     "concepts": "cpp",
     "coroutine": "cpp",
-    "numbers": "cpp"
+    "numbers": "cpp",
+    "dynamic_bitset": "cpp"
   },
   "C_Cpp.suggestSnippets": false,
   "[cpp]": {

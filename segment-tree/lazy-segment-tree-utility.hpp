@@ -98,7 +98,7 @@ struct LazySegmentTreeBase {
   template <class G>
   int max_right(int l, G check) {
     assert(0 <= l && l <= s);
-    assert(check(ei()));
+    assert(check(ti()));
     if (l == n) return n;
     l += n;
     for (int i = log; i >= 1; i--) _push(l >> i);
@@ -125,7 +125,7 @@ struct LazySegmentTreeBase {
   template <class G>
   int min_left(int r, G check) {
     assert(0 <= r && r <= s);
-    assert(check(ei()));
+    assert(check(ti()));
     if (r == 0) return 0;
     r += n;
     for (int i = log; i >= 1; i--) _push((r - 1) >> i);

@@ -42,6 +42,17 @@ FormalPowerSeries<mint> Stirling2nd(int N, Binomial<mint> &C) {
 }
 
 template <typename mint>
+FormalPowerSeries<mint> Stirling2ndRow(int K, int upper, Binomial<mint> &C) {
+  using fps = FormalPowerSeries<mint>;
+  if (upper < K) return {};
+  fps f(upper + 1);
+  for (int i = 1; i <= upper; i++) f[i] = C.finv(i);
+  f = f.pow(K) * C.finv(K);
+  for (int i = K; i <= upper; i++) f[i] *= C.fac(i);
+  return f;
+}
+
+template <typename mint>
 FormalPowerSeries<mint> BernoulliEGF(int N, Binomial<mint> &C) {
   using fps = FormalPowerSeries<mint>;
   fps f(N + 1);

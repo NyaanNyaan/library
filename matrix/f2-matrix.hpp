@@ -79,7 +79,7 @@ struct F2_Matrix {
     return t;
   }
 
-  Mat inverse() const {
+  pair<bool, Mat> inverse() const {
     assert(H == W);
     int N = H;
     F2_Matrix<H_MAX, W_MAX * 2> c(H, W * 2);
@@ -89,15 +89,15 @@ struct F2_Matrix {
         c[i][j] = A[i][j];
       }
     }
-    int r = c.sweep();
-    assert(r == N);
+    int r = c.sweep(N);
+    if (r != N) return {false, Mat{N, N}};
     Mat b(H, W);
     for (int i = 0; i < N; i++) {
       for (int j = 0; j < N; j++) {
         b[i][j] = c[i][j + N];
       }
     }
-    return b;
+    return {true, b};
   }
 
   int determinant() const {

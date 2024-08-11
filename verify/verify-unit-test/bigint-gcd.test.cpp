@@ -7,6 +7,9 @@
 //
 #include "../../math/bigint-gcd.hpp"
 //
+#include "../../math/bigint-binary.hpp"
+#include "../../math/bigint-to-hex.hpp"
+//
 #include "../../math/bigint.hpp"
 #include "../../matrix/matrix.hpp"
 
@@ -124,6 +127,13 @@ using GCDforBigintImpl::gcd_d_ary;
 using GCDforBigintImpl::gcd_half;
 using GCDforBigintImpl::gcd_naive;
 
+bigint gcd_via_binary(bigint a, bigint b) {
+  BinaryBigInt A{BtoH(a), 16};
+  BinaryBigInt B{BtoH(b), 16};
+  BinaryBigInt C = gcd(A, B);
+  return HtoB(C.to_hex());
+}
+
 using namespace Nyaan;
 
 void q() {
@@ -133,7 +143,6 @@ void q() {
     bigint b =
         "111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"s;
     bigint g = gcd_half(a, b);
-    trc(a, b, g);
   }
   auto gen = [&](int d) {
     string S(d, '0');
@@ -167,17 +176,19 @@ void q() {
 #endif
 
   auto check = [&](bigint a, bigint b) -> void {
+    // trc(a, b);
     bigint g1 = gcd_half(a, b);
     bigint g2 = gcd_naive(a, b);
     bigint g3 = gcd_d_ary<false>(a, b);
     bigint g4 = gcd_d_ary<true>(a, b);
-    if (g1 != g2 or g2 != g3 or g3 != g4) {
+    bigint g5 = gcd_via_binary(a, b);
+    if (g1 != g2 or g2 != g3 or g3 != g4 or g4 != g5) {
       trc2(a, b);
       trc2(g1);
       trc2(g2);
       trc2(g3);
       trc2(g4);
-      trc2(divmod(g3, g4));
+      trc2(g5);
       exit(1);
     }
     if (g1 == 0) return;
@@ -221,12 +232,29 @@ void q() {
     s[0] = t[0] = '1';
     check(s, t);
   }
+  reg(a, 90, 110) reg(b, 90, 110) {
+    string s(a + 1, '0'), t(b + 1, '0');
+    s[0] = t[0] = '1';
+    rep(i, 3) {
+      if (i == 1) {
+        rep(j, 20) s[j] = rng('0', '9');
+      }
+      if (i == 2) {
+        rep(j, 20) t[j] = rng('0', '9');
+      }
+      bigint S = HtoB(s);
+      bigint T = HtoB(t);
+      string u = S.to_string();
+      string v = T.to_string();
+      check(u, v);
+    }
+  }
 
   cerr << "OK" << endl;
 
   // 実行時間の比較
   /**
-  for (int d = 1; d <= 256; d *= 2) {
+  for (int d = 1; d <= 1024; d *= 2) {
     V<bigint> as, bs;
     int T = 1000;
     rep(i, T) {
@@ -235,7 +263,7 @@ void q() {
     }
 
     Timer timer;
-    bigint g1 = 0, g2 = 0, g3 = 0;
+    bigint g1 = 0, g2 = 0, g3 = 0, g4 = 0;
 
     timer.reset();
     rep(i, T) g1 += gcd_half(as[i], bs[i]);
@@ -249,8 +277,12 @@ void q() {
     rep(i, T) g3 += gcd_d_ary<true>(as[i], bs[i]);
     ll t3 = timer.elapsed();
 
-    assert(g1 == g2 and g2 == g3);
-    trc2(d, t1, t2, t3);
+    timer.reset();
+    rep(i, T) g4 += gcd_via_binary(as[i], bs[i]);
+    ll t4 = timer.elapsed();
+
+    assert(g1 == g2 and g2 == g3 and g3 == g4);
+    trc2(d, t1, t2, t3, t4);
   }
   //*/
 
