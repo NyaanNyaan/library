@@ -10,6 +10,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-string/yosupo-wildcard-pattern-matching.test.cpp
+    title: verify/verify-yosupo-string/yosupo-wildcard-pattern-matching.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-2231.test.cpp
     title: verify/verify-yuki/yuki-2231.test.cpp
   _isVerificationFailed: false
@@ -199,6 +202,7 @@ data:
   timestamp: '2023-05-29 20:50:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yosupo-string/yosupo-wildcard-pattern-matching.test.cpp
   - verify/verify-yuki/yuki-2231.test.cpp
 documentation_of: string/wildcard-pattern-matching.hpp
 layout: document

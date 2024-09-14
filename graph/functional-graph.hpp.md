@@ -183,8 +183,8 @@ data:
   timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-1254-2.test.cpp
   - verify/verify-aoj-other/aoj-2891-2.test.cpp
+  - verify/verify-yuki/yuki-1254-2.test.cpp
 documentation_of: graph/functional-graph.hpp
 layout: document
 redirect_from:

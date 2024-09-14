@@ -24,6 +24,9 @@ data:
     path: math/primitive-root-ll.hpp
     title: math/primitive-root-ll.hpp
   - icon: ':heavy_check_mark:'
+    path: math/two-square.hpp
+    title: math/two-square.hpp
+  - icon: ':heavy_check_mark:'
     path: modulo/mod-kth-root.hpp
     title: kth root(Tonelli-Shanks algorithm)
   - icon: ':heavy_check_mark:'
@@ -33,6 +36,9 @@ data:
     path: ntt/ntt-64bit.hpp
     title: ntt/ntt-64bit.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/enumerate-convex.test.cpp
+    title: verify/verify-unit-test/enumerate-convex.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/factorize.test.cpp
     title: verify/verify-unit-test/factorize.test.cpp
@@ -57,6 +63,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
     title: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-two-square-sum.test.cpp
+    title: verify/verify-yosupo-math/yosupo-two-square-sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
@@ -298,24 +307,27 @@ data:
   isVerificationFile: false
   path: prime/fast-factorize.hpp
   requiredBy:
-  - ntt/ntt-64bit.hpp
   - ntt/multivariate-circular-convolution.hpp
+  - ntt/ntt-64bit.hpp
   - math/primitive-root-ll.hpp
+  - math/two-square.hpp
   - modulo/mod-kth-root.hpp
   timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-0002.test.cpp
-  - verify/verify-yuki/yuki-0103.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
-  - verify/verify-yosupo-math/yosupo-factorization.test.cpp
-  - verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
-  - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
-  - verify/verify-unit-test/ntt-64bit.test.cpp
+  - verify/verify-unit-test/enumerate-convex.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
-  - verify/verify-unit-test/primitive-root.test.cpp
+  - verify/verify-unit-test/ntt-64bit.test.cpp
   - verify/verify-unit-test/osak.test.cpp
+  - verify/verify-unit-test/primitive-root.test.cpp
+  - verify/verify-yuki/yuki-0103.test.cpp
+  - verify/verify-yuki/yuki-0002.test.cpp
+  - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - verify/verify-yosupo-math/yosupo-factorization.test.cpp
+  - verify/verify-yosupo-math/yosupo-two-square-sum.test.cpp
+  - verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
 documentation_of: prime/fast-factorize.hpp
 layout: document
 redirect_from:

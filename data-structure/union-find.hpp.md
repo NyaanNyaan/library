@@ -92,27 +92,27 @@ data:
   isVerificationFile: false
   path: data-structure/union-find.hpp
   requiredBy:
-  - graph/kruskal.hpp
   - graph/minimum-cost-arborescence.hpp
   - graph/namori.hpp
+  - graph/kruskal.hpp
   - graph/functional-graph.hpp
   timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
-  - verify/verify-yuki/yuki-1170-divide-interval.test.cpp
-  - verify/verify-yuki/yuki-1254.test.cpp
-  - verify/verify-yuki/yuki-1303.test.cpp
-  - verify/verify-yuki/yuki-1254-2.test.cpp
-  - verify/verify-yuki/yuki-2588.test.cpp
-  - verify/verify-aoj-other/aoj-2891.test.cpp
   - verify/verify-aoj-other/aoj-2891-2.test.cpp
   - verify/verify-aoj-other/aoj-2821.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
-  - verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
-  - verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
-  - verify/verify-unit-test/parallel-union-find.test.cpp
+  - verify/verify-aoj-other/aoj-2891.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
+  - verify/verify-unit-test/parallel-union-find.test.cpp
+  - verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
+  - verify/verify-yuki/yuki-1170-divide-interval.test.cpp
+  - verify/verify-yuki/yuki-1254.test.cpp
+  - verify/verify-yuki/yuki-2588.test.cpp
+  - verify/verify-yuki/yuki-1254-2.test.cpp
+  - verify/verify-yuki/yuki-1303.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
 documentation_of: data-structure/union-find.hpp
 layout: document
 redirect_from:

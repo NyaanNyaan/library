@@ -5,6 +5,9 @@ data:
     path: internal/internal-seed.hpp
     title: internal/internal-seed.hpp
   - icon: ':heavy_check_mark:'
+    path: math/floor-sum.hpp
+    title: math/floor-sum.hpp
+  - icon: ':heavy_check_mark:'
     path: math/gray-code.hpp
     title: Gray code
   - icon: ':heavy_check_mark:'
@@ -13,9 +16,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/isqrt.hpp
     title: math/isqrt.hpp
-  - icon: ':heavy_check_mark:'
-    path: math/sum-of-floor.hpp
-    title: math/sum-of-floor.hpp
   - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
@@ -246,8 +246,8 @@ data:
     \ std;\n\n// floor(sqrt(n)) \u3092\u8FD4\u3059 (\u305F\u3060\u3057 n \u304C\u8CA0\
     \u306E\u5834\u5408\u306F 0 \u3092\u8FD4\u3059)\nlong long isqrt(long long n) {\n\
     \  if (n <= 0) return 0;\n  long long x = sqrt(n);\n  while ((x + 1) * (x + 1)\
-    \ <= n) x++;\n  while (x * x > n) x--;\n  return x;\n}\n#line 2 \"math/sum-of-floor.hpp\"\
-    \n\n\n\n// sum_{0 <= i < N} (ai + b) // m\ntemplate <typename T>\nT sum_of_floor(T\
+    \ <= n) x++;\n  while (x * x > n) x--;\n  return x;\n}\n#line 2 \"math/floor-sum.hpp\"\
+    \n\n// sum_{0 <= i < N} (ai + b) // m\ntemplate <typename T>\nT sum_of_floor(T\
     \ n, T m, T a, T b) {\n  T ret = 0;\n  if (a >= m) ret += (n - 1) * n * (a / m)\
     \ / 2, a %= m;\n  if (b >= m) ret += n * (b / m), b %= m;\n  T y = (a * n + b)\
     \ / m;\n  if (y == 0) return ret;\n  T x = y * m - b;\n  ret += (n - (x + a -\
@@ -310,7 +310,7 @@ data:
     \  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../math/gray-code.hpp\"\n#include\
-    \ \"../../math/inv-mod.hpp\"\n#include \"../../math/isqrt.hpp\"\n#include \"../../math/sum-of-floor.hpp\"\
+    \ \"../../math/inv-mod.hpp\"\n#include \"../../math/isqrt.hpp\"\n#include \"../../math/floor-sum.hpp\"\
     \n#include \"../../misc/rng.hpp\"\nusing namespace Nyaan;\n\nvoid gray_code_test()\
     \ {\n  for (int i = 0; i < 20; i++) {\n    auto g = gray_code(i);\n    int s =\
     \ (int)g.size();\n    for (int j = 0; j < s; j++) {\n      int d = g[j] ^ g[j\
@@ -344,13 +344,13 @@ data:
   - math/gray-code.hpp
   - math/inv-mod.hpp
   - math/isqrt.hpp
-  - math/sum-of-floor.hpp
+  - math/floor-sum.hpp
   - misc/rng.hpp
   - internal/internal-seed.hpp
   isVerificationFile: true
   path: verify/verify-unit-test/math.test.cpp
   requiredBy: []
-  timestamp: '2024-05-03 23:21:26+09:00'
+  timestamp: '2024-09-14 20:40:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/math.test.cpp

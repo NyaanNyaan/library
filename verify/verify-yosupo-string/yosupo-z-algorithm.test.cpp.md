@@ -219,14 +219,15 @@ data:
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
     \ 4 \"verify/verify-yosupo-string/yosupo-z-algorithm.test.cpp\"\n//\n#line 2 \"\
-    string/z-algorithm.hpp\"\n\ntemplate<typename Container>\nvector<int> z_algorithm(Container\
-    \ s) {\n  int n = s.size();\n  vector<int> a(n);\n  a[0] = n;\n  int i = 1, j\
-    \ = 0;\n  while (i < n) {\n    while (i + j < n && s[j] == s[i + j]) ++j;\n  \
-    \  a[i] = j;\n    if (j == 0) {\n      ++i;\n      continue;\n    }\n    int k\
-    \ = 1;\n    while (i + k < n && k + a[k] < j) a[i + k] = a[k], ++k;\n    i +=\
-    \ k;\n    j -= k;\n  }\n  return a;\n}\n\n/**\n * @brief Z algorithm\n */\n#line\
-    \ 6 \"verify/verify-yosupo-string/yosupo-z-algorithm.test.cpp\"\n\nusing namespace\
-    \ Nyaan;\nvoid Nyaan::solve() {\n  ins(s);\n  out(z_algorithm(s));\n}\n"
+    string/z-algorithm.hpp\"\n\ntemplate <typename Container>\nvector<int> z_algorithm(const\
+    \ Container& s) {\n  int n = s.size();\n  if(n == 0) return {};\n  vector<int>\
+    \ a(n);\n  a[0] = n;\n  int i = 1, j = 0;\n  while (i < n) {\n    while (i + j\
+    \ < n && s[j] == s[i + j]) j++;\n    a[i] = j;\n    if (j == 0) {\n      i++;\n\
+    \      continue;\n    }\n    int k = 1;\n    while (i + k < n && k + a[k] < j)\
+    \ a[i + k] = a[k], k++;\n    i += k, j -= k;\n  }\n  return a;\n}\n\n/**\n * @brief\
+    \ Z algorithm\n */\n#line 6 \"verify/verify-yosupo-string/yosupo-z-algorithm.test.cpp\"\
+    \n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ins(s);\n  out(z_algorithm(s));\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../string/z-algorithm.hpp\"\
     \n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ins(s);\n  out(z_algorithm(s));\n\
@@ -242,7 +243,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-string/yosupo-z-algorithm.test.cpp
   requiredBy: []
-  timestamp: '2024-05-03 23:21:26+09:00'
+  timestamp: '2024-09-14 20:40:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-string/yosupo-z-algorithm.test.cpp

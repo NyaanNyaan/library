@@ -309,57 +309,67 @@ data:
     \n\n// f(p, c) : f(p^c) \u306E\u5024\u3092\u8FD4\u3059\ntemplate <typename T,\
     \ T (*f)(long long, long long)>\nstruct mf_prefix_sum {\n  using i64 = long long;\n\
     \n  i64 M, sq, s;\n  vector<int> p;\n  int ps;\n  vector<T> buf;\n  T ans;\n\n\
-    \  mf_prefix_sum(i64 m) : M(m) {\n    assert(m < (1LL << 42));\n    sq = sqrt(M);\n\
+    \  mf_prefix_sum(i64 m) : M(m) {\n    assert(m <= 1e15);\n    sq = sqrt(M);\n\
     \    while (sq * sq > M) sq--;\n    while ((sq + 1) * (sq + 1) <= M) sq++;\n\n\
-    \    if (M != 0) {\n      i64 hls = md(M, sq);\n      if (hls != 1 && md(M, hls\
-    \ - 1) == sq) hls--;\n      s = hls + sq;\n\n      p = prime_enumerate(sq);\n\
+    \    if (M != 0) {\n      i64 hls = quo(M, sq);\n      while (hls != 1 && quo(M,\
+    \ hls - 1) == sq) hls--;\n      s = hls + sq;\n\n      p = prime_enumerate(sq);\n\
     \      ps = p.size();\n      ans = T{};\n    }\n  }\n\n  // \u7D20\u6570\u306E\
     \u500B\u6570\u95A2\u6570\u306B\u95A2\u3059\u308B\u30C6\u30FC\u30D6\u30EB\n  vector<T>\
-    \ pi_table() {\n    if (M == 0) return {};\n    i64 hls = md(M, sq);\n    if (hls\
-    \ != 1 && md(M, hls - 1) == sq) hls--;\n\n    vector<i64> hl(hls);\n    for (int\
-    \ i = 1; i < hls; i++) hl[i] = md(M, i) - 1;\n\n    vector<int> hs(sq + 1);\n\
-    \    iota(begin(hs), end(hs), -1);\n\n    int pi = 0;\n    for (auto& x : p) {\n\
-    \      i64 x2 = i64(x) * x;\n      i64 imax = min<i64>(hls, md(M, x2) + 1);\n\
-    \      for (i64 i = 1, ix = x; i < imax; ++i, ix += x) {\n        hl[i] -= (ix\
-    \ < hls ? hl[ix] : hs[md(M, ix)]) - pi;\n      }\n      for (int n = sq; n >=\
-    \ x2; n--) hs[n] -= hs[md(n, x)] - pi;\n      pi++;\n    }\n\n    vector<T> res;\n\
-    \    res.reserve(2 * sq + 10);\n    for (auto& x : hl) res.push_back(x);\n   \
-    \ for (int i = hs.size(); --i;) res.push_back(hs[i]);\n    assert((int)res.size()\
+    \ pi_table() {\n    if (M == 0) return {};\n    i64 hls = s - sq;\n    vector<i64>\
+    \ hl(hls);\n    for (int i = 1; i < hls; i++) hl[i] = quo(M, i) - 1;\n\n    vector<int>\
+    \ hs(sq + 1);\n    iota(begin(hs), end(hs), -1);\n\n    int pi = 0;\n    for (auto&\
+    \ x : p) {\n      i64 x2 = i64(x) * x;\n      i64 imax = min<i64>(hls, quo(M,\
+    \ x2) + 1);\n      for (i64 i = 1, ix = x; i < imax; ++i, ix += x) {\n       \
+    \ hl[i] -= (ix < hls ? hl[ix] : hs[quo(M, ix)]) - pi;\n      }\n      for (int\
+    \ n = sq; n >= x2; n--) hs[n] -= hs[quo(n, x)] - pi;\n      pi++;\n    }\n\n \
+    \   vector<T> res;\n    res.reserve(2 * sq + 10);\n    for (auto& x : hl) res.push_back(x);\n\
+    \    for (int i = hs.size(); --i;) res.push_back(hs[i]);\n    assert((int)res.size()\
     \ == s);\n    return res;\n  }\n\n  // \u7D20\u6570\u306E prefix sum \u306B\u95A2\
     \u3059\u308B\u30C6\u30FC\u30D6\u30EB\n  vector<T> prime_sum_table() {\n    if\
-    \ (M == 0) return {};\n    i64 hls = md(M, sq);\n    if (hls != 1 && md(M, hls\
-    \ - 1) == sq) hls--;\n\n    vector<T> h(s);\n    T inv2 = T{2}.inverse();\n  \
-    \  for (int i = 1; i < hls; i++) {\n      T x = md(M, i);\n      h[i] = x * (x\
-    \ + 1) * inv2 - 1;\n    }\n    for (int i = 1; i <= sq; i++) {\n      T x = i;\n\
-    \      h[s - i] = x * (x + 1) / 2 - 1;\n    }\n\n    for (auto& x : p) {\n   \
-    \   T xt = x;\n      T pi = h[s - x + 1];\n      i64 x2 = i64(x) * x;\n      i64\
-    \ imax = min<i64>(hls, md(M, x2) + 1);\n      i64 ix = x;\n      for (i64 i =\
-    \ 1; i < imax; ++i, ix += x) {\n        h[i] -= ((ix < hls ? h[ix] : h[s - md(M,\
-    \ ix)]) - pi) * xt;\n      }\n      for (int n = sq; n >= x2; n--) {\n       \
-    \ h[s - n] -= (h[s - md(n, x)] - pi) * xt;\n      }\n    }\n\n    assert((int)h.size()\
-    \ == s);\n    return h;\n  }\n\n  void dfs(int i, int c, i64 prod, T cur) {\n\
-    \    ans += cur * f(p[i], c + 1);\n    i64 lim = md(M, prod);\n    if (lim >=\
-    \ 1LL * p[i] * p[i]) dfs(i, c + 1, p[i] * prod, cur);\n    cur *= f(p[i], c);\n\
-    \    ans += cur * (buf[idx(lim)] - buf[idx(p[i])]);\n    int j = i + 1;\n    //\
-    \ M < 2**42 -> p_j < 2**21 -> (p_j)^3 < 2**63\n    for (; j < ps && 1LL * p[j]\
-    \ * p[j] * p[j] <= lim; j++) {\n      dfs(j, 1, prod * p[j], cur);\n    }\n  \
-    \  for (; j < ps && 1LL * p[j] * p[j] <= lim; j++) {\n      T sm = f(p[j], 2);\n\
-    \      int id1 = idx(md(lim, p[j])), id2 = idx(p[j]);\n      sm += f(p[j], 1)\
-    \ * (buf[id1] - buf[id2]);\n      ans += cur * sm;\n    }\n  }\n\n  // fprime\
-    \ \u7834\u58CA\u7684\n  T run(vector<T>& fprime) {\n    if (M == 0) return {};\n\
-    \    set_buf(fprime);\n    assert((int)buf.size() == s);\n    ans = buf[idx(M)]\
-    \ + 1;\n    for (int i = 0; i < ps; i++) dfs(i, 1, p[i], 1);\n    return ans;\n\
-    \  }\n\n  i64 md(i64 n, i64 d) { return double(n) / d; }\n  i64 idx(i64 n) { return\
-    \ n <= sq ? s - n : md(M, n); }\n  void set_buf(vector<T>& _buf) { swap(buf, _buf);\
-    \ }\n};\n\n/**\n * @brief \u4E57\u6CD5\u7684\u95A2\u6570\u306Eprefix sum\n * @docs\
-    \ docs/multiplicative-function/sum-of-multiplicative-function.md\n */\n#line 10\
-    \ \"verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp\"\n//\nusing namespace\
-    \ Nyaan;\nusing mint = LazyMontgomeryModInt<998244353>;\n// using mint = LazyMontgomeryModInt<1000000007>;\n\
-    using vm = vector<mint>;\nusing vvm = vector<vm>;\nBinomial<mint> C;\n\nmint f(ll\
-    \ p, ll c) {\n  ll res = 1;\n  while (--c) res = res * p;\n  return res * (p -\
-    \ 1);\n}\n\nvoid Nyaan::solve() {\n  inl(N);\n  mf_prefix_sum<mint, f> mf(N);\n\
-    \  auto h1 = mf.prime_sum_table();\n  auto h0 = mf.pi_table();\n  rep(i, sz(h1))\
-    \ h1[i] -= h0[i];\n  out(mf.run(h1));\n}\n"
+    \ (M == 0) return {};\n    i64 hls = s - sq;\n    vector<T> h(s);\n    T inv2\
+    \ = T{2}.inverse();\n    for (int i = 1; i < hls; i++) {\n      T x = quo(M, i);\n\
+    \      h[i] = x * (x + 1) * inv2 - 1;\n    }\n    for (int i = 1; i <= sq; i++)\
+    \ {\n      T x = i;\n      h[s - i] = x * (x + 1) * inv2 - 1;\n    }\n\n    for\
+    \ (auto& x : p) {\n      T xt = x;\n      T pi = h[s - x + 1];\n      i64 x2 =\
+    \ i64(x) * x;\n      i64 imax = min<i64>(hls, quo(M, x2) + 1);\n      i64 ix =\
+    \ x;\n      for (i64 i = 1; i < imax; ++i, ix += x) {\n        h[i] -= ((ix <\
+    \ hls ? h[ix] : h[s - quo(M, ix)]) - pi) * xt;\n      }\n      for (int n = sq;\
+    \ n >= x2; n--) {\n        h[s - n] -= (h[s - quo(n, x)] - pi) * xt;\n      }\n\
+    \    }\n\n    assert((int)h.size() == s);\n    return h;\n  }\n\n  void dfs(int\
+    \ i, int c, i64 prod, T cur) {\n    ans += cur * f(p[i], c + 1);\n    i64 lim\
+    \ = quo(M, prod);\n    if (lim >= 1LL * p[i] * p[i]) dfs(i, c + 1, p[i] * prod,\
+    \ cur);\n    cur *= f(p[i], c);\n    ans += cur * (buf[idx(lim)] - buf[idx(p[i])]);\n\
+    \    int j = i + 1;\n    // p_j < 2**21 -> (p_j)^3 < 2**63\n    for (; j < ps\
+    \ && p[j] < (1 << 21) && 1LL * p[j] * p[j] * p[j] <= lim; j++) {\n      dfs(j,\
+    \ 1, prod * p[j], cur);\n    }\n    for (; j < ps && 1LL * p[j] * p[j] <= lim;\
+    \ j++) {\n      T sm = f(p[j], 2);\n      int id1 = idx(quo(lim, p[j])), id2 =\
+    \ idx(p[j]);\n      sm += f(p[j], 1) * (buf[id1] - buf[id2]);\n      ans += cur\
+    \ * sm;\n    }\n  }\n\n  // black algorithm\n  T run(const vector<T>& Fprime)\
+    \ {\n    if (M == 0) return {};\n    assert((int)Fprime.size() == s);\n    buf\
+    \ = Fprime;\n    ans = buf[idx(M)] + 1;\n    for (int i = 0; i < ps; i++) dfs(i,\
+    \ 1, p[i], 1);\n    return ans;\n  }\n\n  vector<T> min_25_sieve(const vector<T>&\
+    \ Fprime) {\n    if(M == 0) return {};\n    assert((int)Fprime.size() == s);\n\
+    \n    vector<i64> ns{0};\n    for (int i = 1; i < s - sq; i++) ns.push_back(quo(M,\
+    \ i));\n    for (int i = sq; i > 0; i--) ns.push_back(i);\n\n    vector<T> F =\
+    \ Fprime, G = Fprime;\n    for (int j = p.size() - 1; j >= 0; j--) {\n      i64\
+    \ P = p[j], pc = P, c = 1;\n      while (quo(M, P) >= pc) {\n        T f_p_c =\
+    \ f(P, c), f_p_cp1 = f(P, c + 1);\n        T Fprime_p = Fprime[idx(P)];\n    \
+    \    for (int i = 1; i < s; i++) {\n          i64 n = ns[i];\n          if (P\
+    \ * pc > n) break;\n          G[i] += f_p_c * (F[idx(quo(n, pc))] - Fprime_p)\
+    \ + f_p_cp1;\n        }\n        c++, pc *= P;\n      }\n      copy(begin(G),\
+    \ begin(G) + min<int>(s, idx(P * P) + 1), begin(F));\n    }\n    for (int i =\
+    \ 1; i < (int)ns.size(); i++) F[i] += 1;\n    return F;\n  }\n\n  i64 quo(i64\
+    \ n, i64 d) { return double(n) / d; }\n  i64 idx(i64 n) { return n <= sq ? s -\
+    \ n : quo(M, n); }\n};\n\n/**\n * @brief \u4E57\u6CD5\u7684\u95A2\u6570\u306E\
+    prefix sum\n * @docs docs/multiplicative-function/sum-of-multiplicative-function.quo\n\
+    \ */\n#line 10 \"verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp\"\n\
+    //\nusing namespace Nyaan;\nusing mint = LazyMontgomeryModInt<998244353>;\n//\
+    \ using mint = LazyMontgomeryModInt<1000000007>;\nusing vm = vector<mint>;\nusing\
+    \ vvm = vector<vm>;\nBinomial<mint> C;\n\nmint f(ll p, ll c) {\n  ll res = 1;\n\
+    \  while (--c) res = res * p;\n  return res * (p - 1);\n}\n\nvoid Nyaan::solve()\
+    \ {\n  inl(N);\n  mf_prefix_sum<mint, f> mf(N);\n  auto h1 = mf.prime_sum_table();\n\
+    \  auto h0 = mf.pi_table();\n  rep(i, sz(h1)) h1[i] -= h0[i];\n  out(mf.run(h1));\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_totient_function\"\
     \n//\n#include \"../../template/template.hpp\"\n//\nusing namespace Nyaan;\n\n\
     #include \"../../modint/montgomery-modint.hpp\"\n#include \"../../modulo/binomial.hpp\"\
@@ -385,7 +395,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
   requiredBy: []
-  timestamp: '2024-05-03 23:21:26+09:00'
+  timestamp: '2024-09-14 20:40:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp

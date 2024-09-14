@@ -153,9 +153,9 @@ data:
   timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/li-chao-tree-abstruct.test.cpp
   - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-3.test.cpp
   - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-4.test.cpp
-  - verify/verify-unit-test/li-chao-tree-abstruct.test.cpp
 documentation_of: segment-tree/li-chao-tree-abstruct.hpp
 layout: document
 redirect_from:

@@ -14,6 +14,9 @@ data:
   - icon: ':warning:'
     path: marathon/top-k.hpp
     title: marathon/top-k.hpp
+  - icon: ':heavy_check_mark:'
+    path: string/number-of-subsequences.hpp
+    title: string/number-of-subsequences.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-1377.test.cpp
@@ -27,6 +30,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
     title: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-string/yosupo-number-of-subsequences.test.cpp
+    title: verify/verify-yosupo-string/yosupo-number-of-subsequences.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -189,13 +195,15 @@ data:
   path: hashmap/hashmap-unerasable.hpp
   requiredBy:
   - marathon/top-k.hpp
+  - string/number-of-subsequences.hpp
   timestamp: '2023-09-05 21:46:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-other/aoj-1377.test.cpp
-  - verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
-  - verify/verify-unit-test/internal-type-traits.test.cpp
   - verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
+  - verify/verify-aoj-other/aoj-1377.test.cpp
+  - verify/verify-yosupo-string/yosupo-number-of-subsequences.test.cpp
+  - verify/verify-unit-test/internal-type-traits.test.cpp
+  - verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
 documentation_of: hashmap/hashmap-unerasable.hpp
 layout: document
 redirect_from:

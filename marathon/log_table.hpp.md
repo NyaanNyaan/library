@@ -36,8 +36,8 @@ data:
   isVerificationFile: false
   path: marathon/log_table.hpp
   requiredBy:
-  - marathon/sa-manager.hpp
   - marathon/simulated-annealing.hpp
+  - marathon/sa-manager.hpp
   timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

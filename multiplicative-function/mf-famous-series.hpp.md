@@ -300,9 +300,9 @@ data:
   timestamp: '2024-05-03 23:21:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-count-squarefrees.test.cpp
-  - verify/verify-unit-test/sum-of-mf.test.cpp
   - verify/verify-unit-test/mf.test.cpp
+  - verify/verify-unit-test/sum-of-mf.test.cpp
+  - verify/verify-yosupo-math/yosupo-count-squarefrees.test.cpp
 documentation_of: multiplicative-function/mf-famous-series.hpp
 layout: document
 redirect_from:

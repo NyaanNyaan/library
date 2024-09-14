@@ -248,8 +248,8 @@ data:
   timestamp: '2024-04-28 09:13:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
   - verify/verify-unit-test/ntt-64bit.test.cpp
+  - verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
 documentation_of: math/primitive-root-ll.hpp
 layout: document
 redirect_from:

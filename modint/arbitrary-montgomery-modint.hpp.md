@@ -9,6 +9,9 @@ data:
     path: math/primitive-root-ll.hpp
     title: math/primitive-root-ll.hpp
   - icon: ':heavy_check_mark:'
+    path: math/two-square.hpp
+    title: math/two-square.hpp
+  - icon: ':heavy_check_mark:'
     path: modulo/mod-kth-root.hpp
     title: kth root(Tonelli-Shanks algorithm)
   - icon: ':heavy_check_mark:'
@@ -33,6 +36,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/arbitrary-modint.test.cpp
     title: verify/verify-unit-test/arbitrary-modint.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/enumerate-convex.test.cpp
+    title: verify/verify-unit-test/enumerate-convex.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/factorize.test.cpp
     title: verify/verify-unit-test/factorize.test.cpp
@@ -72,6 +78,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
     title: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-two-square-sum.test.cpp
+    title: verify/verify-yosupo-math/yosupo-two-square-sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
@@ -174,36 +183,39 @@ data:
   isVerificationFile: false
   path: modint/arbitrary-montgomery-modint.hpp
   requiredBy:
-  - prime/miller-rabin.hpp
-  - prime/fast-factorize.hpp
-  - ntt/ntt-64bit.hpp
   - ntt/multivariate-circular-convolution.hpp
+  - ntt/ntt-64bit.hpp
   - math/primitive-root-ll.hpp
-  - modulo/mod-kth-root.hpp
+  - math/two-square.hpp
+  - fps/fps-sqrt.hpp
   - modulo/quadratic-equation.hpp
   - modulo/mod-sqrt.hpp
-  - fps/fps-sqrt.hpp
+  - modulo/mod-kth-root.hpp
+  - prime/fast-factorize.hpp
+  - prime/miller-rabin.hpp
   timestamp: '2023-05-29 20:16:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-0002.test.cpp
-  - verify/verify-yuki/yuki-0103.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
-  - verify/verify-yosupo-math/yosupo-factorization.test.cpp
-  - verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
-  - verify/verify-yosupo-math/yosupo-primality-test-u64.test.cpp
-  - verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
-  - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
-  - verify/verify-yosupo-math/yosupo-primality-test.test.cpp
   - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-  - verify/verify-unit-test/primality-test.test.cpp
-  - verify/verify-unit-test/arbitrary-modint.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
-  - verify/verify-unit-test/ntt-64bit.test.cpp
+  - verify/verify-unit-test/enumerate-convex.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
-  - verify/verify-unit-test/primitive-root.test.cpp
+  - verify/verify-unit-test/ntt-64bit.test.cpp
   - verify/verify-unit-test/osak.test.cpp
+  - verify/verify-unit-test/arbitrary-modint.test.cpp
+  - verify/verify-unit-test/primitive-root.test.cpp
+  - verify/verify-unit-test/primality-test.test.cpp
+  - verify/verify-yuki/yuki-0103.test.cpp
+  - verify/verify-yuki/yuki-0002.test.cpp
+  - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - verify/verify-yosupo-math/yosupo-primality-test-u64.test.cpp
+  - verify/verify-yosupo-math/yosupo-factorization.test.cpp
+  - verify/verify-yosupo-math/yosupo-two-square-sum.test.cpp
+  - verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
+  - verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
+  - verify/verify-yosupo-math/yosupo-primality-test.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
 documentation_of: modint/arbitrary-montgomery-modint.hpp
 layout: document
 redirect_from:

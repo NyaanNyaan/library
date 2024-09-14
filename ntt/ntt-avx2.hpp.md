@@ -661,8 +661,8 @@ data:
   timestamp: '2021-04-26 16:30:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
 documentation_of: ntt/ntt-avx2.hpp
 layout: document
 redirect_from:

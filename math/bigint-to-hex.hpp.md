@@ -463,8 +463,8 @@ data:
   timestamp: '2024-08-10 13:03:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
   - verify/verify-unit-test/bigint-gcd.test.cpp
+  - verify/verify-yosupo-math/yosupo-division-of-hex.test.cpp
 documentation_of: math/bigint-to-hex.hpp
 layout: document
 redirect_from:

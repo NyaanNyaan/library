@@ -73,8 +73,8 @@ data:
   timestamp: '2024-05-03 23:21:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-other/aoj-3506.test.cpp
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
+  - verify/verify-aoj-other/aoj-3506.test.cpp
 documentation_of: shortest-path/bfs01.hpp
 layout: document
 redirect_from:

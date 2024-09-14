@@ -186,29 +186,29 @@ data:
   isVerificationFile: false
   path: tree/heavy-light-decomposition.hpp
   requiredBy:
-  - tree/auxiliary-tree.hpp
-  - tree/static-top-tree-vertex-based.hpp
-  - tree/static-top-tree-edge-based.hpp
   - tree/dynamic-diameter.hpp
+  - tree/static-top-tree-vertex-based.hpp
+  - tree/auxiliary-tree.hpp
+  - tree/static-top-tree-edge-based.hpp
   - graph/namori.hpp
   timestamp: '2024-05-03 23:21:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
-  - verify/verify-yuki/yuki-1778.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - verify/verify-aoj-other/aoj-2891.test.cpp
+  - verify/verify-unit-test/dynamic-diameter.test.cpp
+  - verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root.test.cpp
+  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
   - verify/verify-yuki/yuki-1326.test.cpp
   - verify/verify-yuki/yuki-1254.test.cpp
   - verify/verify-yuki/yuki-2588.test.cpp
-  - verify/verify-aoj-other/aoj-2891.test.cpp
+  - verify/verify-yuki/yuki-1778.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
-  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
-  - verify/verify-yosupo-graph/yosupo-point-set-tree-path-composite-sum-fixed-root.test.cpp
-  - verify/verify-unit-test/dynamic-diameter.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
 documentation_of: tree/heavy-light-decomposition.hpp
 layout: document
 redirect_from:

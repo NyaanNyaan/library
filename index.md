@@ -512,6 +512,9 @@ data:
       path: math/elementary-function.hpp
       title: math/elementary-function.hpp
     - icon: ':heavy_check_mark:'
+      path: math/enumerate-convex.hpp
+      title: math/enumerate-convex.hpp
+    - icon: ':heavy_check_mark:'
       path: math/enumerate-quotient.hpp
       title: "\u5546\u306E\u5217\u6319"
     - icon: ':warning:'
@@ -521,8 +524,14 @@ data:
       path: math/float-binomial.hpp
       title: math/float-binomial.hpp
     - icon: ':heavy_check_mark:'
+      path: math/floor-sum.hpp
+      title: math/floor-sum.hpp
+    - icon: ':heavy_check_mark:'
       path: math/garner.hpp
       title: Garner's algorithm
+    - icon: ':heavy_check_mark:'
+      path: math/gaussian-integer.hpp
+      title: math/gaussian-integer.hpp
     - icon: ':heavy_check_mark:'
       path: math/gray-code.hpp
       title: Gray code
@@ -572,9 +581,6 @@ data:
       path: math/stern-brocot-tree.hpp
       title: Stern-Brocot Tree
     - icon: ':heavy_check_mark:'
-      path: math/sum-of-floor.hpp
-      title: math/sum-of-floor.hpp
-    - icon: ':heavy_check_mark:'
       path: math/sweep-restore.hpp
       title: "\u6383\u304D\u51FA\u3057\u6CD5(\u5FA9\u5143\u4ED8\u304D)"
     - icon: ':heavy_check_mark:'
@@ -583,6 +589,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/two-sat.hpp
       title: 2-SAT
+    - icon: ':heavy_check_mark:'
+      path: math/two-square.hpp
+      title: math/two-square.hpp
   - name: math-fast
     pages:
     - icon: ':heavy_check_mark:'
@@ -702,6 +711,9 @@ data:
       title: misc/vector-pool.hpp
   - name: modint
     pages:
+    - icon: ':heavy_check_mark:'
+      path: modint/adjunction-modint.hpp
+      title: modint/adjunction-modint.hpp
     - icon: ':heavy_check_mark:'
       path: modint/arbitrary-modint.hpp
       title: "modint (2^{30} \u672A\u6E80\u306E\u4EFB\u610F mod \u7528)"
@@ -1042,6 +1054,9 @@ data:
       path: string/manacher.hpp
       title: Manacher's algorithm
     - icon: ':heavy_check_mark:'
+      path: string/number-of-subsequences.hpp
+      title: string/number-of-subsequences.hpp
+    - icon: ':heavy_check_mark:'
       path: string/rolling-hash-2d.hpp
       title: "\u4E8C\u6B21\u5143Rolling Hash"
     - icon: ':heavy_check_mark:'
@@ -1050,6 +1065,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/rolling-hash.hpp
       title: Rolling Hash
+    - icon: ':heavy_check_mark:'
+      path: string/run-enumerate.hpp
+      title: string/run-enumerate.hpp
     - icon: ':heavy_check_mark:'
       path: string/run-length-encoding.hpp
       title: "Run Length Encoding(\u9023\u9577\u5727\u7E2E)"
@@ -1501,6 +1519,9 @@ data:
       path: verify/verify-unit-test/dynamic-diameter.test.cpp
       title: verify/verify-unit-test/dynamic-diameter.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/enumerate-convex.test.cpp
+      title: verify/verify-unit-test/enumerate-convex.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/enumerate-quotient.test.cpp
       title: verify/verify-unit-test/enumerate-quotient.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1841,6 +1862,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-range-parallel-unionfind.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-range-parallel-unionfind.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-range-reverse-range-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-reverse-range-sum.test.cpp
@@ -2193,6 +2217,9 @@ data:
       path: verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
       title: verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-gcd-of-gaussian-integer.test.cpp
+      title: verify/verify-yosupo-math/yosupo-gcd-of-gaussian-integer.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
       title: verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2309,6 +2336,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
       title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-two-square-sum.test.cpp
+      title: verify/verify-yosupo-math/yosupo-two-square-sum.test.cpp
   - name: verify/verify-yosupo-ntt
     pages:
     - icon: ':heavy_check_mark:'
@@ -2403,14 +2433,23 @@ data:
       path: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
       title: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-string/yosupo-number-of-subsequences.test.cpp
+      title: verify/verify-yosupo-string/yosupo-number-of-subsequences.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
       title: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
       title: verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-string/yosupo-run-enumerate.test.cpp
+      title: verify/verify-yosupo-string/yosupo-run-enumerate.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
       title: verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-string/yosupo-wildcard-pattern-matching.test.cpp
+      title: verify/verify-yosupo-string/yosupo-wildcard-pattern-matching.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-string/yosupo-z-algorithm.test.cpp
       title: verify/verify-yosupo-string/yosupo-z-algorithm.test.cpp
@@ -2659,6 +2698,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-2677.test.cpp
       title: verify/verify-yuki/yuki-2677.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-2883.test.cpp
+      title: verify/verify-yuki/yuki-2883.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-3024.test.cpp
       title: verify/verify-yuki/yuki-3024.test.cpp

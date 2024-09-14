@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: math/sum-of-floor.hpp
-    title: math/sum-of-floor.hpp
+    path: math/floor-sum.hpp
+    title: math/floor-sum.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -218,19 +218,19 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"math/sum-of-floor.hpp\"\n\n\n\n// sum_{0 <= i < N} (ai + b) // m\ntemplate\
-    \ <typename T>\nT sum_of_floor(T n, T m, T a, T b) {\n  T ret = 0;\n  if (a >=\
-    \ m) ret += (n - 1) * n * (a / m) / 2, a %= m;\n  if (b >= m) ret += n * (b /\
-    \ m), b %= m;\n  T y = (a * n + b) / m;\n  if (y == 0) return ret;\n  T x = y\
-    \ * m - b;\n  ret += (n - (x + a - 1) / a) * y;\n  ret += sum_of_floor(y, a, m,\
-    \ (a - x % a) % a);\n  return ret;\n}\n\n// verify www.codechef.com/viewsolution/36222026\n\
+    \ 2 \"math/floor-sum.hpp\"\n\n// sum_{0 <= i < N} (ai + b) // m\ntemplate <typename\
+    \ T>\nT sum_of_floor(T n, T m, T a, T b) {\n  T ret = 0;\n  if (a >= m) ret +=\
+    \ (n - 1) * n * (a / m) / 2, a %= m;\n  if (b >= m) ret += n * (b / m), b %= m;\n\
+    \  T y = (a * n + b) / m;\n  if (y == 0) return ret;\n  T x = y * m - b;\n  ret\
+    \ += (n - (x + a - 1) / a) * y;\n  ret += sum_of_floor(y, a, m, (a - x % a) %\
+    \ a);\n  return ret;\n}\n\n// verify www.codechef.com/viewsolution/36222026\n\
     // count x : ax + b mod m < yr, 0 <= x < xr\ntemplate <typename T>\nT mod_affine_range_counting(T\
     \ a, T b, T m, T xr, T yr) {\n  assert(0 <= yr && yr <= m);\n  return sum_of_floor(xr,\
     \ m, a, b + m) - sum_of_floor(xr, m, a, b + m - yr);\n}\n#line 5 \"verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(T);\n  rep(_, T) {\n \
     \   inl(N, M, A, B);\n    out(sum_of_floor(N, M, A, B));\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_floor_of_linear\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../math/sum-of-floor.hpp\"\
+    \n\n#include \"../../template/template.hpp\"\n#include \"../../math/floor-sum.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(T);\n  rep(_, T) {\n \
     \   inl(N, M, A, B);\n    out(sum_of_floor(N, M, A, B));\n  }\n}"
   dependsOn:
@@ -240,11 +240,11 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - math/sum-of-floor.hpp
+  - math/floor-sum.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
   requiredBy: []
-  timestamp: '2024-05-03 23:21:26+09:00'
+  timestamp: '2024-09-14 20:40:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp

@@ -458,50 +458,51 @@ data:
     \   if (!t) {\n      set_val(i, x);\n      return;\n    }\n    t->val = x;\n \
     \   for (int j = ps.size() - 1; j >= 0; j--) _update(ps[j]);\n  }\n\n  // 1 \u70B9\
     \u53D6\u5F97\n  T get_val(I i) {\n    Ptr p = _find(root, i);\n    return p ?\
-    \ p->val : ti();\n  }\n\n  // 1 \u70B9 \u5024\u306E\u66F8\u304D\u63DB\u3048\n\
-    \  // func \u306E\u8FD4\u308A\u5024\u306F void !!!!!!(\u53C2\u7167\u3055\u308C\
-    \u305F\u5024\u3092\u76F4\u63A5\u66F4\u65B0\u3059\u308B)\n  void apply_val(I i,\
-    \ const function<void(T &)> &func) {\n    auto s = _split_by_key3(root, i);\n\
-    \    if (s[1] == nullptr) s[1] = _my_new(i);\n    func(s[1]->val);\n    root =\
-    \ _merge(_merge(s[0], _update(s[1])), s[2]);\n  }\n  // 1 \u70B9 \u5024\u306E\u66F8\
-    \u304D\u63DB\u3048 \u5024\u304C\u65E2\u306B\u5B58\u5728\u3059\u308B\u3068\u304D\
-    \u306B\u65E9\u3044\n  // func \u306E\u8FD4\u308A\u5024\u306F void !!!!!!(\u53C2\
-    \u7167\u3055\u308C\u305F\u5024\u3092\u76F4\u63A5\u66F4\u65B0\u3059\u308B)\n  void\
-    \ apply_val_fast(I i, const function<void(T &)> &func) {\n    static vector<Ptr>\
-    \ ps;\n    ps.clear();\n    Ptr t = root;\n    while (t) {\n      _push(t);\n\
-    \      ps.push_back(t);\n      if (i == t->key) break;\n      t = i < t->key ?\
-    \ t->l : t->r;\n    }\n    if (!t) {\n      apply_val(i, func);\n      return;\n\
-    \    }\n    func(t->val);\n    for (int j = ps.size() - 1; j >= 0; j--) _update(ps[j]);\n\
-    \  }\n\n  // \u9802\u70B9\u306E\u524A\u9664\n  virtual void erase(I i) { _erase(root,\
-    \ i); }\n\n  // \u7BC4\u56F2\u4F5C\u7528\n  void apply(I l, I r, const E &e) {\n\
-    \    if (l >= r) return;\n    _apply(root, l, r, e);\n  }\n  void apply_all(const\
-    \ E &e) { _propagate(root, e); }\n\n  // \u7BC4\u56F2\u53D6\u5F97\n  T fold(I\
-    \ l, I r) {\n    if (l >= r) return ti();\n    return _fold(root, l, r);\n  }\n\
-    \  T fold_all() { return _sum(root); }\n\n  void shift(const I &sh) { _shift(root,\
-    \ sh); }\n\n  // key \u6700\u5C0F\u3092\u53D6\u5F97\n  I get_min_key(I failed\
-    \ = -1) { return _get_min_keyval(root, failed).first; }\n  // key \u6700\u5927\
-    \u3092\u53D6\u5F97\n  I get_max_key(I failed = -1) { return _get_max_keyval(root,\
-    \ failed).first; }\n  // (key, val) \u6700\u5C0F\u3092\u53D6\u5F97\n  pair<I,\
-    \ T> get_min_keyval(I failed = -1) {\n    return _get_min_keyval(root, failed);\n\
-    \  }\n  // (key, val) \u6700\u5927\u3092\u53D6\u5F97\n  pair<I, T> get_max_keyval(I\
-    \ failed = -1) {\n    return _get_max_keyval(root, failed);\n  }\n  // (key, val)\
-    \ \u6700\u5C0F\u3092 pop\n  pair<I, T> pop_min_keyval(I failed = -1) {\n    assert(root\
-    \ != nullptr);\n    auto kv = _get_min_keyval(root, failed);\n    erase(kv.first);\n\
-    \    return kv;\n  }\n  // (key, val) \u6700\u5927\u3092\u53D6\u5F97\n  pair<I,\
-    \ T> pop_max_keyval(I failed = -1) {\n    assert(root != nullptr);\n    auto kv\
-    \ = _get_max_keyval(root, failed);\n    erase(kv.first);\n    return kv;\n  }\n\
-    \n  // n \u672A\u6E80\u306E i \u306E\u3046\u3061\u3001[i, n) \u306E\u533A\u9593\
-    \ fold \u304C true \u306B\u306A\u308B\u6700\u5C0F\u306E i \u306F\u4F55\u304B\uFF1F\
-    \n  // (\u5B58\u5728\u3057\u306A\u3044\u5834\u5408\u306F failed \u3092\u8FD4\u3059\
-    )\n  template <typename C>\n  I min_left(I n, C check, I failed) {\n    assert(check(ti())\
-    \ == true);\n    auto [x, y] = _split_by_key(root, n);\n    I res = _min_left<C,\
-    \ true>(x, check, failed);\n    root = _merge(x, y);\n    return res;\n  }\n\n\
-    \  // n \u672A\u6E80\u306E i \u306E\u3046\u3061\u3001(i, n) \u306E\u533A\u9593\
-    \ fold \u304C true \u306B\u306A\u308B\u6700\u5C0F\u306E i \u306F\u4F55\u304B\uFF1F\
-    \n  // (\u7A7A\u3060\u3063\u305F\u308A (\u5DE6\u7AEF, n) \u304C \u771F\u306E\u5834\
-    \u5408\u306F minus_infty \u3092\u8FD4\u3059)\n  template <typename C>\n  I min_left_exclusive(I\
-    \ n, C check, I minus_infty) {\n    assert(check(ti()) == true);\n    auto [x,\
-    \ y] = _split_by_key(root, n);\n    I res = _min_left<C, false>(x, check, minus_infty);\n\
+    \ p->val : ti();\n  }\n  bool exist(I i) {\n    Ptr p = _find(root, i);\n    return\
+    \ p != nullptr;\n  }\n\n  // 1 \u70B9 \u5024\u306E\u66F8\u304D\u63DB\u3048\n \
+    \ // func \u306E\u8FD4\u308A\u5024\u306F void !!!!!!(\u53C2\u7167\u3055\u308C\u305F\
+    \u5024\u3092\u76F4\u63A5\u66F4\u65B0\u3059\u308B)\n  void apply_val(I i, const\
+    \ function<void(T &)> &func) {\n    auto s = _split_by_key3(root, i);\n    if\
+    \ (s[1] == nullptr) s[1] = _my_new(i);\n    func(s[1]->val);\n    root = _merge(_merge(s[0],\
+    \ _update(s[1])), s[2]);\n  }\n  // 1 \u70B9 \u5024\u306E\u66F8\u304D\u63DB\u3048\
+    \ \u5024\u304C\u65E2\u306B\u5B58\u5728\u3059\u308B\u3068\u304D\u306B\u65E9\u3044\
+    \n  // func \u306E\u8FD4\u308A\u5024\u306F void !!!!!!(\u53C2\u7167\u3055\u308C\
+    \u305F\u5024\u3092\u76F4\u63A5\u66F4\u65B0\u3059\u308B)\n  void apply_val_fast(I\
+    \ i, const function<void(T &)> &func) {\n    static vector<Ptr> ps;\n    ps.clear();\n\
+    \    Ptr t = root;\n    while (t) {\n      _push(t);\n      ps.push_back(t);\n\
+    \      if (i == t->key) break;\n      t = i < t->key ? t->l : t->r;\n    }\n \
+    \   if (!t) {\n      apply_val(i, func);\n      return;\n    }\n    func(t->val);\n\
+    \    for (int j = ps.size() - 1; j >= 0; j--) _update(ps[j]);\n  }\n\n  // \u9802\
+    \u70B9\u306E\u524A\u9664\n  virtual void erase(I i) { _erase(root, i); }\n\n \
+    \ // \u7BC4\u56F2\u4F5C\u7528\n  void apply(I l, I r, const E &e) {\n    if (l\
+    \ >= r) return;\n    _apply(root, l, r, e);\n  }\n  void apply_all(const E &e)\
+    \ { _propagate(root, e); }\n\n  // \u7BC4\u56F2\u53D6\u5F97\n  T fold(I l, I r)\
+    \ {\n    if (l >= r) return ti();\n    return _fold(root, l, r);\n  }\n  T fold_all()\
+    \ { return _sum(root); }\n\n  void shift(const I &sh) { _shift(root, sh); }\n\n\
+    \  // key \u6700\u5C0F\u3092\u53D6\u5F97\n  I get_min_key(I failed = {}) { return\
+    \ _get_min_keyval(root, failed).first; }\n  // key \u6700\u5927\u3092\u53D6\u5F97\
+    \n  I get_max_key(I failed = {}) { return _get_max_keyval(root, failed).first;\
+    \ }\n  // (key, val) \u6700\u5C0F\u3092\u53D6\u5F97\n  pair<I, T> get_min_keyval(I\
+    \ failed = {}) {\n    return _get_min_keyval(root, failed);\n  }\n  // (key, val)\
+    \ \u6700\u5927\u3092\u53D6\u5F97\n  pair<I, T> get_max_keyval(I failed = {}) {\n\
+    \    return _get_max_keyval(root, failed);\n  }\n  // (key, val) \u6700\u5C0F\u3092\
+    \ pop\n  pair<I, T> pop_min_keyval(I failed = {}) {\n    assert(root != nullptr);\n\
+    \    auto kv = _get_min_keyval(root, failed);\n    erase(kv.first);\n    return\
+    \ kv;\n  }\n  // (key, val) \u6700\u5927\u3092\u53D6\u5F97\n  pair<I, T> pop_max_keyval(I\
+    \ failed = {}) {\n    assert(root != nullptr);\n    auto kv = _get_max_keyval(root,\
+    \ failed);\n    erase(kv.first);\n    return kv;\n  }\n\n  // n \u672A\u6E80\u306E\
+    \ i \u306E\u3046\u3061\u3001[i, n) \u306E\u533A\u9593 fold \u304C true \u306B\u306A\
+    \u308B\u6700\u5C0F\u306E i \u306F\u4F55\u304B\uFF1F\n  // (\u5B58\u5728\u3057\u306A\
+    \u3044\u5834\u5408\u306F failed \u3092\u8FD4\u3059)\n  template <typename C>\n\
+    \  I min_left(I n, C check, I failed) {\n    assert(check(ti()) == true);\n  \
+    \  auto [x, y] = _split_by_key(root, n);\n    I res = _min_left<C, true>(x, check,\
+    \ failed);\n    root = _merge(x, y);\n    return res;\n  }\n\n  // n \u672A\u6E80\
+    \u306E i \u306E\u3046\u3061\u3001(i, n) \u306E\u533A\u9593 fold \u304C true \u306B\
+    \u306A\u308B\u6700\u5C0F\u306E i \u306F\u4F55\u304B\uFF1F\n  // (\u7A7A\u3060\u3063\
+    \u305F\u308A (\u5DE6\u7AEF, n) \u304C \u771F\u306E\u5834\u5408\u306F minus_infty\
+    \ \u3092\u8FD4\u3059)\n  template <typename C>\n  I min_left_exclusive(I n, C\
+    \ check, I minus_infty) {\n    assert(check(ti()) == true);\n    auto [x, y] =\
+    \ _split_by_key(root, n);\n    I res = _min_left<C, false>(x, check, minus_infty);\n\
     \    root = _merge(x, y);\n    return res;\n  }\n\n  // n \u4EE5\u4E0A\u306E i\
     \ \u306E\u3046\u3061\u3001[n, i) \u306E\u533A\u9593 fold \u304C true \u306B\u306A\
     \u308B\u6700\u5927\u306E i \u306F\u4F55\u304B\uFF1F\n  // (\u7A7A\u3060\u3063\u305F\
@@ -756,7 +757,7 @@ data:
     \ > r) swap(l, r);\n        r++;\n        auto v1 = seg1.fold(l, r);\n       \
     \ auto v2 = seg2.query(l, r);\n        assert(v1 == v2 and \"fold\");\n      },\n\
     \      [&]() {\n        // get_min_key, get_min_keyval\n        int v1 = -1;\n\
-    \        while (true) {\n          v1 = seg1.get_min_key();\n          if (v1\
+    \        while (true) {\n          v1 = seg1.get_min_key(-1);\n          if (v1\
     \ == -1) break;\n          T val = seg2.get_val(v1);\n          if (val.second\
     \ == 1) break;\n          if (val.second == 0) {\n            seg1.erase(v1);\n\
     \            seg2.set_val(v1, T{});\n          } else {\n            assert(false\
@@ -766,14 +767,14 @@ data:
     \ (ng + 1 < ok) {\n            int m = (ng + ok) / 2;\n            mint x = seg2.query(0,\
     \ m).second;\n            (x == 0 ? ng : ok) = m;\n          }\n          v2 =\
     \ ok - 1;\n        }\n        assert(v1 == v2 && \"get_min_key\");\n\n       \
-    \ if (v1 == -1) {\n          auto kv1 = seg1.get_min_keyval();\n          assert(kv1.second\
-    \ == T{} && \"get_min_keyval\");\n        } else {\n          auto kv1 = seg1.get_min_keyval();\n\
+    \ if (v1 == -1) {\n          auto kv1 = seg1.get_min_keyval(-1);\n          assert(kv1.second\
+    \ == T{} && \"get_min_keyval\");\n        } else {\n          auto kv1 = seg1.get_min_keyval(-1);\n\
     \          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1 ==\
     \ kv2 && \"get_min_keyval\");\n        }\n      },\n      [&]() {\n        //\
     \ get_max_key, get_max_keyval\n        int v1 = -1;\n        while (true) {\n\
-    \          v1 = seg1.get_max_key();\n          if (v1 == -1) break;\n        \
-    \  T val = seg2.get_val(v1);\n          if (val.second == 1) break;\n        \
-    \  if (val.second == 0) {\n            seg1.erase(v1);\n            seg2.set_val(v1,\
+    \          v1 = seg1.get_max_key(-1);\n          if (v1 == -1) break;\n      \
+    \    T val = seg2.get_val(v1);\n          if (val.second == 1) break;\n      \
+    \    if (val.second == 0) {\n            seg1.erase(v1);\n            seg2.set_val(v1,\
     \ T{});\n          } else {\n            assert(false and \"get_max_key\");\n\
     \          }\n        }\n\n        int v2 = -1;\n        if (seg2.query(0, N).second\
     \ != 0) {\n          // [i, N) \u306F\u975E\u30BC\u30ED\u3067\u3059\u304B\uFF1F\
@@ -781,8 +782,8 @@ data:
     \ int m = (ng + ok) / 2;\n            mint x = seg2.query(m, N).second;\n    \
     \        (x == 0 ? ng : ok) = m;\n          }\n          v2 = ok;\n        }\n\
     \        assert(v1 == v2 && \"get_max_key\");\n\n        if (v1 == -1) {\n   \
-    \       auto kv1 = seg1.get_max_keyval();\n          assert(kv1.second == T{}\
-    \ && \"get_max_keyval\");\n        } else {\n          auto kv1 = seg1.get_max_keyval();\n\
+    \       auto kv1 = seg1.get_max_keyval(-1);\n          assert(kv1.second == T{}\
+    \ && \"get_max_keyval\");\n        } else {\n          auto kv1 = seg1.get_max_keyval(-1);\n\
     \          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1 ==\
     \ kv2 && \"get_mix_keyval\");\n        }\n      },\n      [&]() {\n        //\
     \ pop_min_key\n        int v2 = -1;\n        if (seg2.query(0, N).second != 0)\
@@ -791,16 +792,16 @@ data:
     \ m = (ng + ok) / 2;\n            mint x = seg2.query(0, m).second;\n        \
     \    (x == 0 ? ng : ok) = m;\n          }\n          v2 = ok - 1;\n        }\n\
     \        if (v2 != -1) {\n          pair<int, T> kv1;\n          do {\n      \
-    \      kv1 = seg1.pop_min_keyval();\n          } while (kv1.second.second == 0);\n\
-    \          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1 ==\
-    \ kv2 && \"pop_min_keyval\");\n          seg2.set_val(v2, T{});\n        }\n \
-    \     },\n      [&]() {\n        // pop_max_key\n        int v2 = -1;\n      \
-    \  if (seg2.query(0, N).second != 0) {\n          // [i, N) \u306F\u975E\u30BC\
+    \      kv1 = seg1.pop_min_keyval(-1);\n          } while (kv1.second.second ==\
+    \ 0);\n          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1\
+    \ == kv2 && \"pop_min_keyval\");\n          seg2.set_val(v2, T{});\n        }\n\
+    \      },\n      [&]() {\n        // pop_max_key\n        int v2 = -1;\n     \
+    \   if (seg2.query(0, N).second != 0) {\n          // [i, N) \u306F\u975E\u30BC\
     \u30ED\u3067\u3059\u304B\uFF1F\n          int ok = 0, ng = N;\n          while\
     \ (ok + 1 < ng) {\n            int m = (ng + ok) / 2;\n            mint x = seg2.query(m,\
     \ N).second;\n            (x == 0 ? ng : ok) = m;\n          }\n          v2 =\
     \ ok;\n        }\n        if (v2 != -1) {\n          pair<int, T> kv1;\n     \
-    \     do {\n            kv1 = seg1.pop_max_keyval();\n          } while (kv1.second.second\
+    \     do {\n            kv1 = seg1.pop_max_keyval(-1);\n          } while (kv1.second.second\
     \ == 0);\n          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1\
     \ == kv2 && \"pop_max_keyval\");\n          seg2.set_val(v2, T{});\n        }\n\
     \      },\n  };\n\n  rep(_, 10) {\n    int qq = vector<ll>{0LL, rng(1, 10), rng(1,\
@@ -868,7 +869,7 @@ data:
     \ > r) swap(l, r);\n        r++;\n        auto v1 = seg1.fold(l, r);\n       \
     \ auto v2 = seg2.query(l, r);\n        assert(v1 == v2 and \"fold\");\n      },\n\
     \      [&]() {\n        // get_min_key, get_min_keyval\n        int v1 = -1;\n\
-    \        while (true) {\n          v1 = seg1.get_min_key();\n          if (v1\
+    \        while (true) {\n          v1 = seg1.get_min_key(-1);\n          if (v1\
     \ == -1) break;\n          T val = seg2.get_val(v1);\n          if (val.second\
     \ == 1) break;\n          if (val.second == 0) {\n            seg1.erase(v1);\n\
     \            seg2.set_val(v1, T{});\n          } else {\n            assert(false\
@@ -878,14 +879,14 @@ data:
     \ (ng + 1 < ok) {\n            int m = (ng + ok) / 2;\n            mint x = seg2.query(0,\
     \ m).second;\n            (x == 0 ? ng : ok) = m;\n          }\n          v2 =\
     \ ok - 1;\n        }\n        assert(v1 == v2 && \"get_min_key\");\n\n       \
-    \ if (v1 == -1) {\n          auto kv1 = seg1.get_min_keyval();\n          assert(kv1.second\
-    \ == T{} && \"get_min_keyval\");\n        } else {\n          auto kv1 = seg1.get_min_keyval();\n\
+    \ if (v1 == -1) {\n          auto kv1 = seg1.get_min_keyval(-1);\n          assert(kv1.second\
+    \ == T{} && \"get_min_keyval\");\n        } else {\n          auto kv1 = seg1.get_min_keyval(-1);\n\
     \          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1 ==\
     \ kv2 && \"get_min_keyval\");\n        }\n      },\n      [&]() {\n        //\
     \ get_max_key, get_max_keyval\n        int v1 = -1;\n        while (true) {\n\
-    \          v1 = seg1.get_max_key();\n          if (v1 == -1) break;\n        \
-    \  T val = seg2.get_val(v1);\n          if (val.second == 1) break;\n        \
-    \  if (val.second == 0) {\n            seg1.erase(v1);\n            seg2.set_val(v1,\
+    \          v1 = seg1.get_max_key(-1);\n          if (v1 == -1) break;\n      \
+    \    T val = seg2.get_val(v1);\n          if (val.second == 1) break;\n      \
+    \    if (val.second == 0) {\n            seg1.erase(v1);\n            seg2.set_val(v1,\
     \ T{});\n          } else {\n            assert(false and \"get_max_key\");\n\
     \          }\n        }\n\n        int v2 = -1;\n        if (seg2.query(0, N).second\
     \ != 0) {\n          // [i, N) \u306F\u975E\u30BC\u30ED\u3067\u3059\u304B\uFF1F\
@@ -893,8 +894,8 @@ data:
     \ int m = (ng + ok) / 2;\n            mint x = seg2.query(m, N).second;\n    \
     \        (x == 0 ? ng : ok) = m;\n          }\n          v2 = ok;\n        }\n\
     \        assert(v1 == v2 && \"get_max_key\");\n\n        if (v1 == -1) {\n   \
-    \       auto kv1 = seg1.get_max_keyval();\n          assert(kv1.second == T{}\
-    \ && \"get_max_keyval\");\n        } else {\n          auto kv1 = seg1.get_max_keyval();\n\
+    \       auto kv1 = seg1.get_max_keyval(-1);\n          assert(kv1.second == T{}\
+    \ && \"get_max_keyval\");\n        } else {\n          auto kv1 = seg1.get_max_keyval(-1);\n\
     \          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1 ==\
     \ kv2 && \"get_mix_keyval\");\n        }\n      },\n      [&]() {\n        //\
     \ pop_min_key\n        int v2 = -1;\n        if (seg2.query(0, N).second != 0)\
@@ -903,16 +904,16 @@ data:
     \ m = (ng + ok) / 2;\n            mint x = seg2.query(0, m).second;\n        \
     \    (x == 0 ? ng : ok) = m;\n          }\n          v2 = ok - 1;\n        }\n\
     \        if (v2 != -1) {\n          pair<int, T> kv1;\n          do {\n      \
-    \      kv1 = seg1.pop_min_keyval();\n          } while (kv1.second.second == 0);\n\
-    \          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1 ==\
-    \ kv2 && \"pop_min_keyval\");\n          seg2.set_val(v2, T{});\n        }\n \
-    \     },\n      [&]() {\n        // pop_max_key\n        int v2 = -1;\n      \
-    \  if (seg2.query(0, N).second != 0) {\n          // [i, N) \u306F\u975E\u30BC\
+    \      kv1 = seg1.pop_min_keyval(-1);\n          } while (kv1.second.second ==\
+    \ 0);\n          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1\
+    \ == kv2 && \"pop_min_keyval\");\n          seg2.set_val(v2, T{});\n        }\n\
+    \      },\n      [&]() {\n        // pop_max_key\n        int v2 = -1;\n     \
+    \   if (seg2.query(0, N).second != 0) {\n          // [i, N) \u306F\u975E\u30BC\
     \u30ED\u3067\u3059\u304B\uFF1F\n          int ok = 0, ng = N;\n          while\
     \ (ok + 1 < ng) {\n            int m = (ng + ok) / 2;\n            mint x = seg2.query(m,\
     \ N).second;\n            (x == 0 ? ng : ok) = m;\n          }\n          v2 =\
     \ ok;\n        }\n        if (v2 != -1) {\n          pair<int, T> kv1;\n     \
-    \     do {\n            kv1 = seg1.pop_max_keyval();\n          } while (kv1.second.second\
+    \     do {\n            kv1 = seg1.pop_max_keyval(-1);\n          } while (kv1.second.second\
     \ == 0);\n          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1\
     \ == kv2 && \"pop_max_keyval\");\n          seg2.set_val(v2, T{});\n        }\n\
     \      },\n  };\n\n  rep(_, 10) {\n    int qq = vector<ll>{0LL, rng(1, 10), rng(1,\
@@ -965,7 +966,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/rbst-segment-tree.test.cpp
   requiredBy: []
-  timestamp: '2024-05-03 23:21:26+09:00'
+  timestamp: '2024-09-14 23:01:51+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/rbst-segment-tree.test.cpp

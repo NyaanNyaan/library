@@ -3,9 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: math/enumerate-convex.hpp
+    title: math/enumerate-convex.hpp
+  - icon: ':heavy_check_mark:'
     path: math/stern-brocot-tree-binary-search.hpp
     title: math/stern-brocot-tree-binary-search.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/enumerate-convex.test.cpp
+    title: verify/verify-unit-test/enumerate-convex.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-rational-approximation.test.cpp
     title: verify/verify-yosupo-math/yosupo-rational-approximation.test.cpp
@@ -137,15 +143,17 @@ data:
   isVerificationFile: false
   path: math/stern-brocot-tree.hpp
   requiredBy:
+  - math/enumerate-convex.hpp
   - math/stern-brocot-tree-binary-search.hpp
   timestamp: '2023-12-18 23:52:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-2262.test.cpp
+  - verify/verify-unit-test/enumerate-convex.test.cpp
   - verify/verify-yuki/yuki-2266.test.cpp
-  - verify/verify-yosupo-math/yosupo-rational-approximation.test.cpp
+  - verify/verify-yuki/yuki-2262.test.cpp
   - verify/verify-yosupo-math/yosupo-stern-brocot-tree-2.test.cpp
   - verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp
+  - verify/verify-yosupo-math/yosupo-rational-approximation.test.cpp
 documentation_of: math/stern-brocot-tree.hpp
 layout: document
 redirect_from:

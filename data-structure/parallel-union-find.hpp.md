@@ -15,6 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/parallel-union-find.test.cpp
     title: verify/verify-unit-test/parallel-union-find.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-range-parallel-unionfind.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-range-parallel-unionfind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -163,7 +166,16 @@ data:
     \ - l1;\n      while (ok + 1 < ng) {\n        int m = (ok + ng) / 2;\n       \
     \ (seg.same(l1, l1 + m, l2, l2 + m) ? ok : ng) = m;\n      }\n      uf.unite(l1\
     \ + ok, l2 + ok, [&](int x, int y) {\n        for (int z : uf.enumerate(y)) seg.update(z,\
-    \ x);\n      });\n    }\n  }\n  void unite(int l, int r) { unite(l, l + 1, r,\
+    \ x);\n      });\n    }\n  }\n  // [l1, r1) \u3068 [l2, r2) \u3092 unite \u3059\
+    \u308B\n  // f(x, y) : x \u306B y \u3092\u30DE\u30FC\u30B8\n  template <typename\
+    \ F>\n  void unite(int l1, int r1, int l2, int r2, const F& f) {\n    assert(0\
+    \ <= l1 and l1 <= r1 and r1 <= n);\n    assert(0 <= l2 and l2 <= r2 and r2 <=\
+    \ n);\n    assert(r1 - l1 == r2 - l2);\n    while (1) {\n      if (seg.same(l1,\
+    \ r1, l2, r2)) break;\n      int ok = 0, ng = r1 - l1;\n      while (ok + 1 <\
+    \ ng) {\n        int m = (ok + ng) / 2;\n        (seg.same(l1, l1 + m, l2, l2\
+    \ + m) ? ok : ng) = m;\n      }\n      uf.unite(l1 + ok, l2 + ok, [&](int x, int\
+    \ y) {\n        for (int z : uf.enumerate(y)) seg.update(z, x);\n        f(x,\
+    \ y);\n      });\n    }\n  }\n\n  void unite(int l, int r) { unite(l, l + 1, r,\
     \ r + 1); }\n  int find(int i) { return uf.find(i); }\n  int same(int l, int r)\
     \ { return uf.same(l, r); }\n  int size(int i) { return uf.size(i); }\n};\n"
   code: "#pragma once\n\n#include \"../string/rolling-hash-on-segment-tree.hpp\"\n\
@@ -178,7 +190,16 @@ data:
     \ ng) {\n        int m = (ok + ng) / 2;\n        (seg.same(l1, l1 + m, l2, l2\
     \ + m) ? ok : ng) = m;\n      }\n      uf.unite(l1 + ok, l2 + ok, [&](int x, int\
     \ y) {\n        for (int z : uf.enumerate(y)) seg.update(z, x);\n      });\n \
-    \   }\n  }\n  void unite(int l, int r) { unite(l, l + 1, r, r + 1); }\n  int find(int\
+    \   }\n  }\n  // [l1, r1) \u3068 [l2, r2) \u3092 unite \u3059\u308B\n  // f(x,\
+    \ y) : x \u306B y \u3092\u30DE\u30FC\u30B8\n  template <typename F>\n  void unite(int\
+    \ l1, int r1, int l2, int r2, const F& f) {\n    assert(0 <= l1 and l1 <= r1 and\
+    \ r1 <= n);\n    assert(0 <= l2 and l2 <= r2 and r2 <= n);\n    assert(r1 - l1\
+    \ == r2 - l2);\n    while (1) {\n      if (seg.same(l1, r1, l2, r2)) break;\n\
+    \      int ok = 0, ng = r1 - l1;\n      while (ok + 1 < ng) {\n        int m =\
+    \ (ok + ng) / 2;\n        (seg.same(l1, l1 + m, l2, l2 + m) ? ok : ng) = m;\n\
+    \      }\n      uf.unite(l1 + ok, l2 + ok, [&](int x, int y) {\n        for (int\
+    \ z : uf.enumerate(y)) seg.update(z, x);\n        f(x, y);\n      });\n    }\n\
+    \  }\n\n  void unite(int l, int r) { unite(l, l + 1, r, r + 1); }\n  int find(int\
     \ i) { return uf.find(i); }\n  int same(int l, int r) { return uf.same(l, r);\
     \ }\n  int size(int i) { return uf.size(i); }\n};\n"
   dependsOn:
@@ -188,9 +209,10 @@ data:
   isVerificationFile: false
   path: data-structure/parallel-union-find.hpp
   requiredBy: []
-  timestamp: '2024-04-28 09:13:11+09:00'
+  timestamp: '2024-09-14 20:40:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yosupo-ds/yosupo-range-parallel-unionfind.test.cpp
   - verify/verify-unit-test/parallel-union-find.test.cpp
 documentation_of: data-structure/parallel-union-find.hpp
 layout: document

@@ -107,9 +107,9 @@ data:
   timestamp: '2024-05-03 23:21:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
-  - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
+  - verify/verify-aoj-other/aoj-2995.test.cpp
+  - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
 documentation_of: tree/dsu-on-tree.hpp
 layout: document
 redirect_from:

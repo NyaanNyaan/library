@@ -40,9 +40,9 @@ data:
   timestamp: '2020-12-07 13:36:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-3024.test.cpp
   - verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
   - verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
+  - verify/verify-yuki/yuki-3024.test.cpp
 documentation_of: set-function/enumerate-set.hpp
 layout: document
 redirect_from:
