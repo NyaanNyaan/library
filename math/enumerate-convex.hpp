@@ -69,10 +69,6 @@ vector<pair<Int, Int>> enumerate_convex(
             break;
           } else {
             Int t = go2(x + sb.rx, y + sb.ry, sb.lx, sb.ly, s);
-            if (!f(x + sb.lx * (t + 1) + sb.rx, y + sb.ly * (t + 1) + sb.ry)) {
-              a = sb.lx, b = sb.ly;
-              break;
-            }
             sb.go_left(t);
           }
         }
