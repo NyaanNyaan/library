@@ -475,7 +475,9 @@
 "verify/verify-yuki/yuki-1775.test.cpp": "2024-05-03 23:21:26 +0900",
 "verify/verify-yuki/yuki-1777.test.cpp": "2024-05-03 23:21:26 +0900",
 "verify/verify-yuki/yuki-1778.test.cpp": "2024-05-03 23:21:26 +0900",
+"verify/verify-yuki/yuki-1781.test.cpp": "2024-09-14 20:40:02 +0900",
 "verify/verify-yuki/yuki-1783.test.cpp": "2024-05-03 23:21:26 +0900",
+"verify/verify-yuki/yuki-1786.test.cpp": "2024-09-14 20:40:02 +0900",
 "verify/verify-yuki/yuki-1787.test.cpp": "2024-05-03 23:21:26 +0900",
 "verify/verify-yuki/yuki-1789.test.cpp": "2024-05-04 15:53:37 +0900",
 "verify/verify-yuki/yuki-1875.test.cpp": "2024-05-03 23:21:26 +0900",
@@ -494,6 +496,7 @@
 "verify/verify-yuki/yuki-2588.test.cpp": "2024-08-10 13:03:16 +0900",
 "verify/verify-yuki/yuki-2661.test.cpp": "2024-05-03 23:21:26 +0900",
 "verify/verify-yuki/yuki-2677.test.cpp": "2024-05-03 23:21:26 +0900",
+"verify/verify-yuki/yuki-2883.test.cpp": "2024-09-14 20:40:02 +0900",
 "verify/verify-yuki/yuki-3024.test.cpp": "2024-08-10 13:03:16 +0900",
 "verify/verify-yuki/yuki-helloworld.test.cpp": "2024-05-03 23:21:26 +0900"
 }
