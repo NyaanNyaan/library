@@ -215,11 +215,11 @@ Pair<T> PUpdate(Pair<T> a, T b) {
 }
 template <typename T>
 Pair<T> Pid() {
-  return Pair<T>(0, 0);
+  return Pair<T>(T{}, T{});
 }
 template <typename T>
 T Zero() {
-  return T(0);
+  return T{};
 }
 template <typename T, T val>
 T Const() {
@@ -227,8 +227,8 @@ T Const() {
 }
 
 template <typename T, T MINF>
-struct AddMax_LazySegmentTree
-    : LazySegmentTreeBase<T, T, Mx<T>, Add<T>, Add<T>, Const<T, MINF>, Zero<T>> {
+struct AddMax_LazySegmentTree : LazySegmentTreeBase<T, T, Mx<T>, Add<T>, Add<T>,
+                                                    Const<T, MINF>, Zero<T>> {
   using base =
       LazySegmentTreeBase<T, T, Mx<T>, Add<T>, Add<T>, Const<T, MINF>, Zero<T>>;
   AddMax_LazySegmentTree(const vector<T>& v) : base(v) {}
@@ -244,9 +244,10 @@ struct AddMin_LazySegmentTree
 
 template <typename T>
 struct AddSum_LazySegmentTree
-    : LazySegmentTreeBase<Pair<T>, T, Psum<T>, Padd<T>, Add<T>, Pid<T>, Zero<T>> {
-  using base =
-      LazySegmentTreeBase<Pair<T>, T, Psum<T>, Padd<T>, Add<T>, Pid<T>, Zero<T>>;
+    : LazySegmentTreeBase<Pair<T>, T, Psum<T>, Padd<T>, Add<T>, Pid<T>,
+                          Zero<T>> {
+  using base = LazySegmentTreeBase<Pair<T>, T, Psum<T>, Padd<T>, Add<T>, Pid<T>,
+                                   Zero<T>>;
   AddSum_LazySegmentTree(const vector<T>& v) {
     vector<Pair<T>> w(v.size());
     for (int i = 0; i < (int)v.size(); i++) w[i] = Pair<T>(v[i], 1);
@@ -257,27 +258,27 @@ struct AddSum_LazySegmentTree
 template <typename T, T MINF>
 struct UpdateMax_LazySegmentTree
     : LazySegmentTreeBase<T, T, Mx<T>, Update<T>, Update<T>, Const<T, MINF>,
-                      Const<T, MINF>> {
+                          Const<T, MINF>> {
   using base = LazySegmentTreeBase<T, T, Mx<T>, Update<T>, Update<T>,
-                               Const<T, MINF>, Const<T, MINF>>;
+                                   Const<T, MINF>, Const<T, MINF>>;
   UpdateMax_LazySegmentTree(const vector<T>& v) : base(v) {}
 };
 
 template <typename T, T INF>
 struct UpdateMin_LazySegmentTree
     : LazySegmentTreeBase<T, T, Mn<T>, Update<T>, Update<T>, Const<T, INF>,
-                      Const<T, INF>> {
-  using base = LazySegmentTreeBase<T, T, Mn<T>, Update<T>, Update<T>, Const<T, INF>,
-                               Const<T, INF>>;
+                          Const<T, INF>> {
+  using base = LazySegmentTreeBase<T, T, Mn<T>, Update<T>, Update<T>,
+                                   Const<T, INF>, Const<T, INF>>;
   UpdateMin_LazySegmentTree(const vector<T>& v) : base(v) {}
 };
 
 template <typename T, T UNUSED_VALUE>
 struct UpdateSum_LazySegmentTree
     : LazySegmentTreeBase<Pair<T>, T, Psum<T>, PUpdate<T>, Update<T>, Pid<T>,
-                      Const<T, UNUSED_VALUE>> {
+                          Const<T, UNUSED_VALUE>> {
   using base = LazySegmentTreeBase<Pair<T>, T, Psum<T>, PUpdate<T>, Update<T>,
-                               Pid<T>, Const<T, UNUSED_VALUE>>;
+                                   Pid<T>, Const<T, UNUSED_VALUE>>;
   UpdateSum_LazySegmentTree(const vector<T>& v) {
     vector<Pair<T>> w(v.size());
     for (int i = 0; i < (int)v.size(); i++) w[i] = Pair<T>(v[i], 1);

@@ -11,6 +11,7 @@ struct Fast_Mo {
   int N, Q, width;
   vector<int> L, R, order;
   bool is_build;
+  int nl, nr;
 
   Fast_Mo(int _n, int _q) : N(_n), Q(_q), order(Q), is_build(false) {
     width = max<int>(1, 1.0 * N / max<double>(1.0, sqrt(Q / 2.0)));
@@ -28,7 +29,7 @@ struct Fast_Mo {
   void run(const AL &add_left, const AR &add_right, const DL &delete_left,
            const DR &delete_right, const REM &rem) {
     if (!is_build) build();
-    int nl = 0, nr = 0;
+    nl = nr = 0;
     for (auto idx : order) {
       while (nl > L[idx]) add_left(--nl);
       while (nr < R[idx]) add_right(nr++);
@@ -61,7 +62,7 @@ struct Fast_Mo {
   }
 
   int dist(int i, int j) { return abs(L[i] - L[j]) + abs(R[i] - R[j]); }
-  
+
   void climb(int iter = 3, int interval = 5) {
     vector<int> d(Q - 1);
     for (int i = 0; i < Q - 1; i++) d[i] = dist(order[i], order[i + 1]);

@@ -94,7 +94,7 @@ void test(const int N = 100, const int Q = 100) {
         // get_min_key, get_min_keyval
         int v1 = -1;
         while (true) {
-          v1 = seg1.get_min_key();
+          v1 = seg1.get_min_key(-1);
           if (v1 == -1) break;
           T val = seg2.get_val(v1);
           if (val.second == 1) break;
@@ -120,10 +120,10 @@ void test(const int N = 100, const int Q = 100) {
         assert(v1 == v2 && "get_min_key");
 
         if (v1 == -1) {
-          auto kv1 = seg1.get_min_keyval();
+          auto kv1 = seg1.get_min_keyval(-1);
           assert(kv1.second == T{} && "get_min_keyval");
         } else {
-          auto kv1 = seg1.get_min_keyval();
+          auto kv1 = seg1.get_min_keyval(-1);
           auto kv2 = make_pair(v2, seg2.get_val(v2));
           assert(kv1 == kv2 && "get_min_keyval");
         }
@@ -132,7 +132,7 @@ void test(const int N = 100, const int Q = 100) {
         // get_max_key, get_max_keyval
         int v1 = -1;
         while (true) {
-          v1 = seg1.get_max_key();
+          v1 = seg1.get_max_key(-1);
           if (v1 == -1) break;
           T val = seg2.get_val(v1);
           if (val.second == 1) break;
@@ -158,10 +158,10 @@ void test(const int N = 100, const int Q = 100) {
         assert(v1 == v2 && "get_max_key");
 
         if (v1 == -1) {
-          auto kv1 = seg1.get_max_keyval();
+          auto kv1 = seg1.get_max_keyval(-1);
           assert(kv1.second == T{} && "get_max_keyval");
         } else {
-          auto kv1 = seg1.get_max_keyval();
+          auto kv1 = seg1.get_max_keyval(-1);
           auto kv2 = make_pair(v2, seg2.get_val(v2));
           assert(kv1 == kv2 && "get_mix_keyval");
         }
@@ -182,7 +182,7 @@ void test(const int N = 100, const int Q = 100) {
         if (v2 != -1) {
           pair<int, T> kv1;
           do {
-            kv1 = seg1.pop_min_keyval();
+            kv1 = seg1.pop_min_keyval(-1);
           } while (kv1.second.second == 0);
           auto kv2 = make_pair(v2, seg2.get_val(v2));
           assert(kv1 == kv2 && "pop_min_keyval");
@@ -205,7 +205,7 @@ void test(const int N = 100, const int Q = 100) {
         if (v2 != -1) {
           pair<int, T> kv1;
           do {
-            kv1 = seg1.pop_max_keyval();
+            kv1 = seg1.pop_max_keyval(-1);
           } while (kv1.second.second == 0);
           auto kv2 = make_pair(v2, seg2.get_val(v2));
           assert(kv1 == kv2 && "pop_max_keyval");

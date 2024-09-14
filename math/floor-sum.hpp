@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 // sum_{0 <= i < N} (ai + b) // m
 template <typename T>
 T sum_of_floor(T n, T m, T a, T b) {

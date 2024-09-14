@@ -9,32 +9,32 @@ struct BinaryLifting {
   T I;
 
   BinaryLifting(int n, uint64_t lim, const T I_ = T())
-      : N(n), LOG(__lg(lim) + 2), I(I_) {
-    table.resize(n, vector<Data>(LOG, Data(-1, I)));
+      : N(n), LOG(__lg(max<uint64_t>(lim, 1)) + 2), I(I_) {
+    table.resize(LOG, vector<Data>(n, Data(-1, I)));
   }
 
-  void set_next(int k, int nxt, const T& t) { table[k][0] = Data(nxt, t); }
+  void set_next(int k, int nxt, const T& t) { table[0][k] = Data(nxt, t); }
 
   void build() {
     for (int k = 0; k + 1 < LOG; ++k)
       for (int i = 0; i < N; ++i) {
-        int pre = table[i][k].first;
+        int pre = table[k][i].first;
         if (pre == -1) {
-          table[i][k + 1] = table[i][k];
+          table[k + 1][i] = table[k][i];
         } else {
-          table[i][k + 1].first = table[pre][k].first;
-          table[i][k + 1].second = table[i][k].second + table[pre][k].second;
+          table[k + 1][i].first = table[k][pre].first;
+          table[k + 1][i].second = table[k][i].second + table[k][pre].second;
         }
       }
   }
 
-  // from i, move t times
+  // i から t 回進んだ先, (地点, モノイド和) を返す
   Data query(int i, uint64_t t) const {
     T d = I;
     for (int k = LOG - 1; k >= 0; k--) {
       if ((t >> k) & 1) {
-        d = d + table[i][k].second;
-        i = table[i][k].first;
+        d = d + table[k][i].second;
+        i = table[k][i].first;
       }
       if (i == -1) break;
     }
@@ -42,7 +42,7 @@ struct BinaryLifting {
   }
 
   // query(i, pow(2, k))
-  inline Data query_pow(int i, int k) const { return table[i][k]; }
+  inline Data query_pow(int i, int k) const { return table[k][i]; }
 
   // assuming graph is DAG ( edge(u, v) <-> u < v )
   // find max j | j <= t, path from i to j exists
@@ -51,9 +51,9 @@ struct BinaryLifting {
     T d = I;
     uint64_t times = 0;
     for (int k = LOG - 1; k >= 0; k--) {
-      int nxt = table[thres][k].first;
+      int nxt = table[k][thres].first;
       if (nxt != -1 && nxt <= t) {
-        d = d + table[thres][k].second;
+        d = d + table[k][thres].second;
         thres = nxt;
         times += 1LL << k;
       }
@@ -68,9 +68,9 @@ struct BinaryLifting {
     T d = I;
     uint64_t times = 0;
     for (int k = LOG - 1; k >= 0; k--) {
-      int nxt = table[thres][k].first;
+      int nxt = table[k][thres].first;
       if (nxt != -1 && nxt >= t) {
-        d = d + table[thres][k].second;
+        d = d + table[k][thres].second;
         thres = nxt;
         times += 1LL << k;
       }
