@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sum_of_floor_of_linear"
 
 #include "../../template/template.hpp"
-#include "../../math/sum-of-floor.hpp"
+#include "../../math/floor-sum.hpp"
 
 using namespace Nyaan; void Nyaan::solve() {
   ini(T);

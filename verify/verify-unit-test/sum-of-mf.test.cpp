@@ -7,14 +7,12 @@
 #include "../../multiplicative-function/sum-of-totient.hpp"
 //
 #include "../../modint/montgomery-modint.hpp"
-#include "../../modulo/binomial.hpp"
 //
 using namespace Nyaan;
 using mint = LazyMontgomeryModInt<998244353>;
 // using mint = LazyMontgomeryModInt<1000000007>;
 using vm = vector<mint>;
 using vvm = vector<vm>;
-Binomial<mint> C;
 
 using namespace Nyaan;
 
@@ -35,10 +33,16 @@ void Nyaan::solve() {
     auto h1 = mf.prime_sum_table();
     auto h0 = mf.pi_table();
     assert(sz(h1) == sz(h0));
-    rep(i, sz(h1)) h1[i] -= h0[i];
+    rep(j, sz(h1)) h1[j] -= h0[j];
+
+    auto g = mf.min_25_sieve(h1);
+    rep1(j, mf.s - mf.sq - 1) assert(g[j] == tot[i / j]);
+    rep1(j, mf.sq) assert(g[mf.s - j] == tot[j]);
+
     mint ans = mf.run(h1);
     assert(tot[i] == ans);
   }
+  trc2("OK");
 
   int a, b;
   cin >> a >> b;

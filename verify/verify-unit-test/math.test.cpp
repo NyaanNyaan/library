@@ -5,7 +5,7 @@
 #include "../../math/gray-code.hpp"
 #include "../../math/inv-mod.hpp"
 #include "../../math/isqrt.hpp"
-#include "../../math/sum-of-floor.hpp"
+#include "../../math/floor-sum.hpp"
 #include "../../misc/rng.hpp"
 using namespace Nyaan;
 
