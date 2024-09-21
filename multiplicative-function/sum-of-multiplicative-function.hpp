@@ -154,5 +154,5 @@ struct mf_prefix_sum {
 
 /**
  * @brief 乗法的関数のprefix sum
- * @docs docs/multiplicative-function/sum-of-multiplicative-function.quo
+ * @docs docs/multiplicative-function/sum-of-multiplicative-function.md
  */
