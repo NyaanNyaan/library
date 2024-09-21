@@ -110,9 +110,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
-  - verify/verify-yosupo-math/yosupo-matrix-product-mod-2.test.cpp
-  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
   - verify/verify-yosupo-math/yosupo-inverse-matrix-mod-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-mod-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-matrix-product-mod-2.test.cpp
 documentation_of: matrix/f2-matrix.hpp
 layout: document
 redirect_from:

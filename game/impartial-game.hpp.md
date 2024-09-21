@@ -122,9 +122,9 @@ data:
   timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yuki/yuki-0002.test.cpp
   - verify/verify-yuki/yuki-0102.test.cpp
   - verify/verify-yuki/yuki-0361.test.cpp
-  - verify/verify-yuki/yuki-0002.test.cpp
 documentation_of: game/impartial-game.hpp
 layout: document
 redirect_from:

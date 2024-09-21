@@ -273,8 +273,8 @@ data:
   isVerificationFile: false
   path: multiplicative-function/enamurate-multiplicative-function.hpp
   requiredBy:
-  - multiplicative-function/mf-famous-series.hpp
   - multiplicative-function/count-square-free.hpp
+  - multiplicative-function/mf-famous-series.hpp
   timestamp: '2024-05-03 23:21:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

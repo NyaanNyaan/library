@@ -326,7 +326,7 @@ data:
     \ 1; i < (int)ns.size(); i++) F[i] += 1;\n    return F;\n  }\n\n  i64 quo(i64\
     \ n, i64 d) { return double(n) / d; }\n  i64 idx(i64 n) { return n <= sq ? s -\
     \ n : quo(M, n); }\n};\n\n/**\n * @brief \u4E57\u6CD5\u7684\u95A2\u6570\u306E\
-    prefix sum\n * @docs docs/multiplicative-function/sum-of-multiplicative-function.quo\n\
+    prefix sum\n * @docs docs/multiplicative-function/sum-of-multiplicative-function.md\n\
     \ */\n#line 2 \"multiplicative-function/sum-of-totient.hpp\"\n\ntemplate <typename\
     \ T>\nT sum_of_totient(long long N) {\n  if (N < 2) return N;\n  using i64 = long\
     \ long;\n\n  auto f = [](i64 v, i64 p, i64) -> i64 { return v / p * (p - 1); };\n\
@@ -429,7 +429,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/sum-of-mf.test.cpp
   requiredBy: []
-  timestamp: '2024-09-14 20:40:02+09:00'
+  timestamp: '2024-09-22 00:16:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/sum-of-mf.test.cpp

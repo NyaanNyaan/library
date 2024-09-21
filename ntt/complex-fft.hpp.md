@@ -282,8 +282,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/complex-fft.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-15bit.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
 documentation_of: ntt/complex-fft.hpp
 layout: document
 redirect_from:

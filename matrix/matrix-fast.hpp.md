@@ -111,8 +111,8 @@ data:
   verifiedWith:
   - verify/verify-unit-test/template.test.cpp
   - verify/verify-yuki/yuki-0303.test.cpp
-  - verify/verify-yosupo-math/yosupo-pow-of-matrix-2.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
+  - verify/verify-yosupo-math/yosupo-pow-of-matrix-2.test.cpp
 documentation_of: matrix/matrix-fast.hpp
 layout: document
 redirect_from:

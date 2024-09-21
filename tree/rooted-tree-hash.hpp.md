@@ -113,8 +113,8 @@ data:
   verifiedWith:
   - verify/verify-aoj-other/aoj-2821.test.cpp
   - verify/verify-aoj-other/aoj-1613.test.cpp
-  - verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
   - verify/verify-yuki/yuki-1789.test.cpp
+  - verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
 documentation_of: tree/rooted-tree-hash.hpp
 layout: document
 redirect_from:

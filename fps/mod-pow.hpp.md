@@ -132,15 +132,15 @@ data:
   isVerificationFile: false
   path: fps/mod-pow.hpp
   requiredBy:
-  - fps/root-finding.hpp
   - matrix/black-box-linear-algebra.hpp
+  - fps/root-finding.hpp
   timestamp: '2023-08-31 20:44:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-polynomial-root-finding.test.cpp
-  - verify/verify-yuki/yuki-0720.test.cpp
-  - verify/verify-yuki/yuki-1112-sparse.test.cpp
   - verify/verify-yuki/yuki-1112.test.cpp
+  - verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - verify/verify-yuki/yuki-0720.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
 documentation_of: fps/mod-pow.hpp

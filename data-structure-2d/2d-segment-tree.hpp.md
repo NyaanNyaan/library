@@ -82,8 +82,8 @@ data:
   timestamp: '2023-09-08 22:52:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-other/aoj-1068.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-5-b-2dseg.test.cpp
+  - verify/verify-aoj-other/aoj-1068.test.cpp
 documentation_of: data-structure-2d/2d-segment-tree.hpp
 layout: document
 redirect_from:

@@ -135,12 +135,12 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/dynamic-diameter.test.cpp
-  - verify/verify-yosupo-graph/yosupo-diameter.test.cpp
-  - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
-  - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
-  - verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp
-  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
+  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
+  - verify/verify-yosupo-graph/yosupo-diameter.test.cpp
+  - verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp
+  - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
+  - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
 documentation_of: graph/graph-utility.hpp
 layout: document
 redirect_from:

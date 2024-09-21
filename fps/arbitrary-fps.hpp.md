@@ -337,20 +337,20 @@ data:
   timestamp: '2023-08-31 20:44:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
-  - verify/verify-yuki/yuki-0502.test.cpp
-  - verify/verify-yuki/yuki-0215.test.cpp
-  - verify/verify-yuki/yuki-0214.test.cpp
-  - verify/verify-yuki/yuki-0215-nth-term.test.cpp
-  - verify/verify-yuki/yuki-0720.test.cpp
-  - verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
   - verify/verify-yuki/yuki-1112.test.cpp
+  - verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - verify/verify-yuki/yuki-0215-nth-term.test.cpp
+  - verify/verify-yuki/yuki-0215.test.cpp
+  - verify/verify-yuki/yuki-0502.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
+  - verify/verify-yuki/yuki-0720.test.cpp
+  - verify/verify-yuki/yuki-0214.test.cpp
 documentation_of: fps/arbitrary-fps.hpp
 layout: document
 redirect_from:

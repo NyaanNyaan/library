@@ -59,20 +59,20 @@ data:
   path: math/isqrt.hpp
   requiredBy:
   - math/enumerate-quotient.hpp
-  - multiplicative-function/enumerate-sum-of-multiplicative-function.hpp
   - multiplicative-function/count-square-free.hpp
+  - multiplicative-function/enumerate-sum-of-multiplicative-function.hpp
   timestamp: '2023-04-10 22:57:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/enumerate-convex.test.cpp
   - verify/verify-unit-test/math.test.cpp
+  - verify/verify-unit-test/enumerate-convex.test.cpp
   - verify/verify-unit-test/enumerate-quotient.test.cpp
-  - verify/verify-yuki/yuki-2266.test.cpp
   - verify/verify-yuki/yuki-2262.test.cpp
-  - verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
+  - verify/verify-yuki/yuki-2266.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes-4.test.cpp
-  - verify/verify-yosupo-math/yosupo-count-squarefrees.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient-3.test.cpp
+  - verify/verify-yosupo-math/yosupo-count-squarefrees.test.cpp
+  - verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
 documentation_of: math/isqrt.hpp
 layout: document
 redirect_from:

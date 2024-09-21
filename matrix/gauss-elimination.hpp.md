@@ -122,33 +122,33 @@ data:
   isVerificationFile: false
   path: matrix/gauss-elimination.hpp
   requiredBy:
-  - fps/find-p-recursive.hpp
-  - matrix/inverse-matrix.hpp
-  - matrix/matrix-tree.hpp
-  - matrix/matrix.hpp
   - matrix/linear-equation.hpp
   - matrix/polynomial-matrix-determinant.hpp
   - matrix/polynomial-matrix-prefix-prod.hpp
+  - matrix/inverse-matrix.hpp
+  - matrix/matrix-tree.hpp
+  - matrix/matrix.hpp
+  - fps/find-p-recursive.hpp
   timestamp: '2024-05-03 21:06:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-other/aoj-2171.test.cpp
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
-  - verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
-  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
-  - verify/verify-unit-test/bigint-gcd.test.cpp
-  - verify/verify-unit-test/inverse-matrix.test.cpp
+  - verify/verify-aoj-other/aoj-2171.test.cpp
   - verify/verify-unit-test/debug.test.cpp
+  - verify/verify-unit-test/inverse-matrix.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
-  - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
-  - verify/verify-yuki/yuki-1533.test.cpp
+  - verify/verify-unit-test/gauss-elimination.test.cpp
+  - verify/verify-unit-test/bigint-gcd.test.cpp
+  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-yosupo-fps/yosupo-factorial-p-recursive.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
-  - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
-  - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
-  - verify/verify-yosupo-math/yosupo-pow-of-matrix.test.cpp
+  - verify/verify-yuki/yuki-1533.test.cpp
   - verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
+  - verify/verify-yosupo-math/yosupo-pow-of-matrix.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
   - verify/verify-yosupo-math/yosupo-rank-of-matrix.test.cpp
+  - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
 documentation_of: matrix/gauss-elimination.hpp
 layout: document
 redirect_from:

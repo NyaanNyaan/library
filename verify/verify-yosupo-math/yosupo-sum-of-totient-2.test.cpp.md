@@ -361,7 +361,7 @@ data:
     \ 1; i < (int)ns.size(); i++) F[i] += 1;\n    return F;\n  }\n\n  i64 quo(i64\
     \ n, i64 d) { return double(n) / d; }\n  i64 idx(i64 n) { return n <= sq ? s -\
     \ n : quo(M, n); }\n};\n\n/**\n * @brief \u4E57\u6CD5\u7684\u95A2\u6570\u306E\
-    prefix sum\n * @docs docs/multiplicative-function/sum-of-multiplicative-function.quo\n\
+    prefix sum\n * @docs docs/multiplicative-function/sum-of-multiplicative-function.md\n\
     \ */\n#line 10 \"verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp\"\n\
     //\nusing namespace Nyaan;\nusing mint = LazyMontgomeryModInt<998244353>;\n//\
     \ using mint = LazyMontgomeryModInt<1000000007>;\nusing vm = vector<mint>;\nusing\
@@ -395,7 +395,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
   requiredBy: []
-  timestamp: '2024-09-14 20:40:02+09:00'
+  timestamp: '2024-09-22 00:16:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
