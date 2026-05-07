@@ -350,6 +350,13 @@ struct DynamicRerooting {
     tt.evert(vs[u]);
     tt.cut(vs[v]);
   }
+  void add_edge_in_rooted_tree(int p, int c) {
+    tt.expose(vs[p]);
+    vs[c]->p = vs[p];
+    vs[p]->r = vs[c];
+    tt.update(vs[p]);
+  }
+  void del_edge_to_parent(int c) { tt.cut(vs[c]); }
   // 頂点 u の情報を取得
   Info get_info(int u) { return vs[u]->info; }
   // 頂点 u の情報を設定

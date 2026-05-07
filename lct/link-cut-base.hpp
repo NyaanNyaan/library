@@ -47,10 +47,10 @@ struct LinkCutBase : Splay {
     expose(x);
     while (x) {
       this->push(x);
-      if (x->r && x->r->sz > k) {
+      if (x->r && x->r->cnt > k) {
         x = x->r;
       } else {
-        if (x->r) k -= x->r->sz;
+        if (x->r) k -= x->r->cnt;
         if (k == 0) return x;
         k -= 1;
         x = x->l;
@@ -68,7 +68,7 @@ struct LinkCutBase : Splay {
   Ptr get_parent(Ptr x) {
     expose(x);
     Ptr p = x->l;
-    if(p == nullptr) return nullptr;
+    if (p == nullptr) return nullptr;
     while (true) {
       this->push(p);
       if (p->r == nullptr) return p;

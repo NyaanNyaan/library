@@ -2,7 +2,7 @@
 
 template <typename Node>
 struct RBSTBase {
-  using Ptr = Node *;
+  using Ptr = Node*;
   template <typename... Args>
   inline Ptr my_new(Args... args) {
     return new Node(args...);
@@ -50,7 +50,37 @@ struct RBSTBase {
     }
   }
 
-  Ptr build(int l, int r, const vector<decltype(Node::key)> &v) {
+  template <typename Func>
+  pair<Ptr, Ptr> split_by_key(Ptr t, const Func& func) {
+    if (!t) return {nullptr, nullptr};
+    push(t);
+    if (func(t->key)) {
+      auto s = split_by_key(t->l, func);
+      t->l = s.second;
+      return {s.first, update(t)};
+    } else {
+      auto s = split_by_key(t->r, func);
+      t->r = s.first;
+      return {update(t), s.second};
+    }
+  }
+
+  // 右に行く : 1
+  // 左に行く : 0
+  // どちらにもいかない : -1
+  template <typename Func>
+  void search(Ptr t, const Func& func) {
+    if (!t) return;
+    push(t);
+    int go_right = func(t);
+    if (go_right == 1) {
+      search(t->r);
+    } else if (go_right == 0) {
+      search(t->l);
+    }
+  }
+
+  Ptr build(int l, int r, const vector<decltype(Node::key)>& v) {
     if (l + 1 == r) return my_new(v[l]);
     int m = (l + r) >> 1;
     Ptr pm = my_new(v[m]);
@@ -59,17 +89,17 @@ struct RBSTBase {
     return update(pm);
   }
 
-  Ptr build(const vector<decltype(Node::key)> &v) {
+  Ptr build(const vector<decltype(Node::key)>& v) {
     return build(0, (int)v.size(), v);
   }
 
   template <typename... Args>
-  void insert(Ptr &t, int k, const Args &... args) {
+  void insert(Ptr& t, int k, const Args&... args) {
     auto x = split(t, k);
     t = merge(merge(x.first, my_new(args...)), x.second);
   }
 
-  void erase(Ptr &t, int k) {
+  void erase(Ptr& t, int k) {
     auto x = split(t, k);
     auto y = split(x.second, 1);
     my_del(y.first);

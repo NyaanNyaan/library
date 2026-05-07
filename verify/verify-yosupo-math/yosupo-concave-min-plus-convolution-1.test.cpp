@@ -36,7 +36,13 @@ void q() {
   ini(N, M);
   vi a(N), b(M);
   in(a, b);
-  out(concave_min_plus_convolution(a, b));
+  vi c1 = concave_min_plus_convolution(a, b);
+  each(x, a) x = -x;
+  each(x, b) x = -x;
+  vi c2 = concave_max_plus_convolution(a, b);
+  each(x, c2) x = -x;
+  assert(c1 == c2);
+  out(c1);
 }
 
 void Nyaan::solve() {

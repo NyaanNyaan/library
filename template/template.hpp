@@ -37,6 +37,7 @@ using namespace std;
 #include <memory>
 #include <new>
 #include <numeric>
+#include <optional>
 #include <ostream>
 #include <queue>
 #include <random>
@@ -45,6 +46,7 @@ using namespace std;
 #include <stack>
 #include <streambuf>
 #include <string>
+#include <tr2/dynamic_bitset>
 #include <tuple>
 #include <type_traits>
 #include <typeinfo>

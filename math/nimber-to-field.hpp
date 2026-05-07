@@ -18,7 +18,7 @@ struct NimberToField {
     Sweep sweep{ftn};
     ntf.resize(S);
     for (int i = 0; i < S; i++) {
-      auto ans = sweep.restore(1 << i);
+      auto ans = sweep.restore(uint{1} << i);
       uint bit{};
       for (auto& x : ans.second) bit ^= uint{1} << x;
       ntf[i] = bit;

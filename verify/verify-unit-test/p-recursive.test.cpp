@@ -18,6 +18,7 @@ void test(const vector<mint>& a, int p, int d) {
   int k = coeff.size() - 1;
   rep(i, sz(coeff)) {
     coeff[i].shrink();
+    if (coeff[i].empty()) continue;
     if (i >= 2) cerr << " + ";
     if (i) coeff[i] = -coeff[i];
     if (coeff[i] != fps{1}) {
@@ -154,6 +155,15 @@ void verify(int N) {
       a[i] += a[i - 1] * (i + 1);
     }
     test(a, 40, 5);
+  }
+
+  // a_n = n a_{n-1} + n a_{n-3}
+  {
+    cerr << "a_n = n a_{n-1} + n a_{n-3}" << endl;
+    vector<mint> a(N);
+    a[0] = a[1] = a[2] = 1;
+    for (int n = 3; n < N; n++) a[n] = (a[n - 1] + a[n - 3]) * n;
+    test(a, 40, 3);
   }
 }
 

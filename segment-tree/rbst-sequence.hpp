@@ -41,12 +41,23 @@ struct Sequence : RBSTShiftableLazySegmentTree<int, T, E, f, g, h, ti, ei> {
     append(s);
   }
 
+  // 元の seq は空になる
+  pair<Sequence, Sequence> split(int i) {
+    auto s = _split_by_key(this->root, i);
+    _shift(s.second, -i);
+    this->root = nullptr;
+    Sequence L, R;
+    L.root = s.first, R.root = s.second;
+    return make_pair(L, R);
+  }
+
   void erase(int i) override {
     auto s = _split_by_key3(this->root, i);
     _my_del(s[1]), _shift(s[2], -1);
     this->root = _merge(s[0], s[2]);
   }
   void pop_back() { erase(_count(this->root) - 1); }
+  void pop_front() { erase(0); }
 
   void erase(int l, int r) {
     if (l >= r) return;
@@ -64,7 +75,7 @@ struct Sequence : RBSTShiftableLazySegmentTree<int, T, E, f, g, h, ti, ei> {
     return res;
   }
 
-  friend ostream& operator<<(ostream& os, const Sequence& s) {
+  friend ostream& operator<<(ostream& os, Sequence& s) {
     vector<pair<int, T>> p = s.make_array();
     for (int i = 0; i < (int)p.size(); i++) {
       os << (i ? " " : "") << p[i].second;

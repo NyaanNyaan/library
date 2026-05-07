@@ -6,6 +6,7 @@
 #include "../../math/isqrt.hpp"
 #include "../../math/two-square.hpp"
 #include "../../misc/rng.hpp"
+#include "../../misc/timer.hpp"
 //
 using namespace Nyaan;
 
@@ -44,9 +45,19 @@ void check(long long N) {
 
 void q() {
   rep1(N, 1000) check(N);
-  rep(t, 100) check(rng(1001, TEN(9)));
-  check(TEN(18));
+  rep(t, 1000) check(rng(1001, TEN(9)));
+  {
+    ll N = TEN(18);
+    Timer t;
 
+    t.reset();
+    auto ac = two_square(N);
+    trc2("two_square", t());
+
+    t.reset();
+    auto ad = calc(N);
+    trc2("convex    ", t());
+  }
   trc2("OK");
   inl(a, b);
   out(a + b);

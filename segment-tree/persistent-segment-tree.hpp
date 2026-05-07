@@ -52,6 +52,7 @@ struct PersistentSegmentTree {
   }
 
   Node *build(const vector<T> &v) {
+    if (v.empty()) return new_tree();
     N = (ll)v.size();
     return build(0, (ll)v.size(), v);
   }

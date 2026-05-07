@@ -5,9 +5,9 @@ void superset_zeta_transform(vector<T>& f) {
   int n = f.size();
   assert((n & (n - 1)) == 0);
   for (int i = 1; i < n; i <<= 1) {
-    for (int j = 0; j < n; j++) {
-      if ((j & i) == 0) {
-        f[j] += f[j | i];
+    for (int j = 0; j < n; j += 2 * i) {
+      for (int k = j; k < j + i; k++) {
+        f[k] += f[k + i];
       }
     }
   }
@@ -18,9 +18,9 @@ void superset_mobius_transform(vector<T>& f) {
   int n = f.size();
   assert((n & (n - 1)) == 0);
   for (int i = 1; i < n; i <<= 1) {
-    for (int j = 0; j < n; j++) {
-      if ((j & i) == 0) {
-        f[j] -= f[j | i];
+    for (int j = 0; j < n; j += 2 * i) {
+      for (int k = j; k < j + i; k++) {
+        f[k] -= f[k + i];
       }
     }
   }
@@ -31,9 +31,9 @@ void subset_zeta_transform(vector<T>& f) {
   int n = f.size();
   assert((n & (n - 1)) == 0);
   for (int i = 1; i < n; i <<= 1) {
-    for (int j = 0; j < n; j++) {
-      if ((j & i) == 0) {
-        f[j | i] += f[j];
+    for (int j = 0; j < n; j += 2 * i) {
+      for (int k = j; k < j + i; k++) {
+        f[k + i] += f[k];
       }
     }
   }
@@ -44,9 +44,9 @@ void subset_mobius_transform(vector<T>& f) {
   int n = f.size();
   assert((n & (n - 1)) == 0);
   for (int i = 1; i < n; i <<= 1) {
-    for (int j = 0; j < n; j++) {
-      if ((j & i) == 0) {
-        f[j | i] -= f[j];
+    for (int j = 0; j < n; j += 2 * i) {
+      for (int k = j; k < j + i; k++) {
+        f[k + i] -= f[k];
       }
     }
   }

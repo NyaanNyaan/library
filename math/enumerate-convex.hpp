@@ -7,11 +7,12 @@ using namespace std;
 
 #include "stern-brocot-tree.hpp"
 
-// 下向き凸包の頂点列挙
+// 極小から始まる下向き凸包の頂点列挙
 // (xl, yl) 始点, x in [xl, xr]
 // inside(x, y) : (x, y) が凸包内部か？
 // candicate(x, y, c, d) : (x, y) が凸包外部にあるとする。
 // 凸包内部の点 (x + sc, y + sd) が存在すればそのような s を返す
+// (ただし s は誤差でズレてもいいように s ± 2 を探索する仕様)
 // 存在しなければ任意の値 (-1 でもよい) を返す
 template <typename Int>
 vector<pair<Int, Int>> enumerate_convex(
@@ -36,25 +37,30 @@ vector<pair<Int, Int>> enumerate_convex(
   // (a, b) が out, (a + c * k, b + d * k) が in とする
   // out の間進めるだけ進む
   auto go2 = [&](Int a, Int b, Int c, Int d, Int k) {
-    assert(!inside(a, b) and inside(a + c * k, b + d * k));
+    assert(!f(a, b) and f(a + c * k, b + d * k));
     Int ok = 0, ng = k;
     while (ok + 1 < ng) {
       Int m = (ok + ng) / 2;
-      (inside(a + c * m, b + d * m) ? ng : ok) = m;
+      (f(a + c * m, b + d * m) ? ng : ok) = m;
     }
     return ok;
   };
 
   vector<pair<Int, Int>> ps;
   Int x = xl, y = yl;
-  assert(inside(x, y) and go(x, y, 0, -1) == 0);
+  assert(f(x, y) and go(x, y, 0, -1) == 0);
   ps.emplace_back(x, y);
+  SternBrocotTreeNode<Int> sb;
   while (x < xr) {
     Int a, b;
     if (f(x + 1, y)) {
       a = 1, b = 0;
     } else {
-      SternBrocotTreeNode<Int> sb;
+      while (!f(x + sb.lx, y + sb.ly)) {
+        assert(!sb.seq.empty());
+        Int bc = sb.seq.back();
+        sb.go_parent(bc < 0 ? -bc : bc);
+      }
       while (true) {
         assert(f(x + sb.lx, y + sb.ly));
         assert(!f(x + sb.rx, y + sb.ry));
@@ -63,8 +69,18 @@ vector<pair<Int, Int>> enumerate_convex(
           assert(s > 0);
           sb.go_right(s);
         } else {
-          Int s = candicate(x + sb.rx, y + sb.ry, sb.lx, sb.ly);
-          if (s <= 0 || !inside(x + sb.lx * s + sb.rx, y + sb.ly * s + sb.ry)) {
+          Int c = candicate(x + sb.rx, y + sb.ry, sb.lx, sb.ly);
+          if (sb.lx) c = min(c, (xr - x - sb.rx) / sb.lx);
+          Int s = -1;
+          // 念のため周囲を調べる(フェイルセーフ)
+          for (Int d = -2; d <= 2; d++) {
+            Int v = c + d;
+            if (v > 0 && f(x + sb.lx * v + sb.rx, y + sb.ly * v + sb.ry)) {
+              s = v;
+              break;
+            }
+          }
+          if (s == -1) {
             a = sb.lx, b = sb.ly;
             break;
           } else {

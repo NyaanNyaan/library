@@ -22,7 +22,7 @@ struct Binomial {
   void extend(int m = -1) {
     int n = f.size();
     if (m == -1) m = n * 2;
-    m = min<int>(m, T::get_mod());
+    m = min<long long>(m, T::get_mod());
     if (n >= m) return;
     f.resize(m);
     g.resize(m);
@@ -93,7 +93,7 @@ struct Binomial {
   }
 
   // [x^r] 1 / (1-x)^n
-  T H(int n, int r) {
+  T H(long long n, long long r) {
     if (n < 0 || r < 0) return T(0);
     return r == 0 ? 1 : C(n + r - 1, r);
   }

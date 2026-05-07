@@ -6,7 +6,7 @@ template <typename T, T INF>
 struct LiChaoTree {
   struct Line {
     T slope, intercept;
-    Line(T slope, T intercept) : slope(slope), intercept(intercept) {}
+    Line(T _s, T _i) : slope(_s), intercept(_i) {}
     inline T get(T x) const { return slope * x + intercept; }
     inline bool over(const Line &other, const T &x) const {
       return get(x) < other.get(x);
