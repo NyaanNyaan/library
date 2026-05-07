@@ -79,7 +79,7 @@ struct SternBrocotTreeNode {
     if (d <= 0) return true;
     while (d != 0) {
       if (seq.empty()) return false;
-      Int d2 = min(d, abs(seq.back()));
+      Int d2 = min(d, seq.back() < 0 ? -seq.back() : seq.back());
       if (seq.back() > 0) {
         x -= rx * d2, y -= ry * d2;
         lx = x - rx, ly = y - ry;

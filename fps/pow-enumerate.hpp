@@ -7,7 +7,7 @@ using namespace std;
 #include "formal-power-series.hpp"
 
 // [x^n] f(x)^i g(x) を i=0,1,...,m で列挙
-// n = (f の次数) - 1
+// n = f.size() - 1 = (f の次数)
 template <typename mint>
 FormalPowerSeries<mint> pow_enumerate(FormalPowerSeries<mint> f,
                                       FormalPowerSeries<mint> g = {1},
@@ -149,6 +149,24 @@ FormalPowerSeries<mint> pow_enumerate(FormalPowerSeries<mint> f,
   return (S.rev() * T.rev().inv(m + 1)).pre(m + 1);
 }
 */
+
+// sz(a) = sz(b) = n
+// for 0 <= i < n, calc [x^i] a*b^i
+template <typename mint>
+FormalPowerSeries<mint> pseudo_pow_enumerate(const FormalPowerSeries<mint>& a,
+                                             const FormalPowerSeries<mint>& b) {
+  using fps = FormalPowerSeries<mint>;
+  int n = a.size();
+  assert((int)b.size() == n);
+  if (b[0] == 0) {
+    fps res{a[0]};
+    while ((int)res.size() < n) res.push_back(res.back() * b[1]);
+    return res;
+  }
+  fps c = (a * b.pow(n - 1)).pre(n);
+  fps d = (b.inv() << 1).pre(n);
+  return pow_enumerate(d, c).pre(n).rev();
+}
 
 /**
  * @brief pow 列挙

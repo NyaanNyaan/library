@@ -50,6 +50,7 @@ bool miller_rabin(unsigned long long n, vector<unsigned long long> ws) {
   return true;
 }
 
+// 負数が入ったら壊れるのに注意する
 bool is_prime(unsigned long long n) {
   using mint32 = ArbitraryLazyMontgomeryModInt<96229631>;
   using mint64 = ArbitraryLazyMontgomeryModInt64bit<622196072>;

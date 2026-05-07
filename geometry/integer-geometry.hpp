@@ -1,18 +1,18 @@
 #pragma once
 
 struct Point {
-  using T = __int128_t;
+  using T = long long;
   T x, y;
   Point() : x(0), y(0) {}
   Point(T x_, T y_) : x(x_), y(y_) {}
 
-  Point &operator+=(const Point &p) {
+  Point& operator+=(const Point& p) {
     this->x += p.x;
     this->y += p.y;
     return *this;
   }
 
-  Point &operator-=(const Point &p) {
+  Point& operator-=(const Point& p) {
     this->x -= p.x;
     this->y -= p.y;
     return *this;
@@ -24,32 +24,32 @@ struct Point {
     return 1;
   }
 
-  Point operator+(const Point &p) const { return Point(*this) += p; }
-  Point operator-(const Point &p) const { return Point(*this) -= p; }
+  Point operator+(const Point& p) const { return Point(*this) += p; }
+  Point operator-(const Point& p) const { return Point(*this) -= p; }
   Point operator-() const { return Point(-this->x, -this->y); }
-  bool operator==(const Point &p) const { return x == p.x && y == p.y; }
-  bool operator!=(const Point &p) const { return x != p.x || y != p.y; }
-  bool operator<(const Point &p) const { return x == p.x ? y < p.y : x < p.x; }
+  bool operator==(const Point& p) const { return x == p.x && y == p.y; }
+  bool operator!=(const Point& p) const { return x != p.x || y != p.y; }
+  bool operator<(const Point& p) const { return x == p.x ? y < p.y : x < p.x; }
 
-  friend istream &operator>>(istream &is, Point &p) {
+  friend istream& operator>>(istream& is, Point& p) {
     long long x, y;
     is >> x >> y;
     p.x = x, p.y = y;
     return is;
   }
 
-  friend ostream &operator<<(ostream &os, const Point &p) {
+  friend ostream& operator<<(ostream& os, const Point& p) {
     os << (long long)(p.x) << " " << (long long)(p.y);
     return os;
   }
 };
 using Points = vector<Point>;
 
-Point::T dot(const Point &a, const Point &b) { return a.x * b.x + a.y * b.y; }
-Point::T cross(const Point &a, const Point &b) { return a.x * b.y - a.y * b.x; }
+Point::T dot(const Point& a, const Point& b) { return a.x * b.x + a.y * b.y; }
+Point::T cross(const Point& a, const Point& b) { return a.x * b.y - a.y * b.x; }
 
 // sort by argument (-Pi ~ Pi)
-void ArgumentSort(Points &v) {
+void ArgumentSort(Points& v) {
   sort(begin(v), end(v), [](Point a, Point b) {
     if (a.pos() != b.pos()) return a.pos() < b.pos();
     return cross(a, b) > 0;
@@ -57,13 +57,13 @@ void ArgumentSort(Points &v) {
 }
 
 // 1 ... counterclockwise / 0 straight / -1 clockwise
-int ccw(const Point &a, const Point &b, const Point &c) {
+int ccw(const Point& a, const Point& b, const Point& c) {
   Point::T t = cross(b - a, c - a);
   return t < 0 ? -1 : t == 0 ? 0 : 1;
 }
 
 // v must have sorted by x-coordinate
-Points LowerHull(const Points &ps) {
+Points LowerHull(const Points& ps) {
   int N = (int)ps.size();
   for (int i = 0; i < N - 1; i++) assert(ps[i].x <= ps[i + 1].x);
   if (N <= 2) return ps;
@@ -76,7 +76,7 @@ Points LowerHull(const Points &ps) {
   return convex;
 }
 
-Points UpperHull(const Points &ps) {
+Points UpperHull(const Points& ps) {
   int N = (int)ps.size();
   for (int i = 0; i < N - 1; i++) assert(ps[i].x <= ps[i + 1].x);
   if (N <= 2) return ps;
@@ -104,4 +104,13 @@ Points ConvexHull(Points ps) {
   }
   convex.resize(k - 1);
   return convex;
+}
+
+// 多角形の面積の 2 倍
+long long area(const vector<Point>& p) {
+  long long A = 0;
+  for (int i = 0; i < (int)p.size(); ++i) {
+    A += cross(p[i], p[(i + 1) % p.size()]);
+  }
+  return A;
 }

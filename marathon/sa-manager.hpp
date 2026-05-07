@@ -59,7 +59,7 @@ struct SA_manager {
     // 重いので適宜コメントアウトする
     /**/
     if constexpr (debug) {
-      if ((loop_count & 0x3FFF) == 0) {
+      if ((loop_count & 0xFFF) == 0) {
         if (loop_count == 0) {
           cerr << "     iter | ";
           cerr << "    loops | ";

@@ -2,9 +2,9 @@
 
 template <typename Node>
 struct SplayTreeBase {
-  using Ptr = Node *;
+  using Ptr = Node*;
   template <typename... Args>
-  Ptr my_new(const Args &...args) {
+  Ptr my_new(const Args&... args) {
     return new Node(args...);
   }
   void my_del(Ptr p) { delete p; }
@@ -42,6 +42,20 @@ struct SplayTreeBase {
     return t;
   }
 
+  /*
+  Ptr get_kth(Ptr t, int k) {
+    if (!t) return nullptr;
+    push(t);
+    if (k < count(t->l)) {
+      return get_kth(t->l, k);
+    } else if (k == count(t->l)) {
+      return t;
+    } else {
+      return get_kth(t->r, k - count(t->l) - 1);
+    }
+  }
+  */
+
   pair<Ptr, Ptr> split(Ptr t, int k) {
     if (!t) return {nullptr, nullptr};
     if (k == 0) return {nullptr, t};
@@ -76,21 +90,21 @@ struct SplayTreeBase {
   }
 
   using Key = decltype(Node::key);
-  Ptr build(const vector<Key> &v) { return build(0, v.size(), v); }
-  Ptr build(int l, int r, const vector<Key> &v) {
+  Ptr build(const vector<Key>& v) { return build(0, v.size(), v); }
+  Ptr build(int l, int r, const vector<Key>& v) {
     if (l == r) return nullptr;
     if (l + 1 == r) return my_new(v[l]);
     return merge(build(l, (l + r) >> 1, v), build((l + r) >> 1, r, v));
   }
 
   template <typename... Args>
-  void insert(Ptr &t, int k, const Args &...args) {
+  void insert(Ptr& t, int k, const Args&... args) {
     splay(t);
     auto x = split(t, k);
     t = merge(merge(x.first, my_new(args...)), x.second);
   }
 
-  void erase(Ptr &t, int k) {
+  void erase(Ptr& t, int k) {
     splay(t);
     auto x = split(t, k);
     auto y = split(x.second, 1);
@@ -105,9 +119,9 @@ struct SplayTreeBase {
 
   virtual void push(Ptr t) = 0;
 
-  Ptr build(const vector<Ptr> &v) { return build(0, v.size(), v); }
+  Ptr build(const vector<Ptr>& v) { return build(0, v.size(), v); }
 
-  Ptr build(int l, int r, const vector<Ptr> &v) {
+  Ptr build(int l, int r, const vector<Ptr>& v) {
     if (l + 1 >= r) return v[l];
     return merge(build(l, (l + r) >> 1, v), build((l + r) >> 1, r, v));
   }

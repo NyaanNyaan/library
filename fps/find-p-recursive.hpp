@@ -56,8 +56,9 @@ mint kth_term_of_p_recursive(vector<mint>& a, long long k, int d) {
   Matrix<mint> a0(deg);
   for (int i = 0; i < deg; i++) a0[i][0] = a[deg - 1 - i];
   mint res = (polynomial_matrix_prod(m, k - deg + 1) * a0)[0][0];
-  res /= polynomial_matrix_prod(denom, k - deg + 1)[0][0];
-  return res;
+  mint den = polynomial_matrix_prod(denom, k - deg + 1)[0][0];
+  assert(den != 0);
+  return res / den;
 }
 
 // K 項列挙
@@ -80,7 +81,9 @@ vector<mint> kth_term_of_p_recursive_enumerate(vector<mint>& a, long long K,
     for (int j = 0; j < k; j++) {
       if (i + j >= 0) s += a[i + j] * fs[j].eval(i);
     }
-    a[ipk] = -s / fs[k].eval(i);
+    mint den = fs[k].eval(i);
+    assert(den != 0);
+    a[ipk] = -s / den;
   }
   return a;
 }
@@ -108,8 +111,6 @@ mint kth_term_of_p_recursive(vector<mint>& a, long long k) {
   cerr << "Failed." << endl;
   exit(1);
 }
-
-
 
 /**
  * @brief P-recursiveの高速計算

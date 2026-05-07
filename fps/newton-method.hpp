@@ -11,6 +11,7 @@ fps newton_method(function<pair<fps, fps>(fps, int)> calc_g, fps f0, int deg) {
   assert(!f0.empty());
   if (deg <= (int)f0.size()) return f0.pre(deg);
   fps f = newton_method(calc_g, f0, (deg + 1) / 2);
+  if (f.size() < f0.size()) f = f0;
   int extra = 10, offset = 0;
   auto [g, dgdf] = calc_g(f, deg + extra);
   while (offset < (int)dgdf.size() && dgdf[offset] == 0) offset++;

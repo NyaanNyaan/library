@@ -96,7 +96,12 @@
     "concepts": "cpp",
     "coroutine": "cpp",
     "numbers": "cpp",
-    "dynamic_bitset": "cpp"
+    "dynamic_bitset": "cpp",
+    "format": "cpp",
+    "generator": "cpp",
+    "print": "cpp",
+    "stdfloat": "cpp",
+    "text_encoding": "cpp"
   },
   "C_Cpp.suggestSnippets": false,
   "[cpp]": {
@@ -110,5 +115,13 @@
   },
   "editor.detectIndentation": false,
   "editor.tabSize": 2,
-  "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, TabWidth: 2, IndentWidth: 2}"
+  "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, TabWidth: 2, IndentWidth: 2}",
+  "ruff.lint.ignore": [
+    "E741"
+  ],
+  "python-envs.defaultEnvManager": "ms-python.python:system",
+  "python-envs.pythonProjects": [],
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.stubPath": "",
+  "python.analysis.typeCheckingMode": "basic"
 }

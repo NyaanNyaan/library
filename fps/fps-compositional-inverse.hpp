@@ -16,6 +16,7 @@ FormalPowerSeries<mint> compositional_inverse(FormalPowerSeries<mint> f,
   assert((int)f.size() >= 2 and f[1] != 0);
   if (deg == -1) deg = f.size();
   if (deg < 2) return fps{0, f[1].inverse()}.pre(deg);
+  f = f.pre(deg);
   int n = deg - 1;
   fps h = pow_enumerate(f) * n;
   for (int k = 1; k <= n; k++) h[k] /= k;

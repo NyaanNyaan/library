@@ -45,7 +45,7 @@ struct BinaryIndexedTree2D {
   }
 
   // [(x1,y1) , (x2,y2)] の和
-  // x1 > x2, y1 > y2の時はswap
+  // x1 > x2, y1 > y2の時は 0
   T sum(int x1, int y1, int x2, int y2) {
     if (x1 > x2 || y1 > y2) return T(0);
     return sum(x2, y2) - sum(x2, y1 - 1) - sum(x1 - 1, y2) +

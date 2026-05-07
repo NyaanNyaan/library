@@ -24,6 +24,10 @@ template <>
 long double lc_inf<long double>() {
   return 1 / .0;
 }
+template <>
+double lc_inf<double>() {
+  return 1 / .0;
+}
 
 template <typename T>
 T lc_div(T a, T b) {
@@ -31,6 +35,10 @@ T lc_div(T a, T b) {
 }
 template <>
 long double lc_div(long double a, long double b) {
+  return a / b;
+};
+template <>
+double lc_div(double a, double b) {
   return a / b;
 };
 
@@ -49,7 +57,7 @@ struct LineContainer : multiset<Line<T>, less<>> {
     return x->p >= y->p;
   }
   void add(T k, T m) {
-    auto z = insert({k * objective, m * objective, 0}), y = z++, x = y;
+    auto z = insert({k * T(objective), m * T(objective), 0}), y = z++, x = y;
     while (insect(y, z)) z = erase(z);
     if (x != begin() and insect(--x, y)) insect(x, y = erase(y));
     while ((y = x) != begin() and (--x)->p >= y->p) insect(x, erase(y));
@@ -57,7 +65,7 @@ struct LineContainer : multiset<Line<T>, less<>> {
   T query(T x) {
     assert(!empty());
     auto l = *lower_bound(x);
-    return (l.k * x + l.m) * objective;
+    return (l.k * x + l.m) * T(objective);
   }
 };
 template <typename T>

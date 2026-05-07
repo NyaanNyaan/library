@@ -58,6 +58,12 @@ struct RangeTree {
     assert(ps[i] == make_pair(x, y));
     for (i += N; i; i >>= 1) seg[i].add(id(i, y), a);
   }
+  
+  void update(S x, S y, T a) {
+    int i = lower_bound(begin(ps), end(ps), make_pair(x, y)) - begin(ps);
+    assert(ps[i] == make_pair(x, y));
+    for (i += N; i; i >>= 1) seg[i].update(id(i, y), a);
+  }
 
   T sum(S xl, S yl, S xr, S yr) {
     T L = ti, R = ti;

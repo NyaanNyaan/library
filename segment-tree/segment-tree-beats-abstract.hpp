@@ -14,8 +14,8 @@ struct Beats {
     for (int i = n - 1; i; --i) _update(i);
   }
 
-  template <typename T>
-  void apply(int l, int r, T x) {
+  template <typename U>
+  void apply(int l, int r, U x) {
     if (l == r) return;
     l += n, r += n;
     for (int i = log; i >= 1; i--) {
@@ -58,8 +58,8 @@ struct Beats {
  private:
   void _push(int i) { v[i].push(v[2 * i + 0], v[2 * i + 1]); }
   void _update(int i) { v[i].update(v[2 * i + 0], v[2 * i + 1]); }
-  template <typename T>
-  void _apply(int i, T x) {
+  template <typename U>
+  void _apply(int i, U x) {
     bool res = v[i].apply(x);
     if (i < n && res == false) {
       _push(i);

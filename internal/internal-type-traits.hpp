@@ -45,4 +45,14 @@ ENABLE_VALUE(is_broadly_unsigned);
   template <class T>                                            \
   constexpr auto has_##var##_v = has_##var<T>::value;
 
+#define ENABLE_HAS_FUNCTION(var)                                              \
+  template <class, class = void>                                              \
+  struct has_##var : false_type {};                                           \
+  template <class T>                                                          \
+  struct has_##var<T, void_t<decltype(&T::var)>>                              \
+      : bool_constant<is_member_function_pointer<decltype(&T::var)>::value> { \
+  };                                                                          \
+  template <class T>                                                          \
+  inline constexpr bool has_##var##_v = has_##var<T>::value;
+
 }  // namespace internal

@@ -21,7 +21,7 @@ using minpq = priority_queue<T, vector<T>, greater<T>>;
 template <typename T, typename U>
 struct P : pair<T, U> {
   template <typename... Args>
-  P(Args... args) : pair<T, U>(args...) {}
+  constexpr P(Args... args) : pair<T, U>(args...) {}
 
   using pair<T, U>::first;
   using pair<T, U>::second;

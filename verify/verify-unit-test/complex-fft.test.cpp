@@ -2,7 +2,7 @@
 //
 #include "../../template/template.hpp"
 //
-#include "../../misc/rng.hpp"
+#include "../../misc/all.hpp"
 #include "../../ntt/complex-fft.hpp"
 
 using namespace Nyaan;
@@ -65,6 +65,17 @@ void test() {
     each(x, a) x = randint(0, TEN(9) + 7);
     each(x, b) x = randint(0, TEN(9) + 7);
     is_same_mod(a, b);
+  }
+
+  {
+    int N = 1 << 19;
+    vi a(N), b(N);
+    each(x, a) x = rng(0, TEN(9) + 6);
+    each(x, b) x = rng(0, TEN(9) + 6);
+    Timer t;
+    vi c =
+        ArbitraryModConvolution::CooleyTukey::multiply_15bit<TEN(9) + 7>(a, b);
+    cerr<<t()<<endl;
   }
 }
 

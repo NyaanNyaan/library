@@ -2,7 +2,7 @@
 
 #include "../rbst/rbst-base.hpp"
 
-template <typename Node, bool multi>
+template <typename Node, bool is_multiset>
 struct OrderedMapBase : RBSTBase<Node> {
   using base = RBSTBase<Node>;
   using Ptr = typename base::Ptr;
@@ -49,7 +49,7 @@ struct OrderedMapBase : RBSTBase<Node> {
   }
 
   int count(const Key& k) const {
-    if constexpr (multi) {
+    if constexpr (is_multiset) {
       return upper_bound(k) - lower_bound(k);
     } else {
       return !!find(k);
@@ -91,10 +91,11 @@ struct OrderedMapBase : RBSTBase<Node> {
 
   int size() const { return base::size(root); }
 
- protected:
+  bool empty() const { return size() == 0; }
 
+ protected:
   void push(Ptr) override {}
-  
+
   Ptr update(Ptr n) override {
     n->cnt = 1 + base::count(n->l) + base::count(n->r);
     return n;
@@ -104,7 +105,7 @@ struct OrderedMapBase : RBSTBase<Node> {
     Ptr p = root;
     int ret = 0;
     while (p) {
-      if constexpr (multi == false) {
+      if constexpr (is_multiset == false) {
         if (k == p->key) return p;
       }
       if (k < p->key) {

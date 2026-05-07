@@ -135,7 +135,7 @@ struct WaveletMatrix {
 
   int yid(S y) const { return lower_bound(begin(ys), end(ys), y) - begin(ys); }
 
-  void add(S x, S y, T val) {
+  void update(S x, S y, T val) {
     int i = lower_bound(begin(ps), end(ps), P{x, y}) - begin(ps);
     for (int h = lg - 1; h >= 0; --h) {
       int i0 = bv[h].rank0(i);
@@ -143,7 +143,7 @@ struct WaveletMatrix {
         i += bv[h].zeros - i0;
       else
         i = i0;
-      seg[h].add(i, val);
+      seg[h].update(i, val);
     }
   }
 
@@ -162,8 +162,14 @@ struct WaveletMatrix {
     return res;
   }
 
+  /*
   T sum(S L, S D, S R, S U) const {
     int l = xid(L), r = xid(R);
     return _sum(l, r, yid(U)) - _sum(l, r, yid(D));
+  }
+  */
+  T sum(S L, S R, S U) const {
+    int l = xid(L), r = xid(R);
+    return _sum(l, r, yid(U));
   }
 };

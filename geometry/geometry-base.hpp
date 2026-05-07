@@ -9,8 +9,8 @@
 using namespace std;
 
 using Real = long double;
-constexpr Real EPS = 1e-10;
-constexpr Real pi = 3.141592653589793238462643383279L;
+constexpr Real EPS = 1e-13;
+constexpr Real PI = 3.141592653589793238462643383279L;
 bool equals(Real a, Real b) { return fabs(b - a) < EPS; }
 int sign(Real a) { return equals(a, 0) ? 0 : a > 0 ? 1 : -1; }
 

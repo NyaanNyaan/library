@@ -7,6 +7,8 @@
 template <typename mint>
 mint lagrange_interpolation(const vector<mint>& y, long long x,
                             Binomial<mint>& C) {
+  x = (x % mint::get_mod() + mint::get_mod()) % mint::get_mod();
+  if (y.empty()) return 0;
   int N = (int)y.size() - 1;
   if (x <= N) return y[x];
   mint ret = 0;

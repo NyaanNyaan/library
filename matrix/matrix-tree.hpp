@@ -5,6 +5,7 @@
 #include "matrix.hpp"
 #include "polynomial-matrix-determinant.hpp"
 
+// コンストラクタには N-1 (行列のサイズ) を入れる
 template <typename T>
 struct MatrixTree {
   int n;

@@ -19,6 +19,7 @@ struct Cp {
   constexpr inline Cp operator-() const { return Cp(-x, -y); }
   constexpr inline Cp conj() const { return Cp(x, -y); }
   constexpr inline Cp rotl() const { return Cp(-y, x); }
+  constexpr inline Cp rotr() const { return Cp(y, -x); }
   friend ostream& operator<<(ostream& os, const Cp& c) {
     os << "(" << c.x << ", " << c.y << ")" << endl;
     return os;
@@ -81,7 +82,7 @@ struct CooleyTukey {
         for (; j0 < je; ++j0, ++j1, ++j2, ++j3) {
           C t0 = a[j0], t1 = a[j1], t2 = a[j2], t3 = a[j3];
           C t0p2 = t0 + t2, t1p3 = t1 + t3;
-          C t0m2 = t0 - t2, t1m3 = (t1 - t3) * w[1];
+          C t0m2 = t0 - t2, t1m3 = (t1 - t3).rotl();
           a[j0] = t0p2 + t1p3, a[j1] = t0p2 - t1p3;
           a[j2] = t0m2 + t1m3, a[j3] = t0m2 - t1m3;
         }
@@ -93,13 +94,13 @@ struct CooleyTukey {
         int j2 = j1 + v;
         int j3 = j2 + v;
         int je = j1;
-        C ww = w[jh];
-        C xx = w[jh << 1];
-        C wx = ww * xx;
+        C rot1 = w[jh];
+        C rot2 = w[jh << 1];
+        C rot3 = rot1 * rot2;
         for (; j0 < je; ++j0, ++j1, ++j2, ++j3) {
-          C t0 = a[j0], t1 = a[j1] * xx, t2 = a[j2] * ww, t3 = a[j3] * wx;
+          C t0 = a[j0], t1 = a[j1] * rot2, t2 = a[j2] * rot1, t3 = a[j3] * rot3;
           C t0p2 = t0 + t2, t1p3 = t1 + t3;
-          C t0m2 = t0 - t2, t1m3 = (t1 - t3) * w[1];
+          C t0m2 = t0 - t2, t1m3 = (t1 - t3).rotl();
           a[j0] = t0p2 + t1p3, a[j1] = t0p2 - t1p3;
           a[j2] = t0m2 + t1m3, a[j3] = t0m2 - t1m3;
         }
@@ -128,7 +129,7 @@ struct CooleyTukey {
         for (; j0 < v; ++j0, ++j1, ++j2, ++j3) {
           C t0 = a[j0], t1 = a[j1], t2 = a[j2], t3 = a[j3];
           C t0p1 = t0 + t1, t2p3 = t2 + t3;
-          C t0m1 = t0 - t1, t2m3 = (t2 - t3) * w[1].conj();
+          C t0m1 = t0 - t1, t2m3 = (t2 - t3).rotr();
           a[j0] = t0p1 + t2p3, a[j2] = t0p1 - t2p3;
           a[j1] = t0m1 + t2m3, a[j3] = t0m1 - t2m3;
         }
@@ -140,15 +141,15 @@ struct CooleyTukey {
         int j2 = j1 + v;
         int j3 = j2 + v;
         int je = j1;
-        C ww = w[jh].conj();
-        C xx = w[jh << 1].conj();
-        C yy = w[(jh << 1) + 1].conj();
+        C rot1 = w[jh].conj();
+        C rot2 = w[jh << 1].conj();
+        C rot3 = rot1 * rot2;
         for (; j0 < je; ++j0, ++j1, ++j2, ++j3) {
           C t0 = a[j0], t1 = a[j1], t2 = a[j2], t3 = a[j3];
           C t0p1 = t0 + t1, t2p3 = t2 + t3;
-          C t0m1 = (t0 - t1) * xx, t2m3 = (t2 - t3) * yy;
-          a[j0] = t0p1 + t2p3, a[j2] = (t0p1 - t2p3) * ww;
-          a[j1] = t0m1 + t2m3, a[j3] = (t0m1 - t2m3) * ww;
+          C t0m1 = t0 - t1, t2m3 = (t2 - t3).rotr();
+          a[j0] = t0p1 + t2p3, a[j2] = (t0p1 - t2p3) * rot1;
+          a[j1] = (t0m1 + t2m3) * rot2, a[j3] = (t0m1 - t2m3) * rot3;
         }
       }
       u >>= 2;
@@ -333,9 +334,9 @@ struct CooleyTukey {
       } else {
         u[i] += s1 % MOD;
         u[i] += s2 % MOD * B % MOD;
-        if (u[i] >= MOD) u[i] -= MOD;
+        if (u[i] >= int(MOD)) u[i] -= MOD;
         u[i] += s3 % MOD * (B * B % MOD) % MOD;
-        if (u[i] >= MOD) u[i] -= MOD;
+        if (u[i] >= int(MOD)) u[i] -= MOD;
       }
     }
     return u;

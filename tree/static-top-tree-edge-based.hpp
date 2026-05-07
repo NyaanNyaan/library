@@ -15,7 +15,7 @@ enum Type { Edge, Compress, Rake };
 template <typename G>
 struct StaticTopTree {
   const HeavyLightDecomposition<G>& hld;
-  vector<vector<int>> g;
+  G g;
   int root;     // 元の木の root
   int tt_root;  // top tree の root
   vector<int> P, L, R;

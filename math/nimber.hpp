@@ -84,9 +84,12 @@ struct calc16 {
   constexpr u16 Hprod(u16 i, u16 j) const { return exp[log[i] + log[j] + 3]; }
   constexpr u16 H(u16 i) const { return exp[log[i] + 3]; }
   constexpr u16 H2(u16 i) const { return exp[log[i] + 6]; }
+  constexpr u16 inv(u16 i) const { return exp[order - log[i]]; }
 } constexpr c16;
 
 u16 product16(u16 i, u16 j) { return c16.prod(i, j); }
+
+u16 inv16(u16 i) { return c16.inv(i); }
 
 constexpr u32 product32(u32 i, u32 j) {
   u16 iu = i >> 16, il = i & 65535;
@@ -109,6 +112,19 @@ constexpr u32 H(u32 i) {
   return (u32(c16.H(iu ^ il)) << 16) ^ c16.H2(iu);
 }
 
+constexpr u32 inv32(u32 i) {
+  u16 iu = i >> 16;
+  u16 il = i & 65535;
+  int log_iu = c16.log[iu];
+  int log_iu_il = c16.log[iu ^ il];
+  u16 x = c16.exp[log_iu * 2 + 3];
+  u16 y = c16.exp[c16.log[il] + log_iu_il];
+  int log_w = c16.order - c16.log[x ^ y];
+  u16 u = c16.exp[log_w + log_iu];
+  u16 v = c16.exp[log_w + log_iu_il];
+  return (u32(u) << 16) | v;
+}
+
 constexpr u64 product64(u64 i, u64 j) {
   u32 iu = i >> 32, il = i & u32(-1);
   u32 ju = j >> 32, jl = j & u32(-1);
@@ -117,9 +133,20 @@ constexpr u64 product64(u64 i, u64 j) {
   u32 uq = H(product32(iu, ju));
   return (u64(ul ^ l) << 32) ^ uq ^ l;
 }
+
+constexpr u64 inv64(u64 i) {
+  u32 iu = i >> 32;
+  u32 il = i & ((1uLL << 32) - 1);
+  u32 x = H(product32(iu, iu));
+  u32 y = product32(il, iu ^ il);
+  u32 w = inv32(x ^ y);
+  u32 u = product32(w, iu);
+  u32 v = product32(w, iu ^ il);
+  return (u64(u) << 32) | v;
+}
 }  // namespace NimberImpl
 
-template <typename uint, uint (*prod)(uint, uint)>
+template <typename uint, uint (*prod)(uint, uint), uint (*inv)(uint)>
 struct NimberBase {
   using N = NimberBase;
   uint x;
@@ -140,9 +167,16 @@ struct NimberBase {
     x = prod(x, p.x);
     return *this;
   }
+  N& operator/=(const N& p) {
+    x = prod(x, inv(p.x));
+    return *this;
+  }
   N operator+(const N& p) const { return x ^ p.x; }
   N operator-(const N& p) const { return x ^ p.x; }
   N operator*(const N& p) const { return prod(x, p.x); }
+  N operator/(const N& p) const { return prod(x, inv(p.x)); }
+  N operator-() const { return *this; }
+  N operator+() const { return *this; }
   bool operator==(const N& p) const { return x == p.x; }
   bool operator!=(const N& p) const { return x != p.x; }
   N pow(uint64_t n) const {
@@ -186,7 +220,7 @@ struct NimberBase {
     return garner(rem, mod).first;
   }
 
-  uint is_primitive_root() const {
+  bool is_primitive_root() const {
     if (x == 0) return false;
     for (uint p : {3, 5, 17, 257, 641, 65537, 6700417}) {
       if (uint(-1) % p != 0) continue;
@@ -196,9 +230,9 @@ struct NimberBase {
   }
 };
 
-using Nimber16 = NimberBase<uint16_t, NimberImpl::product16>;
-using Nimber32 = NimberBase<uint32_t, NimberImpl::product32>;
-using Nimber64 = NimberBase<uint64_t, NimberImpl::product64>;
+using Nimber16 = NimberBase<uint16_t, NimberImpl::product16, NimberImpl::inv16>;
+using Nimber32 = NimberBase<uint32_t, NimberImpl::product32, NimberImpl::inv32>;
+using Nimber64 = NimberBase<uint64_t, NimberImpl::product64, NimberImpl::inv64>;
 using Nimber = Nimber64;
 
 /**

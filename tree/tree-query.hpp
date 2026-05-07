@@ -43,6 +43,7 @@ struct Tree {
     return u;
   }
 
+  // s-t パス上の s の隣の点
   int nxt(int s, int t) const {
     if (dp[s] >= dp[t]) return par(s);
     int u = kth_ancestor(t, dp[t] - dp[s] - 1);

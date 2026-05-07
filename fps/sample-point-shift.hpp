@@ -7,7 +7,7 @@
 // output : y(t), y(t + 1), ..., y(t + m - 1)
 // (if m is default, m = n)
 template <typename mint>
-FormalPowerSeries<mint> SamplePointShift(FormalPowerSeries<mint>& y, mint t,
+FormalPowerSeries<mint> SamplePointShift(const FormalPowerSeries<mint>& y, mint t,
                                          int m = -1) {
   if (m == -1) m = y.size();
   long long T = t.get();
